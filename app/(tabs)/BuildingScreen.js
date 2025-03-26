@@ -1,8 +1,7 @@
-import FloatingHeaderTitle from "../../components/FloatingHeaderTitle";
-import {View} from "react-native";
+import FloatingHeader from "../../components/FloatingHeader";
 
 export default function BuildingScreen() {
     return (
-        <></>
+        <FloatingHeader text="text"/>
     )
 }
