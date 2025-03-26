@@ -1,14 +1,14 @@
-import tw, {style} from "twrnc";
-import ProfileScreen from "../app/(tabs)/ProfileScreen";
+import tw from "twrnc";
+import ProfileScreen from "../tabs/ProfileScreen";
 import {Animated, Image, TouchableOpacity, View} from "react-native";
-import BuildingsScreen from "../app/(tabs)/BuildingsScreen";
-import AcademicScreen from "../app/(tabs)/AcademicScreen";
-import NewsScreen from "../app/(tabs)/NewsScreen";
+import BuildingsScreen from "../tabs/BuildingsScreen";
+import AcademicScreen from "../tabs/AcademicScreen";
+import NewsScreen from "../tabs/NewsScreen";
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import FMIHubHeader from "./FMIHubHeader";
-import {scaleWidth} from "../app/ScaleFunction";
-import {scaleHeight} from "../app/ScaleFunction";
+import {scaleWidth} from "../utils/ScaleFunction";
+import {scaleHeight} from "../utils/ScaleFunction";
 
 
 const buttonWidth = scaleWidth(120);
@@ -68,7 +68,7 @@ export default function Navbar({navigation}) {
                 <Tab.Screen name="Profil" component={ProfileScreen} options={{
                     tabBarIcon: () => (
                         <View style={tabIconStyles.container}>
-                            <Image source={require('../assets/images/profile.png')} style={tabIconStyles.image} />
+                            <Image source={require('../../assets/images/profile.png')} style={tabIconStyles.image} />
                         </View>
                     )
                 }} />
@@ -77,7 +77,7 @@ export default function Navbar({navigation}) {
                 <Tab.Screen name="Clădiri" component={BuildingsScreen} options={{
                     tabBarIcon: () => (
                         <View style={tabIconStyles.container}>
-                            <Image source={require('../assets/images/building.png')} style={tabIconStyles.image} />
+                            <Image source={require('../../assets/images/building.png')} style={tabIconStyles.image} />
                         </View>
                     ),
                     tabBarItemStyle: {
@@ -89,7 +89,7 @@ export default function Navbar({navigation}) {
                 <Tab.Screen name="Academic" component={AcademicScreen} options={{
                     tabBarIcon: () => (
                         <View style={tabIconStyles.container}>
-                            <Image source={require('../assets/images/academic.png')} style={tabIconStyles.image} />
+                            <Image source={require('../../assets/images/academic.png')} style={tabIconStyles.image} />
                         </View>
                     ),
                     tabBarItemStyle: {
@@ -101,7 +101,7 @@ export default function Navbar({navigation}) {
                 <Tab.Screen name="News" component={NewsScreen} options={{
                     tabBarIcon: () => (
                         <View style={tabIconStyles.container}>
-                            <Image source={require('../assets/images/news.png')} style={tabIconStyles.image} />
+                            <Image source={require('../../assets/images/news.png')} style={tabIconStyles.image} />
                         </View>
                     )
                 }} />
@@ -111,7 +111,7 @@ export default function Navbar({navigation}) {
             <View style={tw`items-center`}>
                 <TouchableOpacity
                     onPress={() => {
-                        navigation.navigate('HomeScreen');
+                        // navigation.navigate('HomeScreen');
                     }}
                     style={[
                         tw`absolute`,
@@ -124,7 +124,7 @@ export default function Navbar({navigation}) {
                 >
                     <View style={[tw`shadow-2xl rounded-full bg-white`]}>
                         <Image
-                            source={require('../assets/images/home.png')}
+                            source={require('../../assets/images/home.png')}
                             style={{
                                 width: buttonWidth,
                                 height: buttonHeight,

@@ -1,7 +1,7 @@
 import {View} from "react-native";
 import FMIHubHeaderTitle from "./FMIHubHeaderTitle";
 import React from "react";
-import {scaleHeight} from "../app/ScaleFunction.js";
+import {scaleHeight} from "../utils/ScaleFunction.js";
 
 export default function FMIHubHeader() {
     return (

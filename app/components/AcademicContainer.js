@@ -1,9 +1,17 @@
-import {scaleHeight, scaleWidth} from "../app/ScaleFunction";
+import {scaleHeight, scaleWidth} from "../utils/ScaleFunction";
 import {Alert, ImageBackground, Pressable, Text, View} from "react-native";
 
 export default function AcademicContainer({name, image}) {
     return (
-        <View style={{alignItems: "center", paddingTop: scaleHeight(7)}}>
+        <View style={{
+            alignItems: "center",
+            elevation: 5,
+            paddingTop: scaleHeight(13),
+            shadowColor: "#024073",
+            shadowOffset: {width: 0, height: scaleHeight(4)},
+            shadowOpacity: 0.1,
+            shadowRadius: scaleHeight(0.7),
+        }}>
             <Pressable onPress={() => {
                 Alert.alert(
                     name,
@@ -16,7 +24,7 @@ export default function AcademicContainer({name, image}) {
                     borderRadius: scaleWidth(10),
                     overflow: "hidden",
                     borderWidth: scaleWidth(1),
-                    borderColor: '#024073',
+                    borderColor: '#024073'
                 }}>
                     <View style={{
                         backgroundColor: "rgba(2, 64, 115, 1)",

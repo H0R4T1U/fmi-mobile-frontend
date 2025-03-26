@@ -1,9 +1,9 @@
 import {Alert, ImageBackground, Pressable, Text, View} from "react-native";
-import {scaleHeight, scaleWidth} from "../app/ScaleFunction";
+import {scaleHeight, scaleWidth} from "../utils/ScaleFunction";
 
 export default function BuildingContainer({name, image, address}) {
     return (
-        <View style={{alignItems: "center", paddingTop: scaleHeight(7)}}>
+        <View style={{alignItems: "center", paddingTop: scaleHeight(13)}}>
             <Pressable onPress={() => Alert.alert(name, address)}>
                 <View style={{
                     height: scaleHeight(115),

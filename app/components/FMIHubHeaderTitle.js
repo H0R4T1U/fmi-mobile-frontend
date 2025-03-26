@@ -1,11 +1,11 @@
 import {Text, View} from "react-native";
 import React from "react";
-import {scaleHeight, scaleWidth} from "../app/ScaleFunction.js";
+import {scaleHeight, scaleWidth} from "../utils/ScaleFunction.js";
 import {useFonts} from "expo-font";
 
 export default function FMIHubHeaderTitle() {
     const [fontsLoaded] = useFonts({
-        'Peddana': require('../assets/fonts/Peddana-Regular.ttf'),
+        'Peddana': require('../../assets/fonts/Peddana-Regular.ttf'),
     });
     if (!fontsLoaded) return null;
     return (

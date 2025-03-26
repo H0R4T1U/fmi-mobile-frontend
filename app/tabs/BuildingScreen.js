@@ -1,4 +1,4 @@
-import FloatingHeader from "../../components/FloatingHeader";
+import FloatingHeader from "../components/FloatingHeader";
 
 export default function BuildingScreen() {
     return (
