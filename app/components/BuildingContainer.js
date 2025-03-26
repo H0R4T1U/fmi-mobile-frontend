@@ -14,7 +14,6 @@ export default function BuildingContainer({name, image, address}) {
                     shadowOpacity: 0.1,
                     shadowOffset: { width: 0, height: scaleHeight(4) },
                     shadowRadius: scaleHeight(0.7),
-                    elevation: 5,
                 }}>
                     <ImageBackground
                         source={image}
@@ -27,15 +26,15 @@ export default function BuildingContainer({name, image, address}) {
                         }}
                     >
                         <View style={{
-                            backgroundColor: "rgba(255, 255, 255, 0.6)",
-                            height: scaleHeight(26),
-                            width: scaleWidth(170),
-                            borderRadius: scaleWidth(5),
+
                             marginTop: scaleWidth(55),
                             marginLeft: scaleWidth(10),
                             justifyContent: "center",
                         }}>
                             <Text style={{
+                                backgroundColor: "rgba(255, 255, 255, 0.6)",
+                                borderRadius: scaleWidth(5),
+                                paddingVertical: scaleHeight(3),
                                 fontSize: scaleHeight(16),
                                 fontFamily: 'Montserrat',
                                 fontWeight: "500",

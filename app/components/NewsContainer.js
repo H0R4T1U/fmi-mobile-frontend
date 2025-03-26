@@ -5,7 +5,6 @@ export default function NewsContainer({title, description}) {
 return (
     <View style={{
         alignItems: "center",
-        elevation: 5,
         paddingTop: scaleHeight(13),
         shadowColor: "#024073",
         shadowOffset: {width: 0, height: scaleHeight(4)},
@@ -13,6 +12,7 @@ return (
         shadowRadius: scaleHeight(0.7),
     }}>
         <Pressable onPress={() => {Alert.alert(title)}}>
+            {/* containerul mare*/}
             <View style={{
                 backgroundColor: "#AEB9C47D",
                 width: scaleWidth(350),
@@ -23,6 +23,7 @@ return (
                 height: scaleHeight(110),
                 marginHorizontal: scaleWidth(20),
             }}>
+                {/* container titlul anuntului*/}
                 <View style={{
                     backgroundColor: "rgba(2, 64, 115, 1)",
                     height: scaleHeight(26),
@@ -42,6 +43,8 @@ return (
                         {title}
                     </Text>
                 </View>
+
+                {/* container descrierea anuntului*/}
                 <View style={{
                     backgroundColor: "#AEB9C4",
                     marginHorizontal: scaleWidth(10),
@@ -57,9 +60,6 @@ return (
                 </View>
             </View>
         </Pressable>
-        <View>
-
-        </View>
     </View>
 )
 }

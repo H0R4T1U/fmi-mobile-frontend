@@ -13,6 +13,10 @@ export default function ProfilePageSmallContainer({title, content}) {
             borderRadius: scaleWidth(10),
             alignItems: 'center',
             justifyContent: 'center',
+            shadowColor: "#024073",
+            shadowOffset: {width: 0, height: scaleHeight(4)},
+            shadowOpacity: 0.1,
+            shadowRadius: scaleHeight(0.7),
         }}>
             <View style={{
                 backgroundColor: '#024073',

@@ -5,12 +5,11 @@ export default function AcademicContainer({name, image}) {
     return (
         <View style={{
             alignItems: "center",
-            elevation: 5,
             paddingTop: scaleHeight(13),
             shadowColor: "#024073",
-            shadowOffset: {width: 0, height: scaleHeight(4)},
             shadowOpacity: 0.1,
             shadowRadius: scaleHeight(0.7),
+            shadowOffset: {height: scaleHeight(4)},
         }}>
             <Pressable onPress={() => {
                 Alert.alert(

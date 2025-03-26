@@ -1,11 +1,12 @@
 import React from "react";
 import Navbar from "../components/Navbar.js";
-import {SafeAreaView, StatusBar} from 'react-native';
+import {View} from 'react-native';
+import {scaleHeight} from "../utils/ScaleFunction";
 
 export default function App() {
     return (
-        <SafeAreaView style={{flex:1}}>
+        <View style={{flex:1, backgroundColor: '#fff', marginVertical: scaleHeight(47)}}>
         <Navbar/>
-        </SafeAreaView>
+        </View>
     )
 }

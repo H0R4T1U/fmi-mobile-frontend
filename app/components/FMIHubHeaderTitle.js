@@ -11,11 +11,12 @@ export default function FMIHubHeaderTitle() {
     return (
     <View style={{
         position: 'absolute',
-        zIndex: 2,
         flexDirection: 'row',
         top: scaleHeight(10),
         paddingHorizontal: scaleWidth(15),
         alignItems: 'center',
+        overflow: 'hidden',
+
     }}>
         <Text style={{
             fontSize: scaleHeight(36),

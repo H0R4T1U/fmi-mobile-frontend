@@ -37,9 +37,7 @@ const Tab = createBottomTabNavigator();
 
 export default function Navbar({navigation}) {
     return (
-        <>
-        <Animated.View style={[tw`flex-1`, { backgroundColor: "#D9D9D9" }]}>
-            <View style={{ backgroundColor: "#D9D9D9" }}></View>
+        <Animated.View style={[tw`flex-1`, { backgroundColor: "#fff" }]}>
             <Tab.Navigator
                 screenOptions={{
                     tabBarStyle: {
@@ -70,7 +68,9 @@ export default function Navbar({navigation}) {
                         <View style={tabIconStyles.container}>
                             <Image source={require('../../assets/images/profile.png')} style={tabIconStyles.image} />
                         </View>
-                    )
+                    ),
+                    sceneStyle: {
+                        backgroundColor: "#ffffff"}
                 }} />
 
                 {/* buildings button */}
@@ -94,7 +94,9 @@ export default function Navbar({navigation}) {
                     ),
                     tabBarItemStyle: {
                         marginLeft: scaleWidth(55)
-                    }
+                    },
+                    sceneStyle: {
+                        backgroundColor: "#fff"}
                 }} />
 
                 {/* news button */}
@@ -103,7 +105,9 @@ export default function Navbar({navigation}) {
                         <View style={tabIconStyles.container}>
                             <Image source={require('../../assets/images/news.png')} style={tabIconStyles.image} />
                         </View>
-                    )
+                    ),
+                    sceneStyle: {
+                        backgroundColor: "#fff"}
                 }} />
             </Tab.Navigator>
 
@@ -118,25 +122,29 @@ export default function Navbar({navigation}) {
                         {
                             bottom: scaleHeight(25),
                             left: scaleWidth(146),
-                            zIndex: 30,
                         }
                     ]}
                 >
-                    <View style={[tw`shadow-2xl rounded-full bg-white`]}>
+                    <View style={{
+                        shadowColor: "#024073",
+                        shadowOffset: {width: 0, height: scaleHeight(10)},
+                        shadowOpacity: 0.1,
+                        shadowRadius: scaleHeight(0.7)
+                    }}>
                         <Image
                             source={require('../../assets/images/home.png')}
                             style={{
                                 width: buttonWidth,
                                 height: buttonHeight,
                                 borderRadius: buttonWidth / 2,
-                                borderColor: "#D9D9D9",
+                                borderColor: "#fff",
                                 borderWidth: 10,
+
                             }}
                         />
                     </View>
                 </TouchableOpacity>
             </View>
         </Animated.View>
-        </>
     );
 }

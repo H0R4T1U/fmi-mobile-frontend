@@ -6,12 +6,12 @@ import fsega from "../../assets/images/fsega.jpg";
 import drept from "../../assets/images/drept.jpg";
 import math from "../../assets/images/math.jpg";
 import creic from "../../assets/images/creic.jpg";
-import {ScrollView} from "react-native";
+import {ScrollView, View} from "react-native";
 
 
 export default function BuildingsScreen() {
     return (
-        <>
+        <View style={{backgroundColor:'#fff'}}>
             <FloatingHeader text="CLĂDIRI ȘI CANTINE"/>
             <ScrollView>
                 <BuildingContainer name="Clădirea Centrală" image={centrala} address="Strada Mihail Kogălniceanu 1, Cluj-Napoca 400347"/>
@@ -20,6 +20,6 @@ export default function BuildingsScreen() {
                 <BuildingContainer name="Clădirea Mathematica" image={math} address="Strada Ploiești 23-25, Cluj-Napoca 400157"/>
                 <BuildingContainer name="CREIC" image={creic} address="Strada Tiberiu Popoviciu 2-4, Cluj-Napoca 400647"/>
             </ScrollView>
-        </>
+        </View>
     )
 }

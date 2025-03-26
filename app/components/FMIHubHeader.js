@@ -9,6 +9,7 @@ export default function FMIHubHeader() {
             height: scaleHeight(65),
             backgroundColor: 'transparent',
             position: 'relative',
+            overflow: 'hidden',
         }}>
             <View style={{
                 position: 'absolute',
@@ -18,12 +19,14 @@ export default function FMIHubHeader() {
                 height: scaleHeight(65),
                 backgroundColor: "#AEB9C4",
                 opacity: 0.49,
-                zIndex: 1,
+                overflow: 'hidden',
+
             }}/>
 
             <View style={{
                 position: 'absolute',
-                zIndex: 2,
+                overflow: 'hidden',
+
             }}>
                 <FMIHubHeaderTitle/>
             </View>
