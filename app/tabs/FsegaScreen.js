@@ -1,5 +1,5 @@
 import FloatingHeader from "../components/FloatingHeader";
-import CantinaFsegaContainer from "../components/CantinaContainer";
+import CantinaContainer from "../components/CantinaContainer";
 import image from "../../assets/images/cantina.jpg";
 import {View} from "react-native";
 
