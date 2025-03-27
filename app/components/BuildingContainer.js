@@ -27,7 +27,7 @@ export default function BuildingContainer({name, image, address}) {
                     >
                         <View style={{
 
-                            marginTop: scaleWidth(55),
+                            marginTop: scaleHeight(55),
                             marginLeft: scaleWidth(10),
                             justifyContent: "center",
                         }}>

@@ -9,6 +9,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import FMIHubHeader from "./FMIHubHeader";
 import {scaleWidth} from "../utils/ScaleFunction";
 import {scaleHeight} from "../utils/ScaleFunction";
+import FsegaScreen from "../tabs/FsegaScreen";
 
 
 const buttonWidth = scaleWidth(120);
@@ -100,7 +101,7 @@ export default function Navbar({navigation}) {
                 }} />
 
                 {/* news button */}
-                <Tab.Screen name="News" component={NewsScreen} options={{
+                <Tab.Screen name="News" component={FsegaScreen} options={{
                     tabBarIcon: () => (
                         <View style={tabIconStyles.container}>
                             <Image source={require('../../assets/images/news.png')} style={tabIconStyles.image} />
