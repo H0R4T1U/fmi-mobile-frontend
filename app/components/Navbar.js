@@ -49,22 +49,23 @@ export default function Navbar({navigation}) {
                         fontSize: scaleHeight(12),
                         fontFamily: 'Montserrat',
                         paddingTop: scaleHeight(35),
-                        color: "#024073"
+
+                        color: "#024073",
+                        textAlign:"center",
                     },
                     tabBarLabelPosition: "below-icon",
                     animation: 'fade',
                     headerStyle: {
-                        backgroundColor: "#AEB9C4",
-                        opacity: 0.49,
                         height: scaleHeight(60),
                     },
                     headerTitle: "",
-                    header: FMIHubHeader
+                    header: () => <FMIHubHeader />
                 }}
              id={1}>
 
                 {/* profile button */}
                 <Tab.Screen name="Profil" component={ProfileScreen} options={{
+
                     tabBarIcon: () => (
                         <View style={tabIconStyles.container}>
                             <Image source={require('../../assets/images/profile.png')} style={tabIconStyles.image} />
@@ -76,6 +77,7 @@ export default function Navbar({navigation}) {
 
                 {/* buildings button */}
                 <Tab.Screen name="Clădiri" component={BuildingsScreen} options={{
+
                     tabBarIcon: () => (
                         <View style={tabIconStyles.container}>
                             <Image source={require('../../assets/images/building.png')} style={tabIconStyles.image} />
@@ -88,6 +90,7 @@ export default function Navbar({navigation}) {
 
                 {/* academic button */}
                 <Tab.Screen name="Academic" component={AcademicScreen} options={{
+
                     tabBarIcon: () => (
                         <View style={tabIconStyles.container}>
                             <Image source={require('../../assets/images/academic.png')} style={tabIconStyles.image} />

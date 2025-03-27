@@ -22,19 +22,29 @@ export default function BuildingContainer({name, image, address}) {
                             width: '100%',
                             borderRadius: scaleWidth(10),
                             overflow: "hidden",
-                            opacity: 0.8,
+
                         }}
                     >
+                        <View style={{
+                            position: "absolute",
+                            top: 0,
+                            left: 0,
+                            right: 0,
+                            bottom: 0,
+                            backgroundColor: 'rgba(202,201,201,0.3)',
+                        }} />
                         <View style={{
 
                             marginTop: scaleHeight(55),
                             marginLeft: scaleWidth(10),
                             justifyContent: "center",
+                            alignItems:"flex-start"
                         }}>
                             <Text style={{
                                 backgroundColor: "rgba(255, 255, 255, 0.6)",
                                 borderRadius: scaleWidth(5),
                                 paddingVertical: scaleHeight(3),
+                                paddingHorizontal:scaleWidth(5),
                                 fontSize: scaleHeight(16),
                                 fontFamily: 'Montserrat',
                                 fontWeight: "500",
@@ -45,19 +55,23 @@ export default function BuildingContainer({name, image, address}) {
                             </Text>
                         </View>
                         <View style={{
-                            backgroundColor: "rgba(255, 255, 255, 0.6)",
-                            height: scaleHeight(21),
-                            width: scaleWidth(220),
-                            borderRadius: scaleWidth(5),
+
                             marginTop: scaleHeight(5),
                             marginLeft: scaleWidth(10),
-                            justifyContent: "center"
+                            justifyContent: "center",
+                            alignItems:"flex-start"
+
                         }}>
                             <Text style={{
+                                backgroundColor: "rgba(255, 255, 255, 0.6)",
+                                height: scaleHeight(21),
+                                borderRadius: scaleWidth(5),
+                                paddingHorizontal:scaleWidth(5),
                                 fontSize: scaleHeight(10),
                                 fontFamily: 'Montserrat',
                                 color: '#024073',
-                                paddingLeft: scaleWidth(5),
+                                paddingVertical:scaleHeight(3)
+
                             }}>
                                 {address}
                             </Text>

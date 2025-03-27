@@ -7,16 +7,17 @@ export default function FMIHubHeaderTitle() {
     const [fontsLoaded] = useFonts({
         'Peddana': require('../../assets/fonts/Peddana-Regular.ttf'),
     });
-    if (!fontsLoaded) return null;
+    if (!fontsLoaded) {
+
+        return <Text>Loading...</Text>;
+    }
     return (
     <View style={{
-        position: 'absolute',
         flexDirection: 'row',
         top: scaleHeight(10),
         paddingHorizontal: scaleWidth(15),
         alignItems: 'center',
         overflow: 'hidden',
-
     }}>
         <Text style={{
             fontSize: scaleHeight(36),
