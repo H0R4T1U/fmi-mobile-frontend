@@ -1,10 +1,12 @@
 import {Alert, ImageBackground, Pressable, Text, View} from "react-native";
 import {scaleHeight, scaleWidth} from "../utils/ScaleFunction";
+import {useNavigation} from "expo-router";
 
-export default function BuildingContainer({name, image, address}) {
+export default function BuildingContainer({name, image, address, route}) {
+    const navigation = useNavigation();
     return (
         <View style={{alignItems: "center", paddingTop: scaleHeight(13)}}>
-            <Pressable onPress={() => Alert.alert(name, address)}>
+            <Pressable onPress={() => navigation.navigate(route)}>
                 <View style={{
                     height: scaleHeight(115),
                     marginHorizontal: scaleWidth(20),
