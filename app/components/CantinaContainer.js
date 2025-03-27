@@ -23,18 +23,26 @@ export default function CantinaContainer({image,name,location,program}) {
                             width: '100%',
                             borderRadius: scaleWidth(10),
                             overflow: "hidden",
-                            opacity: 0.8,
+
                         }}
                     >
                         <View style={{
+                            position: "absolute",
+                            top: 0,
+                            left: 0,
+                            right: 0,
+                            bottom: 0,
+                            backgroundColor: 'rgba(255,255,255,0.35)',
+                        }} />
+                        <View style={{
 
-                            marginTop: scaleHeight(10),
+                            marginTop: scaleHeight(7),
                             marginLeft: scaleWidth(10),
                             justifyContent: "center",
                             alignItems:"flex-start"
                         }}>
                             <Text style={{
-                                backgroundColor: "#AEB9C499",
+                                backgroundColor: "rgba(187,198,209,0.65)",
                                 borderRadius: scaleWidth(5),
                                 paddingVertical: scaleHeight(3),
                                 paddingHorizontal: scaleWidth(5),
@@ -51,8 +59,10 @@ export default function CantinaContainer({image,name,location,program}) {
                         <View style={{
                             marginTop: scaleHeight(23),
                             marginLeft: scaleWidth(10),
+
                             flexDirection: "row",
-                            alignItems: "center"
+                            alignItems: "center",
+
                         }}>
                             <Text style={{
                                 backgroundColor: "#024073",
@@ -68,7 +78,7 @@ export default function CantinaContainer({image,name,location,program}) {
                             </Text>
 
                             <Text style={{
-                                backgroundColor: "#AEB9C499",
+                                backgroundColor: "rgba(187,198,209,0.65)",
                                 borderRadius: scaleWidth(5),
                                 fontSize: scaleHeight(12),
                                 fontFamily: 'Montserrat',
@@ -84,8 +94,10 @@ export default function CantinaContainer({image,name,location,program}) {
                         <View style={{
                             marginTop: scaleHeight(5),
                             marginLeft: scaleWidth(10),
+                            marginBottom:scaleHeight(5),
                             flexDirection: "row",
                             alignItems: "center"
+
                         }}>
                             <Text style={{
                                 backgroundColor: "#024073",
@@ -101,7 +113,7 @@ export default function CantinaContainer({image,name,location,program}) {
                             </Text>
 
                             <Text style={{
-                                backgroundColor: "#AEB9C499",
+                                backgroundColor: "rgba(174,185,196,0.65)",
                                 borderRadius: scaleWidth(5),
                                 fontSize: scaleHeight(12),
                                 fontFamily: 'Montserrat',
@@ -119,6 +131,7 @@ export default function CantinaContainer({image,name,location,program}) {
 
                     </ImageBackground>
                 </View>
+
 
         </View>
     )

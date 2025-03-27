@@ -1,4 +1,4 @@
-import {View} from "react-native";
+import {View,Text} from "react-native";
 import FMIHubHeaderTitle from "./FMIHubHeaderTitle";
 import React from "react";
 import {scaleHeight} from "../utils/ScaleFunction.js";
@@ -9,6 +9,7 @@ export default function FMIHubHeader() {
             height: scaleHeight(65),
             backgroundColor: 'transparent',
             position: 'relative',
+            width:"100%",
             overflow: 'hidden',
         }}>
             <View style={{
@@ -20,15 +21,19 @@ export default function FMIHubHeader() {
                 backgroundColor: "#AEB9C4",
                 opacity: 0.49,
                 overflow: 'hidden',
+                width:"100%",
 
             }}/>
 
             <View style={{
                 position: 'absolute',
                 overflow: 'hidden',
+                width:"100%",
 
             }}>
+
                 <FMIHubHeaderTitle/>
+
             </View>
         </View>
     )

@@ -20,17 +20,18 @@ export default function ProfilePageSmallContainer({title, content}) {
         }}>
             <View style={{
                 backgroundColor: '#024073',
-                padding: scaleWidth(7),
+                //padding: scaleWidth(7),
                 borderRadius: scaleWidth(5),
-                width: scaleWidth(100),
+                width: scaleWidth(110),
                 height: scaleHeight(28),
                 alignItems: 'center',
+                justifyContent:'center'
             }}>
                 <Text style={{
                     fontSize: scaleWidth(14),
                     fontFamily: 'Montserrat',
                     color: '#fff',
-                    wordWrap: 'break-word',
+                    textAlign: 'center'
                 }}>
                     {title}
                 </Text>

@@ -40,16 +40,17 @@ export default function ProfilePageLargeContainer({username, password}) {
             }}>
                 <View style={{
                     backgroundColor: '#024073',
-                    padding: scaleWidth(7),
                     borderRadius: scaleWidth(5),
                     width: scaleWidth(100),
                     height: scaleHeight(28),
                     alignItems: 'center',
+                    justifyContent:'center'
                 }}>
                     <Text style={{
                         fontSize: scaleWidth(14),
                         fontFamily: 'Montserrat',
                         color: '#fff',
+                        textAlign: 'center'
                     }}>
                         USERNAME
                     </Text>
@@ -79,16 +80,17 @@ export default function ProfilePageLargeContainer({username, password}) {
             }}>
                 <View style={{
                     backgroundColor: '#024073',
-                    padding: scaleWidth(7),
                     borderRadius: scaleWidth(5),
                     width: scaleWidth(100),
                     height: scaleHeight(28),
-                    alignItems: 'center'
+                    alignItems: 'center',
+                    justifyContent:'center'
                 }}>
                     <Text style={{
                         fontSize: scaleWidth(14),
                         fontFamily: 'Montserrat',
                         color: '#fff',
+                        textAlign: 'center'
                     }}>
                         PAROLĂ
                     </Text>
