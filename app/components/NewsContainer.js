@@ -25,20 +25,28 @@ return (
             }}>
                 {/* container titlul anuntului*/}
                 <View style={{
-                    backgroundColor: "rgba(2, 64, 115, 1)",
-                    height: scaleHeight(26),
-                    width: scaleWidth(170),
-                    borderRadius: scaleWidth(5),
+
+                    // height: scaleHeight(26),
+                    // width: scaleWidth(170),
+                    //
                     marginTop: scaleHeight(10),
                     marginLeft: scaleWidth(10),
                     justifyContent: "center",
+                    alignItems:"flex-start"
+
                 }}>
                     <Text style={{
+                        backgroundColor: "rgba(2, 64, 115, 1)",
                         fontSize: scaleHeight(16),
+                        borderRadius: scaleWidth(5),
+                        paddingHorizontal:scaleWidth(5),
+                        paddingVertical:scaleHeight(3),
+
                         fontFamily: 'Montserrat',
                         fontWeight: "500",
                         color: '#fff',
-                        alignSelf: "center",
+
+                        // alignSelf: "center",
                     }}>
                         {title}
                     </Text>

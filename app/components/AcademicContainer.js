@@ -1,7 +1,9 @@
 import {scaleHeight, scaleWidth} from "../utils/ScaleFunction";
 import {Alert, ImageBackground, Pressable, Text, View} from "react-native";
+import {useNavigation} from "expo-router";
 
-export default function AcademicContainer({name, image}) {
+export default function AcademicContainer({name, image,route}) {
+    const navigation = useNavigation();
     return (
         <View style={{
             alignItems: "center",
@@ -11,11 +13,7 @@ export default function AcademicContainer({name, image}) {
             shadowRadius: scaleHeight(0.7),
             shadowOffset: {height: scaleHeight(4)},
         }}>
-            <Pressable onPress={() => {
-                Alert.alert(
-                    name,
-                )
-            }}>
+            <Pressable onPress={() => navigation.navigate(route)}>
                 <ImageBackground source={image} style={{
                     height: scaleHeight(115),
                     marginHorizontal: scaleWidth(20),

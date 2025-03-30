@@ -12,7 +12,7 @@ export default function AcademicScreen() {
             <FloatingHeader text="ACADEMIC"/>
             <>
                 <AcademicContainer name="Taxe" image={taxe}/>
-                <AcademicContainer name="Examene" image={examene}/>
+                <AcademicContainer name="Examene" image={examene} route={"Examene"}/>
                 <AcademicContainer name="Consultare Note" image={note}/>
             </>
         </View>

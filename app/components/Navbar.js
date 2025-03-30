@@ -9,8 +9,6 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import FMIHubHeader from "./FMIHubHeader";
 import {scaleWidth} from "../utils/ScaleFunction";
 import {scaleHeight} from "../utils/ScaleFunction";
-<<<<<<< Updated upstream
-=======
 import FsegaScreen from "../tabs/FsegaScreen";
 import HomeScreen from "../tabs/HomeScreen";
 import {useNavigation} from "expo-router";
@@ -22,7 +20,8 @@ import NttScreen from "../tabs/NttScreen";
 import LitereScreen from "../tabs/LitereScreen";
 import ObservatorScreen from "../tabs/ObservatorScreen";
 import DppdScreen from "../tabs/DppdScreen";
->>>>>>> Stashed changes
+import ExameneScreen from "../tabs/ExameneScreen";
+
 
 
 const buttonWidth = scaleWidth(120);
@@ -96,7 +95,9 @@ export default function Navbar() {
                         </View>
                     ),
                     tabBarItemStyle: {
-                        marginRight: scaleWidth(55)}
+                        marginRight: scaleWidth(55)},
+                    sceneStyle: {
+                        backgroundColor: "#ffffff"}
                 }}
                 />
 
@@ -125,35 +126,63 @@ export default function Navbar() {
                         backgroundColor: "#fff"}
                 }} />
                 <Tab.Screen name="Home" component={HomeScreen} options={{
-                    tabBarItemStyle: {display: 'none'}
+                    tabBarItemStyle: {display: 'none'},
+                    sceneStyle: {
+                        backgroundColor: "#ffffff"}
                 }}/>
                 <Tab.Screen name="Central" component={CentralScreen} options={{
-                    tabBarItemStyle: {display: 'none'}
+                    tabBarItemStyle: {display: 'none'},
+                    sceneStyle: {
+                        backgroundColor: "#ffffff"}
                 }}/>
                 <Tab.Screen name="Fsega" component={FsegaScreen} options={{
-                    tabBarItemStyle: {display: 'none'}
+                    tabBarItemStyle: {display: 'none'},
+                    sceneStyle: {
+                        backgroundColor: "#ffffff"}
                 }}/>
                 <Tab.Screen name="Drept" component={DreptScreen} options={{
-                    tabBarItemStyle: {display: 'none'}
+                    tabBarItemStyle: {display: 'none'},
+                    sceneStyle: {
+                        backgroundColor: "#ffffff"}
                 }}/>
                 <Tab.Screen name="Mathematica" component={MathematicaScreen} options={{
-                    tabBarItemStyle: {display: 'none'}
+                    tabBarItemStyle: {display: 'none'},
+                    sceneStyle: {
+                        backgroundColor: "#ffffff"}
                 }}/>
                 <Tab.Screen name="Creic" component={CreicScreen} options={{
-                    tabBarItemStyle: {display: 'none'}
+                    tabBarItemStyle: {display: 'none'},
+                    sceneStyle: {
+                        backgroundColor: "#ffffff"}
                 }}/>
                 <Tab.Screen name="Ntt" component={NttScreen} options={{
-                    tabBarItemStyle: {display: 'none'}
+                    tabBarItemStyle: {display: 'none'},
+                    sceneStyle: {
+                        backgroundColor: "#ffffff"}
                 }}/>
                 <Tab.Screen name="Litere" component={LitereScreen} options={{
-                    tabBarItemStyle: {display: 'none'}
+                    tabBarItemStyle: {display: 'none'},
+                    sceneStyle: {
+                        backgroundColor: "#ffffff"}
                 }}/>
                 <Tab.Screen name="Observator" component={ObservatorScreen} options={{
-                    tabBarItemStyle: {display: 'none'}
+                    tabBarItemStyle: {display: 'none'},
+                    sceneStyle: {
+                        backgroundColor: "#ffffff"}
                 }}/>
                 <Tab.Screen name="Dppd" component={DppdScreen} options={{
-                    tabBarItemStyle: {display: 'none'}
+                    tabBarItemStyle: {display: 'none'},
+                    sceneStyle: {
+                        backgroundColor: "#ffffff"}
+
                 }}/>
+                <Tab.Screen name={"Examene"} component={ExameneScreen} options={
+                    {tabBarItemStyle:{display: 'none'},
+                        sceneStyle: {
+                            backgroundColor: "#ffffff"}
+                    }
+
+                }/>
 
 
 
