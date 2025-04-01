@@ -21,11 +21,14 @@ import LitereScreen from "../tabs/LitereScreen";
 import ObservatorScreen from "../tabs/ObservatorScreen";
 import DppdScreen from "../tabs/DppdScreen";
 import ExameneScreen from "../tabs/ExameneScreen";
+import ConsultareNoteScreen from "../tabs/ConsultareNoteScreen";
+import TaxeScreen from "../tabs/TaxeScreen";
 
 
 
 const buttonWidth = scaleWidth(120);
 const buttonHeight = scaleHeight(120);
+
 
 const tabIconStyles = {
     container: [
@@ -183,6 +186,20 @@ export default function Navbar() {
                     }
 
                 }/>
+                <Tab.Screen name={"ConsultareNote"} component={ConsultareNoteScreen} options={
+                    {tabBarItemStyle:{display: 'none'},
+                        sceneStyle: {
+                            backgroundColor: "#ffffff"}
+                    }
+
+                }/>
+                <Tab.Screen name={"Taxe"} component={TaxeScreen} options={
+                    {tabBarItemStyle:{display: 'none'},
+                        sceneStyle: {
+                            backgroundColor: "#ffffff"}
+                    }
+
+                }/>
 
 
 
@@ -197,7 +214,7 @@ export default function Navbar() {
                     style={[
                         tw`absolute`,
                         {
-                            bottom: scaleHeight(25),
+                            bottom: scaleHeight(20),
                             left: scaleWidth(146),
                         }
                     ]}
@@ -206,16 +223,24 @@ export default function Navbar() {
                         shadowColor: "#024073",
                         shadowOffset: {width: 0, height: scaleHeight(10)},
                         shadowOpacity: 0.1,
-                        shadowRadius: scaleHeight(0.7)
+                        shadowRadius: scaleHeight(0.7),
+                        backgroundColor:"#fff",
+                        borderRadius:60
+
                     }}>
                         <Image
                             source={require('../../assets/images/home.png')}
                             style={{
                                 width: buttonWidth,
                                 height: buttonHeight,
-                                borderRadius: buttonWidth / 2,
+                                borderRadius: 48,
                                 borderColor: "#fff",
-                                borderWidth: 10,
+                                padding:10,
+                                shadowColor: "#024073",
+                                shadowOffset: {width: 0, height: scaleHeight(5)},
+                                shadowOpacity: 0.15,
+                                shadowRadius: scaleHeight(0.7),
+                               
 
                             }}
                         />

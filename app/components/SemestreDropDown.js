@@ -15,6 +15,9 @@ export default function SemestreDropDown()
         { label: "SEMESTRUL 4", value: "option4" },
         { label: "SEMESTRUL 5", value: "option5" },
         { label: "SEMESTRUL 6", value: "option6" },
+        { label: "SEMESTRUL 7", value: "option7" },
+        { label: "SEMESTRUL 8", value: "option8" },
+
     ]);
     return (
 
@@ -30,7 +33,7 @@ export default function SemestreDropDown()
                     dropDownContainerStyle={
                         {
                             borderColor:"#AEB9C4",
-                            backgroundColor:"rgba(174,185,196,0.6)",
+                            backgroundColor:"rgb(206,213,220)",
                         }
                     }
                     textStyle={{

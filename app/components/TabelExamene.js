@@ -27,6 +27,7 @@ export default function TabelExamene({examene}) {
                 shadowOpacity: 0.1,
                 shadowOffset: { width: 0, height: scaleHeight(4) },
                 shadowRadius: scaleHeight(0.7),
+                overflow:"hidden"
             }}>
                     <ScrollView
                         horizontal={true}
@@ -245,8 +246,6 @@ export default function TabelExamene({examene}) {
                             justifyContent:"flex-start"
                         }}>
 
-                            >
-
                             {examene.map((examen,index) => (
                                 <View
                                     key={index}
@@ -446,7 +445,6 @@ export default function TabelExamene({examene}) {
                                         marginLeft:scaleWidth(5)
                                     }}>
                                     <Text style={{
-
                                         fontSize: scaleHeight(14),
                                         fontFamily: 'Montserrat',
                                         color: '#024073',
