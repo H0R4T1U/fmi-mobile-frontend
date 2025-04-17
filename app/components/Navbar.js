@@ -1,6 +1,6 @@
 import tw from "twrnc";
 import ProfileScreen from "../tabs/ProfileScreen";
-import {Animated, Image, TouchableOpacity, View} from "react-native";
+import {Animated, Dimensions, Image, TouchableOpacity, View} from "react-native";
 import BuildingsScreen from "../tabs/BuildingsScreen";
 import AcademicScreen from "../tabs/AcademicScreen";
 import NewsScreen from "../tabs/NewsScreen";
@@ -23,27 +23,27 @@ import DppdScreen from "../tabs/DppdScreen";
 import ExameneScreen from "../tabs/ExameneScreen";
 import ConsultareNoteScreen from "../tabs/ConsultareNoteScreen";
 import TaxeScreen from "../tabs/TaxeScreen";
+import FMIHubHeaderTitle from "./FMIHubHeaderTitle";
 
-
-
-const buttonWidth = scaleWidth(120);
-const buttonHeight = scaleHeight(120);
+const {height, width} = Dimensions.get('window');
+const buttonWidth =width*0.25;
+const buttonHeight = width*0.25;
 
 
 const tabIconStyles = {
     container: [
         tw`border border-[#024073] shadow-md rounded-full justify-center items-center overflow-hidden`,
         {
-            width: scaleWidth(65),
-            height: scaleHeight(65),
-            marginTop: scaleHeight(32),
+            width: width*0.155,
+            height: width*0.155,
+            marginTop:height*0.04,
         }
     ],
     image: [
         tw`mb-2`,
         {
-            width: scaleWidth(96),
-            height: scaleHeight(96),
+            width: width*0.155,
+            height: height*0.1,
         }
     ]
 };
@@ -58,24 +58,23 @@ export default function Navbar() {
             <Tab.Navigator
                 screenOptions={{
                     tabBarStyle: {
-                        height: scaleHeight(92),
+                        height: height*0.113,
                         backgroundColor: "#AEB9C4"
                     },
                     tabBarLabelStyle: {
-                        fontSize: scaleHeight(12),
+                        fontSize: height*0.014,
                         fontFamily: 'Montserrat',
-                        paddingTop: scaleHeight(35),
+                        paddingTop:height*0.041,
                         color: "#024073"
                     },
                     tabBarLabelPosition: "below-icon",
                     animation: 'fade',
+                    header:FMIHubHeader,
                     headerStyle: {
-                        backgroundColor: "#AEB9C4",
-                        opacity: 0.49,
-                        height: scaleHeight(60),
+                        height:height*0.1,
                     },
-                    headerTitle: "",
-                    header: FMIHubHeader
+
+
                 }}
              id={1}>
 
@@ -98,7 +97,7 @@ export default function Navbar() {
                         </View>
                     ),
                     tabBarItemStyle: {
-                        marginRight: scaleWidth(55)},
+                        marginRight:width*0.135},
                     sceneStyle: {
                         backgroundColor: "#ffffff"}
                 }}
@@ -112,7 +111,7 @@ export default function Navbar() {
                         </View>
                     ),
                     tabBarItemStyle: {
-                        marginLeft: scaleWidth(55)
+                        marginLeft: width*0.135
                     },
                     sceneStyle: {
                         backgroundColor: "#fff"}
@@ -214,18 +213,20 @@ export default function Navbar() {
                     style={[
                         tw`absolute`,
                         {
-                            bottom: scaleHeight(20),
-                            left: scaleWidth(146),
+
+                            bottom: height*0.03,
+
                         }
                     ]}
                 >
                     <View style={{
                         shadowColor: "#024073",
-                        shadowOffset: {width: 0, height: scaleHeight(10)},
+                        shadowOffset: {width: 0, height: height*0.012},
                         shadowOpacity: 0.1,
-                        shadowRadius: scaleHeight(0.7),
                         backgroundColor:"#fff",
-                        borderRadius:60
+                        borderRadius:buttonWidth,
+                        padding:buttonWidth*0.07,
+                        paddingBottom:buttonWidth*0.08
 
                     }}>
                         <Image
@@ -233,14 +234,12 @@ export default function Navbar() {
                             style={{
                                 width: buttonWidth,
                                 height: buttonHeight,
-                                borderRadius: 48,
+                                borderRadius: 100,
                                 borderColor: "#fff",
-                                padding:10,
                                 shadowColor: "#024073",
-                                shadowOffset: {width: 0, height: scaleHeight(5)},
-                                shadowOpacity: 0.15,
-                                shadowRadius: scaleHeight(0.7),
-                               
+                                shadowOffset: {width: 0, height: height*0.012},
+                                shadowOpacity: 0.1,
+                                resizeMode:"contain"
 
                             }}
                         />

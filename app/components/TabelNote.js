@@ -1,6 +1,8 @@
-import { ScrollView, Text, View, } from "react-native";
+import {Dimensions, ScrollView, Text, View,} from "react-native";
 import { scaleHeight, scaleWidth } from "../utils/ScaleFunction";
 import {useState} from "react";
+const {height, width} = Dimensions.get('window');
+
 
 export default function TabelNote({examene}) {
     const [rowHeights, setRowHeights] = useState({});
@@ -14,19 +16,19 @@ export default function TabelNote({examene}) {
         }));
     };
     return (
-        <View style={{ alignItems: "center", paddingTop: scaleHeight(13),  paddingHorizontal: scaleWidth(20),}}>
+        <View style={{ alignItems: "center", paddingTop: height*0.01,  paddingHorizontal: width*0.01,}}>
             <View style={{
                 backgroundColor: "rgba(174,185,196,0.49)",
                 borderStyle: "solid",
                 borderColor: "#AEB9C4",
                 borderWidth: 0.5,
-                height: scaleHeight(470),
-                width: scaleWidth(390),
-                borderRadius: scaleWidth(10),
+                height: height*0.6,
+                width: width*0.95,
+                borderRadius:10,
                 shadowColor: "#024073",
                 shadowOpacity: 0.1,
-                shadowOffset: { width: 0, height: scaleHeight(4) },
-                shadowRadius: scaleHeight(0.7),
+                shadowOffset: { width: 0, height: 4},
+                shadowRadius: 0.7,
                 overflow: "hidden",
             }}>
                 <ScrollView
@@ -40,106 +42,139 @@ export default function TabelNote({examene}) {
                             style={{
                                 flexDirection: "row",
                                 backgroundColor: "#AEB9C4",
-                                borderRadius: scaleWidth(10),
-                                height:scaleHeight(40),
-                                paddingRight:scaleWidth(6)
+                                borderRadius: 10,
+                                height:height*0.045,
+                                paddingRight:width*0.02
                             }}
                         >
-                            <Text style={{
-                                marginLeft:scaleWidth(5),
+                            <View style={{
+                                width:width*0.145,
+                                marginLeft:width*0.02,
                                 backgroundColor: "#024073",
-                                borderRadius: scaleWidth(5),
-                                fontSize: scaleHeight(12),
-                                fontFamily: 'Montserrat',
-                                color: '#FFF',
-                                paddingVertical: scaleHeight(6),
-                                paddingHorizontal: scaleWidth(5),
-                                fontWeight: "500",
-                                justifyContent:"center",
-                                textAlignVertical:"center",
-                                alignSelf:"center",
-                                width:scaleWidth(60),
-                                alignItems:"center"
-                            }}>
-                                NR. CRT
-                            </Text>
-
-                            <Text style={{
-                                marginLeft:scaleWidth(5),
-                                backgroundColor: "#024073",
-                                borderRadius: scaleWidth(5),
-                                fontSize: scaleHeight(12),
-                                fontFamily: 'Montserrat',
-                                color: '#FFF',
-                                paddingVertical: scaleHeight(6),
-                                paddingHorizontal: scaleWidth(8),
-                                fontWeight: "500",
-                                justifyContent:"center",
-                                textAlignVertical:"center",
-                                alignSelf:"center",
-                                width:scaleWidth(83)
-                            }}>
-                                DISCIPLINA
-                            </Text>
-                            <Text style={{
-                                marginLeft:scaleWidth(5),
-                                backgroundColor: "#024073",
-                                borderRadius: scaleWidth(5),
-                                fontSize: scaleHeight(12),
-                                fontFamily: 'Montserrat',
-                                color: '#FFF',
-                                paddingVertical: scaleHeight(6),
-                                paddingHorizontal: scaleWidth(7),
-                                fontWeight: "500",
-                                justifyContent:"center",
-                                textAlignVertical:"center",
+                                borderRadius: 5,
+                                height:height*0.03,
                                 alignSelf:"center",
                                 alignItems:"center",
-                                width:scaleWidth(47)
+                                justifyContent:"center"
                             }}>
-                                NOTA
-                            </Text>
-                            <Text style={{
-                                marginLeft:scaleWidth(5),
+                                <Text style={{
+
+                            fontSize: height*0.014,
+                            fontFamily: 'Montserrat',
+                            color: '#FFF',
+                            fontWeight: "500",
+                            justifyContent:"center",
+                            textAlignVertical:"center",
+                            alignSelf:"center",
+                            alignItems:"center"
+                        }}>
+                            NR. CRT
+                        </Text></View>
+
+
+                            <View style={{
+                                width:width*0.2,
+                                marginLeft:width*0.015,
                                 backgroundColor: "#024073",
-                                borderRadius: scaleWidth(5),
-                                fontSize: scaleHeight(12),
-                                fontFamily: 'Montserrat',
-                                color: '#FFF',
-                                paddingVertical: scaleHeight(6),
-                                paddingHorizontal: scaleWidth(5),
-                                fontWeight: "500",
-                                justifyContent:"center",
-                                textAlignVertical:"center",
+                                borderRadius: 5,
+                                height:height*0.03,
                                 alignSelf:"center",
-                                width:scaleWidth(85)
+                                alignItems:"center",
+                                justifyContent:"center"
                             }}>
-                                NR. CREDITE
-                            </Text>
-                            <Text style={{
-                                marginLeft:scaleWidth(5),
+                                <Text style={{
+
+                                    fontSize: height*0.014,
+                                    fontFamily: 'Montserrat',
+                                    color: '#FFF',
+                                    fontWeight: "500",
+                                    justifyContent:"center",
+                                    textAlignVertical:"center",
+                                    alignSelf:"center",
+                                }}>
+                                    DISCIPLINA
+                                </Text>
+                            </View>
+
+                            <View style={{
+                                width:width*0.11,
+                                marginLeft:width*0.015,
                                 backgroundColor: "#024073",
-                                borderRadius: scaleWidth(5),
-                                fontSize: scaleHeight(12),
-                                fontFamily: 'Montserrat',
-                                color: '#FFF',
-                                paddingVertical: scaleHeight(6),
-                                paddingHorizontal: scaleWidth(26),
-                                fontWeight: "500",
-                                justifyContent:"center",
-                                textAlignVertical:"center",
+                                borderRadius: 5,
+                                height:height*0.03,
                                 alignSelf:"center",
-                                width:scaleWidth(83)
+                                alignItems:"center",
+                                justifyContent:"center"
                             }}>
-                                DATA
-                            </Text>
+                                <Text style={{
+                                    fontSize:height*0.014,
+                                    fontFamily: 'Montserrat',
+                                    color: '#FFF',
+                                    fontWeight: "500",
+                                    justifyContent:"center",
+                                    textAlignVertical:"center",
+                                    alignSelf:"center",
+                                    alignItems:"center",
+                                }}>
+                                    NOTA
+                                </Text>
+                            </View>
+
+
+                            <View style={{
+                                width:width*0.21,
+                                marginLeft:width*0.015,
+                                backgroundColor: "#024073",
+                                borderRadius: 5,
+                                height:height*0.03,
+                                alignSelf:"center",
+                                alignItems:"center",
+                                justifyContent:"center"
+                            }}>
+                                <Text style={{
+                                    fontSize: height*0.014,
+                                    fontFamily: 'Montserrat',
+                                    color: '#FFF',
+                                    fontWeight: "500",
+                                    justifyContent:"center",
+                                    textAlignVertical:"center",
+                                    alignSelf:"center",
+
+                                }}>
+                                    NR. CREDITE
+                                </Text>
+                            </View>
+
+                            <View style={{
+                                width:width*0.19,
+                                marginLeft:width*0.015,
+                                backgroundColor: "#024073",
+                                borderRadius: 5,
+                                height:height*0.03,
+                                alignSelf:"center",
+                                alignItems:"center",
+                                justifyContent:"center"
+                            }}>
+                                <Text style={{
+                                    fontSize: height*0.014,
+                                    fontFamily: 'Montserrat',
+                                    color: '#FFF',
+                                    fontWeight: "500",
+                                    justifyContent:"center",
+                                    textAlignVertical:"center",
+                                    alignSelf:"center",
+                                }}>
+                                    DATA
+                                </Text>
+                            </View>
+
 
                         </View>
 
                         <ScrollView
 
                             contentContainerStyle={{
-                                paddingBottom:scaleHeight(20),
+                                paddingBottom:height*0.02,
 
                                 alignItems:"flex-start",
                                 justifyContent:"flex-start"
@@ -150,24 +185,24 @@ export default function TabelNote({examene}) {
                                     key={index}
                                     onLayout={(event) => handleTextLayout(index, event)}
                                     style={{
-                                        marginTop: scaleHeight(10),
+                                        marginTop: height*0.011,
                                         flexDirection: "row",
                                         alignItems: "center",
-                                        minHeight: rowHeights[index] || scaleHeight(30),
+                                        minHeight: rowHeights[index] || height*0.035,
                                     }}
                                 >
                                     <View style={{
-                                        width: scaleWidth(60),
-                                        minHeight: rowHeights[index] || scaleHeight(30),
+                                        width: width*0.145,
+                                        minHeight: rowHeights[index] || height*0.035,
                                         backgroundColor: "#fff",
-                                        borderRadius: scaleWidth(5),
+                                        borderRadius: 5,
                                         justifyContent: "center",
                                         alignItems: "center",
-                                        marginLeft:scaleWidth(5)
+                                        marginLeft:width*0.02
                                     }}>
                                         <Text style={{
 
-                                            fontSize: scaleHeight(14),
+                                            fontSize:height*0.014,
                                             fontFamily: 'Montserrat',
                                             color: '#024073',
                                             fontWeight: "500",
@@ -179,17 +214,17 @@ export default function TabelNote({examene}) {
                                     </View>
 
                                     <View style={{
-                                        width: scaleWidth(83),
-                                        minHeight: rowHeights[index] || scaleHeight(30),
+                                        width: width*0.2,
+                                        minHeight: rowHeights[index] || height*0.035,
                                         backgroundColor: "#fff",
-                                        borderRadius: scaleWidth(5),
+                                        borderRadius:5,
                                         justifyContent: "center",
                                         alignItems: "center",
-                                        marginLeft:scaleWidth(5)
+                                        marginLeft:width*0.015
                                     }}>
                                         <Text style={{
 
-                                            fontSize: scaleHeight(14),
+                                            fontSize: height*0.014,
                                             fontFamily: 'Montserrat',
                                             color: '#024073',
                                             fontWeight: "500",
@@ -200,17 +235,17 @@ export default function TabelNote({examene}) {
                                         </Text>
                                     </View>
                                     <View style={{
-                                        width: scaleWidth(47),
-                                        minHeight: rowHeights[index] || scaleHeight(30),
+                                        width: width*0.11,
+                                        minHeight: rowHeights[index] || height*0.035,
                                         backgroundColor: "#fff",
-                                        borderRadius: scaleWidth(5),
+                                        borderRadius: 5,
                                         justifyContent: "center",
                                         alignItems: "center",
-                                        marginLeft:scaleWidth(5)
+                                        marginLeft:width*0.015
                                     }}>
                                         <Text style={{
 
-                                            fontSize: scaleHeight(14),
+                                            fontSize: height*0.014,
                                             fontFamily: 'Montserrat',
                                             color: '#024073',
                                             fontWeight: "500",
@@ -221,16 +256,16 @@ export default function TabelNote({examene}) {
                                         </Text>
                                     </View>
                                     <View style={{
-                                        width: scaleWidth(85),
-                                        minHeight: rowHeights[index] || scaleHeight(30),
+                                        width: width*0.21,
+                                        minHeight: rowHeights[index] || height*0.035,
                                         backgroundColor: "#fff",
-                                        borderRadius: scaleWidth(5),
+                                        borderRadius: 5,
                                         justifyContent: "center",
                                         alignItems: "center",
-                                        marginLeft:scaleWidth(5)
+                                        marginLeft:width*0.015
                                     }}>
                                         <Text style={{
-                                            fontSize: scaleHeight(14),
+                                            fontSize: height*0.014,
                                             fontFamily: 'Montserrat',
                                             color: '#024073',
                                             fontWeight: "500",
@@ -240,16 +275,16 @@ export default function TabelNote({examene}) {
                                         </Text>
                                     </View>
                                     <View style={{
-                                        width: scaleWidth(83),
-                                        minHeight: rowHeights[index] || scaleHeight(30),
+                                        width: width*0.19,
+                                        minHeight: rowHeights[index] || height*0.035,
                                         backgroundColor: "#fff",
-                                        borderRadius: scaleWidth(5),
+                                        borderRadius: 5,
                                         justifyContent: "center",
                                         alignItems: "center",
-                                        marginLeft:scaleWidth(5)
+                                        marginLeft:width*0.015
                                     }}>
                                         <Text style={{
-                                            fontSize: scaleHeight(14),
+                                            fontSize:height*0.014,
                                             fontFamily: 'Montserrat',
                                             color: '#024073',
                                             fontWeight: "500",

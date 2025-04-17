@@ -1,6 +1,6 @@
 import FloatingHeader from "../components/FloatingHeader";
 import CantinaContainer from "../components/CantinaContainer";
-import image from "../../assets/images/cantina.avif";
+import image from "../../assets/images/cantina2.jpg";
 import {View} from "react-native";
 import LegendaSaliContainer from "../components/LegendaSaliContainer";
 import {RoomsFsega} from "../utils/Rooms";

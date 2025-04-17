@@ -6,18 +6,20 @@ import fsega from "../../assets/images/fsega1.jpg";
 import drept from "../../assets/images/drept1.jpg";
 import math from "../../assets/images/math1.jpg";
 import creic from "../../assets/images/creic1.jpg";
-import {ScrollView, View} from "react-native";
+import {Dimensions, ScrollView, View} from "react-native";
 import ntt from "../../assets/images/ntt.jpg"
 import observator from "../../assets/images/observator1.jpeg"
 import litere from "../../assets/images/litere1.jpg"
 import {scaleHeight} from "../utils/ScaleFunction";
+const {height, width} = Dimensions.get('window');
+
 
 
 export default function BuildingsScreen() {
     return (
         <View style={{backgroundColor:'#fff'}}>
             <FloatingHeader text="CLĂDIRI ȘI CANTINE"/>
-            <ScrollView contentContainerStyle={{paddingBottom: scaleHeight(150)}}>
+            <ScrollView contentContainerStyle={{paddingBottom:height*0.15}}>
                 <BuildingContainer name="Clădirea Centrală" image={centrala} address="Strada Mihail Kogălniceanu 1, Cluj-Napoca 400347" route='Central'/>
                 <BuildingContainer name="FSEGA" image={fsega} address="Strada Teodor Mihali 58-60, Cluj-Napoca 400591" route='Fsega'/>
                 <BuildingContainer name="Clădirea Avram Iancu" image={drept} address="Strada Avram Iancu 11, Cluj-Napoca 400089" route='Drept'/>

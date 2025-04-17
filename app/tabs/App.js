@@ -7,7 +7,7 @@ import {NavigationContainer} from "expo-router/build/fork/NavigationContainer";
 export default function App() {
     return (
 
-        <View style={{flex:1, backgroundColor: '#fff', marginVertical: scaleHeight(47)}}>
+        <View style={{flex:1, backgroundColor: '#fff'}}>
             <Navbar/>
         </View>
     )

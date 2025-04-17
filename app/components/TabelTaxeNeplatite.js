@@ -1,6 +1,8 @@
-import {Alert, Pressable, ScrollView, Text, View,} from "react-native";
+import {Alert, Dimensions, Pressable, ScrollView, Text, View,} from "react-native";
 import { scaleHeight, scaleWidth } from "../utils/ScaleFunction";
 import {useState} from "react";
+const {height, width} = Dimensions.get('window');
+
 
 export default function TabelTaxeNeplatite({examene}) {
     const [rowHeights, setRowHeights] = useState({});
@@ -14,20 +16,20 @@ export default function TabelTaxeNeplatite({examene}) {
         }));
     };
     return (
-        <View style={{ alignItems: "center", paddingTop: scaleHeight(5),  paddingHorizontal: scaleWidth(20),}}>
+        <View style={{ alignItems: "center", paddingTop: height*0.01,  paddingHorizontal: width*0.01,}}>
             <View style={{
                 backgroundColor: "rgba(174,185,196,0.49)",
                 borderStyle: "solid",
                 borderColor: "#AEB9C4",
                 borderWidth: 0.5,
-                height: scaleHeight(480),
-                width: scaleWidth(390),
-                borderRadius: scaleWidth(10),
+                height: height*0.6,
+                width: width*0.95,
+                borderRadius: 10,
                 shadowColor: "#024073",
                 shadowOpacity: 0.1,
-                shadowOffset: { width: 0, height: scaleHeight(4) },
-                shadowRadius: scaleHeight(0.7),
-                marginTop:scaleHeight(10),
+                shadowOffset: { width: 0, height: 4 },
+                shadowRadius:0.7,
+                marginTop:height*0.01,
                 overflow: "hidden",
             }}>
                 <ScrollView
@@ -41,140 +43,190 @@ export default function TabelTaxeNeplatite({examene}) {
                             style={{
                                 flexDirection: "row",
                                 backgroundColor: "#AEB9C4",
-                                borderRadius: scaleWidth(10),
-                                height:scaleHeight(40),
-                                paddingRight:scaleWidth(10)
+                                borderRadius: 10,
+                                height:height*0.045,
+                                paddingRight:width*0.022
                             }}
                         >
-                            <Text style={{
-                                marginLeft:scaleWidth(10),
+                            <View style={{
+                                width:width*0.145,
+                                marginLeft:width*0.022,
                                 backgroundColor: "#024073",
-                                borderRadius: scaleWidth(5),
-                                fontSize: scaleHeight(12),
-                                fontFamily: 'Montserrat',
-                                color: '#FFF',
-                                paddingVertical: scaleHeight(6),
-                                paddingHorizontal: scaleWidth(5),
-                                fontWeight: "500",
-                                justifyContent:"center",
-                                textAlignVertical:"center",
-                                alignSelf:"center",
-                                width:scaleWidth(60),
-                                alignItems:"center"
-                            }}>
-                                NR. CRT
-                            </Text>
-
-                            <Text style={{
-                                marginLeft:scaleWidth(5),
-                                backgroundColor: "#024073",
-                                borderRadius: scaleWidth(5),
-                                fontSize: scaleHeight(12),
-                                fontFamily: 'Montserrat',
-                                color: '#FFF',
-                                paddingVertical: scaleHeight(6),
-                                paddingHorizontal: scaleWidth(15),
-                                fontWeight: "500",
-                                justifyContent:"center",
-                                textAlignVertical:"center",
-                                alignSelf:"center",
-                                width:scaleWidth(83)
-                            }}>
-                                TIP TAXA
-                            </Text>
-                            <Text style={{
-                                marginLeft:scaleWidth(5),
-                                backgroundColor: "#024073",
-                                borderRadius: scaleWidth(5),
-                                fontSize: scaleHeight(12),
-                                fontFamily: 'Montserrat',
-                                color: '#FFF',
-                                paddingVertical: scaleHeight(6),
-                                paddingHorizontal: scaleWidth(9),
-                                fontWeight: "500",
-                                justifyContent:"center",
-                                textAlignVertical:"center",
+                                borderRadius: 5,
+                                height:height*0.03,
                                 alignSelf:"center",
                                 alignItems:"center",
-                                width:scaleWidth(85)
+                                justifyContent:"center"
                             }}>
-                                DESCRIERE
-                            </Text>
-                            <Text style={{
-                                marginLeft:scaleWidth(5),
+                                <Text style={{
+
+                                    fontSize: height*0.0135,
+                                    fontFamily: 'Montserrat',
+                                    color: '#FFF',
+                                    paddingVertical: height*0.005,
+                                    paddingHorizontal: width*0.013,
+                                    fontWeight: "500",
+                                    justifyContent:"center",
+                                    textAlignVertical:"center",
+                                    alignSelf:"center",
+                                    alignItems:"center"
+                                }}>
+                                    NR. CRT
+                                </Text>
+                            </View>
+
+                            <View style={{
+
+                                width:width*0.2,
+                                marginLeft:width*0.015,
                                 backgroundColor: "#024073",
-                                borderRadius: scaleWidth(5),
-                                fontSize: scaleHeight(12),
-                                fontFamily: 'Montserrat',
-                                color: '#FFF',
-                                paddingVertical: scaleHeight(6),
-                                paddingHorizontal: scaleWidth(5),
-                                fontWeight: "500",
-                                justifyContent:"center",
-                                textAlignVertical:"center",
+                                borderRadius: 5,
+                                height:height*0.03,
                                 alignSelf:"center",
-                                width:scaleWidth(108)
+                                alignItems:"center",
+                                justifyContent:"center"
                             }}>
-                                AN UNIVERSITAR
-                            </Text>
-                            <Text style={{
-                                marginLeft:scaleWidth(5),
+                                <Text style={{
+
+                                    fontSize: height*0.0135,
+                                    fontFamily: 'Montserrat',
+                                    color: '#FFF',
+                                    fontWeight: "500",
+                                    justifyContent:"center",
+                                    textAlignVertical:"center",
+                                    alignSelf:"center",
+
+                                }}>
+                                    TIP TAXA
+                                </Text>
+                            </View>
+
+                            <View style={{
+                                width:width*0.22,
+                                marginLeft:width*0.015,
                                 backgroundColor: "#024073",
-                                borderRadius: scaleWidth(5),
-                                fontSize: scaleHeight(12),
-                                fontFamily: 'Montserrat',
-                                color: '#FFF',
-                                paddingVertical: scaleHeight(6),
-                                paddingHorizontal: scaleWidth(15),
-                                fontWeight: "500",
-                                justifyContent:"center",
-                                textAlignVertical:"center",
+                                borderRadius: 5,
+                                height:height*0.03,
                                 alignSelf:"center",
-                                width:scaleWidth(83)
+                                alignItems:"center",
+                                justifyContent:"center"
                             }}>
-                                VALOARE
-                            </Text>
-                            <Text style={{
-                                marginLeft:scaleWidth(5),
+                                <Text style={{
+
+                                    fontSize: height*0.0135,
+                                    fontFamily: 'Montserrat',
+                                    color: '#FFF',
+                                    fontWeight: "500",
+                                    justifyContent:"center",
+                                    textAlignVertical:"center",
+                                    alignSelf:"center",
+                                    alignItems:"center",
+                                }}>
+                                    DESCRIERE
+                                </Text>
+                            </View>
+
+                            <View style={{
+                                width:width*0.26,
+                                marginLeft:width*0.015,
                                 backgroundColor: "#024073",
-                                borderRadius: scaleWidth(5),
-                                fontSize: scaleHeight(12),
-                                fontFamily: 'Montserrat',
-                                color: '#FFF',
-                                paddingVertical: scaleHeight(6),
-                                paddingHorizontal: scaleWidth(5),
-                                fontWeight: "500",
-                                justifyContent:"center",
-                                textAlignVertical:"center",
+                                borderRadius: 5,
+                                height:height*0.03,
                                 alignSelf:"center",
-                                width:scaleWidth(107)
+                                alignItems:"center",
+                                justifyContent:"center"
                             }}>
-                                DATA SCADENTA
-                            </Text>
-                            <Text style={{
-                                marginLeft:scaleWidth(5),
+                                <Text style={{
+
+                                    fontSize: height*0.0135,
+                                    fontFamily: 'Montserrat',
+                                    color: '#FFF',
+                                    fontWeight: "500",
+                                    justifyContent:"center",
+                                    textAlignVertical:"center",
+                                    alignSelf:"center",
+                                }}>
+                                    AN UNIVERSITAR
+                                </Text>
+                            </View>
+
+                            <View style={{
+                                width:width*0.2,
+                                marginLeft:width*0.015,
                                 backgroundColor: "#024073",
-                                borderRadius: scaleWidth(5),
-                                fontSize: scaleHeight(12),
-                                fontFamily: 'Montserrat',
-                                color: '#FFF',
-                                paddingVertical: scaleHeight(6),
-                                paddingHorizontal: scaleWidth(12),
-                                fontWeight: "500",
-                                justifyContent:"center",
-                                textAlignVertical:"center",
+                                borderRadius: 5,
+                                height:height*0.03,
                                 alignSelf:"center",
-                                width:scaleWidth(60)
+                                alignItems:"center",
+                                justifyContent:"center"
                             }}>
-                                PLATA
-                            </Text>
+                                <Text style={{
+                                    fontSize: height*0.0135,
+                                    fontFamily: 'Montserrat',
+                                    color: '#FFF',
+                                    fontWeight: "500",
+                                    justifyContent:"center",
+                                    textAlignVertical:"center",
+                                    alignSelf:"center",
+                                }}>
+                                    VALOARE
+                                </Text>
+                            </View>
+
+                            <View style={{
+                                width:width*0.26,
+                                marginLeft:width*0.015,
+                                backgroundColor: "#024073",
+                                borderRadius: 5,
+                                height:height*0.03,
+                                alignSelf:"center",
+                                alignItems:"center",
+                                justifyContent:"center"
+                            }}>
+                                <Text style={{
+
+                                    fontSize:height*0.0135,
+                                    fontFamily: 'Montserrat',
+                                    color: '#FFF',
+                                    fontWeight: "500",
+                                    justifyContent:"center",
+                                    textAlignVertical:"center",
+                                    alignSelf:"center",
+                                }}>
+                                    DATA SCADENTA
+                                </Text>
+                            </View>
+
+                            <View style={{
+                                width:width*0.15,
+                                marginLeft:width*0.015,
+                                backgroundColor: "#024073",
+                                borderRadius: 5,
+                                height:height*0.03,
+                                alignSelf:"center",
+                                alignItems:"center",
+                                justifyContent:"center"
+                            }}>
+                                <Text style={{
+                                    fontSize: height*0.0135,
+                                    fontFamily: 'Montserrat',
+                                    color: '#FFF',
+                                    fontWeight: "500",
+                                    justifyContent:"center",
+                                    textAlignVertical:"center",
+                                    alignSelf:"center",
+                                }}>
+                                    PLATA
+                                </Text>
+                            </View>
+
 
                         </View>
 
                         <ScrollView
 
                             contentContainerStyle={{
-                                paddingBottom:scaleHeight(20),
+                                paddingBottom:height*0.02,
 
                                 alignItems:"flex-start",
                                 justifyContent:"flex-start"
@@ -185,26 +237,26 @@ export default function TabelTaxeNeplatite({examene}) {
                                     key={index}
                                     onLayout={(event) => handleTextLayout(index, event)}
                                     style={{
-                                        marginTop: scaleHeight(10),
+                                        marginTop: height*0.011,
                                         flexDirection: "row",
                                         alignItems: "center",
-                                        minHeight: rowHeights[index] || scaleHeight(30),
+                                        minHeight:  rowHeights[index] ||height*0.035,
                                     }}
                                     onPress={()=>Alert.alert(`plateste`)}
                                 >
 
                                     <View style={{
-                                        width: scaleWidth(60),
-                                        minHeight: rowHeights[index] || scaleHeight(30),
+                                        width: width*0.145,
+                                        minHeight:  rowHeights[index] ||height*0.035,
                                         backgroundColor: "#fff",
-                                        borderRadius: scaleWidth(5),
+                                        borderRadius: 5,
                                         justifyContent: "center",
                                         alignItems: "center",
-                                        marginLeft:scaleWidth(10)
+                                        marginLeft:width*0.022
                                     }}>
                                         <Text style={{
 
-                                            fontSize: scaleHeight(14),
+                                            fontSize: height*0.014,
                                             fontFamily: 'Montserrat',
                                             color: '#024073',
                                             fontWeight: "500",
@@ -216,17 +268,17 @@ export default function TabelTaxeNeplatite({examene}) {
                                     </View>
 
                                     <View style={{
-                                        width: scaleWidth(83),
-                                        minHeight: rowHeights[index] || scaleHeight(30),
+                                        width: width*0.2,
+                                        minHeight:  rowHeights[index] ||height*0.035,
                                         backgroundColor: "#fff",
-                                        borderRadius: scaleWidth(5),
+                                        borderRadius: 5,
                                         justifyContent: "center",
                                         alignItems: "center",
-                                        marginLeft:scaleWidth(5)
+                                        marginLeft:width*0.015
                                     }}>
                                         <Text style={{
 
-                                            fontSize: scaleHeight(14),
+                                            fontSize: height*0.014,
                                             fontFamily: 'Montserrat',
                                             color: '#024073',
                                             fontWeight: "500",
@@ -237,17 +289,17 @@ export default function TabelTaxeNeplatite({examene}) {
                                         </Text>
                                     </View>
                                     <View style={{
-                                        width: scaleWidth(85),
-                                        minHeight: rowHeights[index] || scaleHeight(30),
+                                        width: width*0.22,
+                                        minHeight:  rowHeights[index] ||height*0.035,
                                         backgroundColor: "#fff",
-                                        borderRadius: scaleWidth(5),
+                                        borderRadius: 5,
                                         justifyContent: "center",
                                         alignItems: "center",
-                                        marginLeft:scaleWidth(5)
+                                        marginLeft: width*0.015
                                     }}>
                                         <Text style={{
 
-                                            fontSize: scaleHeight(14),
+                                            fontSize: height*0.014,
                                             fontFamily: 'Montserrat',
                                             color: '#024073',
                                             fontWeight: "500",
@@ -258,16 +310,16 @@ export default function TabelTaxeNeplatite({examene}) {
                                         </Text>
                                     </View>
                                     <View style={{
-                                        width: scaleWidth(108),
-                                        minHeight: rowHeights[index] || scaleHeight(30),
+                                        width: width*0.26,
+                                        minHeight:  rowHeights[index] ||height*0.035,
                                         backgroundColor: "#fff",
-                                        borderRadius: scaleWidth(5),
+                                        borderRadius: 5,
                                         justifyContent: "center",
                                         alignItems: "center",
-                                        marginLeft:scaleWidth(5)
+                                        marginLeft:width*0.015
                                     }}>
                                         <Text style={{
-                                            fontSize: scaleHeight(14),
+                                            fontSize: height*0.014,
                                             fontFamily: 'Montserrat',
                                             color: '#024073',
                                             fontWeight: "500",
@@ -277,16 +329,16 @@ export default function TabelTaxeNeplatite({examene}) {
                                         </Text>
                                     </View>
                                     <View style={{
-                                        width: scaleWidth(83),
-                                        minHeight: rowHeights[index] || scaleHeight(30),
+                                        width:width*0.2,
+                                        minHeight:  rowHeights[index] ||height*0.035,
                                         backgroundColor: "#fff",
-                                        borderRadius: scaleWidth(5),
+                                        borderRadius: 5,
                                         justifyContent: "center",
                                         alignItems: "center",
-                                        marginLeft:scaleWidth(5)
+                                        marginLeft:width*0.015
                                     }}>
                                         <Text style={{
-                                            fontSize: scaleHeight(14),
+                                            fontSize: height*0.014,
                                             fontFamily: 'Montserrat',
                                             color: '#024073',
                                             fontWeight: "500",
@@ -296,16 +348,16 @@ export default function TabelTaxeNeplatite({examene}) {
                                         </Text>
                                     </View>
                                     <View style={{
-                                        width: scaleWidth(107),
-                                        minHeight: rowHeights[index] || scaleHeight(30),
+                                        width: width*0.26,
+                                        minHeight:  rowHeights[index] ||height*0.035,
                                         backgroundColor: "#fff",
-                                        borderRadius: scaleWidth(5),
+                                        borderRadius:5,
                                         justifyContent: "center",
                                         alignItems: "center",
-                                        marginLeft:scaleWidth(5)
+                                        marginLeft:width*0.015
                                     }}>
                                         <Text style={{
-                                            fontSize: scaleHeight(14),
+                                            fontSize: height*0.014,
                                             fontFamily: 'Montserrat',
                                             color: '#024073',
                                             fontWeight: "500",
@@ -315,16 +367,16 @@ export default function TabelTaxeNeplatite({examene}) {
                                         </Text>
                                     </View>
                                     <View style={{
-                                        width: scaleWidth(60),
-                                        minHeight: rowHeights[index] || scaleHeight(30),
+                                        width: width*0.15,
+                                        minHeight:  rowHeights[index] ||height*0.035,
                                         backgroundColor: "#fff",
-                                        borderRadius: scaleWidth(5),
+                                        borderRadius: 5,
                                         justifyContent: "center",
                                         alignItems: "center",
-                                        marginLeft:scaleWidth(5)
+                                        marginLeft:width*0.015
                                     }}>
                                         <Text style={{
-                                            fontSize: scaleHeight(14),
+                                            fontSize: height*0.014,
                                             fontFamily: 'Montserrat',
                                             color: '#024073',
                                             fontWeight: "500",

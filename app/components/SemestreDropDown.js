@@ -1,8 +1,10 @@
 import {useState} from "react";
-import {View} from "react-native";
+import {Dimensions, View} from "react-native";
 import FloatingHeader from "./FloatingHeader";
 import {scaleHeight, scaleWidth} from "../utils/ScaleFunction";
 import DropDownPicker from "react-native-dropdown-picker";
+const {height, width} = Dimensions.get('window');
+
 
 export default function SemestreDropDown()
 {
@@ -21,7 +23,7 @@ export default function SemestreDropDown()
     ]);
     return (
 
-            <View style={{paddingHorizontal:scaleWidth(10),paddingTop:scaleHeight(10),borderColor:"#002E54"}}>
+            <View style={{paddingHorizontal:width*0.025,paddingTop:height*0.01,borderColor:"#002E54"}}>
                 <DropDownPicker
                     open={open}
                     value={value}
@@ -37,20 +39,20 @@ export default function SemestreDropDown()
                         }
                     }
                     textStyle={{
-                        fontSize: scaleHeight(15),
+                        fontSize: height*0.017,
                         fontFamily: 'Montserrat',
                         fontWeight: "600",
                         color: '#002E54',
-                        paddingVertical:scaleHeight(5)
+                        paddingVertical:height*0.005
                     }}
                     style={{backgroundColor:"rgba(174,185,196,0.6)",
                         borderColor:"#AEB9C4",
                         borderRadius:10,
                         shadowColor: "#024073",
                         shadowOpacity: 0.1,
-                        shadowRadius: scaleHeight(0.7),
-                        shadowOffset: {height: scaleHeight(4)},
-                        minHeight:scaleHeight(30)
+                        shadowRadius: 0.7,
+                        shadowOffset: {height: 4},
+                        minHeight:height*0.01
                     }}
 
                     selectedItemContainerStyle={{ backgroundColor:"#AEB9C4"}}

@@ -1,28 +1,30 @@
-import {Alert, ImageBackground, Pressable, Text, View} from "react-native";
+import {Alert, Dimensions, ImageBackground, Pressable, Text, View} from "react-native";
 import {scaleHeight, scaleWidth} from "../utils/ScaleFunction";
 import {useNavigation} from "expo-router";
+const {height, width} = Dimensions.get('window');
+
 
 export default function BuildingContainer({name, image, address, route}) {
     const navigation = useNavigation();
     return (
-        <View style={{alignItems: "center", paddingTop: scaleHeight(13)}}>
+        <View style={{alignItems: "center", paddingTop: height*0.015}}>
             <Pressable onPress={() => navigation.navigate(route)}>
                 <View style={{
-                    height: scaleHeight(115),
-                    marginHorizontal: scaleWidth(20),
-                    width: scaleWidth(350),
-                    borderRadius: scaleWidth(10),
+                    height: height*0.134,
+                    marginHorizontal: width*0.02,
+                    width:width*0.86,
+                    borderRadius: 10,
                     shadowColor: "#024073",
                     shadowOpacity: 0.1,
                     shadowOffset: { width: 0, height: scaleHeight(4) },
-                    shadowRadius: scaleHeight(0.7),
+                    shadowRadius:0.7,
                 }}>
                     <ImageBackground
                         source={image}
                         style={{
                             height: '100%',
                             width: '100%',
-                            borderRadius: scaleWidth(10),
+                            borderRadius: 10,
                             overflow: "hidden",
 
                         }}
@@ -37,42 +39,41 @@ export default function BuildingContainer({name, image, address, route}) {
                         }} />
                         <View style={{
 
-                            marginTop: scaleHeight(55),
-                            marginLeft: scaleWidth(10),
+                            marginTop: height*0.07,
+                            marginLeft: width*0.023,
                             justifyContent: "center",
                             alignItems:"flex-start"
                         }}>
                             <Text style={{
                                 backgroundColor: "rgba(255, 255, 255, 0.6)",
-                                borderRadius: scaleWidth(5),
-                                paddingVertical: scaleHeight(3),
-                                paddingHorizontal:scaleWidth(5),
-                                fontSize: scaleHeight(16),
+                                borderRadius: 5,
+                                paddingVertical: height*0.0025,
+                                paddingHorizontal:width*0.01,
+                                fontSize:height*0.016,
                                 fontFamily: 'Montserrat',
                                 fontWeight: "500",
                                 color: '#024073',
-                                paddingLeft: scaleWidth(5),
+                                paddingLeft:width*0.01,
                             }}>
                                 {name}
                             </Text>
                         </View>
                         <View style={{
 
-                            marginTop: scaleHeight(5),
-                            marginLeft: scaleWidth(10),
+                            marginTop: height*0.007,
+                            marginLeft: width*0.023,
                             justifyContent: "center",
                             alignItems:"flex-start"
 
                         }}>
                             <Text style={{
                                 backgroundColor: "rgba(255, 255, 255, 0.6)",
-                                height: scaleHeight(21),
-                                borderRadius: scaleWidth(5),
-                                paddingHorizontal:scaleWidth(5),
-                                fontSize: scaleHeight(10),
+                                borderRadius: 5,
+                                paddingHorizontal:width*0.01,
+                                fontSize:height*0.012,
                                 fontFamily: 'Montserrat',
                                 color: '#024073',
-                                paddingVertical:scaleHeight(3)
+                                paddingVertical: height*0.003
 
                             }}>
                                 {address}
