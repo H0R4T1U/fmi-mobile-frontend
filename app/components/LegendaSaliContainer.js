@@ -1,5 +1,10 @@
+<<<<<<< Updated upstream
 import { ScrollView, Text, View } from "react-native";
 import { scaleHeight, scaleWidth } from "../utils/ScaleFunction";
+=======
+import {Dimensions, ScrollView, Text, View} from "react-native";
+const {height, width} = Dimensions.get('window');
+>>>>>>> Stashed changes
 
 export default function LegendaSaliContainer({ rooms }) {
     return (

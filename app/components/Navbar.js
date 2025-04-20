@@ -7,13 +7,16 @@ import NewsScreen from "../tabs/NewsScreen";
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import FMIHubHeader from "./FMIHubHeader";
+<<<<<<< Updated upstream
 import {scaleWidth} from "../utils/ScaleFunction";
 import {scaleHeight} from "../utils/ScaleFunction";
 <<<<<<< Updated upstream
 =======
+=======
+>>>>>>> Stashed changes
 import FsegaScreen from "../tabs/FsegaScreen";
 import HomeScreen from "../tabs/HomeScreen";
-import {useNavigation} from "expo-router";
+import {Tabs, useNavigation} from "expo-router";
 import CentralScreen from "../tabs/CentralScreen";
 import DreptScreen from "../tabs/DreptScreen";
 import MathematicaScreen from "../tabs/MathematicaScreen";
@@ -22,8 +25,17 @@ import NttScreen from "../tabs/NttScreen";
 import LitereScreen from "../tabs/LitereScreen";
 import ObservatorScreen from "../tabs/ObservatorScreen";
 import DppdScreen from "../tabs/DppdScreen";
+<<<<<<< Updated upstream
 >>>>>>> Stashed changes
 
+=======
+import ExameneScreen from "../tabs/ExameneScreen";
+import ConsultareNoteScreen from "../tabs/ConsultareNoteScreen";
+import TaxeScreen from "../tabs/TaxeScreen";
+const {height, width} = Dimensions.get('window');
+const buttonWidth =width*0.25;
+const buttonHeight = width*0.25;
+>>>>>>> Stashed changes
 
 const buttonWidth = scaleWidth(120);
 const buttonHeight = scaleHeight(120);
@@ -47,13 +59,39 @@ const tabIconStyles = {
 };
 
 
-const Tab = createBottomTabNavigator();
+// const Tab = createBottomTabNavigator();
 
 export default function Navbar() {
     const navigation = useNavigation();
+    const linking = {
+        prefixes: ['fmihub://'],
+        config: {
+            screens: {
+                Home: 'home',
+                Profil: 'profile',
+                Clădiri: 'buildings',
+                Academic: 'academic',
+                News: 'news',
+                Central: 'central',
+                Fsega: 'fsega',
+                Drept: 'drept',
+                Mathematica: 'mathematica',
+                Creic: 'creic',
+                Ntt: 'ntt',
+                Litere: 'litere',
+                Observator: 'observator',
+                Dppd: 'dppd',
+                Examene: 'examene',
+                ConsultareNote: 'consultare-note',
+                Taxe: 'taxe',
+                AuthCallback: 'auth-callback',
+            }
+        }
+    };
     return (
         <Animated.View style={[tw`flex-1`, { backgroundColor: "#fff" }]}>
-            <Tab.Navigator
+            {/*<NavigationContainer linking={linking}>*/}
+            <Tabs
                 screenOptions={{
                     tabBarStyle: {
                         height: scaleHeight(92),
@@ -78,7 +116,7 @@ export default function Navbar() {
              id={1}>
 
                 {/* profile button */}
-                <Tab.Screen name="Profil" component={ProfileScreen} options={{
+                <Tabs.Screen name="Profil" component={ProfileScreen} options={{
                     tabBarIcon: () => (
                         <View style={tabIconStyles.container}>
                             <Image source={require('../../assets/images/profile.png')} style={tabIconStyles.image} />
@@ -89,7 +127,7 @@ export default function Navbar() {
                 }} />
 
                 {/* buildings button */}
-                <Tab.Screen name="Clădiri" component={BuildingsScreen} options={{
+                <Tabs.Screen name="Clădiri" component={BuildingsScreen} options={{
                     tabBarIcon: () => (
                         <View style={tabIconStyles.container}>
                             <Image source={require('../../assets/images/building.png')} style={tabIconStyles.image} />
@@ -101,7 +139,7 @@ export default function Navbar() {
                 />
 
                 {/* academic button */}
-                <Tab.Screen name="Academic" component={AcademicScreen} options={{
+                <Tabs.Screen name="Academic" component={AcademicScreen} options={{
                     tabBarIcon: () => (
                         <View style={tabIconStyles.container}>
                             <Image source={require('../../assets/images/academic.png')} style={tabIconStyles.image} />
@@ -115,7 +153,7 @@ export default function Navbar() {
                 }} />
 
                 {/* news button */}
-                <Tab.Screen name="News" component={NewsScreen} options={{
+                <Tabs.Screen name="News" component={NewsScreen} options={{
                     tabBarIcon: () => (
                         <View style={tabIconStyles.container}>
                             <Image source={require('../../assets/images/news.png')} style={tabIconStyles.image} />
@@ -124,6 +162,7 @@ export default function Navbar() {
                     sceneStyle: {
                         backgroundColor: "#fff"}
                 }} />
+<<<<<<< Updated upstream
                 <Tab.Screen name="Home" component={HomeScreen} options={{
                     tabBarItemStyle: {display: 'none'}
                 }}/>
@@ -154,10 +193,93 @@ export default function Navbar() {
                 <Tab.Screen name="Dppd" component={DppdScreen} options={{
                     tabBarItemStyle: {display: 'none'}
                 }}/>
+=======
+                <Tabs.Screen name="Home" component={HomeScreen} options={{
+                    tabBarItemStyle: {display: 'none'},
+                    sceneStyle: {
+                        backgroundColor: "#ffffff"}
+                }}/>
+                <Tabs.Screen name="Central" component={CentralScreen} options={{
+                    tabBarItemStyle: {display: 'none'},
+                    sceneStyle: {
+                        backgroundColor: "#ffffff"}
+                }}/>
+                <Tabs.Screen name="Fsega" component={FsegaScreen} options={{
+                    tabBarItemStyle: {display: 'none'},
+                    sceneStyle: {
+                        backgroundColor: "#ffffff"}
+                }}/>
+                <Tabs.Screen name="Drept" component={DreptScreen} options={{
+                    tabBarItemStyle: {display: 'none'},
+                    sceneStyle: {
+                        backgroundColor: "#ffffff"}
+                }}/>
+                <Tabs.Screen name="Mathematica" component={MathematicaScreen} options={{
+                    tabBarItemStyle: {display: 'none'},
+                    sceneStyle: {
+                        backgroundColor: "#ffffff"}
+                }}/>
+                <Tabs.Screen name="Creic" component={CreicScreen} options={{
+                    tabBarItemStyle: {display: 'none'},
+                    sceneStyle: {
+                        backgroundColor: "#ffffff"}
+                }}/>
+                <Tabs.Screen name="Ntt" component={NttScreen} options={{
+                    tabBarItemStyle: {display: 'none'},
+                    sceneStyle: {
+                        backgroundColor: "#ffffff"}
+                }}/>
+                <Tabs.Screen name="Litere" component={LitereScreen} options={{
+                    tabBarItemStyle: {display: 'none'},
+                    sceneStyle: {
+                        backgroundColor: "#ffffff"}
+                }}/>
+                <Tabs.Screen name="Observator" component={ObservatorScreen} options={{
+                    tabBarItemStyle: {display: 'none'},
+                    sceneStyle: {
+                        backgroundColor: "#ffffff"}
+                }}/>
+                <Tabs.Screen name="Dppd" component={DppdScreen} options={{
+                    tabBarItemStyle: {display: 'none'},
+                    sceneStyle: {
+                        backgroundColor: "#ffffff"}
+
+                }}/>
+                <Tabs.Screen name={"Examene"} component={ExameneScreen} options={
+                    {tabBarItemStyle:{display: 'none'},
+                        sceneStyle: {
+                            backgroundColor: "#ffffff"}
+                    }
+
+                }/>
+                <Tabs.Screen name={"ConsultareNote"} component={ConsultareNoteScreen} options={
+                    {tabBarItemStyle:{display: 'none'},
+                        sceneStyle: {
+                            backgroundColor: "#ffffff"}
+                    }
+
+                }/>
+                <Tabs.Screen name={"Taxe"} component={TaxeScreen} options={
+                    {tabBarItemStyle:{display: 'none'},
+                        sceneStyle: {
+                            backgroundColor: "#ffffff"}
+                    }
+
+                }/>
+                <Tabs.Screen
+                    name="AuthCallback"
+                    // component={AuthCallbackScreen}
+                    options={{
+                        tabBarItemStyle: {display: 'none'},
+                        sceneStyle: {backgroundColor: "#ffffff"}
+                    }}
+                />
+>>>>>>> Stashed changes
 
 
 
-            </Tab.Navigator>
+            </Tabs>
+            {/*</NavigationContainer>*/}
 
             {/* home button */}
             <View style={tw`items-center`}>

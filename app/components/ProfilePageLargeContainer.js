@@ -20,10 +20,17 @@ export default function ProfilePageLargeContainer({username, password}) {
         }}>
             <View style={{
                 backgroundColor: '#024073',
+<<<<<<< Updated upstream
                 marginBottom: scaleHeight(10),
                 height: scaleHeight(35),
                 width: scaleWidth(150),
                 borderRadius: scaleWidth(5),
+=======
+                marginBottom: height*0.007,
+                height: height*0.045,
+                width: width*0.37,
+                borderRadius: 5,
+>>>>>>> Stashed changes
                 alignItems: 'center',
                 justifyContent: 'center',
 

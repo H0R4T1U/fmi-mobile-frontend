@@ -8,9 +8,15 @@ export default function ProfilePageSmallContainer({title, content}) {
             marginTop: scaleHeight(13),
             display: 'flex',
             flexDirection: 'row',
+<<<<<<< Updated upstream
             height: scaleHeight(78),
             width: scaleWidth(350),
             borderRadius: scaleWidth(10),
+=======
+            height: height*0.075,
+            width: width*0.86,
+            borderRadius: 10,
+>>>>>>> Stashed changes
             alignItems: 'center',
             justifyContent: 'center',
             shadowColor: "#024073",
