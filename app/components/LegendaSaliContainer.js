@@ -1,40 +1,36 @@
-<<<<<<< Updated upstream
-import { ScrollView, Text, View } from "react-native";
-import { scaleHeight, scaleWidth } from "../utils/ScaleFunction";
-=======
 import {Dimensions, ScrollView, Text, View} from "react-native";
 const {height, width} = Dimensions.get('window');
->>>>>>> Stashed changes
 
 export default function LegendaSaliContainer({ rooms }) {
     return (
-        <View style={{ alignItems: "center", paddingTop: scaleHeight(13) }}>
+        <View style={{ alignItems: "center", paddingTop: height*0.014 }}>
             <View style={{
                 backgroundColor: "rgba(174,185,196,0.49)",
                 borderStyle: "solid",
                 borderColor: "#AEB9C4",
                 borderWidth: 0.5,
-                height: scaleHeight(400),
-                marginHorizontal: scaleWidth(20),
-                width: scaleWidth(350),
-                borderRadius: scaleWidth(10),
+                height:(height*0.106)+rooms.length*(height*0.04)+rooms.length*(height*0.015),
+                maxHeight:height*0.52,
+                width:width*0.86,
+                borderRadius: 10,
                 shadowColor: "#024073",
                 shadowOpacity: 0.1,
-                shadowOffset: { width: 0, height: scaleHeight(4) },
-                shadowRadius: scaleHeight(0.7),
+                shadowOffset: { width: 0, height: 4 },
+                shadowRadius: 0.7,
+                paddingBottom:height*0.01
             }}>
                 <View style={{
-                    marginTop: scaleHeight(15),
-                    marginLeft: scaleWidth(10),
+                    marginTop:height*0.015,
                     justifyContent: "center",
-                    alignItems: "center"
+                    alignItems: "center",
+
                 }}>
                     <Text style={{
                         backgroundColor: "#AEB9C4",
-                        borderRadius: scaleWidth(5),
-                        paddingVertical: scaleHeight(4),
-                        paddingHorizontal: scaleWidth(10),
-                        fontSize: scaleHeight(15),
+                        borderRadius: 5,
+                        paddingVertical: height*0.006,
+                        paddingHorizontal: width*0.03,
+                        fontSize: height*0.0155,
                         fontFamily: 'Montserrat',
                         fontWeight: "600",
                         color: '#024073',
@@ -44,20 +40,21 @@ export default function LegendaSaliContainer({ rooms }) {
                 </View>
 
                 <View style={{
-                    marginTop: scaleHeight(20),
-                    marginBottom: scaleHeight(10),
-                    marginLeft: scaleWidth(10),
+                    marginTop:height*0.022,
+                    marginBottom: height*0.005,
                     flexDirection: "row",
+                    justifyContent:"center",
                     alignItems: "center"
                 }}>
                     <Text style={{
                         backgroundColor: "#024073",
-                        borderRadius: scaleWidth(5),
-                        fontSize: scaleHeight(12),
+                        borderRadius: 5,
+                        fontSize: height*0.0145,
                         fontFamily: 'Montserrat',
+                        width: width*0.256,
                         color: '#FFF',
-                        paddingVertical: scaleHeight(4),
-                        paddingHorizontal: scaleWidth(35),
+                        paddingVertical: height*0.005,
+                        paddingHorizontal: width*0.083,
                         fontWeight: "500"
                     }}>
                         SALA
@@ -65,62 +62,77 @@ export default function LegendaSaliContainer({ rooms }) {
 
                     <Text style={{
                         backgroundColor: "#024073",
-                        borderRadius: scaleWidth(5),
-                        fontSize: scaleHeight(12),
+                        borderRadius: 5,
+                        fontSize:height*0.0145,
                         fontFamily: 'Montserrat',
                         color: '#FFF',
-                        paddingVertical: scaleHeight(4),
-                        paddingHorizontal: scaleWidth(72),
-                        marginLeft: scaleWidth(10),
+                        width: width*0.53,
+                        paddingVertical: height*0.005,
+                        paddingHorizontal: width*0.165,
+                        marginLeft:width*0.02,
                         fontWeight: "500"
                     }}>
                         LOCALIZARE
                     </Text>
                 </View>
 
-                <ScrollView>
+                <ScrollView style={{
+                    paddingHorizontal:width*0.023
+                }}>
                     {rooms.map((room, index) => (
                         <View
                             key={index}
                             style={{
-                                marginTop: scaleHeight(10),
-                                marginLeft: scaleWidth(10),
+                                marginTop: height*0.011,
                                 flexDirection: "row",
                                 alignItems: "center",
+                                justifyContent:"center"
                             }}
                         >
                             <Text style={{
                                 backgroundColor: "#fff",
-                                borderRadius: scaleWidth(5),
-                                fontSize: scaleHeight(16),
+                                borderRadius: 5,
+                                fontSize: height*0.016,
                                 fontFamily: 'Montserrat',
                                 color: '#024073',
-                                height: scaleHeight(40),
-                                width: scaleWidth(100),
+                                height:height*0.04,
+                                width: width*0.256,
                                 fontWeight: "500",
                                 textAlign: 'center',
                                 textAlignVertical: "center",
-                                lineHeight: scaleHeight(40),
+                                lineHeight: height*0.04,
                             }}>
                                 {room.sala}
                             </Text>
-                            <Text style={{
+                            <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{
+
+                                marginLeft: width*0.02,
                                 backgroundColor: "#fff",
-                                borderRadius: scaleWidth(5),
-                                fontSize: scaleHeight(16),
-                                fontFamily: 'Montserrat',
-                                color: '#024073',
-                                marginLeft: scaleWidth(10),
-                                fontWeight: "500",
-                                height: scaleHeight(40),
-                                width: scaleWidth(217),
-                                textAlign: "center",
-                                textAlignVertical: "center",
-                                lineHeight: scaleHeight(40),
-                                flexWrap: 're'
-                            }}>
-                                {room.localizare}
-                            </Text>
+                                borderRadius:5,
+                                height: height*0.04,
+                                width:  width*0.53,
+
+
+
+                            }} contentContainerStyle={{ alignItems: "center"}} >
+                                <Text style={{
+
+                                    fontSize: height*0.016,
+                                    fontFamily: 'Montserrat',
+                                    color: '#024073',
+                                    fontWeight: "500",
+                                    height: height*0.04,
+                                    textAlign: "center",
+                                    textAlignVertical: "center",
+                                    lineHeight: height*0.04,
+                                    minWidth: '100%',
+                                    paddingHorizontal:width*0.02
+
+                                }}>
+                                    {room.localizare}
+                                </Text>
+                            </ScrollView>
+
                         </View>
                     ))}
                 </ScrollView>

@@ -1,41 +1,42 @@
-import {scaleHeight, scaleWidth} from "../utils/ScaleFunction";
-import {Alert, ImageBackground, Pressable, Text, View} from "react-native";
+import {Dimensions, ImageBackground, Pressable, Text, View} from "react-native";
+import {useRouter} from "expo-router";
+const {height, width} = Dimensions.get('window');
 
-export default function AcademicContainer({name, image}) {
+
+export default function AcademicContainer({name, image,route}) {
+    const router = useRouter();
     return (
         <View style={{
             alignItems: "center",
-            paddingTop: scaleHeight(13),
+            paddingTop: height*0.014,
             shadowColor: "#024073",
             shadowOpacity: 0.1,
-            shadowRadius: scaleHeight(0.7),
-            shadowOffset: {height: scaleHeight(4)},
+            shadowRadius: height*0.001,
+            shadowOffset: {height:height*0.0051},
         }}>
             <Pressable onPress={() => {
-                Alert.alert(
-                    name,
-                )
+                const newRoute = '/' + route;
+                router.push(newRoute);
             }}>
                 <ImageBackground source={image} style={{
-                    height: scaleHeight(115),
-                    marginHorizontal: scaleWidth(20),
-                    width: scaleWidth(350),
-                    borderRadius: scaleWidth(10),
+                    height: height*0.128,
+                    width: width*0.86,
+                    borderRadius:10,
                     overflow: "hidden",
-                    borderWidth: scaleWidth(1),
+                    borderWidth: width*0.0025,
                     borderColor: '#024073'
                 }}>
                     <View style={{
                         backgroundColor: "rgba(2, 64, 115, 1)",
-                        height: scaleHeight(26),
-                        width: scaleWidth(140),
-                        borderRadius: scaleWidth(5),
-                        marginTop: scaleWidth(75),
-                        marginLeft: scaleWidth(10),
+                        height: height*0.033,
+                        width: width*0.35,
+                        borderRadius: 5,
+                        marginTop: width*0.18,
+                        marginLeft:width*0.024,
                         justifyContent: "center",
                     }}>
                         <Text style={{
-                            fontSize: scaleHeight(16),
+                            fontSize: height*0.018,
                             fontFamily: 'Montserrat',
                             fontWeight: "500",
                             color: '#fff',
