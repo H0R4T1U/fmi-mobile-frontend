@@ -10,9 +10,9 @@ export default function Index() {
         const checkUser = async () => {
             const user = await CacheManager.get("loggedUser");
             if (user) {
-                router.replace("/Profil");
+                router.replace("/LogIntoNewScreen");
             } else {
-                router.replace("/SignInScreen");
+                router.replace("/LoginScreen");
             }
         };
         checkUser();

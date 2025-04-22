@@ -25,7 +25,7 @@ export default function Profil() {
 
     const handleLogout = async () => {
         await CacheManager.remove("loggedUser");
-        router.replace("/SignInScreen");
+        router.replace("/LoginScreen");
     };
 
     if (loading) {
@@ -39,7 +39,7 @@ export default function Profil() {
     if (!user) {
         return (
             <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-                <Button title="Go to login" onPress={() => router.replace("/SignInScreen")} />
+                <Button title="Go to login" onPress={() => router.replace("/LoginScreen")} />
             </View>
         );
     }

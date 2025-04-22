@@ -26,6 +26,7 @@
     "preset": "jest-expo"
   },
   "dependencies": {
+    "@fontsource/peddana": "^5.2.5",
     "@react-native-async-storage/async-storage": "1.23.1",
     "expo": "~52.0.40",
     "expo-auth-session": "~6.0.3",

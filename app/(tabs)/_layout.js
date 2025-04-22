@@ -2,7 +2,7 @@ import tw from "twrnc";
 import {Animated, Dimensions, Image, TouchableOpacity, View} from "react-native";
 import React from "react";
 import FMIHubHeader from "../components/FMIHubHeader";
-import {Tabs, useRouter} from "expo-router";
+import {Tabs, useRouter, useSegments} from "expo-router";
 const {height, width} = Dimensions.get('window');
 const buttonWidth =width*0.25;
 const buttonHeight = width*0.25;
@@ -29,6 +29,9 @@ const tabIconStyles = {
 
 export default function Layout() {
     const router = useRouter();
+    const segments = useSegments();
+    const currentScreen = segments[segments.length - 1];
+    const showHomeButton = currentScreen !== "LogIntoNewScreen" && currentScreen !== "LoginScreen";
     return (
         <Animated.View style={[tw`flex-1`, { backgroundColor: "#fff" }]}>
             <Tabs
@@ -174,39 +177,54 @@ export default function Layout() {
                     }
 
                 }/>
-                <Tabs.Screen name="SignInScreen" options={
-                    {tabBarItemStyle:{display: 'none'},
+                <Tabs.Screen name="LogIntoNewScreen" options={
+                    {headerShown:false,
+                        tabBarItemStyle:{display: 'none'},
                         sceneStyle: {
-                            backgroundColor: "#ffffff"}
+                            backgroundColor: "#ffffff",
+                        },
+                        tabBarStyle: {
+                            display: 'none'
+                        }
                     }
-
+                }/>
+                <Tabs.Screen name="LoginScreen" options={
+                    {headerShown:false,
+                        tabBarItemStyle:{display: 'none'},
+                        sceneStyle: {
+                            backgroundColor: "#ffffff",
+                        },
+                        tabBarStyle: {
+                            display: 'none'
+                        }
+                    }
                 }/>
             </Tabs>
 
             {/* home button */}
-            <View style={tw`items-center`}>
+            {showHomeButton && (
+                <View style={tw`items-center`}>
                 <TouchableOpacity
                     onPress={() => {
                         router.push('HomeScreen');
-                        // navigation.navigate('HomeScreen');
                     }}
                     style={[
                         tw`absolute`,
                         {
 
-                            bottom: height*0.03,
+                            bottom: height * 0.03,
 
                         }
                     ]}
                 >
                     <View style={{
                         shadowColor: "#024073",
-                        shadowOffset: {width: 0, height: height*0.012},
+                        shadowOffset: {width: 0, height: height * 0.012},
                         shadowOpacity: 0.1,
-                        backgroundColor:"#fff",
-                        borderRadius:buttonWidth,
-                        padding:buttonWidth*0.07,
-                        paddingBottom:buttonWidth*0.08
+                        backgroundColor: "#fff",
+                        borderRadius: buttonWidth,
+                        padding: buttonWidth * 0.07,
+                        paddingBottom: buttonWidth * 0.08
 
                     }}>
                         <Image
@@ -217,15 +235,14 @@ export default function Layout() {
                                 borderRadius: 100,
                                 borderColor: "#fff",
                                 shadowColor: "#024073",
-                                shadowOffset: {width: 0, height: height*0.012},
+                                shadowOffset: {width: 0, height: height * 0.012},
                                 shadowOpacity: 0.1,
-                                resizeMode:"contain"
-
+                                resizeMode: "contain"
                             }}
                         />
                     </View>
                 </TouchableOpacity>
-            </View>
+            </View>)}
         </Animated.View>
     );
 }
