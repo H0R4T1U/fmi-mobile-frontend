@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import {Text, Button, Dimensions, View, ActivityIndicator, TouchableOpacity} from "react-native";
+import { Text, View, Dimensions, ActivityIndicator, TouchableOpacity, Alert } from "react-native";
 import FloatingHeader from "../components/FloatingHeader";
 import ProfilePageSmallContainer from "../components/ProfilePageSmallContainer";
 import ProfilePageLargeContainer from "../components/ProfilePageLargeContainer";
-import { useRouter } from "expo-router";
+import { useRouter, useFocusEffect } from "expo-router";
 import { CacheManager } from "../utils/CacheManager";
+import { useCallback } from "react";
 
 const { width, height } = Dimensions.get("window");
 
@@ -13,42 +14,71 @@ export default function Profil() {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const [logoutLoading, setLogoutLoading] = useState(false);
+    const [refreshCounter, setRefreshCounter] = useState(0);
+
+    const fetchUserData = useCallback(async () => {
+        try {
+            const cachedUser = await CacheManager.get("loggedUser", true);
+            console.log("Fetched user from cache:", JSON.stringify(cachedUser));
+            if (cachedUser && cachedUser.displayName) {
+                setUser(cachedUser);
+            } else {
+                console.log("No valid user data in cache");
+                setUser(null);
+            }
+        } catch (error) {
+            console.error("Error fetching user from cache:", error);
+            setUser(null);
+        } finally {
+            setLoading(false);
+        }
+    }, []);
+
+    useFocusEffect(
+        useCallback(() => {
+            console.log("Profile screen focused - fetching fresh user data");
+            setLoading(true);
+            fetchUserData();
+            return () => {console.log("Profile screen unfocused");};
+        }, [fetchUserData, refreshCounter])
+    );
 
     useEffect(() => {
-        const fetchUser = async () => {
-            const cachedUser = await CacheManager.get("loggedUser");
-            setUser(cachedUser);
-            setLoading(false);
-        };
-        fetchUser();
-    }, []);
+        fetchUserData();
+    }, [fetchUserData]);
 
     useEffect(() => {
         if (!loading && !user) {
+            console.log("No user found after loading, redirecting to login");
             router.replace("/LoginScreen");
         }
-    }, [loading, user]);
+    }, [loading, user, router]);
 
     const handleLogout = async () => {
-        await CacheManager.remove("loggedUser");
-        console.log("removed loggedUser", user);
-        setUser(null);
-        setLogoutLoading(true);
+        try {
+            setLogoutLoading(true);
+            await CacheManager.remove("loggedUser");
+            await CacheManager.remove("token");
+            console.log("Removed user from cache");
+            setUser(null);
+            setRefreshCounter(prev => prev + 1);
+        } catch (error) {
+            console.error("Error during logout:", error);
+            Alert.alert("Logout Error", "There was a problem logging out. Please try again.");
+        } finally {
+            setLogoutLoading(false);
+        }
     };
-
-    if (logoutLoading) {
-        setTimeout(() => {router.replace("/LoginScreen");}, 2500);
-        setTimeout(() => {setLogoutLoading(false);}, 2500);
-    }
+    console.log("Rendering profile with user:", user?.displayName);
 
     return (
         <View style={{ backgroundColor: "#fff", flex: 1 }}>
             <FloatingHeader text="PROFIL" />
             <View style={{ alignItems: "center", backgroundColor: "#fff", flex: 1 }}>
-                <ProfilePageSmallContainer title="STUDENT" content={user?.displayName || "N/A"} />
-                <ProfilePageLargeContainer title="CREDENȚIALE" username="PLACEHOLDER" password="PLACEHOLDER" />
-                <ProfilePageSmallContainer title="NR. MATRICOL" content="PLACEHOLDER" />
-                <ProfilePageSmallContainer title="COD" content="PLACEHOLDER" />
+                <ProfilePageSmallContainer title="STUDENT" content={user?.displayName || "N/A"}/>
+                <ProfilePageLargeContainer title="CREDENȚIALE" username="PLACEHOLDER" password="PLACEHOLDER"/>
+                <ProfilePageSmallContainer title="NR. MATRICOL" content="PLACEHOLDER"/>
+                <ProfilePageSmallContainer title="COD" content="PLACEHOLDER"/>
                 <View style={{
                     marginTop: height * 0.03,
                     backgroundColor: '#024073',
@@ -67,13 +97,17 @@ export default function Profil() {
                             textAlignVertical: 'center',
                             color: '#fff'
                         }}>
-                        LOG OUT
+                            LOG OUT
                         </Text>
                     </TouchableOpacity>
                 </View>
-                {logoutLoading ? <ActivityIndicator size={'small'} style={{
-                    marginVertical: height * 0.015
-                }}/> : <></>}
+                {logoutLoading && (
+                    <ActivityIndicator
+                        size="small"
+                        color="#024073"
+                        style={{ marginVertical: height * 0.015 }}
+                    />
+                )}
             </View>
         </View>
     );

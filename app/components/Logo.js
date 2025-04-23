@@ -22,19 +22,19 @@ export default function Logo() {
                 flexDirection: 'row'
             }}>
                 <Image source={require('../../assets/images/cs-logo.png')} style={{
-                    height: height * 0.15,
-                    width: width * 0.27,
+                    height: height * 0.12,
+                    width: width * 0.22,
                     resizeMode: 'contain'
                 }}/>
                 <View style={{
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'center',
-                    marginLeft: width * 0.05,
+                    marginLeft: width * 0.05
                 }}>
                     <View style={{
                         display: 'flex',
-                        flexDirection: 'row'
+                        flexDirection: 'row',
                     }}>
                         <Text style={{
                             fontFamily: 'Peddana',

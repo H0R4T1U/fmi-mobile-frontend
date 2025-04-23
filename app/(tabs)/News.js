@@ -1,59 +1,75 @@
 import FloatingHeader from "../components/FloatingHeader";
-import React, { useState, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import NewsContainer from "../components/NewsContainer";
-import { FlatList, ActivityIndicator, View } from "react-native";
+import {FlatList, Dimensions} from "react-native";
+import { CacheManager } from "../utils/CacheManager";
+import Constants from "expo-constants";
+const { BACKEND } = Constants.expoConfig.extra;
+const {height} = Dimensions.get('window');
 
 export default function News() {
-    const [newsData, setNewsData] = useState([
-        { id: '1', title: "TITLUL ANUNTULUI 1", description: "Descrierea anuntului" },
-        { id: '2', title: "TITLUL ANUNTULUI 2", description: "Descrierea anuntului" },
-        { id: '3', title: "TITLUL ANUNTULUI 3", description: "Descrierea anuntului" },
-    ]);
-    const [loading, setLoading] = useState(false);
-    const [page, setPage] = useState(1);
+    const [loading, setLoading] = useState(true);
+    const [token, setToken] = useState(null);
+    const [news, setNews] = useState([]);
+    const [error, setError] = useState(null);
 
-    const fetchMoreNews = useCallback(async () => {
-        if (loading) return;
-        setLoading(true);
+    useEffect(() => {
+        const getToken = async () => {
+            try {
+                const storedToken = await CacheManager.get("token");
+                setToken(storedToken);
+            } catch (error) {
+                console.error("Token retrieval failed:", error);
+                setError("Authentication error");
+            }
+        };
+        getToken();
+    }, []);
 
-        try {
-            const newItems = Array.from({ length: 3 }, (_, i) => ({
-                id: `${newsData.length + i + 1}`,
-                title: `TITLUL ANUNTULUI ${newsData.length + i + 1}`,
-                description: "Descrierea anuntului"
-            }));
+    useEffect(() => {
+        const fetchNews = async () => {
+            try {
+                if (!token) return;
 
-            setNewsData(prev => [...prev, ...newItems]);
-            setPage(prev => prev + 1);
-        } catch (error) {
-            console.error("Error fetching news:", error);
-        } finally {
-            setLoading(false);
-        }
-    }, [loading, newsData]);
+                setLoading(true);
+                const response = await fetch(`${BACKEND}/api/news/ro`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+
+                const responseData = await response.json();
+                setNews(responseData._embedded.newsList);
+
+            } catch (error) {
+                console.error("News fetch failed:", error);
+                setError(error.message);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        if (token) fetchNews();
+    }, [token]);
 
     return (
         <>
             <FloatingHeader text="NEWS" />
             <FlatList
-                data={newsData}
+                data={news}
                 renderItem={({ item }) => (
-                    <NewsContainer
-                        title={item.title}
-                        description={item.description}
-                    />
+                    <NewsContainer date={item.date} title={item.title}/>
                 )}
-                keyExtractor={(item) => item.id}
-                onEndReached={fetchMoreNews}
-                onEndReachedThreshold={0.5}
-                ListFooterComponent={
-                    loading ? (
-                        <View style={{ paddingVertical: 20 }}>
-                            <ActivityIndicator size="large" color="#024073" />
-                        </View>
-                    ) : null
-                }
-                contentContainerStyle={{ paddingBottom: 20 }}
+                keyExtractor={(item) => item.id.toString()}
+                contentContainerStyle={{
+                    paddingBottom: height * 0.08,
+                    flexGrow: 1,
+                }}
             />
         </>
     );

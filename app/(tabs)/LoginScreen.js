@@ -1,11 +1,9 @@
 import Logo from "../components/Logo";
 import LoginHeader from "../components/LoginHeader";
 import {Dimensions, Text, TouchableOpacity, View} from "react-native";
-import {useFonts} from "expo-font";
 import {useLogin} from "../utils/Login";
 const {width, height} = Dimensions.get('window');
 export default function LoginScreen() {
-    useFonts({'Montserrat-MediumItalic': require('../../assets/fonts/Montserrat-MediumItalic.ttf')});
     const { loading, error, promptAsync } = useLogin();
     return (
         <>

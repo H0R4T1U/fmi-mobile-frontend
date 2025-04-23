@@ -3,6 +3,7 @@ import {exchangeCodeAsync, makeRedirectUri, Prompt, ResponseType, useAuthRequest
 import { CacheManager } from "./CacheManager";
 import Constants from 'expo-constants';
 import { useRouter } from "expo-router";
+import { Alert } from "react-native";
 const { CLIENT_ID, TENANT_ID } = Constants.expoConfig.extra;
 
 const azureConfig = {
@@ -40,10 +41,29 @@ export function useLogin() {
     );
 
     useEffect(() => {
+        const checkExistingLogin = async () => {
+            try {
+                const cachedUser = await CacheManager.get("loggedUser");
+                if (cachedUser && cachedUser.displayName) {
+                    console.log("Found existing user in cache, redirecting to profile");
+                    router.replace('/Profil');
+                }
+            } catch (error) {
+                console.error("Error checking existing login:", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+        checkExistingLogin();
+    }, []);
+
+    useEffect(() => {
         const handleAuth = async () => {
             if (response?.type === "success") {
-                const { code } = response.params;
                 try {
+                    setLoading(true);
+                    const { code } = response.params;
+
                     const tokenResult = await exchangeCodeAsync(
                         {
                             clientId: azureConfig.clientId,
@@ -55,29 +75,44 @@ export function useLogin() {
                         },
                         discovery
                     );
+                    await CacheManager.set("token", tokenResult.accessToken);
+
                     const userInfoRes = await fetch("https://graph.microsoft.com/v1.0/me", {
                         headers: { Authorization: `Bearer ${tokenResult.accessToken}` },
                     });
 
-                    const user = await userInfoRes.json();
-                    if (user !== null) {
-                        await CacheManager.set("loggedUser", user);
-                        setTimeout(() => {
-                            router.replace('/Profil');
-                        }, 500);
+                    const userData = await userInfoRes.json();
+
+                    if (userData && userData.displayName) {
+                        console.log("Login successful, user data:", JSON.stringify(userData));
+                        await CacheManager.remove("loggedUser");
+                        await CacheManager.set("loggedUser", userData);
+                        const verifyUser = await CacheManager.get("loggedUser");
+                        console.log("Verified stored user:", JSON.stringify(verifyUser));
+                        router.replace('/Profil');
+                    } else {
+                        throw new Error("Invalid user data received");
                     }
                 } catch (err) {
-                    setError("Login failed. Please restart the app.");
                     console.error("Auth error:", err);
+                    setError("Login failed. Please try again.");
+                    Alert.alert("Login Failed", "There was a problem logging in. Please try again.");
                 } finally {
                     setLoading(false);
                 }
-            } else if (response?.type === "error" || response?.type === "cancel") {
-                setError("Login was cancelled or failed.");
+            } else if (response?.type === "error") {
+                console.error("Auth error:", response.error);
+                setError("Login error: " + (response.error?.message || "Unknown error"));
+                setLoading(false);
+            } else if (response?.type === "cancel") {
+                console.log("Auth cancelled by user");
+                setError("Login was cancelled.");
                 setLoading(false);
             }
         };
-        handleAuth();
-    }, [response]);
+        if (response) {
+            handleAuth();
+        }
+    }, [response, request?.codeVerifier, router]);
     return { loading, error, promptAsync };
 }
