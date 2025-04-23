@@ -48,7 +48,9 @@ export default function ProfilePageSmallContainer({title, content}) {
                 <Text style={{
                     fontSize: height*0.016,
                     fontFamily: 'Montserrat',
-                    color: '#024073'
+                    color: '#024073',
+                    textAlign: 'center',
+                    textAlignVertical: 'center'
                 }}>
                     {content}
                 </Text>

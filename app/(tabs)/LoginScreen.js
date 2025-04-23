@@ -34,7 +34,7 @@ export default function LoginScreen() {
                     justifyContent: 'center',
                     alignItems: 'center',
                     borderRadius: 10,
-                    marginTop: height * 0.015,
+                    marginTop: height * 0.025,
                 }} onPress={() => {promptAsync().catch(err => console.error(err))}}>
                     <Text style={{
                         color: '#fff'

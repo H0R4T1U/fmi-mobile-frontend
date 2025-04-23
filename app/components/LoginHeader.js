@@ -1,8 +1,8 @@
-import {View, Text, Dimensions, TouchableOpacity} from "react-native";
+import {Platform, View, Text, Dimensions, TouchableOpacity} from "react-native";
 import {useFonts} from "expo-font";
 import {useEffect, useState} from "react";
 import {CacheManager} from "../utils/CacheManager";
-const {width, height} = Dimensions.get('window');
+const { height} = Dimensions.get('window');
 
 export default function LoginHeader() {
     const [user, setUser] = useState(null);
@@ -18,7 +18,7 @@ export default function LoginHeader() {
     return (
         <View style={{
             backgroundColor: '#024073',
-            height: height * 0.13,
+            height: Platform.OS === 'ios' ? height * 0.13 : height * 0.12,
             alignItems: 'center',
             justifyContent: 'center',
             paddingTop: height * 0.05
@@ -26,13 +26,15 @@ export default function LoginHeader() {
             <Text style={{
                 fontFamily: 'Peddana',
                 fontSize: height * 0.03,
-                color: '#F5F5F6'
+                color: '#F5F5F6',
+                textAlignVertical: 'center'
             }}>Universitatea Babes-Bolyai</Text>
             <Text style={{
                 fontFamily: 'Peddana',
                 fontSize: height * 0.025,
                 color: '#A0C9FF',
-                marginTop: -height * 0.021
+                marginTop: -height * 0.021,
+                textAlignVertical: 'center'
             }}>Facultatea de Matematica si Informatica</Text>
         </View>
     );

@@ -3,11 +3,11 @@ import * as WebBrowser from "expo-web-browser";
 import { CacheManager } from "../utils/CacheManager";
 import LoginHeader from "../components/LoginHeader";
 import Logo from "../components/Logo";
-import {Dimensions, Text, TouchableOpacity, View} from "react-native";
+import {ActivityIndicator, Dimensions, Text, TouchableOpacity, View} from "react-native";
 const {width, height} = Dimensions.get('window');
 import {useLogin} from "../utils/Login";
+import {router} from "expo-router";
 WebBrowser.maybeCompleteAuthSession();
-
 
 export default function LogIntoNewScreen() {
     const [userLoading, setUserLoading] = useState(true);
@@ -19,28 +19,35 @@ export default function LogIntoNewScreen() {
             const cachedUser = await CacheManager.get("loggedUser");
             if (cachedUser) {
                 setUser(cachedUser);
+                setTimeout(() => {
+                    router.replace("/Profil");
+                }, 3500);
             }
             setUserLoading(false);
         };
         loadUser();
     }, []);
-    console.log(user);
 
     return (
         <>
             <LoginHeader/>
             <View style={{
-                alignItems: 'center'
+                alignItems: 'center',
+                justifyContent: 'center',
+                flex: 1,
+                marginTop: height * 0.2
             }}>
                 <Text>LOGGING IN AS</Text>
-
                 {userLoading ? (
                     <Text>Loading...</Text>
                     ) : user ? (
                     <Text>{user.mail}</Text>
             ) : (
-            <Text>No user found</Text>
-            )}
+                <Text>No user found</Text>
+                )}
+                <ActivityIndicator size={"large"} style={{
+                    marginVertical: height * 0.05
+                }}/>
                 <TouchableOpacity style={{
                     height: height * 0.065,
                     width: width * 0.8,
@@ -52,7 +59,8 @@ export default function LogIntoNewScreen() {
                     <Text style={{
                         color: '#fff',
                         fontFamily: 'Montserrat',
-                        fontSize: height * 0.015
+                        fontSize: height * 0.015,
+                        fontWeight: 'bold'
                     }}>LOG INTO A NEW ACCOUNT</Text>
                 </TouchableOpacity>
             </View>

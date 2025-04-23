@@ -1,8 +1,9 @@
 import tw from "twrnc";
-import {Animated, Dimensions, Image, TouchableOpacity, View} from "react-native";
+import {Animated, Platform, Dimensions, Image, TouchableOpacity, View} from "react-native";
 import React from "react";
 import FMIHubHeader from "../components/FMIHubHeader";
 import {Tabs, useRouter, useSegments} from "expo-router";
+import {StatusBar} from "expo-status-bar";
 const {height, width} = Dimensions.get('window');
 const buttonWidth =width*0.25;
 const buttonHeight = width*0.25;
@@ -33,6 +34,8 @@ export default function Layout() {
     const currentScreen = segments[segments.length - 1];
     const showHomeButton = currentScreen !== "LogIntoNewScreen" && currentScreen !== "LoginScreen";
     return (
+        <>
+        <StatusBar style="light" hidden={false}/>
         <Animated.View style={[tw`flex-1`, { backgroundColor: "#fff" }]}>
             <Tabs
                 screenOptions={{
@@ -49,9 +52,6 @@ export default function Layout() {
                     tabBarLabelPosition: "below-icon",
                     animation: 'fade',
                     header:FMIHubHeader,
-                    headerStyle: {
-                        height:height*0.1,
-                    },
                 }}
             >
 
@@ -211,9 +211,7 @@ export default function Layout() {
                     style={[
                         tw`absolute`,
                         {
-
                             bottom: height * 0.03,
-
                         }
                     ]}
                 >
@@ -244,5 +242,6 @@ export default function Layout() {
                 </TouchableOpacity>
             </View>)}
         </Animated.View>
+        </>
     );
 }

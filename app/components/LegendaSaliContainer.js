@@ -23,7 +23,6 @@ export default function LegendaSaliContainer({ rooms }) {
                     marginTop:height*0.015,
                     justifyContent: "center",
                     alignItems: "center",
-
                 }}>
                     <Text style={{
                         backgroundColor: "#AEB9C4",
@@ -34,6 +33,7 @@ export default function LegendaSaliContainer({ rooms }) {
                         fontFamily: 'Montserrat',
                         fontWeight: "600",
                         color: '#024073',
+                        textAlign: 'center'
                     }}>
                         LEGENDA SĂLILOR
                     </Text>
@@ -55,7 +55,8 @@ export default function LegendaSaliContainer({ rooms }) {
                         color: '#FFF',
                         paddingVertical: height*0.005,
                         paddingHorizontal: width*0.083,
-                        fontWeight: "500"
+                        fontWeight: "500",
+                        textAlign: 'center'
                     }}>
                         SALA
                     </Text>
@@ -70,7 +71,8 @@ export default function LegendaSaliContainer({ rooms }) {
                         paddingVertical: height*0.005,
                         paddingHorizontal: width*0.165,
                         marginLeft:width*0.02,
-                        fontWeight: "500"
+                        fontWeight: "500",
+                        textAlign: 'center'
                     }}>
                         LOCALIZARE
                     </Text>

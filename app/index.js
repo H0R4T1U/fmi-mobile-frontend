@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useRouter } from "expo-router";
 import { CacheManager } from "./utils/CacheManager";
 import { ActivityIndicator, View } from "react-native";
+import {StatusBar} from "expo-status-bar";
 
 export default function Index() {
     const router = useRouter();
@@ -21,8 +22,11 @@ export default function Index() {
     }, []);
 
     return (
+        <>
+        <StatusBar style="light" hidden={false}/>
         <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
             <ActivityIndicator />
         </View>
+        </>
     );
 }

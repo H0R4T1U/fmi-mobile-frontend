@@ -40,19 +40,6 @@ export function useLogin() {
     );
 
     useEffect(() => {
-        if (request) {
-            const timeout = setTimeout(() => {
-                promptAsync().catch(err => {
-                    setError(err);
-                    setLoading(false);
-                });
-            }, 500);
-
-            return () => clearTimeout(timeout);
-        }
-    }, [request]);
-
-    useEffect(() => {
         const handleAuth = async () => {
             if (response?.type === "success") {
                 const { code } = response.params;

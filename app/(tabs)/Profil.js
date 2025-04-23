@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { Button, Dimensions, View, ActivityIndicator } from "react-native";
+import {Text, Button, Dimensions, View, ActivityIndicator, TouchableOpacity} from "react-native";
 import FloatingHeader from "../components/FloatingHeader";
 import ProfilePageSmallContainer from "../components/ProfilePageSmallContainer";
 import ProfilePageLargeContainer from "../components/ProfilePageLargeContainer";
 import { useRouter } from "expo-router";
 import { CacheManager } from "../utils/CacheManager";
 
-const { height } = Dimensions.get("window");
+const { width, height } = Dimensions.get("window");
 
 export default function Profil() {
     const router = useRouter();
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [logoutLoading, setLogoutLoading] = useState(false);
 
     useEffect(() => {
         const fetchUser = async () => {
@@ -31,16 +32,13 @@ export default function Profil() {
     const handleLogout = async () => {
         await CacheManager.remove("loggedUser");
         console.log("removed loggedUser", user);
-        console.log("Cached user after removal:", await CacheManager.get("loggedUser"));
         setUser(null);
+        setLogoutLoading(true);
     };
 
-    if (loading) {
-        return (
-            <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-                <ActivityIndicator size="large" />
-            </View>
-        );
+    if (logoutLoading) {
+        setTimeout(() => {router.replace("/LoginScreen");}, 2500);
+        setTimeout(() => {setLogoutLoading(false);}, 2500);
     }
 
     return (
@@ -51,9 +49,31 @@ export default function Profil() {
                 <ProfilePageLargeContainer title="CREDENȚIALE" username="PLACEHOLDER" password="PLACEHOLDER" />
                 <ProfilePageSmallContainer title="NR. MATRICOL" content="PLACEHOLDER" />
                 <ProfilePageSmallContainer title="COD" content="PLACEHOLDER" />
-                <View style={{ marginTop: height * 0.1 }}>
-                    <Button title="Logout" onPress={handleLogout} />
+                <View style={{
+                    marginTop: height * 0.03,
+                    backgroundColor: '#024073',
+                    width: width * 0.5,
+                    height: height * 0.06,
+                    borderRadius: 10,
+                    shadowColor: "#024073",
+                    shadowOffset: {width: 0, height: 4},
+                    shadowOpacity: 0.1,
+                    shadowRadius: 0.7,
+                    justifyContent: 'center'
+                }}>
+                    <TouchableOpacity onPress={handleLogout}>
+                        <Text style={{
+                            textAlign: 'center',
+                            textAlignVertical: 'center',
+                            color: '#fff'
+                        }}>
+                        LOG OUT
+                        </Text>
+                    </TouchableOpacity>
                 </View>
+                {logoutLoading ? <ActivityIndicator size={'small'} style={{
+                    marginVertical: height * 0.015
+                }}/> : <></>}
             </View>
         </View>
     );
