@@ -9,7 +9,7 @@ export default function ProfilePageSmallContainer({title, content}) {
             marginTop: height*0.015,
             display: 'flex',
             flexDirection: 'row',
-            height: height*0.087,
+            height: height*0.075,
             width: width*0.86,
             borderRadius: 10,
             alignItems: 'center',

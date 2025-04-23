@@ -1,14 +1,17 @@
 import {Alert, Dimensions, ImageBackground, Pressable, Text, View} from "react-native";
 import {scaleHeight, scaleWidth} from "../utils/ScaleFunction";
-import {useNavigation} from "expo-router";
+import {useRouter} from "expo-router";
 const {height, width} = Dimensions.get('window');
 
 
 export default function BuildingContainer({name, image, address, route}) {
-    const navigation = useNavigation();
+    const router = useRouter();
     return (
         <View style={{alignItems: "center", paddingTop: height*0.015}}>
-            <Pressable onPress={() => navigation.navigate(route)}>
+            <Pressable onPress={() => {
+                const newRoute = '/' + route;
+                router.push(newRoute);
+            }}>
                 <View style={{
                     height: height*0.134,
                     marginHorizontal: width*0.02,

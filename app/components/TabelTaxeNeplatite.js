@@ -1,5 +1,4 @@
 import {Alert, Dimensions, Pressable, ScrollView, Text, View,} from "react-native";
-import { scaleHeight, scaleWidth } from "../utils/ScaleFunction";
 import {useState} from "react";
 const {height, width} = Dimensions.get('window');
 
