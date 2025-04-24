@@ -14,7 +14,7 @@ const {height} = Dimensions.get('window');
 
 
 
-export default function ClDiri() {
+export default function Clădiri() {
     return (
         <View style={{backgroundColor:'#fff'}}>
             <FloatingHeader text="CLĂDIRI ȘI CANTINE"/>

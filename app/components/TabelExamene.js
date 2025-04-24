@@ -45,7 +45,7 @@ export default function TabelExamene({examene}) {
                                 borderRadius: 10,
                                 height:height*0.045,
                                 alignItems:"center",
-                                justifyContent:"center"
+                                justifyContent:"center",
                             }}
                         >
                             <Text style={{
@@ -63,7 +63,7 @@ export default function TabelExamene({examene}) {
                                 textAlignVertical:"center",
                                 alignSelf:"center",
                                 width:width*0.145,
-                                alignItems:"center"
+                                alignItems:"center",
                             }}>
                                 NR. CRT
                             </Text>
