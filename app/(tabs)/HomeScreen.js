@@ -14,7 +14,6 @@ export default function HomeScreen() {
         <View style={{backgroundColor:'#fff',alignItems:"center"}}>
             <FloatingHeader text="ORAR"/>
 
-            return (
             <ScrollView
 
                 contentContainerStyle={{
@@ -31,7 +30,7 @@ export default function HomeScreen() {
                     </View>
                 ))}
             </ScrollView>
-            );
+
         </View>
     );
 }

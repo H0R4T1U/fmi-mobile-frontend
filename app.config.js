@@ -25,8 +25,10 @@ export default {
            },
 extra: {
     CLIENT_ID: process.env.CLIENT_ID,
-        TENANT_ID: process.env.TENANT_ID,
-        BACKEND: process.env.BACKEND
+    TENANT_ID: process.env.TENANT_ID,
+    BACKEND: process.env.BACKEND,
+    SECRET_KEY:process.env.SECRET_KEY,
+    PUBLIC_KEY:process.env.PUBLIC_KEY
 },
 androidStatusBar: {
     barStyle: "light-content",

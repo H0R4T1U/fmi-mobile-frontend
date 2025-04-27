@@ -13,8 +13,9 @@ const tabIconStyles = {
     container: [
         tw`border border-[#024073] shadow-md rounded-full justify-center items-center overflow-hidden`,
         {
-            width: width*0.15,
-            height: width*0.15,
+            width: width*0.155,
+            height: width*0.155,
+            marginTop:height*0.04,
         }
     ],
     image: [

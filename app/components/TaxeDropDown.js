@@ -1,21 +1,117 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {Dimensions, View} from "react-native";
-import FloatingHeader from "./FloatingHeader";
-import {scaleHeight, scaleWidth} from "../utils/ScaleFunction";
 import DropDownPicker from "react-native-dropdown-picker";
 import TabelTaxeNeplatite from "./TabelTaxeNeplatite";
 import TabelTaxePlatite from "./TabelTaxePlatite";
-import {Examene} from "../utils/Examene";
+import { CacheManager } from "../utils/CacheManager";
+import Constants from "expo-constants";
+const { BACKEND } = Constants.expoConfig.extra;
 const {height, width} = Dimensions.get('window');
 
 
 export default function TaxeDropDown()
 {
+    const [loading, setLoading] = useState(true);
+    const [token, setToken] = useState(null);
+    const [taxePlatite, setTaxePlatite] = useState([]);
+    const [taxeNeplatite, setTaxeNeplatite] = useState([]);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const getToken = async () => {
+            try {
+                const storedToken = await CacheManager.get("token");
+                setToken(storedToken);
+            } catch (error) {
+                console.error("Token retrieval failed:", error);
+                setError("Authentication error");
+            }
+        };
+        getToken();
+        console.log("Retrieved token:", token);
+    }, []);
+
+    useEffect(() => {
+        const fetchTaxePlatite = async () => {
+            try {
+                if (!token) return;
+
+                const cachedUser = await CacheManager.get("loggedUser");
+                const userMail=cachedUser.mail;
+                setLoading(true);
+                const response = await fetch(`${BACKEND}/api/paid-tuitions/${userMail}`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+
+                const responseData = await response.json();
+                if (responseData._embedded && responseData._embedded.paidTuitionDTOList) {
+                    setTaxePlatite(responseData._embedded.paidTuitionDTOList);
+                }
+                else
+                    setTaxePlatite([]);
+
+
+            } catch (error) {
+                console.error("News fetch failed:", error);
+                setError(error.message);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        if (token) fetchTaxePlatite();
+    }, [token]);
+
+    useEffect(() => {
+        const fetchTaxeNeplatite = async () => {
+            try {
+                if (!token) return;
+
+                const cachedUser = await CacheManager.get("loggedUser");
+                const userMail=cachedUser.mail;
+                setLoading(true);
+                const response = await fetch(`${BACKEND}/api/tuitions/${userMail}`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+
+                const responseData = await response.json();
+                if (responseData._embedded && responseData._embedded.tuitionDTOList) {
+                    setTaxeNeplatite(responseData._embedded.tuitionDTOList);
+                }
+                else
+                    setTaxeNeplatite([]);
+
+
+            } catch (error) {
+                console.error("TaxeNeplatite fetch failed:", error);
+                setError(error.message);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        if (token) fetchTaxeNeplatite();
+    }, [token]);
+
     const TabelTaxeN = () =>(
-        <TabelTaxeNeplatite examene={Examene}/>
+        <TabelTaxeNeplatite examene={taxeNeplatite}/>
     )
     const TabelTaxeP=()=>(
-        <TabelTaxePlatite examene={Examene}/>
+        <TabelTaxePlatite examene={taxePlatite}/>
     )
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState("TabelTaxeN");

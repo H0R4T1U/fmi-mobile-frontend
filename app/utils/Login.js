@@ -58,7 +58,11 @@ export function useLogin() {
     }, []);
 
     useEffect(() => {
+        let handled = false;
         const handleAuth = async () => {
+            if(handled)
+                return;
+            handled=true;
             if (response?.type === "success") {
                 try {
                     setLoading(true);

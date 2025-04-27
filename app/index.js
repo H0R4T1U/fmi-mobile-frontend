@@ -3,6 +3,10 @@ import { useRouter } from "expo-router";
 import { CacheManager } from "./utils/CacheManager";
 import { ActivityIndicator, View } from "react-native";
 import {StatusBar} from "expo-status-bar";
+import { StripeProvider } from '@stripe/stripe-react-native';
+import Constants from "expo-constants";
+const { PUBLIC_KEY } = Constants.expoConfig.extra;
+
 
 export default function Index() {
     const router = useRouter();
@@ -22,11 +26,11 @@ export default function Index() {
     }, []);
 
     return (
-        <>
+        <StripeProvider publishableKey={PUBLIC_KEY}>
         <StatusBar style="light" hidden={false}/>
         <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
             <ActivityIndicator />
         </View>
-        </>
+        </StripeProvider>
     );
 }

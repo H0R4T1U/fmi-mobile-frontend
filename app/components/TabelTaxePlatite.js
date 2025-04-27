@@ -254,7 +254,7 @@ export default function TabelTaxePlatite({examene}) {
                                             textAlign: 'center',
 
                                         }}>
-                                            {examen.nr}
+                                            {examen.number}
                                         </Text>
                                     </View>
 
@@ -276,7 +276,7 @@ export default function TabelTaxePlatite({examene}) {
                                             textAlign: "center",
 
                                         }}>
-                                            {examen.tips}
+                                            {examen.series}
                                         </Text>
                                     </View>
                                     <View style={{
@@ -297,7 +297,7 @@ export default function TabelTaxePlatite({examene}) {
                                             textAlign: "center",
 
                                         }}>
-                                            {examen.tipd}
+                                            {examen.paymentNumber}
                                         </Text>
                                     </View>
                                     <View style={{
@@ -316,7 +316,7 @@ export default function TabelTaxePlatite({examene}) {
                                             fontWeight: "500",
                                             textAlign: "center",
                                         }}>
-                                            {examen.tipe}
+                                            {examen.date}
                                         </Text>
                                     </View>
                                     <View style={{
@@ -335,7 +335,7 @@ export default function TabelTaxePlatite({examene}) {
                                             fontWeight: "500",
                                             textAlign: "center",
                                         }}>
-                                            {examen.data}
+                                            {examen.price}
                                         </Text>
                                     </View>
                                     <View style={{
@@ -354,7 +354,7 @@ export default function TabelTaxePlatite({examene}) {
                                             fontWeight: "500",
                                             textAlign: "center",
                                         }}>
-                                            {examen.ora}
+                                            {examen.description}
                                         </Text>
                                     </View>
                                     <View style={{
@@ -373,7 +373,7 @@ export default function TabelTaxePlatite({examene}) {
                                             fontWeight: "500",
                                             textAlign: "center",
                                         }}>
-                                            {examen.durata}
+                                            {examen.message}
                                         </Text>
                                     </View>
 

@@ -1,10 +1,26 @@
-import {Alert, Dimensions, Pressable, ScrollView, Text, View,} from "react-native";
+import {Alert, Dimensions, ImageBackground, Pressable, ScrollView, Text, View,} from "react-native";
 import {useState} from "react";
+import image from "../../assets/images/pay.png";
+import { StripeProvider } from '@stripe/stripe-react-native';
+import Constants from "expo-constants";
+const { BACKEND } = Constants.expoConfig.extra;
 const {height, width} = Dimensions.get('window');
+import { useRouter } from 'expo-router';
+import PaymentModal from "./PaymentModal";
+
+
+
 
 
 export default function TabelTaxeNeplatite({examene}) {
     const [rowHeights, setRowHeights] = useState({});
+    const router = useRouter();
+    const [selectedAmount, setSelectedAmount] = useState(null);
+
+    const handleOpenPayment = (amount) => {
+        setSelectedAmount(amount);
+    };
+
 
     const handleTextLayout = (index: number, event: LayoutChangeEvent) => {
         const height = event.nativeEvent.layout.height;
@@ -14,7 +30,9 @@ export default function TabelTaxeNeplatite({examene}) {
             [index]: Math.max(prevHeights[index] || 0, height),
         }));
     };
+
     return (
+
         <View style={{ alignItems: "center", paddingTop: height*0.01,  paddingHorizontal: width*0.01,}}>
             <View style={{
                 backgroundColor: "rgba(174,185,196,0.49)",
@@ -241,7 +259,7 @@ export default function TabelTaxeNeplatite({examene}) {
                                         alignItems: "center",
                                         minHeight:  rowHeights[index] ||height*0.035,
                                     }}
-                                    onPress={()=>Alert.alert(`plateste`)}
+                                    onPress={() => handleOpenPayment(examen.price * 100)}
                                 >
 
                                     <View style={{
@@ -251,7 +269,8 @@ export default function TabelTaxeNeplatite({examene}) {
                                         borderRadius: 5,
                                         justifyContent: "center",
                                         alignItems: "center",
-                                        marginLeft:width*0.022
+                                        marginLeft:width*0.022,
+                                        paddingVertical:height*0.005
                                     }}>
                                         <Text style={{
 
@@ -260,9 +279,10 @@ export default function TabelTaxeNeplatite({examene}) {
                                             color: '#024073',
                                             fontWeight: "500",
                                             textAlign: 'center',
+                                            paddingHorizontal:width*0.01
 
                                         }}>
-                                            {examen.nr}
+                                            {examen.number}
                                         </Text>
                                     </View>
 
@@ -273,7 +293,8 @@ export default function TabelTaxeNeplatite({examene}) {
                                         borderRadius: 5,
                                         justifyContent: "center",
                                         alignItems: "center",
-                                        marginLeft:width*0.015
+                                        marginLeft:width*0.015,
+                                        paddingVertical:height*0.005
                                     }}>
                                         <Text style={{
 
@@ -282,9 +303,10 @@ export default function TabelTaxeNeplatite({examene}) {
                                             color: '#024073',
                                             fontWeight: "500",
                                             textAlign: "center",
+                                            paddingHorizontal:width*0.01
 
                                         }}>
-                                            {examen.tips}
+                                            {examen.type}
                                         </Text>
                                     </View>
                                     <View style={{
@@ -294,7 +316,8 @@ export default function TabelTaxeNeplatite({examene}) {
                                         borderRadius: 5,
                                         justifyContent: "center",
                                         alignItems: "center",
-                                        marginLeft: width*0.015
+                                        marginLeft: width*0.015,
+                                        paddingVertical:height*0.005
                                     }}>
                                         <Text style={{
 
@@ -303,9 +326,10 @@ export default function TabelTaxeNeplatite({examene}) {
                                             color: '#024073',
                                             fontWeight: "500",
                                             textAlign: "center",
+                                            paddingHorizontal:width*0.01
 
                                         }}>
-                                            {examen.tipd}
+                                            {examen.description}
                                         </Text>
                                     </View>
                                     <View style={{
@@ -315,7 +339,8 @@ export default function TabelTaxeNeplatite({examene}) {
                                         borderRadius: 5,
                                         justifyContent: "center",
                                         alignItems: "center",
-                                        marginLeft:width*0.015
+                                        marginLeft:width*0.015,
+                                        paddingVertical:height*0.005
                                     }}>
                                         <Text style={{
                                             fontSize: height*0.014,
@@ -323,8 +348,9 @@ export default function TabelTaxeNeplatite({examene}) {
                                             color: '#024073',
                                             fontWeight: "500",
                                             textAlign: "center",
+                                            paddingHorizontal:width*0.01
                                         }}>
-                                            {examen.tipe}
+                                            {examen.year}
                                         </Text>
                                     </View>
                                     <View style={{
@@ -334,7 +360,8 @@ export default function TabelTaxeNeplatite({examene}) {
                                         borderRadius: 5,
                                         justifyContent: "center",
                                         alignItems: "center",
-                                        marginLeft:width*0.015
+                                        marginLeft:width*0.015,
+                                        paddingVertical:height*0.005
                                     }}>
                                         <Text style={{
                                             fontSize: height*0.014,
@@ -342,8 +369,9 @@ export default function TabelTaxeNeplatite({examene}) {
                                             color: '#024073',
                                             fontWeight: "500",
                                             textAlign: "center",
+                                            paddingHorizontal:width*0.01
                                         }}>
-                                            {examen.data}
+                                            {examen.price}
                                         </Text>
                                     </View>
                                     <View style={{
@@ -353,7 +381,8 @@ export default function TabelTaxeNeplatite({examene}) {
                                         borderRadius:5,
                                         justifyContent: "center",
                                         alignItems: "center",
-                                        marginLeft:width*0.015
+                                        marginLeft:width*0.015,
+                                        paddingVertical:height*0.005
                                     }}>
                                         <Text style={{
                                             fontSize: height*0.014,
@@ -361,8 +390,9 @@ export default function TabelTaxeNeplatite({examene}) {
                                             color: '#024073',
                                             fontWeight: "500",
                                             textAlign: "center",
+                                            paddingHorizontal:width*0.01
                                         }}>
-                                            {examen.ora}
+                                            {examen.paymentTerm}
                                         </Text>
                                     </View>
                                     <View style={{
@@ -372,17 +402,14 @@ export default function TabelTaxeNeplatite({examene}) {
                                         borderRadius: 5,
                                         justifyContent: "center",
                                         alignItems: "center",
-                                        marginLeft:width*0.015
+                                        marginLeft:width*0.015,overflow:"hidden"
+                                        //paddingVertical:height*0.005
                                     }}>
-                                        <Text style={{
-                                            fontSize: height*0.014,
-                                            fontFamily: 'Montserrat',
-                                            color: '#024073',
-                                            fontWeight: "500",
-                                            textAlign: "center",
+                                        <ImageBackground source={image} style={{width: width*0.15,
+                                            height:height*0.075,
+
                                         }}>
-                                            {examen.durata}
-                                        </Text>
+                                        </ImageBackground>
                                     </View>
 
 
@@ -391,14 +418,19 @@ export default function TabelTaxeNeplatite({examene}) {
                         </ScrollView>
                     </View>
                 </ScrollView>
-
+                {selectedAmount !== null && (
+                    <PaymentModal
+                        visible={true}
+                        amount={selectedAmount}
+                        onClose={() => setSelectedAmount(null)}
+                    />
+                )}
 
 
             </View>
 
-
-
         </View>
+
 
     )
 }
