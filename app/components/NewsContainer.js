@@ -2,7 +2,7 @@ import {Alert, Dimensions, Pressable, Text, View} from "react-native";
 import {scaleHeight, scaleWidth} from "../utils/ScaleFunction";
 const {height, width} = Dimensions.get('window');
 
-export default function NewsContainer({title, description}) {
+export default function NewsContainer({date, title}) {
 return (
     <View style={{
         alignItems: "center",
@@ -21,12 +21,11 @@ return (
                 overflow: "hidden",
                 borderWidth: 1,
                 borderColor: '#AEB9C4',
-                height: height*0.126,
+                height: height*0.2,
                 marginHorizontal: width*0.01,
             }}>
-                {/* container titlul anuntului*/}
+                {/* container data anuntului*/}
                 <View style={{
-
                     marginTop: height*0.0113,
                     marginLeft: width*0.025,
                     justifyContent: "center",
@@ -40,26 +39,31 @@ return (
                         paddingHorizontal:width*0.015,
                         paddingVertical:height*0.004,
                         fontFamily: 'Montserrat',
-                        fontWeight: "500",
+                        fontWeight: "700",
                         color: '#fff',
-
                     }}>
-                        {title}
+                        {new Date(date).toLocaleString('ro-RO')}
                     </Text>
                 </View>
 
-                {/* container descrierea anuntului*/}
+                {/* container titlul anuntului*/}
                 <View style={{
                     backgroundColor: "#AEB9C4",
                     marginHorizontal: width*0.025,
                     marginVertical: height*0.01,
                     borderRadius: 5,
-                    height: height*0.062,
-                    alignItems: "center",
-                    justifyContent: "center",
+                    height: height*0.14,
+                    justifyContent: 'center'
                 }}>
-                    <Text>
-                        {description}
+                    <Text style={{
+                        fontFamily: 'Montserrat',
+                        fontWeight: 'bold',
+                        textAlign: 'center',
+                        textAlignVertical: 'center',
+                        color: '#024073',
+                        paddingHorizontal: width * 0.07
+                    }}>
+                        {title} {/* make caps*/}
                     </Text>
                 </View>
             </View>

@@ -21,7 +21,7 @@ export default function ProfilePageLargeContainer({username, password}) {
         }}>
             <View style={{
                 backgroundColor: '#024073',
-                marginBottom: height*0.011,
+                marginBottom: height*0.007,
                 height: height*0.045,
                 width: width*0.37,
                 borderRadius: 5,

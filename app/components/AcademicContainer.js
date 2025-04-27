@@ -1,11 +1,10 @@
-import {scaleHeight, scaleWidth} from "../utils/ScaleFunction";
-import {Alert, Dimensions, ImageBackground, Pressable, Text, View} from "react-native";
-import {useNavigation} from "expo-router";
+import {Dimensions, ImageBackground, Pressable, Text, View} from "react-native";
+import {useRouter} from "expo-router";
 const {height, width} = Dimensions.get('window');
 
 
 export default function AcademicContainer({name, image,route}) {
-    const navigation = useNavigation();
+    const router = useRouter();
     return (
         <View style={{
             alignItems: "center",
@@ -15,7 +14,10 @@ export default function AcademicContainer({name, image,route}) {
             shadowRadius: height*0.001,
             shadowOffset: {height:height*0.0051},
         }}>
-            <Pressable onPress={() => navigation.navigate(route)}>
+            <Pressable onPress={() => {
+                const newRoute = '/' + route;
+                router.push(newRoute);
+            }}>
                 <ImageBackground source={image} style={{
                     height: height*0.128,
                     width: width*0.86,
