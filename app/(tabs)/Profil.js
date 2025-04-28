@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { Text, View, Dimensions, ActivityIndicator, TouchableOpacity, Alert } from "react-native";
 import FloatingHeader from "../components/FloatingHeader";
 import ProfilePageSmallContainer from "../components/ProfilePageSmallContainer";
 import ProfilePageLargeContainer from "../components/ProfilePageLargeContainer";
 import { useRouter, useFocusEffect } from "expo-router";
 import { CacheManager } from "../utils/CacheManager";
-import { useCallback } from "react";
+import Constants from "expo-constants";
 
+const { BACKEND } = Constants.expoConfig.extra;
 const { width, height } = Dimensions.get("window");
 
 export default function Profil() {
@@ -15,6 +16,9 @@ export default function Profil() {
     const [loading, setLoading] = useState(true);
     const [logoutLoading, setLogoutLoading] = useState(false);
     const [refreshCounter, setRefreshCounter] = useState(0);
+    const [token, setToken] = useState(null);
+    const [userInfo, setUserInfo] = useState([]);
+    const [error, setError] = useState(null);
 
     const fetchUserData = useCallback(async () => {
         try {
@@ -34,18 +38,78 @@ export default function Profil() {
         }
     }, []);
 
+    const fetchToken = useCallback(async () => {
+        try {
+            const cachedToken = await CacheManager.get("token", true);
+            console.log("Fetched token from cache:", JSON.stringify(cachedToken));
+            if (cachedToken) {
+                setToken(cachedToken);
+            } else {
+                console.log("No valid token data in cache");
+                setToken(null);
+            }
+        } catch (error) {
+            console.error("Error fetching token from cache:", error);
+            setToken(null);
+        } finally {
+            setLoading(false);
+        }
+    }, []);
+
+    const fetchProfileData = useCallback(async () => {
+        try {
+            if (!token) return;
+
+            const cachedUser = await CacheManager.get("loggedUser");
+            const userMail = cachedUser.mail;
+            setLoading(true);
+
+            const response = await fetch(`${BACKEND}/api/students/${userMail}`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
+            const responseData = await response.json();
+            if (responseData._embedded && responseData._embedded.studentList) {
+                setUserInfo(responseData._embedded.studentList);
+            } else {
+                setUserInfo([]);
+            }
+
+        } catch (error) {
+            console.error("To fetch failed:", error);
+            setError(error.message);
+        } finally {
+            setLoading(false);
+        }
+    }, [token]);
+
     useFocusEffect(
         useCallback(() => {
             console.log("Profile screen focused - fetching fresh user data");
             setLoading(true);
             fetchUserData();
-            return () => {console.log("Profile screen unfocused");};
-        }, [fetchUserData, refreshCounter])
+            fetchToken();
+            return () => { console.log("Profile screen unfocused"); };
+        }, [fetchUserData, fetchToken])
     );
 
     useEffect(() => {
         fetchUserData();
-    }, [fetchUserData]);
+        fetchToken();
+    }, []);
+
+    useEffect(() => {
+        if (token) {
+            fetchProfileData();
+        }
+    }, [token, fetchProfileData]);
 
     useEffect(() => {
         if (!loading && !user) {
@@ -69,16 +133,17 @@ export default function Profil() {
             setLogoutLoading(false);
         }
     };
+
     console.log("Rendering profile with user:", user?.displayName);
 
     return (
         <View style={{ backgroundColor: "#fff", flex: 1 }}>
             <FloatingHeader text="PROFIL" />
             <View style={{ alignItems: "center", backgroundColor: "#fff", flex: 1 }}>
-                <ProfilePageSmallContainer title="STUDENT" content={user?.displayName || "N/A"}/>
-                <ProfilePageLargeContainer title="CREDENȚIALE" username="PLACEHOLDER" password="PLACEHOLDER"/>
-                <ProfilePageSmallContainer title="NR. MATRICOL" content="PLACEHOLDER"/>
-                <ProfilePageSmallContainer title="COD" content="PLACEHOLDER"/>
+                <ProfilePageSmallContainer title="STUDENT" content={user?.displayName} />
+                <ProfilePageLargeContainer title="CREDENȚIALE" username={userInfo[0]?.username} password={userInfo[0]?.password} />
+                <ProfilePageSmallContainer title="NR. MATRICOL" content={userInfo[0]?.number} />
+                <ProfilePageSmallContainer title="COD" content={userInfo[0]?.code} />
                 <View style={{
                     marginTop: height * 0.03,
                     backgroundColor: '#024073',
@@ -86,7 +151,7 @@ export default function Profil() {
                     height: height * 0.06,
                     borderRadius: 10,
                     shadowColor: "#024073",
-                    shadowOffset: {width: 0, height: 4},
+                    shadowOffset: { width: 0, height: 4 },
                     shadowOpacity: 0.1,
                     shadowRadius: 0.7,
                     justifyContent: 'center'

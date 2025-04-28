@@ -1,8 +1,8 @@
-import {Alert, Dimensions, Pressable, Text, View} from "react-native";
-import {scaleHeight, scaleWidth} from "../utils/ScaleFunction";
+import {Linking, Alert, Dimensions, Pressable, Text, View} from "react-native";
+import React, { useState, useEffect } from "react";
 const {height, width} = Dimensions.get('window');
 
-export default function NewsContainer({date, title}) {
+export default function NewsContainer({date, title, link}) {
 return (
     <View style={{
         alignItems: "center",
@@ -12,7 +12,25 @@ return (
         shadowOpacity: 0.1,
         shadowRadius: 0.7,
     }}>
-        <Pressable onPress={() => {Alert.alert(title)}}>
+        <Pressable onPress={() => {
+            Alert.alert(
+                `Open in browser?`,
+                `FMIHub wants to open "${link}" in a browser`,
+                [
+                    {
+                        text: 'Cancel',
+                        style: 'cancel',
+                    },
+                    {
+                        text: 'Open',
+                        onPress: () => {
+                            Linking.openURL(link);
+                        },
+                    },
+                ],
+                { cancelable: true }
+            );
+        }}>
             {/* containerul mare*/}
             <View style={{
                 backgroundColor: "#AEB9C47D",
@@ -63,7 +81,7 @@ return (
                         color: '#024073',
                         paddingHorizontal: width * 0.07
                     }}>
-                        {title} {/* make caps*/}
+                        {title}
                     </Text>
                 </View>
             </View>

@@ -1,8 +1,17 @@
-import {Dimensions, Text, View} from "react-native";
+import {
+    Dimensions,
+    Text,
+    TextInput,
+    View,
+    Pressable,
+} from "react-native";
 import {scaleHeight, scaleWidth} from "../utils/ScaleFunction";
+import {useState} from "react";
 const {height, width} = Dimensions.get('window');
 
+
 export default function ProfilePageLargeContainer({username, password}) {
+    const [isPasswordVisible, setIsPasswordVisible] = useState(false);
     return (
         <View style={{
             backgroundColor: '#AEB9C4D7',
@@ -97,6 +106,12 @@ export default function ProfilePageLargeContainer({username, password}) {
                     </Text>
                 </View>
                 <View style={{
+                    flexDirection: 'row',
+                    display: 'flex',
+                    alignItems: 'center'
+                }}>
+                <Pressable onPress={() => setIsPasswordVisible(!isPasswordVisible)}>
+                <View style={{
                     backgroundColor: '#fff',
                     height: height*0.052,
                     width: width*0.48,
@@ -104,17 +119,24 @@ export default function ProfilePageLargeContainer({username, password}) {
                     marginLeft: width*0.03,
                     justifyContent: 'center',
                     alignItems: 'center',
+                    flexDirection: 'row'
                 }}>
-                    <Text style={{
-                        fontSize: height*0.016,
-                        fontFamily: 'Montserrat',
-                        color: '#024073'
-                    }}>
-                        {password}
-                    </Text>
-                </View>
+                        <TextInput style={{
+                            fontSize: height*0.016,
+                            fontFamily: 'Montserrat',
+                            color: '#024073',
+                            textAlignVertical: 'center',
+                            textAlign: 'center',
+                            flex: 1,
+                            includeFontPadding: false
+                        }} value={password}
+                           editable={false}
+                           secureTextEntry={!isPasswordVisible}
+                        />
+                    </View>
+                </Pressable>
             </View>
         </View>
-
+        </View>
     )
 }

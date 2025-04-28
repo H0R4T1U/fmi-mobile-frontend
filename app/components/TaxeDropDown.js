@@ -59,7 +59,7 @@ export default function TaxeDropDown()
 
 
             } catch (error) {
-                console.error("News fetch failed:", error);
+                console.error("Taxe fetch failed:", error);
                 setError(error.message);
             } finally {
                 setLoading(false);

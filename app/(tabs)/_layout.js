@@ -13,9 +13,9 @@ const tabIconStyles = {
     container: [
         tw`border border-[#024073] shadow-md rounded-full justify-center items-center overflow-hidden`,
         {
-            width: width*0.155,
-            height: width*0.155,
-            marginTop:height*0.04,
+            width: width*0.15,
+            height: width*0.15,
+            // marginTop: height * 0.04
         }
     ],
     image: [
@@ -31,7 +31,7 @@ const tabIconStyles = {
         color: '#024073',
         fontSize: height * 0.015,
         fontFamily: 'Montserrat',
-        marginHorizontal: '-37%'
+        marginHorizontal: '-60%'
     }
 };
 
@@ -65,7 +65,7 @@ export default function Layout() {
                         sceneStyle: {
                             backgroundColor: '#fff'
                         },
-                        tabBarLabelPosition: 'beside-icon'
+                        tabBarLabelPosition: 'beside-icon',
                     }}>
                     {/* profile button */}
                     <Tabs.Screen name="Profil" options={{

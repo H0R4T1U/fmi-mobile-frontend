@@ -1,12 +1,30 @@
-import {Alert, Dimensions, ImageBackground, Pressable, Text, View} from "react-native";
+import {Alert, Dimensions, ImageBackground, Linking, Pressable, Text, TouchableOpacity, View} from "react-native";
 import {scaleHeight, scaleWidth} from "../utils/ScaleFunction";
 const {height, width} = Dimensions.get('window');
 
 
-export default function CantinaContainer({image,name,location,program}) {
+export default function CantinaContainer({image,name,location,program, link}) {
     return (
+        <Pressable onPress={() => {
+            Alert.alert(
+                `Open in browser?`,
+                `FMIHub wants to open "${link}" in a browser`,
+                [
+                    {
+                        text: 'Cancel',
+                        style: 'cancel',
+                    },
+                    {
+                        text: 'Open',
+                        onPress: () => {
+                            Linking.openURL(link);
+                        },
+                    },
+                ],
+                { cancelable: true }
+            );
+        }}>
         <View style={{alignItems: "center", paddingTop:height*0.01}}>
-
                 <View style={{
                     height: height*0.125,
                     marginHorizontal: width*0.01,
@@ -132,8 +150,7 @@ export default function CantinaContainer({image,name,location,program}) {
 
                     </ImageBackground>
                 </View>
-
-
         </View>
+        </Pressable>
     )
 }
