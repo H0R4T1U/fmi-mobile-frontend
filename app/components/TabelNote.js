@@ -4,7 +4,7 @@ import {useState} from "react";
 const {height, width} = Dimensions.get('window');
 
 
-export default function TabelNote({examene}) {
+export default function TabelNote({userGrades}) {
     const [rowHeights, setRowHeights] = useState({});
 
     const handleTextLayout = (index: number, event: LayoutChangeEvent) => {
@@ -180,7 +180,7 @@ export default function TabelNote({examene}) {
                                 justifyContent:"flex-start"
                             }}>
 
-                            {examene.map((examen,index) => (
+                            {userGrades.map((userGrade,index) => (
                                 <View
                                     key={index}
                                     onLayout={(event) => handleTextLayout(index, event)}
@@ -209,7 +209,7 @@ export default function TabelNote({examene}) {
                                             textAlign: 'center',
 
                                         }}>
-                                            {examen.nr}
+                                            {userGrade.number}
                                         </Text>
                                     </View>
 
@@ -231,7 +231,7 @@ export default function TabelNote({examene}) {
                                             textAlign: "center",
 
                                         }}>
-                                            {examen.tips}
+                                            {userGrade.course}
                                         </Text>
                                     </View>
                                     <View style={{
@@ -252,7 +252,7 @@ export default function TabelNote({examene}) {
                                             textAlign: "center",
 
                                         }}>
-                                            {examen.tipd}
+                                            {userGrade.grade}
                                         </Text>
                                     </View>
                                     <View style={{
@@ -271,7 +271,7 @@ export default function TabelNote({examene}) {
                                             fontWeight: "500",
                                             textAlign: "center",
                                         }}>
-                                            {examen.tipe}
+                                            {userGrade.credits}
                                         </Text>
                                     </View>
                                     <View style={{
@@ -290,7 +290,7 @@ export default function TabelNote({examene}) {
                                             fontWeight: "500",
                                             textAlign: "center",
                                         }}>
-                                            {examen.data}
+                                            {userGrade.date}
                                         </Text>
                                     </View>
 
