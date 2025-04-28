@@ -12,7 +12,7 @@ WebBrowser.maybeCompleteAuthSession();
 export default function LogIntoNewScreen() {
     const [userLoading, setUserLoading] = useState(true);
     const [user, setUser] = useState(null);
-    const [shouldLogin, setShouldLogin] = useState(false);
+    const { loading, error, promptAsync } = useLogin();
 
     useEffect(() => {
         const loadUser = async () => {
@@ -21,21 +21,12 @@ export default function LogIntoNewScreen() {
                 setUser(cachedUser);
                 setTimeout(() => {
                     router.replace("/Profil");
-                }, 3000);
+                }, 3500);
             }
             setUserLoading(false);
         };
         loadUser();
     }, []);
-
-
-    const handleLogin = async () => {
-        setUser(null);
-        const { loading, error, promptAsync } = useLogin();
-        promptAsync().catch(err => console.error(err));
-    };
-
-
 
     return (
         <>
@@ -49,10 +40,10 @@ export default function LogIntoNewScreen() {
                 <Text>LOGGING IN AS</Text>
                 {userLoading ? (
                     <Text>Loading...</Text>
-                ) : user ? (
+                    ) : user ? (
                     <Text>{user.mail}</Text>
-                ) : (
-                    <Text>No user found</Text>
+            ) : (
+                <Text>No user found</Text>
                 )}
                 <ActivityIndicator size={"large"} style={{
                     marginVertical: height * 0.05
@@ -64,8 +55,7 @@ export default function LogIntoNewScreen() {
                     justifyContent: 'center',
                     alignItems: 'center',
                     borderRadius: 10
-                }} onPress={ handleLogin
-                }>
+                }} onPress={() => {promptAsync().catch(err => console.error(err))}}>
                     <Text style={{
                         color: '#fff',
                         fontFamily: 'Montserrat',

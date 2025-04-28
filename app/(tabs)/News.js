@@ -13,7 +13,6 @@ export default function News() {
     const [news, setNews] = useState([]);
     const [error, setError] = useState(null);
 
-
     useEffect(() => {
         const getToken = async () => {
             try {
@@ -56,6 +55,7 @@ export default function News() {
         };
 
         if (token) fetchNews();
+        console.log(news);
     }, [token]);
 
     return (
@@ -64,7 +64,7 @@ export default function News() {
             <FlatList
                 data={news}
                 renderItem={({ item }) => (
-                    <NewsContainer date={item.date} title={item.title}/>
+                    <NewsContainer date={item.date} title={item.title} link={item.location}/>
                 )}
                 keyExtractor={(item) => item.id.toString()}
                 contentContainerStyle={{

@@ -114,7 +114,7 @@ export function useLogin() {
                 setLoading(false);
             }
         };
-        if (response ) {
+        if (response) {
             handleAuth();
         }
     }, [response, request?.codeVerifier, router]);

@@ -6,21 +6,29 @@ import DropDownPicker from "react-native-dropdown-picker";
 const {height, width} = Dimensions.get('window');
 
 
-export default function SemestreDropDown()
+export default function SemestreDropDown({onSelectSemester})
 {
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState(null);
     const [items, setItems] = useState([
-        { label: "SEMESTRUL 1", value: "option1" },
-        { label: "SEMESTRUL 2", value: "option2" },
-        { label: "SEMESTRUL 3", value: "option3" },
-        { label: "SEMESTRUL 4", value: "option4" },
-        { label: "SEMESTRUL 5", value: "option5" },
-        { label: "SEMESTRUL 6", value: "option6" },
-        { label: "SEMESTRUL 7", value: "option7" },
-        { label: "SEMESTRUL 8", value: "option8" },
+        { label: "SEMESTRUL 1", value: "1" },
+        { label: "SEMESTRUL 2", value: "2" },
+        { label: "SEMESTRUL 3", value: "3" },
+        { label: "SEMESTRUL 4", value: "4" },
+        { label: "SEMESTRUL 5", value: "5" },
+        { label: "SEMESTRUL 6", value: "6" },
+        { label: "SEMESTRUL 7", value: "7" },
+        { label: "SEMESTRUL 8", value: "8" },
 
     ]);
+
+    const handleChange = (callback) => {
+        setValue(callback);
+        if (onSelectSemester) {
+            onSelectSemester(callback);
+        }
+    };
+
     return (
 
             <View style={{paddingHorizontal:width*0.025,paddingTop:height*0.01,borderColor:"#002E54"}}>
@@ -29,7 +37,7 @@ export default function SemestreDropDown()
                     value={value}
                     items={items}
                     setOpen={setOpen}
-                    setValue={setValue}
+                    setValue={handleChange}
                     setItems={setItems}
                     placeholder="Seleteaza semestru"
                     dropDownContainerStyle={

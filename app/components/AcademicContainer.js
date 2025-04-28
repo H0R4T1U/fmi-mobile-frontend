@@ -24,23 +24,25 @@ export default function AcademicContainer({name, image,route}) {
                     borderRadius:10,
                     overflow: "hidden",
                     borderWidth: width*0.0025,
-                    borderColor: '#024073'
+                    borderColor: '#024073',
+                    justifyContent: 'flex-end',
+                    paddingBottom: '1.5%'
                 }}>
                     <View style={{
                         backgroundColor: "rgba(2, 64, 115, 1)",
-                        height: height*0.033,
+                        height: '23%',
                         width: width*0.35,
                         borderRadius: 5,
-                        marginTop: width*0.18,
                         marginLeft:width*0.024,
-                        justifyContent: "center",
+                        justifyContent: 'center',
                     }}>
                         <Text style={{
                             fontSize: height*0.018,
                             fontFamily: 'Montserrat',
                             fontWeight: "500",
                             color: '#fff',
-                            alignSelf: "center",
+                            textAlign: 'center',
+                            textAlignVertical: 'center'
                         }}>
                             {name}
                         </Text>
