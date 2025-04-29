@@ -280,7 +280,7 @@ export default function TabelExamene({examene}) {
                                             textAlign: 'center',
 
                                         }}>
-                                            {examen.nr}
+                                            {examen.number}
                                         </Text>
                                     </View>
 
@@ -302,7 +302,7 @@ export default function TabelExamene({examene}) {
                                         textAlign: "center",
 
                                     }}>
-                                        {examen.tips}
+                                        {examen.sessionType}
                                     </Text>
                                     </View>
                                     <View style={{
@@ -323,7 +323,7 @@ export default function TabelExamene({examene}) {
                                         textAlign: "center",
 
                                     }}>
-                                        {examen.tipd}
+                                        {examen.dateType}
                                     </Text>
                                     </View>
                                     <View style={{
@@ -342,7 +342,7 @@ export default function TabelExamene({examene}) {
                                         fontWeight: "500",
                                         textAlign: "center",
                                     }}>
-                                        {examen.tipe}
+                                        {examen.type}
                                     </Text>
                                     </View>
                                     <View style={{
@@ -361,7 +361,7 @@ export default function TabelExamene({examene}) {
                                         fontWeight: "500",
                                         textAlign: "center",
                                     }}>
-                                        {examen.data}
+                                        {examen.date}
                                     </Text>
                                     </View>
                                     <View style={{
@@ -380,7 +380,7 @@ export default function TabelExamene({examene}) {
                                         fontWeight: "500",
                                         textAlign: "center",
                                     }}>
-                                        {examen.ora}
+                                        {examen.date}
                                     </Text>
                                     </View>
                                     <View style={{
@@ -399,7 +399,7 @@ export default function TabelExamene({examene}) {
                                         fontWeight: "500",
                                         textAlign: "center",
                                     }}>
-                                        {examen.durata}
+                                        {examen.duration}
                                     </Text>
                                     </View>
                                     <View style={{
@@ -418,7 +418,7 @@ export default function TabelExamene({examene}) {
                                         fontWeight: "500",
                                         textAlign: "center",
                                     }}>
-                                        {examen.sala}
+                                        {examen.room}
                                     </Text>
                                     </View>
                                     <View style={{
@@ -437,7 +437,7 @@ export default function TabelExamene({examene}) {
                                         fontWeight: "500",
                                         textAlign: "center",
                                     }}>
-                                        {examen.examinator}
+                                        {examen.teacher}
                                     </Text>
                                     </View>
                                     <View style={{
@@ -456,7 +456,7 @@ export default function TabelExamene({examene}) {
                                         fontWeight: "500",
                                         textAlign: "center",
                                     }}>
-                                        {examen.disciplina}
+                                        {examen.course}
                                     </Text>
                                     </View>
                                     <View style={{
@@ -475,7 +475,7 @@ export default function TabelExamene({examene}) {
                                         fontWeight: "500",
                                         textAlign: "center",
                                     }}>
-                                        {examen.grupa}
+                                        {examen.group}
                                     </Text>
                                     </View>
                                 </View>

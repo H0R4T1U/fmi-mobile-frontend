@@ -418,19 +418,14 @@ export default function TabelTaxeNeplatite({examene}) {
                         </ScrollView>
                     </View>
                 </ScrollView>
-                {selectedAmount !== null && (
-                    <PaymentModal
-                        visible={true}
-                        amount={selectedAmount}
-                        onClose={() => setSelectedAmount(null)}
-                    />
-                )}
-
-
             </View>
-
+            {selectedAmount !== null && (
+                <PaymentModal
+                    visible={true}
+                    amount={selectedAmount}
+                    onClose={() => setSelectedAmount(null)}
+                />
+            )}
         </View>
-
-
     )
 }

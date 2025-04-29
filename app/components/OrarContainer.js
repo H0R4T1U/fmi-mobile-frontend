@@ -7,9 +7,7 @@ const {height, width} = Dimensions.get('window');
 
 export default function OrarContainer({orar,zi}) {
     const [rowHeights, setRowHeights] = useState({});
-    const [open, setOpen] = useState(false); // ⭐️ DropDown state
-
-
+    const [open, setOpen] = useState(false);
 
     return (
         <View style={{
@@ -65,9 +63,9 @@ export default function OrarContainer({orar,zi}) {
                         marginTop: height*0.005,
                         borderRadius: 5,
                     }}>
-                        <ScrollView>
+                        <ScrollView nestedScrollEnabled={true}>
                             <View>
-                                <ScrollView style={{height:(height*0.05)+(height*0.045)*5}} showsVerticalScrollIndicator={false}>
+                                <ScrollView nestedScrollEnabled={true} style={{height:(height*0.05)+(height*0.045)*5}} showsVerticalScrollIndicator={false}>
                                     {orar.map((orari,index) => (
                                         <OrarPageMateriaContainer key={index} disciplina={orari.disciplina} ora={orari.ora} frecventa={orari.frecventa} sala={orari.sala} formatia={orari.formatia} tipul={orari.tipul} prof={orari.prof} />
 

@@ -48,7 +48,7 @@ export default function Layout() {
                 <Tabs
                     screenOptions={{
                         tabBarStyle: {
-                            height: '11.6%',
+                            height: Platform.OS==='android' ? '11.6%' : '12%',
                             backgroundColor: "#AEB9C4",
                             paddingVertical: 10,
                             paddingBottom: 0
@@ -72,7 +72,7 @@ export default function Layout() {
                         tabBarIcon: () => (
                             <View style={{justifyContent: 'center',
                                 alignItems: 'center',
-                                height: '100%',}}>
+                                }}>
                                 <View style={tabIconStyles.container}>
                                     <Image source={require('../../assets/images/profile.png')} style={tabIconStyles.image} />
                                 </View>

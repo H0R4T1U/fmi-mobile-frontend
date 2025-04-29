@@ -9,7 +9,7 @@ const { BACKEND } = Constants.expoConfig.extra;
 const AddCardModal = ({ visible, onClose, amount }) => {
     const { confirmPayment } = useConfirmPayment();
     const [cardDetails, setCardDetails] = useState(null);
-    const [billingCountry, setBillingCountry] = useState('United States');
+    const [billingCountry, setBillingCountry] = useState('Romania');
     const [zipCode, setZipCode] = useState('');
 
 
@@ -110,12 +110,10 @@ const AddCardModal = ({ visible, onClose, amount }) => {
 
                         style={{  width: '100%',
                             height: 200,
-
                         }}
                         cardStyle={{
-                            backgroundColor: "rgba(163,163,163,0.94)",
+                            backgroundColor: "white",
                             textAlign: "center",
-                            textColor: "pink",
                         }}
 
                     />
