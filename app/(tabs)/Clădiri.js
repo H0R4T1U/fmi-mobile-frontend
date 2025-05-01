@@ -10,6 +10,7 @@ import {Dimensions, ScrollView, View} from "react-native";
 import ntt from "../../assets/images/ntt.jpg"
 import observator from "../../assets/images/observator1.jpeg"
 import litere from "../../assets/images/litere1.jpg"
+import dppd from "../../assets/images/dppd.png"
 const {height} = Dimensions.get('window');
 
 export default function Clădiri() {
@@ -24,7 +25,7 @@ export default function Clădiri() {
                 <BuildingContainer name="CREIC" image={creic} address="Strada Tiberiu Popoviciu 2-4, Cluj-Napoca 400647" route='CreicScreen'/>
                 <BuildingContainer name="NTT Data" image={ntt} address="Strada Constanța 19-21, Cluj-Napoca 400158" route='NttScreen'/>
                 <BuildingContainer name="Observatorul Astronomic" image={observator} address="Strada Cireșilor 19, Cluj-Napoca 400487" route='ObservatorScreen'/>
-                <BuildingContainer name="Clădirea DPPD" image={creic} address="Calea Moților 11, Cluj-Napoca 400001" route='DppdScreen'/>
+                <BuildingContainer name="Clădirea DPPD" image={dppd} address="Calea Moților 11, Cluj-Napoca 400001" route='DppdScreen'/>
                 <BuildingContainer name="Facultatea de Litere" image={litere} address="Strada Horea 31, Cluj-Napoca 400394" route='LitereScreen'/>
             </ScrollView>
         </View>

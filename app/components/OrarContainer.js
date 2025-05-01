@@ -6,7 +6,6 @@ import OrarPageMateriaContainer from "./OrarPageMaterieContainer";
 const {height, width} = Dimensions.get('window');
 
 export default function OrarContainer({orar,zi}) {
-    const [rowHeights, setRowHeights] = useState({});
     const [open, setOpen] = useState(false);
 
     return (
@@ -55,12 +54,11 @@ export default function OrarContainer({orar,zi}) {
                         marginTop: height*0.005,
                         borderRadius: 5,
                     }}>
-                        <ScrollView nestedScrollEnabled={true}>
+                        <ScrollView nestedScrollEnabled={true} showsVerticalScrollIndicator={false}>
                             <View>
                                 <ScrollView nestedScrollEnabled={true} style={{height:(height*0.05)+(height*0.045)*5}} showsVerticalScrollIndicator={false}>
-                                    {orar.map((orari,index) => (
-                                        <OrarPageMateriaContainer key={index} disciplina={orari.disciplina} ora={orari.ora} frecventa={orari.frecventa} sala={orari.sala} formatia={orari.formatia} tipul={orari.tipul} prof={orari.prof} />
-
+                                    {orar.sort((ora1, ora2) => ora1.startHour - ora2.startHour).map((orari,index) => (
+                                        <OrarPageMateriaContainer key={index} disciplina={orari.courseInstanceName} orastart={orari.startHour} orafinal={orari.endHour} frecventa={orari.frequency} sala={orari.room} formatia={orari.formation} tipul={orari.classType} prof={orari.teacher} />
                                         ))}
                                 </ScrollView>
                             </View>

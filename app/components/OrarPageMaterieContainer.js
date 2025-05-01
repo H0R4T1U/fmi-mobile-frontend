@@ -2,7 +2,7 @@ import {Dimensions, Text, View} from "react-native";
 const {height, width} = Dimensions.get('window');
 
 
-export default function OrarPageMateriaContainer({disciplina,ora,frecventa,sala,formatia,tipul,prof}){
+export default function OrarPageMateriaContainer({disciplina,orastart,orafinal,frecventa,sala,formatia,tipul,prof}){
     const handleTextLayout = (index, event) => {
         const height = event.nativeEvent.layout.height;
         setRowHeights((prevHeights) => ({
@@ -33,7 +33,7 @@ return(
                             fontWeight: "bold",
                             textAlign: "center",
                         }}>
-                            {disciplina} | {ora}
+                            {disciplina} | {orastart} - {orafinal}
                         </Text>
                     </View>
                     <View style={{
@@ -68,7 +68,7 @@ return(
                             fontWeight: "500",
                             textAlign: "center",
                         }}>
-                            {frecventa}
+                            {frecventa === 0 ? 'Saptamanal' : (frecventa === 2 ? 'Saptamana para' : 'Saptamana impara')}
                         </Text>
                     </View>
                     <View style={{

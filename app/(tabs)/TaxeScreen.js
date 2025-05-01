@@ -1,10 +1,5 @@
 import FloatingHeader from "../components/FloatingHeader";
 import {View, Text, Button, Pressable} from "react-native";
-import SemestreDropDown from "../components/SemestreDropDown";
-import TabelExamene from "../components/TabelExamene";
-import {Examene} from "../utils/Examene";
-import TabelTaxeNeplatite from "../components/TabelTaxeNeplatite";
-import {scaleHeight, scaleWidth} from "../utils/ScaleFunction";
 import TaxeDropDown from "../components/TaxeDropDown";
 
 

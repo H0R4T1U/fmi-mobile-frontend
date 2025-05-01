@@ -2,7 +2,6 @@ import FloatingHeader from "../components/FloatingHeader";
 import {View} from "react-native";
 import SemestreDropDown from "../components/SemestreDropDown";
 import TabelExamene from "../components/TabelExamene";
-import {Examene} from "../utils/Examene";
 import TabelNote from "../components/TabelNote";
 import Constants from "expo-constants";
 import {useRouter} from "expo-router";
