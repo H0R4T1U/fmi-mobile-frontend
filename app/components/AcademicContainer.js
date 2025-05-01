@@ -9,10 +9,6 @@ export default function AcademicContainer({name, image,route}) {
         <View style={{
             alignItems: "center",
             paddingTop: height*0.014,
-            shadowColor: "#024073",
-            shadowOpacity: 0.1,
-            shadowRadius: height*0.001,
-            shadowOffset: {height:height*0.0051},
         }}>
             <Pressable onPress={() => {
                 const newRoute = '/' + route;
@@ -26,7 +22,8 @@ export default function AcademicContainer({name, image,route}) {
                     borderWidth: width*0.0025,
                     borderColor: '#024073',
                     justifyContent: 'flex-end',
-                    paddingBottom: '1.5%'
+                    paddingBottom: '1.5%',
+                    boxShadow: `0px ${height*0.0051} ${height*0.001} #02407315`
                 }}>
                     <View style={{
                         backgroundColor: "rgba(2, 64, 115, 1)",

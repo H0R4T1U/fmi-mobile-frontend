@@ -150,10 +150,7 @@ export default function Profil() {
                     width: width * 0.5,
                     height: height * 0.06,
                     borderRadius: 10,
-                    shadowColor: "#024073",
-                    shadowOffset: { width: 0, height: 4 },
-                    shadowOpacity: 0.1,
-                    shadowRadius: 0.7,
+                    boxShadow: '0px 4px 0.8px #02407315',
                     justifyContent: 'center'
                 }}>
                     <TouchableOpacity onPress={handleLogout}>

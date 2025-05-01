@@ -13,10 +13,7 @@ export default function FloatingHeader({text}) {
             width: width*0.94,
             top: -0.022*height,
             justifyContent: "center",
-            shadowColor: "#024073",
-            shadowOffset: {width: 0, height: 4},
-            shadowOpacity: 0.1,
-            shadowRadius: 0.7,
+            boxShadow: '0px 4px 0.8px #02407315',
             marginBottom:height*-0.01
         }}>
             {<Text style={{

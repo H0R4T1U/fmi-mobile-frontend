@@ -7,10 +7,6 @@ return (
     <View style={{
         alignItems: "center",
         paddingTop: height*0.014,
-        shadowColor: "#024073",
-        shadowOffset: {width: 0, height: 4},
-        shadowOpacity: 0.1,
-        shadowRadius: 0.7,
     }}>
         <Pressable onPress={() => {
             Alert.alert(
@@ -41,6 +37,7 @@ return (
                 borderColor: '#AEB9C4',
                 height: height*0.2,
                 marginHorizontal: width*0.01,
+                boxShadow: `0px ${height*0.005} ${height*0.005} #02407320`,
             }}>
                 {/* container data anuntului*/}
                 <View style={{

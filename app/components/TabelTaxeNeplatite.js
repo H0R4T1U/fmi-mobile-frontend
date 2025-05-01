@@ -7,6 +7,7 @@ const { BACKEND } = Constants.expoConfig.extra;
 const {height, width} = Dimensions.get('window');
 import { useRouter } from 'expo-router';
 import PaymentModal from "./PaymentModal";
+import {LayoutChangeEvent} from "react-native";
 
 
 
@@ -42,10 +43,7 @@ export default function TabelTaxeNeplatite({examene}) {
                 height: height*0.6,
                 width: width*0.95,
                 borderRadius: 10,
-                shadowColor: "#024073",
-                shadowOpacity: 0.1,
-                shadowOffset: { width: 0, height: 4 },
-                shadowRadius:0.7,
+                boxShadow: `0px ${height*0.01} ${height*0.02} #02407315`,
                 marginTop:height*0.01,
                 overflow: "hidden",
             }}>

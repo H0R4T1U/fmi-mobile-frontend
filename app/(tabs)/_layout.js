@@ -168,9 +168,6 @@ export default function Layout() {
                             ]}
                         >
                             <View style={{
-                                shadowColor: "#024073",
-                                shadowOffset: {width: 0, height: height * 0.012},
-                                shadowOpacity: 0.1,
                                 backgroundColor: "#fff",
                                 borderRadius: buttonWidth,
                                 padding: buttonWidth * 0.07,
@@ -178,16 +175,13 @@ export default function Layout() {
                             }}>
                                 <Image
                                     source={require('../../assets/images/home.png')}
-                                    style={{
+                                    style={[tw`shadow-xl`,{
                                         width: buttonWidth,
                                         height: buttonHeight,
                                         borderRadius: 100,
                                         borderColor: "#fff",
-                                        shadowColor: "#024073",
-                                        shadowOffset: {width: 0, height: height * 0.012},
-                                        shadowOpacity: 0.1,
                                         resizeMode: "contain"
-                                    }}
+                                    }]}
                                 />
                             </View>
                         </TouchableOpacity>

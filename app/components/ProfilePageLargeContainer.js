@@ -23,10 +23,7 @@ export default function ProfilePageLargeContainer({username, password}) {
             borderRadius: 10,
             alignItems: 'center',
             justifyContent: 'center',
-            shadowColor: "#024073",
-            shadowOffset: {width: 0, height: 4},
-            shadowOpacity: 0.1,
-            shadowRadius: 0.7,
+            boxShadow: '0px 4px 0.8px #02407315'
         }}>
             <View style={{
                 backgroundColor: '#024073',

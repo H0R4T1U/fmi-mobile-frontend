@@ -56,10 +56,7 @@ export default function SemestreDropDown({onSelectSemester})
                     style={{backgroundColor:"rgba(174,185,196,0.6)",
                         borderColor:"#AEB9C4",
                         borderRadius:10,
-                        shadowColor: "#024073",
-                        shadowOpacity: 0.1,
-                        shadowRadius: 0.7,
-                        shadowOffset: {height: 4},
+                        boxShadow: `0px ${height*0.01} ${height*0.02} #02407315`,
                         minHeight:height*0.01
                     }}
 

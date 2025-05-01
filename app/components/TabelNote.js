@@ -25,10 +25,7 @@ export default function TabelNote({userGrades}) {
                 height: height*0.6,
                 width: width*0.95,
                 borderRadius:10,
-                shadowColor: "#024073",
-                shadowOpacity: 0.1,
-                shadowOffset: { width: 0, height: 4},
-                shadowRadius: 0.7,
+                boxShadow: `0px ${height*0.01} ${height*0.02} #02407315`,
                 overflow: "hidden",
             }}>
                 <ScrollView

@@ -30,10 +30,7 @@ export default function CantinaContainer({image,name,location,program, link}) {
                     marginHorizontal: width*0.01,
                     width: width*0.86,
                     borderRadius: 10,
-                    shadowColor: "#024073",
-                    shadowOpacity: 0.1,
-                    shadowOffset: { width: 0, height:4},
-                    shadowRadius: 0.7,
+                    boxShadow: '0px 4px 0.8px #02407315'
                 }}>
                     <ImageBackground
                         source={image}
