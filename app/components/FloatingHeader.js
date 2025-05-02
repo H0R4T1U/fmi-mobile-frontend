@@ -1,5 +1,4 @@
 import {Dimensions, Text, View} from "react-native";
-import {scaleHeight, scaleWidth} from "../utils/ScaleFunction";
 const {height, width} = Dimensions.get('window');
 
 export default function FloatingHeader({text}) {

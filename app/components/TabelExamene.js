@@ -1,20 +1,19 @@
 import {Dimensions, ScrollView, Text, View,} from "react-native";
-import { scaleHeight, scaleWidth } from "../utils/ScaleFunction";
 import {useState} from "react";
 const {height, width} = Dimensions.get('window');
-
+import {tabelExameneHeaderTextStyle, tabelExameneDataTextStyle, tabelExameneDataViewStyle} from '../utils/styles';
+import {LayoutChangeEvent} from "react-native";
 
 export default function TabelExamene({examene}) {
     const [rowHeights, setRowHeights] = useState({});
-
     const handleTextLayout = (index: number, event: LayoutChangeEvent) => {
         const height = event.nativeEvent.layout.height;
-
         setRowHeights((prevHeights) => ({
             ...prevHeights,
             [index]: Math.max(prevHeights[index] || 0, height),
         }));
     };
+
     return (
         <View style={{ alignItems: "center", paddingTop:height*0.015 ,  paddingHorizontal: width*0.02,}}>
             <View style={{
@@ -28,14 +27,9 @@ export default function TabelExamene({examene}) {
                 boxShadow: `0px ${height*0.01} ${height*0.02} #02407315`,
                 overflow:"hidden"
             }}>
-                    <ScrollView
-                        horizontal={true}
-
-                        >
-
+                    <ScrollView horizontal={true}>
                         <View>
                             <View
-
                             style={{
                                 flexDirection: "row",
                                 backgroundColor: "#AEB9C4",
@@ -45,207 +39,49 @@ export default function TabelExamene({examene}) {
                                 justifyContent:"center",
                             }}
                         >
-                            <Text style={{
-                                marginLeft:width*0.013,
-                                backgroundColor: "#024073",
-                                borderRadius: 5,
-                                fontSize: height*0.0135,
-                                fontFamily: 'Montserrat',
-                                color: '#FFF',
-                                paddingVertical: height*0.0065,
-                                //paddingHorizontal: width*0.015,
-                                paddingLeft:width*0.015,
-                                fontWeight: "500",
-                                justifyContent:"center",
-                                textAlignVertical:"center",
-                                alignSelf:"center",
-                                width:width*0.145,
-                                alignItems:"center",
-                            }}>
+                            <Text style={[tabelExameneHeaderTextStyle(width, height), {marginLeft:width*0.013, width:width*0.145}]}>
                                 NR. CRT
                             </Text>
-
-                            <Text style={{
-                                marginLeft:width*0.012,
-                                backgroundColor: "#024073",
-                                borderRadius: 5,
-                                fontSize: height*0.0135,
-                                fontFamily: 'Montserrat',
-                                color: '#FFF',
-                                paddingVertical: height*0.0065,
-                                paddingLeft: width*0.015,
-                                fontWeight: "500",
-                                justifyContent:"center",
-                                textAlignVertical:"center",
-                                alignSelf:"center",
-                                width:width*0.207
-                            }}>
+                            <Text style={[tabelExameneHeaderTextStyle(width, height), {width:width*0.207}]}>
                                 TIP SESIUNE
                             </Text>
-                            <Text style={{
-                                marginLeft:width*0.012,
-                                backgroundColor: "#024073",
-                                borderRadius: 5,
-                                fontSize: height*0.0135,
-                                fontFamily: 'Montserrat',
-                                color: '#FFF',
-                                paddingVertical: height*0.0065,
-                                paddingLeft:width*0.0227,
-                                fontWeight: "500",
-                                justifyContent:"center",
-                                textAlignVertical:"center",
-                                alignSelf:"center",
-                                alignItems:"center",
-                                width:width*0.175
-                            }}>
+                            <Text style={[tabelExameneHeaderTextStyle(width, height), {width:width*0.175}]}>
                                 TIP DATA
                             </Text>
-                            <Text style={{
-                                marginLeft:width*0.012,
-                                backgroundColor: "#024073",
-                                borderRadius: 5,
-                                fontSize:  height*0.0135,
-                                fontFamily: 'Montserrat',
-                                color: '#FFF',
-                                paddingVertical:height*0.0065,
-                                paddingLeft: width*0.02,
-                                fontWeight: "500",
-                                justifyContent:"center",
-                                textAlignVertical:"center",
-                                alignSelf:"center",
-                                width:width*0.215
-                            }}>
+                            <Text style={[tabelExameneHeaderTextStyle(width, height), {width:width*0.215}]}>
                                 TIP EXAMEN
                             </Text>
-                            <Text style={{
-                                marginLeft:width*0.012,
-                                backgroundColor: "#024073",
-                                borderRadius: 5,
-                                fontSize: height*0.0135,
-                                fontFamily: 'Montserrat',
-                                color: '#FFF',
-                                paddingVertical: height*0.0065,
-                                paddingLeft: width*0.0645,
-                                fontWeight: "500",
-                                justifyContent:"center",
-                                textAlignVertical:"center",
-                                alignSelf:"center",
-                                width:width*0.205
-                            }}>
+                            <Text style={[tabelExameneHeaderTextStyle(width, height), {width:width*0.205}]}>
                                 DATA
                             </Text>
-                            <Text style={{
-                                marginLeft:width*0.012,
-                                backgroundColor: "#024073",
-                                borderRadius: 5,
-                                fontSize: height*0.0135,
-                                fontFamily: 'Montserrat',
-                                color: '#FFF',
-                                paddingVertical: height*0.0065,
-                                paddingLeft: width*0.05,
-                                fontWeight: "500",
-                                justifyContent:"center",
-                                textAlignVertical:"center",
-                                alignSelf:"center",
-                                width:width*0.158
-                            }}>
+                            <Text style={[tabelExameneHeaderTextStyle(width, height), {width:width*0.158}]}>
                                 ORA
                             </Text>
-                            <Text style={{
-                                marginLeft:width*0.012,
-                                backgroundColor: "#024073",
-                                borderRadius: 5,
-                                fontSize: height*0.0135,
-                                fontFamily: 'Montserrat',
-                                color: '#FFF',
-                                paddingVertical:height*0.0065,
-                                paddingLeft: width*0.018,
-                                fontWeight: "500",
-                                justifyContent:"center",
-                                textAlignVertical:"center",
-                                alignSelf:"center",
-                                width:width*0.15
-                            }}>
+                            <Text style={[tabelExameneHeaderTextStyle(width, height), {width:width*0.15}]}>
                                 DURATA
                             </Text>
-                            <Text style={{
-                                marginLeft:width*0.012,
-                                backgroundColor: "#024073",
-                                borderRadius: 5,
-                                fontSize: height*0.0135,
-                                fontFamily: 'Montserrat',
-                                color: '#FFF',
-                                paddingVertical: height*0.0065,
-                                paddingLeft: width*0.06,
-                                fontWeight: "500",
-                                justifyContent:"center",
-                                textAlignVertical:"center",
-                                alignSelf:"center",
-                                width:width*0.2
-                            }}>
+                            <Text style={[tabelExameneHeaderTextStyle(width, height), {width:width*0.2}]}>
                                 SALA
                             </Text>
-                            <Text style={{
-                                marginLeft:width*0.012,
-                                backgroundColor: "#024073",
-                                borderRadius: 5,
-                                fontSize:height*0.0135,
-                                fontFamily: 'Montserrat',
-                                color: '#FFF',
-                                paddingVertical: height*0.0065,
-                                paddingLeft: width*0.016,
-                                fontWeight: "500",
-                                justifyContent:"center",
-                                textAlignVertical:"center",
-                                alignSelf:"center",
-                                width:width*0.22
-                            }}>
+                            <Text style={[tabelExameneHeaderTextStyle(width, height), {width:width*0.22}]}>
                                 EXAMINATOR
                             </Text>
-                            <Text style={{
-                                marginLeft:width*0.012,
-                                backgroundColor: "#024073",
-                                borderRadius:5,
-                                fontSize: height*0.0135,
-                                fontFamily: 'Montserrat',
-                                color: '#FFF',
-                                paddingVertical: height*0.0065,
-                                paddingLeft: width*0.022,
-                                fontWeight: "500",
-                                justifyContent:"center",
-                                textAlignVertical:"center",
-                                alignSelf:"center",
-                                width:width*0.203
-                            }}>
+                            <Text style={[tabelExameneHeaderTextStyle(width, height), {width:width*0.203}]}>
                                 DISCIPLINA
                             </Text>
-                            <Text style={{
-                                marginLeft:width*0.012,
-                                backgroundColor: "#024073",
-                                borderRadius: 5,
-                                fontSize: height*0.0135,
-                                fontFamily: 'Montserrat',
-                                color: '#FFF',
-                                paddingVertical: height*0.0065,
-                                paddingLeft: width*0.0145,
-                                fontWeight: "500",
-                                justifyContent:"center",
-                                textAlignVertical:"center",
-                                alignSelf:"center",
+                            <Text style={[tabelExameneHeaderTextStyle(width, height), {
                                 marginRight:width*0.012,
                                 width:width*0.13
-                            }}>
+                            }]}>
                                 GRUPA
                             </Text>
                         </View>
 
                         <ScrollView
-
                             contentContainerStyle={{
-                                paddingBottom:scaleHeight(20),
-
-                            alignItems:"flex-start",
-                            justifyContent:"flex-start"
+                                paddingBottom: height * 0.15,
+                                alignItems:"flex-start",
+                                justifyContent:"flex-start"
                         }}>
 
                             {examene.map((examen,index) => (
@@ -259,219 +95,91 @@ export default function TabelExamene({examene}) {
                                        minHeight: rowHeights[index] || height*0.1,
                                     }}
                                 >
-                                    <View style={{
-                                        width: scaleWidth(60),
-                                        minHeight: rowHeights[index] || scaleHeight(30),
-                                        backgroundColor: "#fff",
-                                        borderRadius: scaleWidth(5),
-                                        justifyContent: "center",
-                                        alignItems: "center",
-                                        marginLeft:width*0.012
-                                    }}>
-                                        <Text style={{
-
-                                            fontSize: scaleHeight(14),
-                                            fontFamily: 'Montserrat',
-                                            color: '#024073',
-                                            fontWeight: "500",
-                                            textAlign: 'center',
-
-                                        }}>
+                                    <View style={[tabelExameneDataViewStyle(width, height), {
+                                        width: width * 0.145,
+                                        minHeight: rowHeights[index] || height * 0.1,
+                                    }]}>
+                                        <Text style={tabelExameneDataTextStyle(width, height)}>
                                             {examen.number}
                                         </Text>
                                     </View>
-
-                                    <View style={{
+                                    <View style={[tabelExameneDataViewStyle(width, height), {
                                         width: width*0.207,
-                                        minHeight: rowHeights[index] || scaleHeight(30),
-                                        backgroundColor: "#fff",
-                                        borderRadius: scaleWidth(5),
-                                        justifyContent: "center",
-                                        alignItems: "center",
-                                        marginLeft:width*0.012
-                                    }}>
-                                    <Text style={{
-
-                                        fontSize: scaleHeight(14),
-                                        fontFamily: 'Montserrat',
-                                        color: '#024073',
-                                        fontWeight: "500",
-                                        textAlign: "center",
-
-                                    }}>
+                                        minHeight: rowHeights[index] || height * 0.1,
+                                    }]}>
+                                    <Text style={tabelExameneDataTextStyle(width, height)}>
                                         {examen.sessionType}
                                     </Text>
                                     </View>
-                                    <View style={{
+                                    <View style={[tabelExameneDataViewStyle(width, height), {
                                         width:width*0.175,
-                                        minHeight: rowHeights[index] || scaleHeight(30),
-                                        backgroundColor: "#fff",
-                                        borderRadius: scaleWidth(5),
-                                        justifyContent: "center",
-                                        alignItems: "center",
-                                        marginLeft:width*0.012
-                                    }}>
-                                    <Text style={{
-
-                                        fontSize: scaleHeight(14),
-                                        fontFamily: 'Montserrat',
-                                        color: '#024073',
-                                        fontWeight: "500",
-                                        textAlign: "center",
-
-                                    }}>
+                                        minHeight: rowHeights[index] || height * 0.1,
+                                    }]}>
+                                    <Text style={tabelExameneDataTextStyle(width, height)}>
                                         {examen.dateType}
                                     </Text>
                                     </View>
-                                    <View style={{
+                                    <View style={[tabelExameneDataViewStyle(width, height), {
                                         width: width*0.215,
-                                        minHeight: rowHeights[index] || scaleHeight(30),
-                                        backgroundColor: "#fff",
-                                        borderRadius: scaleWidth(5),
-                                        justifyContent: "center",
-                                        alignItems: "center",
-                                        marginLeft:width*0.012
-                                    }}>
-                                    <Text style={{
-                                        fontSize: scaleHeight(14),
-                                        fontFamily: 'Montserrat',
-                                        color: '#024073',
-                                        fontWeight: "500",
-                                        textAlign: "center",
-                                    }}>
+                                        minHeight: rowHeights[index] || height * 0.1,
+                                    }]}>
+                                    <Text style={tabelExameneDataTextStyle(width, height)}>
                                         {examen.type}
                                     </Text>
                                     </View>
-                                    <View style={{
+                                    <View style={[tabelExameneDataViewStyle(width, height), {
                                         width: width*0.205,
-                                        minHeight: rowHeights[index] || scaleHeight(30),
-                                        backgroundColor: "#fff",
-                                        borderRadius: 5,
-                                        justifyContent: "center",
-                                        alignItems: "center",
-                                        marginLeft:width*0.012
-                                    }}>
-                                    <Text style={{
-                                        fontSize: scaleHeight(14),
-                                        fontFamily: 'Montserrat',
-                                        color: '#024073',
-                                        fontWeight: "500",
-                                        textAlign: "center",
-                                    }}>
+                                        minHeight: rowHeights[index] || height * 0.1,
+                                    }]}>
+                                    <Text style={tabelExameneDataTextStyle(width, height)}>
                                         {examen.date}
                                     </Text>
                                     </View>
-                                    <View style={{
+                                    <View style={[tabelExameneDataViewStyle(width, height), {
                                         width: width*0.158,
-                                        minHeight: rowHeights[index] || scaleHeight(30),
-                                        backgroundColor: "#fff",
-                                        borderRadius: scaleWidth(5),
-                                        justifyContent: "center",
-                                        alignItems: "center",
-                                        marginLeft:width*0.012
-                                    }}>
-                                    <Text style={{
-                                        fontSize: scaleHeight(14),
-                                        fontFamily: 'Montserrat',
-                                        color: '#024073',
-                                        fontWeight: "500",
-                                        textAlign: "center",
-                                    }}>
+                                        minHeight: rowHeights[index] || height * 0.1,
+                                    }]}>
+                                    <Text style={tabelExameneDataTextStyle(width, height)}>
                                         {examen.date}
                                     </Text>
                                     </View>
-                                    <View style={{
+                                    <View style={[tabelExameneDataViewStyle(width, height), {
                                         width: width*0.15,
-                                        minHeight: rowHeights[index] || scaleHeight(30),
-                                        backgroundColor: "#fff",
-                                        borderRadius: scaleWidth(5),
-                                        justifyContent: "center",
-                                        alignItems: "center",
-                                        marginLeft:width*0.012
-                                    }}>
-                                    <Text style={{
-                                        fontSize: scaleHeight(14),
-                                        fontFamily: 'Montserrat',
-                                        color: '#024073',
-                                        fontWeight: "500",
-                                        textAlign: "center",
-                                    }}>
+                                        minHeight: rowHeights[index] || height * 0.1,
+                                    }]}>
+                                    <Text style={tabelExameneDataTextStyle(width, height)}>
                                         {examen.duration}
                                     </Text>
                                     </View>
-                                    <View style={{
+                                    <View style={[tabelExameneDataViewStyle(width, height), {
                                         width: width*0.2,
-                                        minHeight: rowHeights[index] || scaleHeight(30),
-                                        backgroundColor: "#fff",
-                                        borderRadius: scaleWidth(5),
-                                        justifyContent: "center",
-                                        alignItems: "center",
-                                        marginLeft:width*0.012
-                                    }}>
-                                    <Text style={{
-                                        fontSize: scaleHeight(14),
-                                        fontFamily: 'Montserrat',
-                                        color: '#024073',
-                                        fontWeight: "500",
-                                        textAlign: "center",
-                                    }}>
+                                        minHeight: rowHeights[index] || height * 0.1,
+                                    }]}>
+                                    <Text style={tabelExameneDataTextStyle(width, height)}>
                                         {examen.room}
                                     </Text>
                                     </View>
-                                    <View style={{
+                                    <View style={[tabelExameneDataViewStyle(width, height), {
                                         width: width*0.22,
-                                        minHeight: rowHeights[index] || scaleHeight(30),
-                                        backgroundColor: "#fff",
-                                        borderRadius: scaleWidth(5),
-                                        justifyContent: "center",
-                                        alignItems: "center",
-                                        marginLeft:width*0.012
-                                    }}>
-                                    <Text style={{
-                                        fontSize: scaleHeight(14),
-                                        fontFamily: 'Montserrat',
-                                        color: '#024073',
-                                        fontWeight: "500",
-                                        textAlign: "center",
-                                    }}>
+                                        minHeight: rowHeights[index] || height * 0.1,
+                                    }]}>
+                                    <Text style={tabelExameneDataTextStyle(width, height)}>
                                         {examen.teacher}
                                     </Text>
                                     </View>
-                                    <View style={{
+                                    <View style={[tabelExameneDataViewStyle(width, height), {
                                         width: width*0.203,
-                                        minHeight: rowHeights[index] || scaleHeight(30),
-                                        backgroundColor: "#fff",
-                                        borderRadius: scaleWidth(5),
-                                        justifyContent: "center",
-                                        alignItems: "center",
-                                        marginLeft:width*0.012
-                                    }}>
-                                    <Text style={{
-                                        fontSize: scaleHeight(14),
-                                        fontFamily: 'Montserrat',
-                                        color: '#024073',
-                                        fontWeight: "500",
-                                        textAlign: "center",
-                                    }}>
+                                        minHeight: rowHeights[index] || height * 0.1,
+                                    }]}>
+                                    <Text style={tabelExameneDataTextStyle(width, height)}>
                                         {examen.course}
                                     </Text>
                                     </View>
-                                    <View style={{
+                                    <View style={[tabelExameneDataViewStyle(width, height), {
                                         width: width*0.13,
-                                        minHeight: rowHeights[index] || scaleHeight(30),
-                                        backgroundColor: "#fff",
-                                        borderRadius: 5,
-                                        justifyContent: "center",
-                                        alignItems: "center",
-                                        marginLeft:width*0.012
-                                    }}>
-                                    <Text style={{
-                                        fontSize: scaleHeight(14),
-                                        fontFamily: 'Montserrat',
-                                        color: '#024073',
-                                        fontWeight: "500",
-                                        textAlign: "center",
-                                    }}>
+                                        minHeight: rowHeights[index] || height * 0.1,
+                                    }]}>
+                                    <Text style={tabelExameneDataTextStyle(width, height)}>
                                         {examen.group}
                                     </Text>
                                     </View>
@@ -480,13 +188,7 @@ export default function TabelExamene({examene}) {
                         </ScrollView>
                         </View>
                     </ScrollView>
-
-
-
                 </View>
-
-
-
             </View>
 
     )

@@ -1,9 +1,9 @@
 import {Dimensions, ScrollView, Text, View,} from "react-native";
-import { scaleHeight, scaleWidth } from "../utils/ScaleFunction";
 import {useState} from "react";
 const {height, width} = Dimensions.get('window');
 
-import headerHeightContext from "react-native-screens/src/native-stack/utils/HeaderHeightContext";
+import {LayoutChangeEvent} from "react-native";
+import {tabelTaxePlatiteTextStyle, tabelTaxePlatiteViewStyle} from "../utils/styles";
 
 export default function TabelTaxePlatite({examene}) {
     const [rowHeights, setRowHeights] = useState({});
@@ -30,14 +30,9 @@ export default function TabelTaxePlatite({examene}) {
                 marginTop:10,
                 overflow: "hidden",
             }}>
-                <ScrollView
-                    horizontal={true}
-
-                >
-
+                <ScrollView horizontal={true}>
                     <View>
                         <View
-
                             style={{
                                 flexDirection: "row",
                                 backgroundColor: "#AEB9C4",
@@ -129,7 +124,7 @@ export default function TabelTaxePlatite({examene}) {
                                 justifyContent:"center"
                             }}>
                                 <Text style={{
-                                    fontSize: scaleHeight(12),
+                                    fontSize: height * 0.014,
                                     fontFamily: 'Montserrat',
                                     color: '#FFF',
                                     fontWeight: "500",
@@ -217,7 +212,6 @@ export default function TabelTaxePlatite({examene}) {
 
                             contentContainerStyle={{
                                 paddingBottom:height*0.02,
-
                                 alignItems:"flex-start",
                                 justifyContent:"flex-start"
                             }}>
@@ -233,160 +227,70 @@ export default function TabelTaxePlatite({examene}) {
                                         minHeight: rowHeights[index] || height*0.035,
                                     }}
                                 >
-                                    <View style={{
+                                    <View style={[tabelTaxePlatiteViewStyle(width, height), {
                                         width: width*0.145,
                                         minHeight: rowHeights[index] ||height*0.035,
-                                        backgroundColor: "#fff",
-                                        borderRadius:5,
-                                        justifyContent: "center",
-                                        alignItems: "center",
-                                        marginLeft:width*0.022
-                                    }}>
-                                        <Text style={{
-
-                                            fontSize: height*0.014,
-                                            fontFamily: 'Montserrat',
-                                            color: '#024073',
-                                            fontWeight: "500",
-                                            textAlign: 'center',
-
-                                        }}>
+                                        marginLeft: width * 0.022
+                                    }]}>
+                                        <Text style={tabelTaxePlatiteTextStyle(width, height)}>
                                             {examen.number}
                                         </Text>
                                     </View>
 
-                                    <View style={{
+                                    <View style={[tabelTaxePlatiteViewStyle(width, height), {
                                         width: width*0.165,
                                         minHeight: rowHeights[index] ||height*0.035,
-                                        backgroundColor: "#fff",
-                                        borderRadius: 5,
-                                        justifyContent: "center",
-                                        alignItems: "center",
-                                        marginLeft:width*0.015
-                                    }}>
-                                        <Text style={{
-
-                                            fontSize: height*0.014,
-                                            fontFamily: 'Montserrat',
-                                            color: '#024073',
-                                            fontWeight: "500",
-                                            textAlign: "center",
-
-                                        }}>
+                                    }]}>
+                                        <Text style={tabelTaxePlatiteTextStyle(width, height)}>
                                             {examen.series}
                                         </Text>
                                     </View>
-                                    <View style={{
+                                    <View style={[tabelTaxePlatiteViewStyle(width, height), {
                                         width: width*0.2,
                                         minHeight: rowHeights[index] || height*0.035,
-                                        backgroundColor: "#fff",
-                                        borderRadius: 5,
-                                        justifyContent: "center",
-                                        alignItems: "center",
-                                        marginLeft:width*0.015
-                                    }}>
-                                        <Text style={{
-
-                                            fontSize: height*0.014,
-                                            fontFamily: 'Montserrat',
-                                            color: '#024073',
-                                            fontWeight: "500",
-                                            textAlign: "center",
-
-                                        }}>
+                                    }]}>
+                                        <Text style={tabelTaxePlatiteTextStyle(width, height)}>
                                             {examen.paymentNumber}
                                         </Text>
                                     </View>
-                                    <View style={{
+                                    <View style={[tabelTaxePlatiteViewStyle(width, height), {
                                         width: width*0.2,
                                         minHeight: rowHeights[index] || height*0.035,
-                                        backgroundColor: "#fff",
-                                        borderRadius: 5,
-                                        justifyContent: "center",
-                                        alignItems: "center",
-                                        marginLeft:width*0.015
-                                    }}>
-                                        <Text style={{
-                                            fontSize: height*0.014,
-                                            fontFamily: 'Montserrat',
-                                            color: '#024073',
-                                            fontWeight: "500",
-                                            textAlign: "center",
-                                        }}>
+                                    }]}>
+                                        <Text style={tabelTaxePlatiteTextStyle(width, height)}>
                                             {examen.date}
                                         </Text>
                                     </View>
-                                    <View style={{
+                                    <View style={[tabelTaxePlatiteViewStyle(width, height), {
                                         width: width*0.19,
                                         minHeight: rowHeights[index] || height*0.035,
-                                        backgroundColor: "#fff",
-                                        borderRadius: 5,
-                                        justifyContent: "center",
-                                        alignItems: "center",
-                                        marginLeft:width*0.015
-                                    }}>
-                                        <Text style={{
-                                            fontSize: height*0.014,
-                                            fontFamily: 'Montserrat',
-                                            color: '#024073',
-                                            fontWeight: "500",
-                                            textAlign: "center",
-                                        }}>
+                                    }]}>
+                                        <Text style={tabelTaxePlatiteTextStyle(width, height)}>
                                             {examen.price}
                                         </Text>
                                     </View>
-                                    <View style={{
+                                    <View style={[tabelTaxePlatiteViewStyle(width, height), {
                                         width: width*0.26,
                                         minHeight: rowHeights[index] || height*0.035,
-                                        backgroundColor: "#fff",
-                                        borderRadius: 5,
-                                        justifyContent: "center",
-                                        alignItems: "center",
-                                        marginLeft:width*0.015
-                                    }}>
-                                        <Text style={{
-                                            fontSize: height*0.014,
-                                            fontFamily: 'Montserrat',
-                                            color: '#024073',
-                                            fontWeight: "500",
-                                            textAlign: "center",
-                                        }}>
+                                    }]}>
+                                        <Text style={tabelTaxePlatiteTextStyle(width, height)}>
                                             {examen.description}
                                         </Text>
                                     </View>
-                                    <View style={{
+                                    <View style={[tabelTaxePlatiteViewStyle(width, height), {
                                         width: width*0.16,
                                         minHeight: rowHeights[index] || height*0.035,
-                                        backgroundColor: "#fff",
-                                        borderRadius: 5,
-                                        justifyContent: "center",
-                                        alignItems: "center",
-                                        marginLeft:width*0.015
-                                    }}>
-                                        <Text style={{
-                                            fontSize: height*0.014,
-                                            fontFamily: 'Montserrat',
-                                            color: '#024073',
-                                            fontWeight: "500",
-                                            textAlign: "center",
-                                        }}>
+                                    }]}>
+                                        <Text style={tabelTaxePlatiteTextStyle(width, height)}>
                                             {examen.message}
                                         </Text>
                                     </View>
-
                                 </View>
                             ))}
                         </ScrollView>
                     </View>
                 </ScrollView>
-
-
-
             </View>
-
-
-
         </View>
-
-    )
+    );
 }

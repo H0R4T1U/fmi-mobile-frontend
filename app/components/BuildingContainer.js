@@ -1,5 +1,4 @@
 import {Alert, Dimensions, ImageBackground, Pressable, Text, View} from "react-native";
-import {scaleHeight, scaleWidth} from "../utils/ScaleFunction";
 import {useRouter} from "expo-router";
 const {height, width} = Dimensions.get('window');
 

@@ -1,5 +1,4 @@
 import {View, Text, Dimensions} from "react-native";
-import {scaleHeight, scaleWidth} from "../utils/ScaleFunction";
 const {height, width} = Dimensions.get('window');
 
 export default function ProfilePageSmallContainer({title, content}) {

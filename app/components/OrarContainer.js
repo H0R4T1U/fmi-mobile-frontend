@@ -1,5 +1,4 @@
 import {Dimensions, ScrollView, Text, View, TouchableOpacity} from "react-native";
-import {scaleHeight, scaleWidth} from "../utils/ScaleFunction";
 import {useState} from "react";
 import OrarPageMateriaContainer from "./OrarPageMaterieContainer";
 

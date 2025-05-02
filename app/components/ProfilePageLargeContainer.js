@@ -5,7 +5,6 @@ import {
     View,
     Pressable,
 } from "react-native";
-import {scaleHeight, scaleWidth} from "../utils/ScaleFunction";
 import {useState} from "react";
 const {height, width} = Dimensions.get('window');
 
@@ -83,7 +82,7 @@ export default function ProfilePageLargeContainer({username, password}) {
             <View style={{
                 flexDirection: 'row',
                 alignItems: 'center',
-                marginTop: scaleHeight(30)
+                marginTop: height * 0.025
             }}>
                 <View style={{
                     backgroundColor: '#024073',

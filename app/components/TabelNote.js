@@ -1,6 +1,6 @@
 import {Dimensions, ScrollView, Text, View,} from "react-native";
-import { scaleHeight, scaleWidth } from "../utils/ScaleFunction";
 import {useState} from "react";
+import {tabelTaxePlatiteTextStyle} from "../utils/styles";
 const {height, width} = Dimensions.get('window');
 
 
@@ -169,10 +169,8 @@ export default function TabelNote({userGrades}) {
                         </View>
 
                         <ScrollView
-
                             contentContainerStyle={{
                                 paddingBottom:height*0.02,
-
                                 alignItems:"flex-start",
                                 justifyContent:"flex-start"
                             }}>
@@ -197,15 +195,7 @@ export default function TabelNote({userGrades}) {
                                         alignItems: "center",
                                         marginLeft:width*0.02
                                     }}>
-                                        <Text style={{
-
-                                            fontSize:height*0.014,
-                                            fontFamily: 'Montserrat',
-                                            color: '#024073',
-                                            fontWeight: "500",
-                                            textAlign: 'center',
-
-                                        }}>
+                                        <Text style={tabelTaxePlatiteTextStyle(width, height)}>
                                             {userGrade.number}
                                         </Text>
                                     </View>
@@ -219,15 +209,7 @@ export default function TabelNote({userGrades}) {
                                         alignItems: "center",
                                         marginLeft:width*0.015
                                     }}>
-                                        <Text style={{
-
-                                            fontSize: height*0.014,
-                                            fontFamily: 'Montserrat',
-                                            color: '#024073',
-                                            fontWeight: "500",
-                                            textAlign: "center",
-
-                                        }}>
+                                        <Text style={tabelTaxePlatiteTextStyle(width, height)}>
                                             {userGrade.course}
                                         </Text>
                                     </View>
@@ -240,15 +222,7 @@ export default function TabelNote({userGrades}) {
                                         alignItems: "center",
                                         marginLeft:width*0.015
                                     }}>
-                                        <Text style={{
-
-                                            fontSize: height*0.014,
-                                            fontFamily: 'Montserrat',
-                                            color: '#024073',
-                                            fontWeight: "500",
-                                            textAlign: "center",
-
-                                        }}>
+                                        <Text style={tabelTaxePlatiteTextStyle(width, height)}>
                                             {userGrade.grade}
                                         </Text>
                                     </View>
@@ -261,13 +235,7 @@ export default function TabelNote({userGrades}) {
                                         alignItems: "center",
                                         marginLeft:width*0.015
                                     }}>
-                                        <Text style={{
-                                            fontSize: height*0.014,
-                                            fontFamily: 'Montserrat',
-                                            color: '#024073',
-                                            fontWeight: "500",
-                                            textAlign: "center",
-                                        }}>
+                                        <Text style={tabelTaxePlatiteTextStyle(width, height)}>
                                             {userGrade.credits}
                                         </Text>
                                     </View>
@@ -280,30 +248,16 @@ export default function TabelNote({userGrades}) {
                                         alignItems: "center",
                                         marginLeft:width*0.015
                                     }}>
-                                        <Text style={{
-                                            fontSize:height*0.014,
-                                            fontFamily: 'Montserrat',
-                                            color: '#024073',
-                                            fontWeight: "500",
-                                            textAlign: "center",
-                                        }}>
+                                        <Text style={tabelTaxePlatiteTextStyle(width, height)}>
                                             {userGrade.date}
                                         </Text>
                                     </View>
-
                                 </View>
                             ))}
                         </ScrollView>
                     </View>
                 </ScrollView>
-
-
-
             </View>
-
-
-
         </View>
-
     )
 }
