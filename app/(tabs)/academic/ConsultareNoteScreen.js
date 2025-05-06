@@ -1,12 +1,12 @@
-import FloatingHeader from "../components/FloatingHeader";
-import {View} from "react-native";
-import SemestreDropDown from "../components/SemestreDropDown";
-import TabelExamene from "../components/TabelExamene";
-import TabelNote from "../components/TabelNote";
+import FloatingHeader from "../../components/common/FloatingHeader";
+import {ActivityIndicator, Text, View} from "react-native";
+import SemestreDropDown from "../../components/academic/SemestreDropDown";
+import TabelExamene from "../../components/academic/TabelExamene";
+import TabelNote from "../../components/academic/TabelNote";
 import Constants from "expo-constants";
 import {useRouter} from "expo-router";
-import {useCallback, useEffect, useState} from "react";
-import {CacheManager} from "../utils/CacheManager";
+import React, {useCallback, useEffect, useState} from "react";
+import {CacheManager} from "../../utils/CacheManager";
 
 const { BACKEND } = Constants.expoConfig.extra;
 
@@ -70,6 +70,25 @@ export default function ConsultareNoteScreen() {
 
         if (token) fetchGrades();
     }, [token]);
+
+    if (loading)
+        return (
+            <>
+                <FloatingHeader text="NOTE"/>
+                <ActivityIndicator size="small" style={{
+                    flex: 1
+                }}/>
+            </>
+        );
+    if (error)
+        return (
+            <>
+                <FloatingHeader text="EXAMENE"/>
+                <View style={{flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+                    <Text style={{color: '#024073', fontFamily: 'Montserrat', fontSize: height * 0.015, textAlign: 'center', textAlignVertical: 'center'}}>{error}. Please try again later.</Text>
+                </View>
+            </>
+        );
 
     const filteredGrades = selectedSemester
         ? userGrades.filter(grade => grade.semester === parseInt(selectedSemester))

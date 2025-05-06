@@ -1,7 +1,7 @@
-import FloatingHeader from "../components/FloatingHeader";
+import FloatingHeader from "../components/common/FloatingHeader";
 import React, { useState, useEffect } from "react";
-import NewsContainer from "../components/NewsContainer";
-import {FlatList, Dimensions} from "react-native";
+import NewsContainer from "../components/news/NewsContainer";
+import {Text, FlatList, Dimensions, ActivityIndicator, View} from "react-native";
 import { CacheManager } from "../utils/CacheManager";
 import Constants from "expo-constants";
 const { BACKEND } = Constants.expoConfig.extra;
@@ -55,8 +55,26 @@ export default function News() {
         };
 
         if (token) fetchNews();
-        console.log(news);
     }, [token]);
+
+    if (loading)
+        return (
+            <>
+                <FloatingHeader text="NEWS"/>
+                <ActivityIndicator size="small" style={{
+                    flex: 1
+                }}/>
+            </>
+        );
+    if (error)
+        return (
+            <>
+                <FloatingHeader text="EXAMENE"/>
+                <View style={{flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+                    <Text style={{color: '#024073', fontFamily: 'Montserrat', fontSize: height * 0.015, textAlign: 'center', textAlignVertical: 'center'}}>{error}. Please try again later.</Text>
+                </View>
+            </>
+        );
 
     return (
         <>

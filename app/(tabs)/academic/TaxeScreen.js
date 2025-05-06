@@ -1,6 +1,6 @@
-import FloatingHeader from "../components/FloatingHeader";
+import FloatingHeader from "../../components/common/FloatingHeader";
 import {View, Text, Button, Pressable} from "react-native";
-import TaxeDropDown from "../components/TaxeDropDown";
+import TaxeDropDown from "../../components/academic/TaxeDropDown";
 
 
 export default function ExameneScreen() {

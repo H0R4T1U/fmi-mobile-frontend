@@ -1,10 +1,10 @@
-import FloatingHeader from "../components/FloatingHeader";
-import CantinaContainer from "../components/CantinaContainer";
-import image from "../../assets/images/cantina2.jpg";
+import FloatingHeader from "../../components/common/FloatingHeader";
+import CantinaContainer from "../../components/buildings/CantinaContainer";
+import image from "../../../assets/images/cantina2.jpg";
 import {View} from "react-native";
-import LegendaSaliContainer from "../components/LegendaSaliContainer";
-import {RoomsFsega} from "../utils/Rooms";
-import {Days} from "../utils/Days";
+import LegendaSaliContainer from "../../components/buildings/LegendaSaliContainer";
+import {RoomsFsega} from "../../utils/Rooms";
+import {Days} from "../../utils/Days";
 
 export default function FsegaScreen() {
     const currentDate = new Date();

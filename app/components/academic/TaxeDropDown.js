@@ -1,10 +1,11 @@
-import {useEffect, useState} from "react";
-import {Dimensions, View} from "react-native";
+import React, {useEffect, useState} from "react";
+import {ActivityIndicator, Dimensions, Text, View} from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
 import TabelTaxeNeplatite from "./TabelTaxeNeplatite";
 import TabelTaxePlatite from "./TabelTaxePlatite";
-import { CacheManager } from "../utils/CacheManager";
+import { CacheManager } from "../../utils/CacheManager";
 import Constants from "expo-constants";
+import FloatingHeader from "../common/FloatingHeader";
 const { BACKEND } = Constants.expoConfig.extra;
 const {height, width} = Dimensions.get('window');
 
@@ -120,6 +121,25 @@ export default function TaxeDropDown()
         { label: "TAXE PLATITE", value: "TabelTaxeP" },
 
     ]);
+
+    if (loading)
+        return (
+            <>
+                <ActivityIndicator size="small" style={{
+                    flex: 1
+                }}/>
+            </>
+        );
+    if (error)
+        return (
+            <>
+                <FloatingHeader text="EXAMENE"/>
+                <View style={{flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+                    <Text style={{color: '#024073', fontFamily: 'Montserrat', fontSize: height * 0.015, textAlign: 'center', textAlignVertical: 'center'}}>{error}. Please try again later.</Text>
+                </View>
+            </>
+        );
+
     return (
 
         <View style={{paddingHorizontal:width*0.025,paddingTop:height*0.01,borderColor:"#002E54"}}>

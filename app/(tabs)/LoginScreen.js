@@ -1,5 +1,5 @@
-import Logo from "../components/Logo";
-import LoginHeader from "../components/LoginHeader";
+import Logo from "../components/login/Logo";
+import LoginHeader from "../components/login/LoginHeader";
 import {Dimensions, Text, TouchableOpacity, View} from "react-native";
 import {useLogin} from "../utils/Login";
 const {width, height} = Dimensions.get('window');

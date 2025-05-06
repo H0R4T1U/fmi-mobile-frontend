@@ -1,9 +1,13 @@
 import {Dimensions, ScrollView, Text, View,} from "react-native";
 import {useState} from "react";
 const {height, width} = Dimensions.get('window');
-
 import {LayoutChangeEvent} from "react-native";
-import {tabelTaxePlatiteTextStyle, tabelTaxePlatiteViewStyle} from "../utils/styles";
+import {
+    tabelTaxePlatiteHeaderTextStyle,
+    tabelTaxePlatiteHeaderViewStyle,
+    tabelTaxePlatiteTextStyle,
+    tabelTaxePlatiteViewStyle
+} from "../../utils/styles";
 
 export default function TabelTaxePlatite({examene}) {
     const [rowHeights, setRowHeights] = useState({});
@@ -39,177 +43,64 @@ export default function TabelTaxePlatite({examene}) {
                                 borderRadius: 10,
                                 height:height*0.045,
                                 paddingRight:width*0.022
-                            }}
-                        >
-                            <View style={{
+                            }}>
+                            <View style={[tabelTaxePlatiteHeaderViewStyle(width, height), {
                                 width:width*0.145,
                                 marginLeft:width*0.022,
-                                backgroundColor: "#024073",
-                                borderRadius: 5,
-                                height:height*0.03,
-                                alignSelf:"center",
-                                alignItems:"center",
-                                justifyContent:"center"
-                            }}>
-                                <Text style={{
-                                    fontSize: height*0.014,
-                                    fontFamily: 'Montserrat',
-                                    color: '#FFF',
-                                    fontWeight: "500",
-                                    justifyContent:"center",
-                                    textAlignVertical:"center",
-                                    alignSelf:"center",
-                                    alignItems:"center"
-                                }}>
+                            }]}>
+                                <Text style={tabelTaxePlatiteHeaderTextStyle(width, height)}>
                                     NR. CRT
                                 </Text>
                             </View>
-
-
-                            <View style={{
+                            <View style={[tabelTaxePlatiteHeaderViewStyle(width, height), {
                                 width:width*0.165,
-                                marginLeft:width*0.015,
-                                backgroundColor: "#024073",
-                                borderRadius: 5,
-                                height:height*0.03,
-                                alignSelf:"center",
-                                alignItems:"center",
-                                justifyContent:"center"
-                            }}>
-                                <Text style={{
-                                    fontSize: height*0.014,
-                                    fontFamily: 'Montserrat',
-                                    color: '#FFF',
-                                    fontWeight: "500",
-                                    justifyContent:"center",
-                                    textAlignVertical:"center",
-                                    alignSelf:"center",
-                                }}>
+                            }]}>
+                                <Text style={tabelTaxePlatiteHeaderTextStyle(width, height)}>
                                     SERIA
                                 </Text>
                             </View>
 
-                            <View style={{
+                            <View style={[tabelTaxePlatiteHeaderViewStyle(width, height), {
                                 width:width*0.2,
-                                marginLeft:width*0.015,
-                                backgroundColor: "#024073",
-                                borderRadius: 5,
-                                height:height*0.03,
-                                alignSelf:"center",
-                                alignItems:"center",
-                                justifyContent:"center"
-                            }}>
-                                <Text style={{
-                                    fontSize: height*0.014,
-                                    fontFamily: 'Montserrat',
-                                    color: '#FFF',
-                                    fontWeight: "500",
-                                    justifyContent:"center",
-                                    textAlignVertical:"center",
-                                    alignSelf:"center",
-                                    alignItems:"center",
-                                }}>
+                            }]}>
+                                <Text style={tabelTaxePlatiteHeaderTextStyle(width, height)}>
                                     NUMARUL
                                 </Text>
                             </View>
 
-                            <View style={{
+                            <View style={[tabelTaxePlatiteHeaderViewStyle(width, height), {
                                 width:width*0.2,
-                                marginLeft:width*0.015,
-                                backgroundColor: "#024073",
-                                borderRadius: 5,
-                                height:height*0.03,
-                                alignSelf:"center",
-                                alignItems:"center",
-                                justifyContent:"center"
-                            }}>
-                                <Text style={{
-                                    fontSize: height * 0.014,
-                                    fontFamily: 'Montserrat',
-                                    color: '#FFF',
-                                    fontWeight: "500",
-                                    justifyContent:"center",
-                                    textAlignVertical:"center",
-                                    alignSelf:"center",
-                                }}>
+                            }]}>
+                                <Text style={tabelTaxePlatiteHeaderTextStyle(width, height)}>
                                     DATA
                                 </Text>
                             </View>
 
-                            <View style={{
+                            <View style={[tabelTaxePlatiteHeaderViewStyle(width, height), {
                                 width:width*0.19,
-                                marginLeft:width*0.015,
-                                backgroundColor: "#024073",
-                                borderRadius: 5,
-                                height:height*0.03,
-                                alignSelf:"center",
-                                alignItems:"center",
-                                justifyContent:"center"
-                            }}>
-                                <Text style={{
-                                    fontSize: height*0.014,
-                                    fontFamily: 'Montserrat',
-                                    color: '#FFF',
-                                    fontWeight: "500",
-                                    justifyContent:"center",
-                                    textAlignVertical:"center",
-                                    alignSelf:"center",
-                                }}>
+                            }]}>
+                                <Text style={tabelTaxePlatiteHeaderTextStyle(width, height)}>
                                     VALOARE
                                 </Text>
                             </View>
 
-                            <View style={{
+                            <View style={[tabelTaxePlatiteHeaderViewStyle(width, height), {
                                 width:width*0.26,
-                                marginLeft:width*0.015,
-                                backgroundColor: "#024073",
-                                borderRadius: 5,
-                                height:height*0.03,
-                                alignSelf:"center",
-                                alignItems:"center",
-                                justifyContent:"center"
-                            }}>
-                                <Text style={{
-                                    fontSize: height*0.014,
-                                    fontFamily: 'Montserrat',
-                                    color: '#FFF',
-                                    fontWeight: "500",
-                                    justifyContent:"center",
-                                    textAlignVertical:"center",
-                                    alignSelf:"center",
-                                }}>
+                            }]}>
+                                <Text style={tabelTaxePlatiteHeaderTextStyle(width, height)}>
                                     EXPLICATIE
                                 </Text>
                             </View>
 
-                            <View style={{
+                            <View style={[tabelTaxePlatiteHeaderViewStyle(width, height), {
                                 width:width*0.16,
-                                marginLeft:width*0.015,
-                                backgroundColor: "#024073",
-                                borderRadius: 5,
-                                height:height*0.03,
-                                alignSelf:"center",
-                                alignItems:"center",
-                                justifyContent:"center"
-                            }}>
-                                <Text style={{
-                                    fontSize: height*0.014,
-                                    fontFamily: 'Montserrat',
-                                    color: '#FFF',
-                                    fontWeight: "500",
-                                    justifyContent:"center",
-                                    textAlignVertical:"center",
-                                    alignSelf:"center",
-                                }}>
+                            }]}>
+                                <Text style={tabelTaxePlatiteHeaderTextStyle(width, height)}>
                                     MESAJ
                                 </Text>
                             </View>
-
-
                         </View>
-
                         <ScrollView
-
                             contentContainerStyle={{
                                 paddingBottom:height*0.02,
                                 alignItems:"flex-start",

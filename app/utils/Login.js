@@ -9,10 +9,7 @@ const { CLIENT_ID, TENANT_ID } = Constants.expoConfig.extra;
 const azureConfig = {
     clientId: CLIENT_ID,
     tenantId: TENANT_ID,
-    redirectUri: makeRedirectUri({
-        scheme: 'fmihub',
-        path: 'Profil'
-    }),
+    redirectUri: 'exp://127.0.0.1:25242/--/Profil',
     scopes: ["openid", "profile", "email", "User.Read"],
 };
 
@@ -39,6 +36,10 @@ export function useLogin() {
         },
         discovery
     );
+
+    useEffect(() => {
+        console.log("Redirect URI:", azureConfig.redirectUri);
+    }, [azureConfig]);
 
     useEffect(() => {
         const checkExistingLogin = async () => {

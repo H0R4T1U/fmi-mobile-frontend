@@ -1,10 +1,10 @@
 import {View} from "react-native";
-import FloatingHeader from "../components/FloatingHeader";
-import LegendaSaliContainer from "../components/LegendaSaliContainer";
-import {RoomsDrept} from "../utils/Rooms";
-import CantinaContainer from "../components/CantinaContainer";
-import image from "../../assets/images/cantina2.jpg";
-import {Days} from "../utils/Days";
+import FloatingHeader from "../../components/common/FloatingHeader";
+import LegendaSaliContainer from "../../components/buildings/LegendaSaliContainer";
+import {RoomsDrept} from "../../utils/Rooms";
+import CantinaContainer from "../../components/buildings/CantinaContainer";
+import image from "../../../assets/images/cantina2.jpg";
+import {Days} from "../../utils/Days";
 
 export default function DreptScreen() {
     const currentDate = new Date();

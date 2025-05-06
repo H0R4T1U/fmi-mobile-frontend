@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { Dimensions, ScrollView, View, ActivityIndicator } from "react-native";
-import FloatingHeader from "../components/FloatingHeader";
-import OrarContainer from "../components/OrarContainer";
+import FloatingHeader from "../components/common/FloatingHeader";
+import OrarContainer from "../components/home/OrarContainer";
 import { CacheManager } from "../utils/CacheManager";
 import Constants from "expo-constants";
 
@@ -88,12 +88,14 @@ export default function HomeScreen() {
         getTimeTable();
     }, [group]);
 
+
+
     return (
         <View style={{ backgroundColor: '#fff', alignItems: "center" }}>
             <FloatingHeader text="ORAR" />
 
             {loading ? (
-                <ActivityIndicator size="large"style={{ marginTop: height * 0.2 }} />
+                <ActivityIndicator size="small" style={{ flex: 1 }} />
             ) : (
                 <ScrollView
                     contentContainerStyle={{

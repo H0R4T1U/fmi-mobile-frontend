@@ -4,7 +4,7 @@ import {useFonts} from "expo-font";
 const {height, width} = Dimensions.get('window');
 
 export default function FMIHubHeaderTitle() {
-    useFonts({'Peddana': require('../../assets/fonts/Peddana-Regular.ttf')});
+    useFonts({'Peddana': require('../../../assets/fonts/Peddana-Regular.ttf')});
     return (
     <View style={{
         flexDirection: 'row',

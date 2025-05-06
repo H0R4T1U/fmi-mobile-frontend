@@ -11,8 +11,7 @@ export default function AcademicContainer({name, image,route}) {
             paddingTop: height*0.014,
         }}>
             <Pressable onPress={() => {
-                const newRoute = '/' + route;
-                router.push(newRoute);
+                router.push(route);
             }}>
                 <ImageBackground source={image} style={{
                     height: height*0.128,

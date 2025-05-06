@@ -3,7 +3,7 @@ import {useFonts} from "expo-font";
 
 export default function Logo() {
     const {width, height} = Dimensions.get('window');
-    useFonts({'Peddana': require('../../assets/fonts/Peddana-Regular.ttf')});
+    useFonts({'Peddana': require('../../../assets/fonts/Peddana-Regular.ttf')});
     return (
         <View style={{
             justifyContent: 'flex-end',
@@ -21,7 +21,7 @@ export default function Logo() {
                 display: 'flex',
                 flexDirection: 'row'
             }}>
-                <Image source={require('../../assets/images/cs-logo.png')} style={{
+                <Image source={require('../../../assets/images/cs-logo.png')} style={{
                     height: height * 0.12,
                     width: width * 0.22,
                     resizeMode: 'contain'

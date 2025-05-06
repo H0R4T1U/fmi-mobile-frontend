@@ -1,7 +1,7 @@
 import {View} from "react-native";
-import FloatingHeader from "../components/FloatingHeader";
-import LegendaSaliContainer from "../components/LegendaSaliContainer";
-import {RoomsCentral} from "../utils/Rooms";
+import FloatingHeader from "../../components/common/FloatingHeader";
+import LegendaSaliContainer from "../../components/buildings/LegendaSaliContainer";
+import {RoomsCentral} from "../../utils/Rooms";
 
 export default function CentralScreen() {
     return (

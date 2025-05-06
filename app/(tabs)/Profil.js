@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { Text, View, Dimensions, ActivityIndicator, TouchableOpacity, Alert } from "react-native";
-import FloatingHeader from "../components/FloatingHeader";
-import ProfilePageSmallContainer from "../components/ProfilePageSmallContainer";
-import ProfilePageLargeContainer from "../components/ProfilePageLargeContainer";
+import FloatingHeader from "../components/common/FloatingHeader";
+import ProfilePageSmallContainer from "../components/profile/ProfilePageSmallContainer";
+import ProfilePageLargeContainer from "../components/profile/ProfilePageLargeContainer";
 import { useRouter, useFocusEffect } from "expo-router";
 import { CacheManager } from "../utils/CacheManager";
 import Constants from "expo-constants";
@@ -89,6 +89,25 @@ export default function Profil() {
             setLoading(false);
         }
     }, [token]);
+
+    // if (loading)
+    //     return (
+    //         <>
+    //             <FloatingHeader text="PROFIL"/>
+    //             <ActivityIndicator size="small" style={{
+    //                 flex: 1
+    //             }}/>
+    //         </>
+    //     );
+    if (error)
+        return (
+            <>
+                <FloatingHeader text="EXAMENE"/>
+                <View style={{flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+                    <Text style={{color: '#024073', fontFamily: 'Montserrat', fontSize: height * 0.015, textAlign: 'center', textAlignVertical: 'center'}}>{error}. Please try again later.</Text>
+                </View>
+            </>
+        );
 
     useFocusEffect(
         useCallback(() => {

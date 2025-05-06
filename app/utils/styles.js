@@ -29,12 +29,32 @@ export const tabelExameneDataViewStyle = (width, height) => ({
     marginLeft:width*0.012
 });
 
+export const tabelTaxePlatiteHeaderTextStyle = (width, height) => ({
+    fontSize: height*0.014,
+    fontFamily: 'Montserrat',
+    color: '#FFF',
+    fontWeight: "500",
+    justifyContent:"center",
+    textAlignVertical:"center",
+    textAlign: 'center'
+});
+
+export const tabelTaxePlatiteHeaderViewStyle = (width, height) => ({
+    backgroundColor: "#024073",
+    borderRadius: 5,
+    height:height*0.03,
+    alignSelf:"center",
+    alignItems:"center",
+    justifyContent:"center",
+    marginLeft:width*0.015
+});
+
 export const tabelTaxePlatiteTextStyle = (width, height) => ({
     fontSize: height*0.014,
     fontFamily: 'Montserrat',
     color: '#024073',
     fontWeight: "500",
-    textAlign: "center",
+    textAlign: "center"
 });
 
 export const tabelTaxePlatiteViewStyle = (width, height) => ({
@@ -59,7 +79,8 @@ export const tabelTaxeNeplatiteViewStyle = (width, height) => ({
     borderRadius:5,
     justifyContent: "center",
     alignItems: "center",
-    paddingVertical:height*0.005
+    paddingVertical:height*0.005,
+    marginLeft:width*0.015
 });
 
 export const tabelTaxeNeplatiteHeaderTextStyle = (width, height) => ({

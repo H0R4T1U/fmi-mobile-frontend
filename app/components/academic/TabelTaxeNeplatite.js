@@ -1,13 +1,13 @@
 import {Alert, Dimensions, ImageBackground, Pressable, ScrollView, Text, View,} from "react-native";
 import {useState} from "react";
-import image from "../../assets/images/pay.png";
+import image from "../../../assets/images/pay.png";
 import PaymentModal from "./PaymentModal";
 import {LayoutChangeEvent} from "react-native";
 import {
     tabelTaxeNeplatiteHeaderTextStyle,
     tabelTaxeNeplatiteTextStyle,
-    tabelTaxeNeplatiteViewStyle
-} from "../utils/styles";
+    tabelTaxeNeplatiteViewStyle, tabelTaxePlatiteHeaderViewStyle
+} from "../../utils/styles";
 const {height, width} = Dimensions.get('window');
 
 export default function TabelTaxeNeplatite({examene}) {
@@ -50,124 +50,70 @@ export default function TabelTaxeNeplatite({examene}) {
                                 borderRadius: 10,
                                 height:height*0.045,
                                 paddingRight:width*0.022
-                            }}
-                        >
-                            <View style={{
+                            }}>
+                            <View style={[tabelTaxePlatiteHeaderViewStyle(width, height), {
                                 width:width*0.145,
                                 marginLeft:width*0.022,
-                                backgroundColor: "#024073",
-                                borderRadius: 5,
-                                height:height*0.03,
-                                alignSelf:"center",
-                                alignItems:"center",
-                                justifyContent:"center"
-                            }}>
+                            }]}>
                                 <Text style={tabelTaxeNeplatiteHeaderTextStyle(width, height)}>
                                     NR. CRT
                                 </Text>
                             </View>
 
-                            <View style={{
-
-                                width:width*0.2,
-                                marginLeft:width*0.015,
-                                backgroundColor: "#024073",
-                                borderRadius: 5,
-                                height:height*0.03,
-                                alignSelf:"center",
-                                alignItems:"center",
-                                justifyContent:"center"
-                            }}>
+                            <View style={[tabelTaxePlatiteHeaderViewStyle(width, height), {
+                                width:width*0.2
+                            }]}>
                                 <Text style={tabelTaxeNeplatiteHeaderTextStyle(width, height)}>
                                     TIP TAXA
                                 </Text>
                             </View>
 
-                            <View style={{
-                                width:width*0.22,
-                                marginLeft:width*0.015,
-                                backgroundColor: "#024073",
-                                borderRadius: 5,
-                                height:height*0.03,
-                                alignSelf:"center",
-                                alignItems:"center",
-                                justifyContent:"center"
-                            }}>
+                            <View style={[tabelTaxePlatiteHeaderViewStyle(width, height), {
+                                width:width*0.22
+                            }]}>
                                 <Text style={tabelTaxeNeplatiteHeaderTextStyle(width, height)}>
                                     DESCRIERE
                                 </Text>
                             </View>
 
-                            <View style={{
-                                width:width*0.26,
-                                marginLeft:width*0.015,
-                                backgroundColor: "#024073",
-                                borderRadius: 5,
-                                height:height*0.03,
-                                alignSelf:"center",
-                                alignItems:"center",
-                                justifyContent:"center"
-                            }}>
+                            <View style={[tabelTaxePlatiteHeaderViewStyle(width, height), {
+                                width:width*0.26
+                            }]}>
                                 <Text style={tabelTaxeNeplatiteHeaderTextStyle(width, height)}>
                                     AN UNIVERSITAR
                                 </Text>
                             </View>
 
-                            <View style={{
-                                width:width*0.2,
-                                marginLeft:width*0.015,
-                                backgroundColor: "#024073",
-                                borderRadius: 5,
-                                height:height*0.03,
-                                alignSelf:"center",
-                                alignItems:"center",
-                                justifyContent:"center"
-                            }}>
+                            <View style={[tabelTaxePlatiteHeaderViewStyle(width, height), {
+                                width:width*0.2
+                            }]}>
                                 <Text style={tabelTaxeNeplatiteHeaderTextStyle(width, height)}>
                                     VALOARE
                                 </Text>
                             </View>
 
-                            <View style={{
-                                width:width*0.26,
-                                marginLeft:width*0.015,
-                                backgroundColor: "#024073",
-                                borderRadius: 5,
-                                height:height*0.03,
-                                alignSelf:"center",
-                                alignItems:"center",
-                                justifyContent:"center"
-                            }}>
+                            <View style={[tabelTaxePlatiteHeaderViewStyle(width, height), {
+                                width:width*0.26
+                            }]}>
                                 <Text style={tabelTaxeNeplatiteHeaderTextStyle(width, height)}>
                                     DATA SCADENTA
                                 </Text>
                             </View>
 
-                            <View style={{
+                            <View style={[tabelTaxePlatiteHeaderViewStyle(width, height), {
                                 width:width*0.15,
-                                marginLeft:width*0.015,
-                                backgroundColor: "#024073",
-                                borderRadius: 5,
-                                height:height*0.03,
-                                alignSelf:"center",
-                                alignItems:"center",
-                                justifyContent:"center"
-                            }}>
+                            }]}>
                                 <Text style={tabelTaxeNeplatiteHeaderTextStyle(width, height)}>
                                     PLATA
                                 </Text>
                             </View>
-
-
                         </View>
-
                         <ScrollView
                             contentContainerStyle={{
                                 paddingBottom:height*0.02,
                                 alignItems:"flex-start",
                                 justifyContent:"flex-start"
                             }}>
-
                             {examene.map((examen,index) => (
                                 <Pressable
                                     key={index}
@@ -192,7 +138,6 @@ export default function TabelTaxeNeplatite({examene}) {
                                     <View style={[tabelTaxeNeplatiteViewStyle(width, height), {
                                         width: width*0.2,
                                         minHeight:  rowHeights[index] ||height*0.035,
-                                        marginLeft:width*0.015,
                                     }]}>
                                         <Text style={tabelTaxeNeplatiteTextStyle(width, height)}>
                                             {examen.type}
@@ -201,7 +146,6 @@ export default function TabelTaxeNeplatite({examene}) {
                                     <View style={[tabelTaxeNeplatiteViewStyle(width, height), {
                                         width: width*0.22,
                                         minHeight:  rowHeights[index] ||height*0.035,
-                                        marginLeft:width*0.015,
                                     }]}>
                                         <Text style={tabelTaxeNeplatiteTextStyle(width, height)}>
                                             {examen.description}
@@ -210,7 +154,6 @@ export default function TabelTaxeNeplatite({examene}) {
                                     <View style={[tabelTaxeNeplatiteViewStyle(width, height), {
                                         width: width*0.26,
                                         minHeight:  rowHeights[index] ||height*0.035,
-                                        marginLeft:width*0.015,
                                     }]}>
                                         <Text style={tabelTaxeNeplatiteTextStyle(width, height)}>
                                             {examen.year}
@@ -219,7 +162,6 @@ export default function TabelTaxeNeplatite({examene}) {
                                     <View style={[tabelTaxeNeplatiteViewStyle(width, height), {
                                         width:width*0.2,
                                         minHeight:  rowHeights[index] ||height*0.035,
-                                        marginLeft:width*0.015,
                                     }]}>
                                         <Text style={tabelTaxeNeplatiteTextStyle(width, height)}>
                                             {examen.price}
@@ -228,7 +170,6 @@ export default function TabelTaxeNeplatite({examene}) {
                                     <View style={[tabelTaxeNeplatiteViewStyle(width, height), {
                                         width: width*0.26,
                                         minHeight:  rowHeights[index] ||height*0.035,
-                                        marginLeft:width*0.015,
                                     }]}>
                                         <Text style={tabelTaxeNeplatiteTextStyle(width, height)}>
                                             {examen.paymentTerm}

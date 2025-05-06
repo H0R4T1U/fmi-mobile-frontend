@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import {useEffect, useState} from "react";
 import { useRouter } from "expo-router";
 import { CacheManager } from "./utils/CacheManager";
 import { ActivityIndicator, View } from "react-native";
@@ -10,27 +10,23 @@ const { PUBLIC_KEY } = Constants.expoConfig.extra;
 
 export default function Index() {
     const router = useRouter();
+    const [user, setUser] = useState(null);
 
     useEffect(() => {
         const checkUser = async () => {
             const user = await CacheManager.get("loggedUser");
-            setTimeout(() => {
-                if (user) {
-                    router.replace("/LogIntoNewScreen");
-                } else {
-                    router.replace("/LoginScreen");
-                }
-            }, 500);
+            setUser(user);
         };
         checkUser();
     }, []);
 
+    useEffect(() => {
+        if (!user) router.replace("/LoginScreen");
+    }, [user]);
+
     return (
         <StripeProvider publishableKey={PUBLIC_KEY}>
         <StatusBar style="light" hidden={false}/>
-        <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-            <ActivityIndicator />
-        </View>
         </StripeProvider>
     );
 }

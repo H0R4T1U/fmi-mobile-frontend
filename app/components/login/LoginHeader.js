@@ -1,19 +1,9 @@
-import {Platform, View, Text, Dimensions, TouchableOpacity} from "react-native";
+import {Platform, View, Text, Dimensions} from "react-native";
 import {useFonts} from "expo-font";
-import {useEffect, useState} from "react";
-import {CacheManager} from "../utils/CacheManager";
 const { height} = Dimensions.get('window');
 
 export default function LoginHeader() {
-    const [user, setUser] = useState(null);
-    useEffect(() => {
-        const fetchUser = async () => {
-            const cachedUser = await CacheManager.get("loggedUser");
-            setUser(cachedUser);
-        };
-        fetchUser();
-    }, []);
-    useFonts({'Peddana': require('../../assets/fonts/Peddana-Regular.ttf')});
+    useFonts({'Peddana': require('../../../assets/fonts/Peddana-Regular.ttf')});
 
     return (
         <View style={{

@@ -8,7 +8,7 @@ export default function BuildingContainer({name, image, address, route}) {
     return (
         <View style={{alignItems: "center", paddingTop: height*0.015}}>
             <Pressable onPress={() => {
-                router.push(route);
+                router.navigate(route);
             }}>
                 <View style={{
                     height: height*0.134,
