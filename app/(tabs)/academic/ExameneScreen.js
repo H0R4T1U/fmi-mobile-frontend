@@ -68,6 +68,10 @@ export default function ExameneScreen() {
         if (token) fetchExamene();
     }, [token]);
 
+    const filteredExams = selectedSemester
+        ? examene.filter(examen => examen.semester === parseInt(selectedSemester))
+        : examene;
+
     if (loading)
         return (
             <>
@@ -86,11 +90,6 @@ export default function ExameneScreen() {
                 </View>
             </>
         );
-
-
-    const filteredExams = selectedSemester
-        ? examene.filter(examen => examen.semester === parseInt(selectedSemester))
-        : examene;
 
     return (
         <View>

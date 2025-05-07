@@ -69,7 +69,7 @@ export default function News() {
     if (error)
         return (
             <>
-                <FloatingHeader text="EXAMENE"/>
+                <FloatingHeader text="NEWS"/>
                 <View style={{flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
                     <Text style={{color: '#024073', fontFamily: 'Montserrat', fontSize: height * 0.015, textAlign: 'center', textAlignVertical: 'center'}}>{error}. Please try again later.</Text>
                 </View>

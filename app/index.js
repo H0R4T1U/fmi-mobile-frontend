@@ -26,7 +26,7 @@ export default function Index() {
 
     return (
         <StripeProvider publishableKey={PUBLIC_KEY}>
-        <StatusBar style="light" hidden={false}/>
+            <StatusBar style="light" hidden={false}/>
         </StripeProvider>
     );
 }

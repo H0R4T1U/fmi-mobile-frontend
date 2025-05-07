@@ -71,28 +71,29 @@ export default function ConsultareNoteScreen() {
         if (token) fetchGrades();
     }, [token]);
 
+
+    const filteredGrades = selectedSemester
+        ? userGrades.filter(grade => grade.semester === parseInt(selectedSemester))
+        : userGrades;
+
     if (loading)
-        return (
-            <>
-                <FloatingHeader text="NOTE"/>
-                <ActivityIndicator size="small" style={{
-                    flex: 1
-                }}/>
-            </>
-        );
+            return (
+                <>
+                    <FloatingHeader text="NOTE"/>
+                    <ActivityIndicator size="small" style={{
+                        flex: 1
+                    }}/>
+                </>
+            );
     if (error)
         return (
             <>
-                <FloatingHeader text="EXAMENE"/>
+                <FloatingHeader text="NOTE"/>
                 <View style={{flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
                     <Text style={{color: '#024073', fontFamily: 'Montserrat', fontSize: height * 0.015, textAlign: 'center', textAlignVertical: 'center'}}>{error}. Please try again later.</Text>
                 </View>
             </>
         );
-
-    const filteredGrades = selectedSemester
-        ? userGrades.filter(grade => grade.semester === parseInt(selectedSemester))
-        : userGrades;
 
     return (
         <View>
