@@ -1,43 +1,31 @@
 import FloatingHeader from "../../components/common/FloatingHeader";
-import {ActivityIndicator, Dimensions, Text, View} from "react-native";
 import SemestreDropDown from "../../components/academic/SemestreDropDown";
 import TabelExamene from "../../components/academic/TabelExamene";
 import React, {useEffect, useState} from "react";
 import {CacheManager} from "../../utils/CacheManager";
 import Constants from "expo-constants";
+import LoadingView from "../../components/common/LoadingView";
+import ErrorView from "../../components/common/ErrorView";
+import useToken from "../../utils/useToken";
 const { BACKEND } = Constants.expoConfig.extra;
-const {height, width} = Dimensions.get('window');
 
 export default function ExameneScreen() {
-    const [loading, setLoading] = useState(true);
-    const [token, setToken] = useState(null);
     const [examene, setExamene] = useState([]);
-    const [error, setError] = useState(null);
+    const [exameneLoading, setExameneLoading] = useState(false);
+    const [exameneError, setExameneError] = useState(null);
     const [selectedSemester, setSelectedSemester] = useState(null);
+    const {token, tokenError, tokenLoading} = useToken();
 
-
-    useEffect(() => {
-        const getToken = async () => {
-            try {
-                const storedToken = await CacheManager.get("token");
-                setToken(storedToken);
-            } catch (error) {
-                console.error("Token retrieval failed:", error);
-                setError("Authentication error");
-            }
-        };
-        getToken();
-        console.log("Retrieved token:", token);
-    }, []);
+    const loading = tokenLoading || exameneLoading;
+    const error = tokenError || exameneError;
 
     useEffect(() => {
         const fetchExamene = async () => {
             try {
                 if (!token) return;
-
+                setExameneLoading(true);
                 const cachedUser = await CacheManager.get("loggedUser");
                 const userMail=cachedUser.mail;
-                setLoading(true);
                 const response = await fetch(`${BACKEND}/api/exams/${userMail}`, {
                     headers: {
                         'Authorization': `Bearer ${token}`,
@@ -55,17 +43,13 @@ export default function ExameneScreen() {
                 }
                 else
                     setExamene([]);
-
-
             } catch (error) {
-                console.error("Examene fetch failed:", error);
-                setError(error.message);
+                setExameneError(error.message);
             } finally {
-                setLoading(false);
+                setExameneLoading(false);
             }
         };
-
-        if (token) fetchExamene();
+        fetchExamene();
     }, [token]);
 
     const filteredExams = selectedSemester
@@ -73,29 +57,16 @@ export default function ExameneScreen() {
         : examene;
 
     if (loading)
-        return (
-            <>
-                <FloatingHeader text="EXAMENE"/>
-                <ActivityIndicator size="small" style={{
-                    flex: 1
-                }}/>
-            </>
-        );
+        return <LoadingView headerText="EXAMENE"/>;
+
     if (error)
-        return (
-            <>
-                <FloatingHeader text="EXAMENE"/>
-                <View style={{flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-                    <Text style={{color: '#024073', fontFamily: 'Montserrat', fontSize: height * 0.015, textAlign: 'center', textAlignVertical: 'center'}}>{error}. Please try again later.</Text>
-                </View>
-            </>
-        );
+        return <ErrorView error={error} headerText="EXAMENE"/>
 
     return (
-        <View>
+        <>
             <FloatingHeader text="EXAMENE"/>
-            <SemestreDropDown  onSelectSemester={setSelectedSemester}/>
+            <SemestreDropDown onSelectSemester={setSelectedSemester}/>
             <TabelExamene examene={filteredExams}/>
-        </View>
+        </>
     )
 }

@@ -6,40 +6,33 @@ import TabelTaxePlatite from "./TabelTaxePlatite";
 import { CacheManager } from "../../utils/CacheManager";
 import Constants from "expo-constants";
 import FloatingHeader from "../common/FloatingHeader";
+import ErrorView from "../common/ErrorView";
+import LoadingView from "../common/LoadingView";
+import useToken from "../../utils/useToken";
 const { BACKEND } = Constants.expoConfig.extra;
 const {height, width} = Dimensions.get('window');
 
 
 export default function TaxeDropDown()
 {
-    const [loading, setLoading] = useState(true);
-    const [token, setToken] = useState(null);
     const [taxePlatite, setTaxePlatite] = useState([]);
+    const [taxePlatiteLoading, setTaxePlatiteLoading] = useState(false);
+    const [taxePlatiteError, setTaxePlatiteError] = useState(null);
     const [taxeNeplatite, setTaxeNeplatite] = useState([]);
-    const [error, setError] = useState(null);
+    const [taxeNeplatiteLoading, setTaxeNeplatiteLoading] = useState(false);
+    const [taxeNeplatiteError, setTaxeNeplatiteError] = useState(null);
+    const {token, tokenError, tokenLoading} = useToken();
 
-    useEffect(() => {
-        const getToken = async () => {
-            try {
-                const storedToken = await CacheManager.get("token");
-                setToken(storedToken);
-            } catch (error) {
-                console.error("Token retrieval failed:", error);
-                setError("Authentication error");
-            }
-        };
-        getToken();
-        console.log("Retrieved token:", token);
-    }, []);
+    const loading = taxePlatiteLoading || taxeNeplatiteLoading || tokenLoading;
+    const error = taxePlatiteError || taxeNeplatiteError || tokenError;
 
     useEffect(() => {
         const fetchTaxePlatite = async () => {
             try {
                 if (!token) return;
-
+                setTaxePlatiteLoading(true);
                 const cachedUser = await CacheManager.get("loggedUser");
                 const userMail=cachedUser.mail;
-                setLoading(true);
                 const response = await fetch(`${BACKEND}/api/paid-tuitions/${userMail}`, {
                     headers: {
                         'Authorization': `Bearer ${token}`,
@@ -57,27 +50,22 @@ export default function TaxeDropDown()
                 }
                 else
                     setTaxePlatite([]);
-
-
             } catch (error) {
-                console.error("Taxe fetch failed:", error);
-                setError(error.message);
+                setTaxePlatiteError(error.message);
             } finally {
-                setLoading(false);
+                setTaxePlatiteLoading(false);
             }
         };
-
-        if (token) fetchTaxePlatite();
+        fetchTaxePlatite();
     }, [token]);
 
     useEffect(() => {
         const fetchTaxeNeplatite = async () => {
             try {
                 if (!token) return;
-
+                setTaxeNeplatiteLoading(true);
                 const cachedUser = await CacheManager.get("loggedUser");
                 const userMail=cachedUser.mail;
-                setLoading(true);
                 const response = await fetch(`${BACKEND}/api/tuitions/${userMail}`, {
                     headers: {
                         'Authorization': `Bearer ${token}`,
@@ -99,9 +87,9 @@ export default function TaxeDropDown()
 
             } catch (error) {
                 console.error("TaxeNeplatite fetch failed:", error);
-                setError(error.message);
+                setTaxeNeplatiteError(error.message);
             } finally {
-                setLoading(false);
+                setTaxeNeplatiteLoading(false);
             }
         };
 
@@ -123,24 +111,14 @@ export default function TaxeDropDown()
     ]);
 
     if (loading)
-        return (
-            <>
-                <ActivityIndicator size="small" style={{
-                    flex: 1
-                }}/>
-            </>
-        );
+        return <LoadingView headerText="TAXE"/>
+
     if (error)
-        return (
-            <>
-                <View style={{flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-                    <Text style={{color: '#024073', fontFamily: 'Montserrat', fontSize: height * 0.015, textAlign: 'center', textAlignVertical: 'center'}}>{error}. Please try again later.</Text>
-                </View>
-            </>
-        );
+        return <ErrorView error={error} headerText="TAXE"/>
 
     return (
-
+        <>
+        <FloatingHeader text="TAXE"/>
         <View style={{paddingHorizontal:width*0.025,paddingTop:height*0.01,borderColor:"#002E54"}}>
             <DropDownPicker
                 open={open}
@@ -174,6 +152,7 @@ export default function TaxeDropDown()
             />
             {value === "TabelTaxeN"&&<TabelTaxeN/>}
             {value === "TabelTaxeP"&&<TabelTaxeP/>}
-        </View>)
+        </View>
+        </>)
 
 }

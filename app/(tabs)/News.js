@@ -1,37 +1,30 @@
 import FloatingHeader from "../components/common/FloatingHeader";
 import React, { useState, useEffect } from "react";
 import NewsContainer from "../components/news/NewsContainer";
-import {Text, FlatList, Dimensions, ActivityIndicator, View} from "react-native";
-import { CacheManager } from "../utils/CacheManager";
+import {FlatList, Dimensions} from "react-native";
 import Constants from "expo-constants";
+import useToken from "../utils/useToken";
+import LoadingView from "../components/common/LoadingView";
+import ErrorView from "../components/common/ErrorView";
 const { BACKEND } = Constants.expoConfig.extra;
 const {height} = Dimensions.get('window');
 
 export default function News() {
-    const [loading, setLoading] = useState(true);
-    const [token, setToken] = useState(null);
     const [news, setNews] = useState([]);
-    const [error, setError] = useState(null);
+    const [newsLoading, setNewsLoading] = useState(true);
+    const [newsError, setNewsError] = useState(null);
+    const {token, tokenError, tokenLoading} = useToken();
 
-    useEffect(() => {
-        const getToken = async () => {
-            try {
-                const storedToken = await CacheManager.get("token");
-                setToken(storedToken);
-            } catch (error) {
-                console.error("Token retrieval failed:", error);
-                setError("Authentication error");
-            }
-        };
-        getToken();
-    }, []);
+    const loading = tokenLoading || newsLoading;
+    const error = tokenError || newsError;
 
     useEffect(() => {
         const fetchNews = async () => {
             try {
-                if (!token) return;
+                console.log(token);
+                if (tokenLoading || !token) return;
 
-                setLoading(true);
+                setNewsLoading(true);
                 const response = await fetch(`${BACKEND}/api/news/ro`, {
                     headers: {
                         'Authorization': `Bearer ${token}`,
@@ -48,33 +41,19 @@ export default function News() {
 
             } catch (error) {
                 console.error("News fetch failed:", error);
-                setError(error.message);
+                setNewsError(error.message);
             } finally {
-                setLoading(false);
+                setNewsLoading(false);
             }
         };
-
-        if (token) fetchNews();
-    }, [token]);
+        fetchNews();
+    }, [token, tokenLoading]);
 
     if (loading)
-        return (
-            <>
-                <FloatingHeader text="NEWS"/>
-                <ActivityIndicator size="small" style={{
-                    flex: 1
-                }}/>
-            </>
-        );
+        return <LoadingView headerText="NEWS"/>;
+
     if (error)
-        return (
-            <>
-                <FloatingHeader text="NEWS"/>
-                <View style={{flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-                    <Text style={{color: '#024073', fontFamily: 'Montserrat', fontSize: height * 0.015, textAlign: 'center', textAlignVertical: 'center'}}>{error}. Please try again later.</Text>
-                </View>
-            </>
-        );
+        return <ErrorView error={error} headerText="NEWS"/>
 
     return (
         <>

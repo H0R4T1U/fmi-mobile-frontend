@@ -7,68 +7,51 @@ import Constants from "expo-constants";
 import {useRouter} from "expo-router";
 import React, {useCallback, useEffect, useState} from "react";
 import {CacheManager} from "../../utils/CacheManager";
+import LoadingView from "../../components/common/LoadingView";
+import ErrorView from "../../components/common/ErrorView";
+import useToken from "../../utils/useToken";
 
 const { BACKEND } = Constants.expoConfig.extra;
 
 export default function ConsultareNoteScreen() {
-
-    const [token, setToken] = useState(null);
     const [userGrades, setUserGrades] = useState([]);
-    const [error, setError] = useState(null);
-    const [loading, setLoading] = useState(true);
+    const [gradesLoading, setGradesLoading] = useState(false);
+    const [gradesError, setGradesError] = useState(null);
     const [selectedSemester, setSelectedSemester] = useState(null);
+    const {token, tokenError, tokenLoading} = useToken();
 
-
-    useEffect(() => {
-        const getToken = async () => {
-            try {
-                const storedToken = await CacheManager.get("token");
-                setToken(storedToken);
-            } catch (error) {
-                console.error("Token retrieval failed:", error);
-                setError("Authentication error");
-            }
-        };
-        getToken();
-        console.log("Retrieved token:", token);
-    }, []);
+    const loading = tokenLoading || gradesLoading;
+    const error = tokenError || gradesError;
 
     useEffect(() => {
         const fetchGrades = async () => {
             try {
                 if (!token) return;
-
+                setGradesLoading(true);
                 const cachedUser = await CacheManager.get("loggedUser");
                 const userMail=cachedUser.mail;
-                setLoading(true);
                 const response = await fetch(`${BACKEND}/api/grades/${userMail}`, {
                     headers: {
                         'Authorization': `Bearer ${token}`,
                         'Content-Type': 'application/json'
                     }
                 });
-
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
-
                 const responseData = await response.json();
                 if (responseData._embedded && responseData._embedded.gradesDTOList) {
                     setUserGrades(responseData._embedded.gradesDTOList);
                 }
                 else
                     setUserGrades([]);
-
-
             } catch (error) {
-                console.error("Grades fetch failed:", error);
-                setError(error.message);
+                setGradesError(error.message);
             } finally {
-                setLoading(false);
+                setGradesLoading(false);
             }
         };
-
-        if (token) fetchGrades();
+        fetchGrades();
     }, [token]);
 
 
@@ -77,23 +60,10 @@ export default function ConsultareNoteScreen() {
         : userGrades;
 
     if (loading)
-            return (
-                <>
-                    <FloatingHeader text="NOTE"/>
-                    <ActivityIndicator size="small" style={{
-                        flex: 1
-                    }}/>
-                </>
-            );
+        return <LoadingView headerText="NOTE"/>;
+
     if (error)
-        return (
-            <>
-                <FloatingHeader text="NOTE"/>
-                <View style={{flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-                    <Text style={{color: '#024073', fontFamily: 'Montserrat', fontSize: height * 0.015, textAlign: 'center', textAlignVertical: 'center'}}>{error}. Please try again later.</Text>
-                </View>
-            </>
-        );
+        return <ErrorView error={error} headerText="NOTE"/>;
 
     return (
         <View>

@@ -6,7 +6,6 @@ import TaxeDropDown from "../../components/academic/TaxeDropDown";
 export default function ExameneScreen() {
     return (
         <View>
-            <FloatingHeader text="TAXE"/>
             <TaxeDropDown/>
             {/*<TabelTaxeNeplatite examene={Examene}/>*/}
             {/*<View style={{*/}

@@ -6,6 +6,8 @@ import ProfilePageLargeContainer from "../components/profile/ProfilePageLargeCon
 import { useRouter, useFocusEffect } from "expo-router";
 import { CacheManager } from "../utils/CacheManager";
 import Constants from "expo-constants";
+import LoadingView from "../components/common/LoadingView";
+import ErrorView from "../components/common/ErrorView";
 
 const { BACKEND } = Constants.expoConfig.extra;
 const { width, height } = Dimensions.get("window");
@@ -78,29 +80,10 @@ export default function Profil() {
     };
 
     if (loading)
-        return (
-            <>
-                <FloatingHeader text="PROFIL" />
-                <ActivityIndicator size="small" style={{ flex: 1 }} />
-            </>
-        );
+        return <LoadingView headerText="PROFIL"/>
 
     if (error)
-        return (
-            <>
-                <FloatingHeader text="PROFIL" />
-                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                    <Text style={{
-                        color: '#024073',
-                        fontFamily: 'Montserrat',
-                        fontSize: height * 0.015,
-                        textAlign: 'center'
-                    }}>
-                        {error}. Please try again later.
-                    </Text>
-                </View>
-            </>
-        );
+        return <ErrorView error={error} headerText="PROFIL"/>
 
     return (
         <View style={{ backgroundColor: "#fff", flex: 1 }}>
