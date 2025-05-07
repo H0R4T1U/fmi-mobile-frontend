@@ -38,15 +38,10 @@ export function useLogin() {
     );
 
     useEffect(() => {
-        console.log("Redirect URI:", azureConfig.redirectUri);
-    }, [azureConfig]);
-
-    useEffect(() => {
         const checkExistingLogin = async () => {
             try {
                 const cachedUser = await CacheManager.get("loggedUser");
                 if (cachedUser && cachedUser.displayName) {
-                    console.log("Found existing user in cache, redirecting to profile");
                     router.replace('/Profil');
                 }
             } catch (error) {

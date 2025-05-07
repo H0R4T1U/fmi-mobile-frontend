@@ -9,92 +9,30 @@ import FloatingHeader from "../common/FloatingHeader";
 import ErrorView from "../common/ErrorView";
 import LoadingView from "../common/LoadingView";
 import useToken from "../../utils/useToken";
+import useEmail from "../../utils/useEmail";
+import useFetch from "../../utils/useFetch";
 const { BACKEND } = Constants.expoConfig.extra;
 const {height, width} = Dimensions.get('window');
 
 
 export default function TaxeDropDown()
 {
-    const [taxePlatite, setTaxePlatite] = useState([]);
-    const [taxePlatiteLoading, setTaxePlatiteLoading] = useState(false);
-    const [taxePlatiteError, setTaxePlatiteError] = useState(null);
-    const [taxeNeplatite, setTaxeNeplatite] = useState([]);
-    const [taxeNeplatiteLoading, setTaxeNeplatiteLoading] = useState(false);
-    const [taxeNeplatiteError, setTaxeNeplatiteError] = useState(null);
     const {token, tokenError, tokenLoading} = useToken();
+    const {mail, mailError, mailLoading} = useEmail();
+    let {data : taxePlatite, dataError: taxePlatiteError , dataLoading : taxePlatiteLoading} = useFetch(
+        {token,
+            address: `${BACKEND}/api/paid-tuitions/${mail}`
+        });
+    let {data : taxeNeplatite, dataError: taxeNeplatiteError, dataLoading: taxeNeplatiteLoading} = useFetch(
+        {token,
+            address: `${BACKEND}/api/tuitions/${mail}`
+        });
+    const loading = taxePlatiteLoading || taxeNeplatiteLoading || tokenLoading || mailLoading;
+    const error = taxePlatiteError || taxeNeplatiteError || tokenError || mailError;
 
-    const loading = taxePlatiteLoading || taxeNeplatiteLoading || tokenLoading;
-    const error = taxePlatiteError || taxeNeplatiteError || tokenError;
+    taxePlatite = taxePlatite?.paidTuitionDTOList || [];
+    taxeNeplatite = taxeNeplatite?.tuitionDTOList || [];
 
-    useEffect(() => {
-        const fetchTaxePlatite = async () => {
-            try {
-                if (!token) return;
-                setTaxePlatiteLoading(true);
-                const cachedUser = await CacheManager.get("loggedUser");
-                const userMail=cachedUser.mail;
-                const response = await fetch(`${BACKEND}/api/paid-tuitions/${userMail}`, {
-                    headers: {
-                        'Authorization': `Bearer ${token}`,
-                        'Content-Type': 'application/json'
-                    }
-                });
-
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-
-                const responseData = await response.json();
-                if (responseData._embedded && responseData._embedded.paidTuitionDTOList) {
-                    setTaxePlatite(responseData._embedded.paidTuitionDTOList);
-                }
-                else
-                    setTaxePlatite([]);
-            } catch (error) {
-                setTaxePlatiteError(error.message);
-            } finally {
-                setTaxePlatiteLoading(false);
-            }
-        };
-        fetchTaxePlatite();
-    }, [token]);
-
-    useEffect(() => {
-        const fetchTaxeNeplatite = async () => {
-            try {
-                if (!token) return;
-                setTaxeNeplatiteLoading(true);
-                const cachedUser = await CacheManager.get("loggedUser");
-                const userMail=cachedUser.mail;
-                const response = await fetch(`${BACKEND}/api/tuitions/${userMail}`, {
-                    headers: {
-                        'Authorization': `Bearer ${token}`,
-                        'Content-Type': 'application/json'
-                    }
-                });
-
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-
-                const responseData = await response.json();
-                if (responseData._embedded && responseData._embedded.tuitionDTOList) {
-                    setTaxeNeplatite(responseData._embedded.tuitionDTOList);
-                }
-                else
-                    setTaxeNeplatite([]);
-
-
-            } catch (error) {
-                console.error("TaxeNeplatite fetch failed:", error);
-                setTaxeNeplatiteError(error.message);
-            } finally {
-                setTaxeNeplatiteLoading(false);
-            }
-        };
-
-        if (token) fetchTaxeNeplatite();
-    }, [token]);
 
     const TabelTaxeN = () =>(
         <TabelTaxeNeplatite examene={taxeNeplatite}/>

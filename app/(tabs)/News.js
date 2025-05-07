@@ -1,53 +1,23 @@
 import FloatingHeader from "../components/common/FloatingHeader";
-import React, { useState, useEffect } from "react";
 import NewsContainer from "../components/news/NewsContainer";
 import {FlatList, Dimensions} from "react-native";
 import Constants from "expo-constants";
 import useToken from "../utils/useToken";
 import LoadingView from "../components/common/LoadingView";
 import ErrorView from "../components/common/ErrorView";
+import useFetch from "../utils/useFetch";
 const { BACKEND } = Constants.expoConfig.extra;
 const {height} = Dimensions.get('window');
 
 export default function News() {
-    const [news, setNews] = useState([]);
-    const [newsLoading, setNewsLoading] = useState(true);
-    const [newsError, setNewsError] = useState(null);
     const {token, tokenError, tokenLoading} = useToken();
+    const {data, dataError, dataLoading} = useFetch({
+        token,
+        address: `${BACKEND}/api/news/ro`
+    });
 
-    const loading = tokenLoading || newsLoading;
-    const error = tokenError || newsError;
-
-    useEffect(() => {
-        const fetchNews = async () => {
-            try {
-                console.log(token);
-                if (tokenLoading || !token) return;
-
-                setNewsLoading(true);
-                const response = await fetch(`${BACKEND}/api/news/ro`, {
-                    headers: {
-                        'Authorization': `Bearer ${token}`,
-                        'Content-Type': 'application/json'
-                    }
-                });
-
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-
-                const responseData = await response.json();
-                setNews(responseData._embedded.newsList);
-
-            } catch (error) {
-                console.error("News fetch failed:", error);
-                setNewsError(error.message);
-            } finally {
-                setNewsLoading(false);
-            }
-        };
-        fetchNews();
-    }, [token, tokenLoading]);
+    const loading = tokenLoading || dataLoading;
+    const error = tokenError || dataError;
 
     if (loading)
         return <LoadingView headerText="NEWS"/>;
@@ -59,7 +29,7 @@ export default function News() {
         <>
             <FloatingHeader text="NEWS" />
             <FlatList
-                data={news}
+                data={data?.newsList || []}
                 renderItem={({ item }) => (
                     <NewsContainer date={item.date} title={item.title} link={item.location}/>
                 )}

@@ -8,74 +8,54 @@ import { CacheManager } from "../utils/CacheManager";
 import Constants from "expo-constants";
 import LoadingView from "../components/common/LoadingView";
 import ErrorView from "../components/common/ErrorView";
+import useFetch from "../utils/useFetch";
 
 const { BACKEND } = Constants.expoConfig.extra;
 const { width, height } = Dimensions.get("window");
 
 export default function Profil() {
     const router = useRouter();
-    const [loading, setLoading] = useState(false);
     const [token, setToken] = useState(null);
-    const [error, setError] = useState(null);
-    const [user, setUser] = useState(null);
     const [mail, setMail] = useState(null);
+    const [tokenAndMailError, setTokenAndMailError] = useState(null);
+    const [tokenAndMailLoading, setTokenAndMailLoading] = useState(false);
+    const [logoutLoading, setLogoutLoading] = useState(false);
+    const [logoutError, setLogoutError] = useState(null);
+    const {data, dataError, dataLoading} = useFetch({token, address : `${BACKEND}/api/students/${mail}`});
+
+    const error = dataError || tokenAndMailError || logoutError;
+    const loading = dataLoading || tokenAndMailLoading || logoutLoading;
 
     useFocusEffect(
         useCallback(() => {
             const fetchTokenAndMail = async () => {
                 try {
-                    setLoading(true);
+                    setTokenAndMailLoading(true);
                     const fetchedToken = await CacheManager.get("token");
                     const fetchedUser = await CacheManager.get("loggedUser");
-
                     setToken(fetchedToken);
                     setMail(fetchedUser.mail);
                 } catch (err) {
-                    setError(err.message || "Failed to load credentials");
+                    setTokenAndMailError(err.message || "Failed to load credentials");
                 } finally {
-                    setLoading(false);
+                    setTokenAndMailLoading(false);
                 }
             };
             fetchTokenAndMail();
         }, [])
     );
 
-    useEffect(() => {
-        const fetchProfileData = async () => {
-            if (!mail || !token) return;
-
-            try {
-                setLoading(true);
-                const response = await fetch(`${BACKEND}/api/students/${mail}`, {
-                    headers: {
-                        'Authorization': `Bearer ${token}`,
-                        'Content-Type': 'application/json',
-                    }
-                });
-                if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
-                const data = await response.json();
-                setUser(data._embedded.studentList[0]);
-            } catch (err) {
-                console.error("Profile fetch failed:", err);
-                setError(err.message || "Could not load profile");
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchProfileData();
-    }, [mail, token]);
+    const user = data?.studentList[0] || [];
 
     const handleLogout = async () => {
         try {
-            setLoading(true);
-            await CacheManager.remove("token");
-            await CacheManager.remove("loggedUser");
+            setLogoutLoading(true);
+            await CacheManager.clear();
             router.replace("/LoginScreen");
         } catch (err) {
-            setError(err.message || "Logout failed");
+            setLogoutError(err.message || "Logout failed");
         } finally {
-            setLoading(false);
+            setLogoutLoading(false);
         }
     };
 
