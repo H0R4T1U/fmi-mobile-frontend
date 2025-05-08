@@ -19,7 +19,7 @@ export default function ProfilePageSmallContainer({title, content}) {
             <View style={{
                 backgroundColor: '#024073',
                 borderRadius: 5,
-                width:width*0.25,
+                width:width*0.27,
                 height: height*0.035,
                 alignItems: 'center',
                 justifyContent:'center'
@@ -27,6 +27,7 @@ export default function ProfilePageSmallContainer({title, content}) {
                 <Text style={{
                     fontSize: height*0.0147,
                     fontFamily: 'Montserrat',
+                    fontWeight:"500",
                     color: '#fff',
                     textAlign: 'center'
                 }}>

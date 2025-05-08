@@ -11,7 +11,6 @@ import ntt from "../../assets/images/ntt.jpg"
 import observator from "../../assets/images/observator1.jpeg"
 import litere from "../../assets/images/litere1.jpg"
 import dppd from "../../assets/images/dppd.png"
-
 const {height} = Dimensions.get('window');
 
 export default function Clădiri() {

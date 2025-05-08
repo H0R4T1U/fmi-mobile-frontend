@@ -1,5 +1,4 @@
 import {Dimensions, ScrollView, Text, View} from "react-native";
-
 const {height, width} = Dimensions.get('window');
 
 export default function LegendaSaliContainer({ rooms }) {
@@ -67,7 +66,6 @@ export default function LegendaSaliContainer({ rooms }) {
                         color: '#FFF',
                         width: width*0.53,
                         paddingVertical: height*0.005,
-                        paddingHorizontal: width*0.165,
                         marginLeft:width*0.02,
                         fontWeight: "500",
                         textAlign: 'center'

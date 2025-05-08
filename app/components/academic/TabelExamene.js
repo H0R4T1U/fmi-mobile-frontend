@@ -1,8 +1,12 @@
-import {Dimensions, LayoutChangeEvent, ScrollView, Text, View} from "react-native";
-import {useState} from "react";
-import {tabelExameneDataTextStyle, tabelExameneDataViewStyle, tabelExameneHeaderTextStyle,} from "../../utils/styles";
-
+import { Dimensions, ScrollView, Text, View } from "react-native";
+import { useState } from "react";
 const { height, width } = Dimensions.get("window");
+import {
+    tabelExameneHeaderTextStyle,
+    tabelExameneDataTextStyle,
+    tabelExameneDataViewStyle,
+} from "../../utils/styles";
+import { LayoutChangeEvent } from "react-native";
 
 const exameneHeader = [
     { key: "number", name: "NR. CRT", style: { marginLeft: width * 0.013, width: width * 0.145 } },

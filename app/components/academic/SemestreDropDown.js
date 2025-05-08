@@ -1,7 +1,6 @@
 import {useState} from "react";
 import {Dimensions, View} from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
-
 const {height, width} = Dimensions.get('window');
 
 

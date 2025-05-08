@@ -1,5 +1,7 @@
-import {Dimensions, LayoutChangeEvent, ScrollView, Text, View,} from "react-native";
+import {Dimensions, ScrollView, Text, View,} from "react-native";
 import {useState} from "react";
+const {height, width} = Dimensions.get('window');
+import {LayoutChangeEvent} from "react-native";
 import {
     tabelTaxePlatiteHeaderTextStyle,
     tabelTaxePlatiteHeaderViewStyle,
@@ -7,9 +9,18 @@ import {
     tabelTaxePlatiteViewStyle
 } from "../../utils/styles";
 
-const {height, width} = Dimensions.get('window');
 
-export default function TabelTaxePlatite({examene}) {
+const tableHeaders = [
+    { key: "number", name: "NR. CRT", style: { width: width * 0.145, marginLeft: width * 0.02 } },
+    { key: "series", name: "SERIA", style: { width: width * 0.165 } },
+    { key: "paymentNumber", name: "NUMARUL", style: { width: width * 0.2 } },
+    { key: "date", name: "DATA", style: { width: width * 0.2 } },
+    { key: "price", name: "VALOARE", style: { width: width * 0.19 } },
+    { key: "description", name: "EXPLICATIE", style: { width: width * 0.26 } },
+    { key: "message", name: "MESAJ", style: { width: width * 0.16 } },
+];
+
+export default function TabelTaxePlatite({taxePlatite}) {
     const [rowHeights, setRowHeights] = useState({});
 
     const handleTextLayout = (index: number, event: LayoutChangeEvent) => {
@@ -44,138 +55,77 @@ export default function TabelTaxePlatite({examene}) {
                                 height:height*0.045,
                                 paddingRight:width*0.022
                             }}>
-                            <View style={[tabelTaxePlatiteHeaderViewStyle(width, height), {
-                                width:width*0.145,
-                                marginLeft:width*0.022,
-                            }]}>
-                                <Text style={tabelTaxePlatiteHeaderTextStyle(width, height)}>
-                                    NR. CRT
-                                </Text>
-                            </View>
-                            <View style={[tabelTaxePlatiteHeaderViewStyle(width, height), {
-                                width:width*0.165,
-                            }]}>
-                                <Text style={tabelTaxePlatiteHeaderTextStyle(width, height)}>
-                                    SERIA
-                                </Text>
-                            </View>
-
-                            <View style={[tabelTaxePlatiteHeaderViewStyle(width, height), {
-                                width:width*0.2,
-                            }]}>
-                                <Text style={tabelTaxePlatiteHeaderTextStyle(width, height)}>
-                                    NUMARUL
-                                </Text>
-                            </View>
-
-                            <View style={[tabelTaxePlatiteHeaderViewStyle(width, height), {
-                                width:width*0.2,
-                            }]}>
-                                <Text style={tabelTaxePlatiteHeaderTextStyle(width, height)}>
-                                    DATA
-                                </Text>
-                            </View>
-
-                            <View style={[tabelTaxePlatiteHeaderViewStyle(width, height), {
-                                width:width*0.19,
-                            }]}>
-                                <Text style={tabelTaxePlatiteHeaderTextStyle(width, height)}>
-                                    VALOARE
-                                </Text>
-                            </View>
-
-                            <View style={[tabelTaxePlatiteHeaderViewStyle(width, height), {
-                                width:width*0.26,
-                            }]}>
-                                <Text style={tabelTaxePlatiteHeaderTextStyle(width, height)}>
-                                    EXPLICATIE
-                                </Text>
-                            </View>
-
-                            <View style={[tabelTaxePlatiteHeaderViewStyle(width, height), {
-                                width:width*0.16,
-                            }]}>
-                                <Text style={tabelTaxePlatiteHeaderTextStyle(width, height)}>
-                                    MESAJ
-                                </Text>
-                            </View>
+                            {tableHeaders.map((header, index) => (
+                                <View
+                                    key={index}
+                                    style={[
+                                        {
+                                            height: height * 0.03,
+                                            borderRadius: 5,
+                                            alignSelf: "center",
+                                            alignItems: "center",
+                                            justifyContent: "center",
+                                            marginLeft: width * 0.015,
+                                            backgroundColor: '#024073',
+                                        },
+                                        header.style,
+                                    ]}
+                                >
+                                    <Text
+                                        style={{
+                                            fontSize: height * 0.014,
+                                            fontFamily: "Montserrat",
+                                            color: "#FFF",
+                                            fontWeight: "500",
+                                            justifyContent: "center",
+                                            textAlignVertical: "center",
+                                            textAlign: 'center',
+                                        }}
+                                    >
+                                        {header.name}
+                                    </Text>
+                                </View>
+                            ))}
                         </View>
+
                         <ScrollView
                             contentContainerStyle={{
-                                paddingBottom:height*0.02,
-                                alignItems:"flex-start",
-                                justifyContent:"flex-start"
-                            }}>
-
-                            {examene.map((examen,index) => (
+                                paddingBottom: height * 0.02,
+                                alignItems: "flex-start",
+                                justifyContent: "flex-start",
+                            }}
+                        >
+                            {taxePlatite.map((taxa, index) => (
                                 <View
                                     key={index}
                                     onLayout={(event) => handleTextLayout(index, event)}
                                     style={{
-                                        marginTop: height*0.011,
+                                        marginTop: height * 0.011,
                                         flexDirection: "row",
                                         alignItems: "center",
-                                        minHeight: rowHeights[index] || height*0.035,
+                                        minHeight: rowHeights[index] || height * 0.035,
                                     }}
                                 >
-                                    <View style={[tabelTaxePlatiteViewStyle(width, height), {
-                                        width: width*0.145,
-                                        minHeight: rowHeights[index] ||height*0.035,
-                                        marginLeft: width * 0.022
-                                    }]}>
-                                        <Text style={tabelTaxePlatiteTextStyle(width, height)}>
-                                            {examen.number}
-                                        </Text>
-                                    </View>
-
-                                    <View style={[tabelTaxePlatiteViewStyle(width, height), {
-                                        width: width*0.165,
-                                        minHeight: rowHeights[index] ||height*0.035,
-                                    }]}>
-                                        <Text style={tabelTaxePlatiteTextStyle(width, height)}>
-                                            {examen.series}
-                                        </Text>
-                                    </View>
-                                    <View style={[tabelTaxePlatiteViewStyle(width, height), {
-                                        width: width*0.2,
-                                        minHeight: rowHeights[index] || height*0.035,
-                                    }]}>
-                                        <Text style={tabelTaxePlatiteTextStyle(width, height)}>
-                                            {examen.paymentNumber}
-                                        </Text>
-                                    </View>
-                                    <View style={[tabelTaxePlatiteViewStyle(width, height), {
-                                        width: width*0.2,
-                                        minHeight: rowHeights[index] || height*0.035,
-                                    }]}>
-                                        <Text style={tabelTaxePlatiteTextStyle(width, height)}>
-                                            {examen.date}
-                                        </Text>
-                                    </View>
-                                    <View style={[tabelTaxePlatiteViewStyle(width, height), {
-                                        width: width*0.19,
-                                        minHeight: rowHeights[index] || height*0.035,
-                                    }]}>
-                                        <Text style={tabelTaxePlatiteTextStyle(width, height)}>
-                                            {examen.price}
-                                        </Text>
-                                    </View>
-                                    <View style={[tabelTaxePlatiteViewStyle(width, height), {
-                                        width: width*0.26,
-                                        minHeight: rowHeights[index] || height*0.035,
-                                    }]}>
-                                        <Text style={tabelTaxePlatiteTextStyle(width, height)}>
-                                            {examen.description}
-                                        </Text>
-                                    </View>
-                                    <View style={[tabelTaxePlatiteViewStyle(width, height), {
-                                        width: width*0.16,
-                                        minHeight: rowHeights[index] || height*0.035,
-                                    }]}>
-                                        <Text style={tabelTaxePlatiteTextStyle(width, height)}>
-                                            {examen.message}
-                                        </Text>
-                                    </View>
+                                    {tableHeaders.map((header, colIndex) => (
+                                        <View
+                                            key={colIndex}
+                                            style={[
+                                                {
+                                                    backgroundColor: "#fff",
+                                                    borderRadius: 5,
+                                                    justifyContent: "center",
+                                                    alignItems: "center",
+                                                    marginLeft: width * 0.015,
+                                                },
+                                                header.style,
+                                                { minHeight: rowHeights[index] || height * 0.035 },
+                                            ]}
+                                        >
+                                            <Text style={tabelTaxePlatiteTextStyle(width, height)}>
+                                                {taxa[header.key]}
+                                            </Text>
+                                        </View>
+                                    ))}
                                 </View>
                             ))}
                         </ScrollView>

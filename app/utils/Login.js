@@ -38,6 +38,10 @@ export function useLogin() {
     );
 
     useEffect(() => {
+        console.log("Redirect URI:", azureConfig.redirectUri);
+    }, [azureConfig]);
+
+    useEffect(() => {
         const checkExistingLogin = async () => {
             try {
                 const cachedUser = await CacheManager.get("loggedUser");

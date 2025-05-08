@@ -50,6 +50,7 @@ export default function ProfilePageLargeContainer({username, password}) {
                     <Text style={{
                         fontSize: height*0.0147,
                         fontFamily: 'Montserrat',
+                        fontWeight:"500",
                         color: '#fff',
                         textAlign: 'center'
                     }}>
@@ -91,7 +92,8 @@ export default function ProfilePageLargeContainer({username, password}) {
                         fontSize: height*0.0145,
                         fontFamily: 'Montserrat',
                         color: '#fff',
-                        textAlign: 'center'
+                        textAlign: 'center',
+                        fontWeight:"500",
                     }}>
                         PAROLĂ
                     </Text>

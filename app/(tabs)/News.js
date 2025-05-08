@@ -26,6 +26,25 @@ export default function News() {
     if (error)
         return <ErrorView error={error} headerText="NEWS"/>
 
+    if (loading)
+        return (
+            <>
+                <FloatingHeader text="NEWS"/>
+                <ActivityIndicator size="small" style={{
+                    flex: 1
+                }}/>
+            </>
+        );
+    if (error)
+        return (
+            <>
+                <FloatingHeader text="EXAMENE"/>
+                <View style={{flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+                    <Text style={{color: '#024073', fontFamily: 'Montserrat', fontSize: height * 0.015, textAlign: 'center', textAlignVertical: 'center'}}>{error}. Please try again later.</Text>
+                </View>
+            </>
+        );
+
     return (
         <>
             <FloatingHeader text="NEWS" />
