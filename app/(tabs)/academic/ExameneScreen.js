@@ -1,17 +1,20 @@
-import FloatingHeader from "../components/common/FloatingHeader";
-import React, { useState, useEffect } from "react";
-import NewsContainer from "../components/news/NewsContainer";
-import {Text, FlatList, Dimensions, ActivityIndicator, View} from "react-native";
-import { CacheManager } from "../utils/CacheManager";
+import FloatingHeader from "../../components/common/FloatingHeader";
+import {ActivityIndicator, Dimensions, Text, View} from "react-native";
+import SemestreDropDown from "../../components/academic/SemestreDropDown";
+import TabelExamene from "../../components/academic/TabelExamene";
+import React, {useEffect, useState} from "react";
+import {CacheManager} from "../../utils/CacheManager";
 import Constants from "expo-constants";
 const { BACKEND } = Constants.expoConfig.extra;
-const {height} = Dimensions.get('window');
+const {height, width} = Dimensions.get('window');
 
-export default function News() {
+export default function ExameneScreen() {
     const [loading, setLoading] = useState(true);
     const [token, setToken] = useState(null);
-    const [news, setNews] = useState([]);
+    const [examene, setExamene] = useState([]);
     const [error, setError] = useState(null);
+    const [selectedSemester, setSelectedSemester] = useState(null);
+
 
     useEffect(() => {
         const getToken = async () => {
@@ -24,15 +27,18 @@ export default function News() {
             }
         };
         getToken();
+        console.log("Retrieved token:", token);
     }, []);
 
     useEffect(() => {
-        const fetchNews = async () => {
+        const fetchExamene = async () => {
             try {
                 if (!token) return;
 
+                const cachedUser = await CacheManager.get("loggedUser");
+                const userMail=cachedUser.mail;
                 setLoading(true);
-                const response = await fetch(`${BACKEND}/api/news/ro`, {
+                const response = await fetch(`${BACKEND}/api/exams/${userMail}`, {
                     headers: {
                         'Authorization': `Bearer ${token}`,
                         'Content-Type': 'application/json'
@@ -44,23 +50,28 @@ export default function News() {
                 }
 
                 const responseData = await response.json();
-                setNews(responseData._embedded.newsList);
+                if (responseData._embedded && responseData._embedded.examsDTOList) {
+                    setExamene(responseData._embedded.examsDTOList);
+                }
+                else
+                    setExamene([]);
+
 
             } catch (error) {
-                console.error("News fetch failed:", error);
+                console.error("Examene fetch failed:", error);
                 setError(error.message);
             } finally {
                 setLoading(false);
             }
         };
 
-        if (token) fetchNews();
+        if (token) fetchExamene();
     }, [token]);
 
     if (loading)
         return (
             <>
-                <FloatingHeader text="NEWS"/>
+                <FloatingHeader text="EXAMENE"/>
                 <ActivityIndicator size="small" style={{
                     flex: 1
                 }}/>
@@ -76,20 +87,16 @@ export default function News() {
             </>
         );
 
+
+    const filteredExams = selectedSemester
+        ? examene.filter(examen => examen.semester === parseInt(selectedSemester))
+        : examene;
+
     return (
-        <>
-            <FloatingHeader text="NEWS" />
-            <FlatList
-                data={news}
-                renderItem={({ item }) => (
-                    <NewsContainer date={item.date} title={item.title} link={item.location}/>
-                )}
-                keyExtractor={(item) => item.id.toString()}
-                contentContainerStyle={{
-                    paddingBottom: height * 0.08,
-                    flexGrow: 1,
-                }}
-            />
-        </>
-    );
+        <View>
+            <FloatingHeader text="EXAMENE"/>
+            <SemestreDropDown  onSelectSemester={setSelectedSemester}/>
+            <TabelExamene examene={filteredExams}/>
+        </View>
+    )
 }

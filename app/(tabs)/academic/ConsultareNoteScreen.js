@@ -1,17 +1,23 @@
-import FloatingHeader from "../components/common/FloatingHeader";
-import React, { useState, useEffect } from "react";
-import NewsContainer from "../components/news/NewsContainer";
-import {Text, FlatList, Dimensions, ActivityIndicator, View} from "react-native";
-import { CacheManager } from "../utils/CacheManager";
+import FloatingHeader from "../../components/common/FloatingHeader";
+import {ActivityIndicator, Text, View} from "react-native";
+import SemestreDropDown from "../../components/academic/SemestreDropDown";
+import TabelExamene from "../../components/academic/TabelExamene";
+import TabelNote from "../../components/academic/TabelNote";
 import Constants from "expo-constants";
-const { BACKEND } = Constants.expoConfig.extra;
-const {height} = Dimensions.get('window');
+import {useRouter} from "expo-router";
+import React, {useCallback, useEffect, useState} from "react";
+import {CacheManager} from "../../utils/CacheManager";
 
-export default function News() {
-    const [loading, setLoading] = useState(true);
+const { BACKEND } = Constants.expoConfig.extra;
+
+export default function ConsultareNoteScreen() {
+
     const [token, setToken] = useState(null);
-    const [news, setNews] = useState([]);
+    const [userGrades, setUserGrades] = useState([]);
     const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [selectedSemester, setSelectedSemester] = useState(null);
+
 
     useEffect(() => {
         const getToken = async () => {
@@ -24,15 +30,18 @@ export default function News() {
             }
         };
         getToken();
+        console.log("Retrieved token:", token);
     }, []);
 
     useEffect(() => {
-        const fetchNews = async () => {
+        const fetchGrades = async () => {
             try {
                 if (!token) return;
 
+                const cachedUser = await CacheManager.get("loggedUser");
+                const userMail=cachedUser.mail;
                 setLoading(true);
-                const response = await fetch(`${BACKEND}/api/news/ro`, {
+                const response = await fetch(`${BACKEND}/api/grades/${userMail}`, {
                     headers: {
                         'Authorization': `Bearer ${token}`,
                         'Content-Type': 'application/json'
@@ -44,23 +53,28 @@ export default function News() {
                 }
 
                 const responseData = await response.json();
-                setNews(responseData._embedded.newsList);
+                if (responseData._embedded && responseData._embedded.gradesDTOList) {
+                    setUserGrades(responseData._embedded.gradesDTOList);
+                }
+                else
+                    setUserGrades([]);
+
 
             } catch (error) {
-                console.error("News fetch failed:", error);
+                console.error("Grades fetch failed:", error);
                 setError(error.message);
             } finally {
                 setLoading(false);
             }
         };
 
-        if (token) fetchNews();
+        if (token) fetchGrades();
     }, [token]);
 
     if (loading)
         return (
             <>
-                <FloatingHeader text="NEWS"/>
+                <FloatingHeader text="NOTE"/>
                 <ActivityIndicator size="small" style={{
                     flex: 1
                 }}/>
@@ -76,20 +90,15 @@ export default function News() {
             </>
         );
 
+    const filteredGrades = selectedSemester
+        ? userGrades.filter(grade => grade.semester === parseInt(selectedSemester))
+        : userGrades;
+
     return (
-        <>
-            <FloatingHeader text="NEWS" />
-            <FlatList
-                data={news}
-                renderItem={({ item }) => (
-                    <NewsContainer date={item.date} title={item.title} link={item.location}/>
-                )}
-                keyExtractor={(item) => item.id.toString()}
-                contentContainerStyle={{
-                    paddingBottom: height * 0.08,
-                    flexGrow: 1,
-                }}
-            />
-        </>
-    );
+        <View>
+            <FloatingHeader text="CONSULTARE NOTE"/>
+            <SemestreDropDown onSelectSemester={setSelectedSemester}/>
+            <TabelNote userGrades={filteredGrades}/>
+        </View>
+    )
 }

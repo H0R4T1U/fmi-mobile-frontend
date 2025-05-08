@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { CacheManager } from './utils/CacheManager';
-import { Stack } from "expo-router";
+import {Slot, Stack} from "expo-router";
 
 export default function Layout() {
     const [isLoading, setIsLoading] = useState(true);
@@ -20,8 +20,6 @@ export default function Layout() {
     if (isLoading) return null;
 
     return (
-            <Stack>
-                 <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-            </Stack>
+        <Slot/>
 );
 }

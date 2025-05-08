@@ -1,7 +1,7 @@
 import tw from "twrnc";
 import {Text, Animated, Platform, Dimensions, Image, TouchableOpacity, View} from "react-native";
-import React from "react";
-import FMIHubHeader from "../components/FMIHubHeader";
+import React, {useEffect} from "react";
+import FMIHubHeader from "../components/common/FMIHubHeader";
 import {Tabs, useRouter, useSegments} from "expo-router";
 import {StatusBar} from "expo-status-bar";
 const {height, width} = Dimensions.get('window');
@@ -40,7 +40,7 @@ export default function Layout() {
     const router = useRouter();
     const segments = useSegments();
     const currentScreen = segments[segments.length - 1];
-    const showHomeButton = currentScreen !== "LogIntoNewScreen" && currentScreen !== "LoginScreen";
+    const showHomeButton = currentScreen !== "Loading" && currentScreen !== "LoginScreen";
     return (
         <>
             <StatusBar style="light" hidden={false}/>
@@ -48,7 +48,7 @@ export default function Layout() {
                 <Tabs
                     screenOptions={{
                         tabBarStyle: {
-                            height: '11.6%',
+                            height: Platform.OS==='android' ? '11.6%' : '12%',
                             backgroundColor: "#AEB9C4",
                             paddingVertical: 10,
                             paddingBottom: 0
@@ -72,7 +72,7 @@ export default function Layout() {
                         tabBarIcon: () => (
                             <View style={{justifyContent: 'center',
                                 alignItems: 'center',
-                                height: '100%',}}>
+                                }}>
                                 <View style={tabIconStyles.container}>
                                     <Image source={require('../../assets/images/profile.png')} style={tabIconStyles.image} />
                                 </View>
@@ -107,7 +107,6 @@ export default function Layout() {
                         ),
                         tabBarItemStyle: {
                             marginLeft: width*0.135,
-
                         }
                     }} />
 
@@ -122,20 +121,10 @@ export default function Layout() {
                             </View>
                         )
                     }} />
-                    <Tabs.Screen name="CentralScreen" options={{tabBarItemStyle: {display: 'none'}}}/>
                     <Tabs.Screen name="HomeScreen" options={{tabBarItemStyle: {display: 'none'}}}/>
-                    <Tabs.Screen name="FsegaScreen" options={{tabBarItemStyle: {display: 'none'}}}/>
-                    <Tabs.Screen name="DreptScreen" options={{tabBarItemStyle: {display: 'none'}}}/>
-                    <Tabs.Screen name="MathematicaScreen" options={{tabBarItemStyle: {display: 'none'},}}/>
-                    <Tabs.Screen name="CreicScreen" options={{tabBarItemStyle: {display: 'none'}}}/>
-                    <Tabs.Screen name="NttScreen" options={{tabBarItemStyle: {display: 'none'}}}/>
-                    <Tabs.Screen name="LitereScreen" options={{tabBarItemStyle: {display: 'none'}}}/>
-                    <Tabs.Screen name="ObservatorScreen" options={{tabBarItemStyle: {display: 'none'}}}/>
-                    <Tabs.Screen name="DppdScreen" options={{tabBarItemStyle: {display: 'none'}}}/>
-                    <Tabs.Screen name="ExameneScreen" options={{tabBarItemStyle:{display: 'none'}}}/>
-                    <Tabs.Screen name="ConsultareNoteScreen" options={{tabBarItemStyle:{display: 'none'}}}/>
-                    <Tabs.Screen name="TaxeScreen" options={{tabBarItemStyle:{display: 'none'}}}/>
-                    <Tabs.Screen name="LogIntoNewScreen" options={
+                    <Tabs.Screen name="buildings" options={{tabBarItemStyle: {display: 'none'}}}/>
+                    <Tabs.Screen name="academic" options={{tabBarItemStyle: {display: 'none'}}}/>
+                    <Tabs.Screen name="LoginScreen" options={
                         {headerShown:false,
                             tabBarItemStyle:{display: 'none'},
                             tabBarStyle: {
@@ -143,7 +132,7 @@ export default function Layout() {
                             }
                         }
                     }/>
-                    <Tabs.Screen name="LoginScreen" options={
+                    <Tabs.Screen name="Loading" options={
                         {headerShown:false,
                             tabBarItemStyle:{display: 'none'},
                             tabBarStyle: {
@@ -158,7 +147,7 @@ export default function Layout() {
                     <View style={tw`items-center`}>
                         <TouchableOpacity
                             onPress={() => {
-                                router.push('HomeScreen');
+                                router.navigate('HomeScreen');
                             }}
                             style={[
                                 tw`absolute`,
@@ -168,9 +157,6 @@ export default function Layout() {
                             ]}
                         >
                             <View style={{
-                                shadowColor: "#024073",
-                                shadowOffset: {width: 0, height: height * 0.012},
-                                shadowOpacity: 0.1,
                                 backgroundColor: "#fff",
                                 borderRadius: buttonWidth,
                                 padding: buttonWidth * 0.07,
@@ -178,16 +164,13 @@ export default function Layout() {
                             }}>
                                 <Image
                                     source={require('../../assets/images/home.png')}
-                                    style={{
+                                    style={[tw`shadow-xl`,{
                                         width: buttonWidth,
                                         height: buttonHeight,
                                         borderRadius: 100,
                                         borderColor: "#fff",
-                                        shadowColor: "#024073",
-                                        shadowOffset: {width: 0, height: height * 0.012},
-                                        shadowOpacity: 0.1,
                                         resizeMode: "contain"
-                                    }}
+                                    }]}
                                 />
                             </View>
                         </TouchableOpacity>
