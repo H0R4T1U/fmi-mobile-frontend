@@ -1,62 +1,33 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import {Dimensions, ScrollView, View} from "react-native";
 import FloatingHeader from "../components/common/FloatingHeader";
 import OrarContainer from "../components/home/OrarContainer";
-import { CacheManager } from "../utils/CacheManager";
 import Constants from "expo-constants";
-import useToken from "../utils/useToken";
+import useToken from "../utils/hooks/useToken";
 import ErrorView from "../components/common/ErrorView";
 import LoadingView from "../components/common/LoadingView";
+import useFetch from "../utils/hooks/useFetch";
+import useEmail from "../utils/hooks/useEmail";
 
 const { height, width } = Dimensions.get('window');
 const { BACKEND } = Constants.expoConfig.extra;
 
 export default function HomeScreen() {
     const zile = ["Luni", "Marti", "Miercuri", "Joi", "Vineri"];
-    const [group, setGroup] = useState(null);
-    const [groupLoading, setGroupLoading] = useState(false);
-    const [groupError, setGroupError] = useState(null);
     const [timeTable, setTimeTable] = useState(null);
     const [timeTableLoading, setTimeTableLoading] = useState(false);
     const [timeTableError, setTimeTableError] = useState(null);
-    const {fetchedToken: token, tokenLoading, tokenError} = useToken();
+    const {token, tokenLoading, tokenError} = useToken();
+    const {mail, mailError, mailLoading} = useEmail();
+    const {data, dataError, dataLoading} = useFetch({
+        token,
+        address: `${BACKEND}/api/students/${mail}`
+    })
 
-    const loading = tokenLoading || groupLoading || timeTableLoading;
-    const error = tokenError || groupError || timeTableError;
+    const loading = tokenLoading || timeTableLoading || mailLoading || dataLoading;
+    const error = tokenError || timeTableError || mailError || dataError;
 
-
-    useEffect(() => {
-        const getStudentGroup = async () => {
-            try {
-                if (!token) return;
-                setGroupLoading(true);
-                const cachedUser = await CacheManager.get("loggedUser");
-                const userMail = cachedUser.mail;
-                const response = await fetch(`${BACKEND}/api/students/${userMail}`, {
-                    headers: {
-                        'Authorization': `Bearer ${token}`,
-                        'Content-Type': 'application/json'
-                    }
-                });
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-                const responseData = await response.json();
-                if (responseData._embedded && responseData._embedded.studentList) {
-                    setGroup(responseData._embedded.studentList[0].group);
-                } else {
-                    setGroup(null);
-                }
-
-            } catch (error) {
-                setGroupError(error);
-                console.error("Fetch failed:", error);
-            } finally {
-                setGroupLoading(false);
-            }
-        };
-        getStudentGroup();
-    }, [token]);
+    const group = data?.studentList[0].group || "";
 
     useEffect(() => {
         const getTimeTable = async () => {
@@ -65,7 +36,8 @@ export default function HomeScreen() {
                 setTimeTableLoading(true);
                 const response = await fetch(`https://www.cs.ubbcluj.ro/apps/orar/api/classes/group/${group}/ro-RO`, {
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        // 'Authorization': `Bearer ${token}`
                     }
                 });
                 if (!response.ok) {
@@ -107,7 +79,6 @@ export default function HomeScreen() {
                     </View>
                 ))}
             </ScrollView>
-            )
         </View>
     );
 }

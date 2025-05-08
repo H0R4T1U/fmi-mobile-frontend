@@ -1,4 +1,5 @@
 import {Dimensions, ScrollView, Text, View} from "react-native";
+
 const {height, width} = Dimensions.get('window');
 
 export default function LegendaSaliContainer({ rooms }) {

@@ -1,11 +1,6 @@
-import {
-    Dimensions,
-    Text,
-    TextInput,
-    View,
-    Pressable,
-} from "react-native";
+import {Dimensions, Pressable, Text, TextInput, View,} from "react-native";
 import {useState} from "react";
+
 const {height, width} = Dimensions.get('window');
 
 

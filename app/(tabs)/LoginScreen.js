@@ -1,7 +1,8 @@
 import Logo from "../components/login/Logo";
 import LoginHeader from "../components/login/LoginHeader";
 import {Dimensions, Text, TouchableOpacity, View} from "react-native";
-import {useLogin} from "../utils/Login";
+import {useLogin} from "../utils/auth/Login";
+
 const {width, height} = Dimensions.get('window');
 export default function LoginScreen() {
     const { loading, error, promptAsync } = useLogin();

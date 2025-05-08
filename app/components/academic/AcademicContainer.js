@@ -1,5 +1,6 @@
 import {Dimensions, ImageBackground, Pressable, Text, View} from "react-native";
 import {useRouter} from "expo-router";
+
 const {height, width} = Dimensions.get('window');
 
 

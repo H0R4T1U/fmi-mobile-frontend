@@ -1,10 +1,10 @@
 import {useEffect, useState} from "react";
-import { useRouter } from "expo-router";
-import { CacheManager } from "./utils/CacheManager";
-import { ActivityIndicator, View } from "react-native";
+import {useRouter} from "expo-router";
+import {CacheManager} from "./utils/CacheManager";
 import {StatusBar} from "expo-status-bar";
-import { StripeProvider } from '@stripe/stripe-react-native';
+import {StripeProvider} from '@stripe/stripe-react-native';
 import Constants from "expo-constants";
+
 const { PUBLIC_KEY } = Constants.expoConfig.extra;
 
 

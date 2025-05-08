@@ -1,6 +1,7 @@
 import FloatingHeader from "./FloatingHeader";
 import {Dimensions, Text, View} from "react-native";
 import React from "react";
+
 const {height} = Dimensions.get('window');
 
 export default function ErrorView({error, headerText}) {

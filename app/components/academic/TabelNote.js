@@ -1,7 +1,7 @@
-import { Dimensions, ScrollView, Text, View } from "react-native";
-import { useState } from "react";
-import { tabelTaxePlatiteTextStyle } from "../../utils/styles";
-import {LayoutChangeEvent} from "react-native";
+import {Dimensions, LayoutChangeEvent, ScrollView, Text, View} from "react-native";
+import {useState} from "react";
+import {tabelTaxePlatiteTextStyle} from "../../utils/styles";
+
 const { height, width } = Dimensions.get("window");
 
 const tableHeaders = [

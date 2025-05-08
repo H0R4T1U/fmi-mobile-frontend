@@ -1,63 +1,36 @@
-import React, { useEffect, useState, useCallback } from "react";
-import { Text, View, Dimensions, ActivityIndicator, TouchableOpacity } from "react-native";
+import {Dimensions, Text, TouchableOpacity, View} from "react-native";
 import FloatingHeader from "../components/common/FloatingHeader";
 import ProfilePageSmallContainer from "../components/profile/ProfilePageSmallContainer";
 import ProfilePageLargeContainer from "../components/profile/ProfilePageLargeContainer";
-import { useRouter, useFocusEffect } from "expo-router";
-import { CacheManager } from "../utils/CacheManager";
 import Constants from "expo-constants";
 import LoadingView from "../components/common/LoadingView";
 import ErrorView from "../components/common/ErrorView";
-import useFetch from "../utils/useFetch";
+import useFetch from "../utils/hooks/useFetch";
+import useEmail from "../utils/hooks/useEmail";
+import useToken from "../utils/hooks/useToken";
+import useLogout from "../utils/auth/Logout";
 
 const { BACKEND } = Constants.expoConfig.extra;
 const { width, height } = Dimensions.get("window");
 
 export default function Profil() {
-    const router = useRouter();
-    const [token, setToken] = useState(null);
-    const [mail, setMail] = useState(null);
-    const [tokenAndMailError, setTokenAndMailError] = useState(null);
-    const [tokenAndMailLoading, setTokenAndMailLoading] = useState(false);
-    const [logoutLoading, setLogoutLoading] = useState(false);
-    const [logoutError, setLogoutError] = useState(null);
-    const {data, dataError, dataLoading} = useFetch({token, address : `${BACKEND}/api/students/${mail}`});
+    const { token, tokenError, tokenLoading } = useToken();
+    const { mail, mailError, mailLoading } = useEmail();
+    const { data, dataError, dataLoading } = useFetch({
+        token,
+        address: `${BACKEND}/api/students/${mail}`
+    });
+    const {logout, loading : logoutLoading, error: logoutError} = useLogout();
 
-    const error = dataError || tokenAndMailError || logoutError;
-    const loading = dataLoading || tokenAndMailLoading || logoutLoading;
-
-    useFocusEffect(
-        useCallback(() => {
-            const fetchTokenAndMail = async () => {
-                try {
-                    setTokenAndMailLoading(true);
-                    const fetchedToken = await CacheManager.get("token");
-                    const fetchedUser = await CacheManager.get("loggedUser");
-                    setToken(fetchedToken);
-                    setMail(fetchedUser.mail);
-                } catch (err) {
-                    setTokenAndMailError(err.message || "Failed to load credentials");
-                } finally {
-                    setTokenAndMailLoading(false);
-                }
-            };
-            fetchTokenAndMail();
-        }, [])
-    );
-
+    const error = dataError || tokenError || mailError || logoutError;
+    const loading = dataLoading || tokenLoading || mailLoading || logoutLoading;
     const user = data?.studentList[0] || [];
 
-    const handleLogout = async () => {
-        try {
-            setLogoutLoading(true);
-            await CacheManager.clear();
-            router.replace("/LoginScreen");
-        } catch (err) {
-            setLogoutError(err.message || "Logout failed");
-        } finally {
-            setLogoutLoading(false);
-        }
-    };
+    // const {data : testData, dataError: testDataError, dataLoading: testDataLoading} = useFetch({
+    //     token,
+    //     address: `${BACKEND}/api/test`
+    //     });
+    // console.log("testData",testData);
 
     if (loading)
         return <LoadingView headerText="PROFIL"/>
@@ -81,7 +54,7 @@ export default function Profil() {
                     borderRadius: 10,
                     justifyContent: 'center'
                 }}>
-                    <TouchableOpacity onPress={handleLogout}>
+                    <TouchableOpacity onPress={logout}>
                         <Text style={{ textAlign: 'center', color: '#fff' }}>
                             LOG OUT
                         </Text>

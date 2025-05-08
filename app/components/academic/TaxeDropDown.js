@@ -1,16 +1,16 @@
-import React, {useEffect, useState} from "react";
-import {ActivityIndicator, Dimensions, Text, View} from "react-native";
+import React, {useState} from "react";
+import {Dimensions, View} from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
 import TabelTaxeNeplatite from "./TabelTaxeNeplatite";
 import TabelTaxePlatite from "./TabelTaxePlatite";
-import { CacheManager } from "../../utils/CacheManager";
 import Constants from "expo-constants";
 import FloatingHeader from "../common/FloatingHeader";
 import ErrorView from "../common/ErrorView";
 import LoadingView from "../common/LoadingView";
-import useToken from "../../utils/useToken";
-import useEmail from "../../utils/useEmail";
-import useFetch from "../../utils/useFetch";
+import useToken from "../../utils/hooks/useToken";
+import useEmail from "../../utils/hooks/useEmail";
+import useFetch from "../../utils/hooks/useFetch";
+
 const { BACKEND } = Constants.expoConfig.extra;
 const {height, width} = Dimensions.get('window');
 

@@ -1,5 +1,6 @@
-import {Linking, Alert, Dimensions, Pressable, Text, View} from "react-native";
-import React, { useState, useEffect } from "react";
+import {Alert, Dimensions, Linking, Pressable, Text, View} from "react-native";
+import React from "react";
+
 const {height, width} = Dimensions.get('window');
 
 export default function NewsContainer({date, title, link}) {

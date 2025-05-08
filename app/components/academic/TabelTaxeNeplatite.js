@@ -1,13 +1,14 @@
-import {Alert, Dimensions, ImageBackground, Pressable, ScrollView, Text, View,} from "react-native";
+import {Dimensions, ImageBackground, LayoutChangeEvent, Pressable, ScrollView, Text, View,} from "react-native";
 import {useState} from "react";
 import image from "../../../assets/images/pay.png";
 import PaymentModal from "./PaymentModal";
-import {LayoutChangeEvent} from "react-native";
 import {
     tabelTaxeNeplatiteHeaderTextStyle,
     tabelTaxeNeplatiteTextStyle,
-    tabelTaxeNeplatiteViewStyle, tabelTaxePlatiteHeaderViewStyle
+    tabelTaxeNeplatiteViewStyle,
+    tabelTaxePlatiteHeaderViewStyle
 } from "../../utils/styles";
+
 const {height, width} = Dimensions.get('window');
 
 export default function TabelTaxeNeplatite({examene}) {

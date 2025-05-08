@@ -1,4 +1,5 @@
-import {View, Text, Dimensions} from "react-native";
+import {Dimensions, Text, View} from "react-native";
+
 const {height, width} = Dimensions.get('window');
 
 export default function ProfilePageSmallContainer({title, content}) {

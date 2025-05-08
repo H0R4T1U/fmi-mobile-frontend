@@ -1,13 +1,13 @@
-import {Dimensions, ScrollView, Text, View,} from "react-native";
+import {Dimensions, LayoutChangeEvent, ScrollView, Text, View,} from "react-native";
 import {useState} from "react";
-const {height, width} = Dimensions.get('window');
-import {LayoutChangeEvent} from "react-native";
 import {
     tabelTaxePlatiteHeaderTextStyle,
     tabelTaxePlatiteHeaderViewStyle,
     tabelTaxePlatiteTextStyle,
     tabelTaxePlatiteViewStyle
 } from "../../utils/styles";
+
+const {height, width} = Dimensions.get('window');
 
 export default function TabelTaxePlatite({examene}) {
     const [rowHeights, setRowHeights] = useState({});

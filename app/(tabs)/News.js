@@ -1,11 +1,12 @@
 import FloatingHeader from "../components/common/FloatingHeader";
 import NewsContainer from "../components/news/NewsContainer";
-import {FlatList, Dimensions} from "react-native";
+import {Dimensions, FlatList} from "react-native";
 import Constants from "expo-constants";
-import useToken from "../utils/useToken";
+import useToken from "../utils/hooks/useToken";
 import LoadingView from "../components/common/LoadingView";
 import ErrorView from "../components/common/ErrorView";
-import useFetch from "../utils/useFetch";
+import useFetch from "../utils/hooks/useFetch";
+
 const { BACKEND } = Constants.expoConfig.extra;
 const {height} = Dimensions.get('window');
 

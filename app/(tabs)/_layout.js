@@ -1,9 +1,10 @@
 import tw from "twrnc";
-import {Text, Animated, Platform, Dimensions, Image, TouchableOpacity, View} from "react-native";
-import React, {useEffect} from "react";
+import {Animated, Dimensions, Image, Platform, Text, TouchableOpacity, View} from "react-native";
+import React from "react";
 import FMIHubHeader from "../components/common/FMIHubHeader";
 import {Tabs, useRouter, useSegments} from "expo-router";
 import {StatusBar} from "expo-status-bar";
+
 const {height, width} = Dimensions.get('window');
 const buttonWidth =width*0.25;
 const buttonHeight = width*0.25;

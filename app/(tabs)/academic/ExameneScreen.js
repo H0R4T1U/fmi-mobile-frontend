@@ -5,9 +5,10 @@ import React, {useState} from "react";
 import Constants from "expo-constants";
 import LoadingView from "../../components/common/LoadingView";
 import ErrorView from "../../components/common/ErrorView";
-import useToken from "../../utils/useToken";
-import useEmail from "../../utils/useEmail";
-import useFetch from "../../utils/useFetch";
+import useToken from "../../utils/hooks/useToken";
+import useEmail from "../../utils/hooks/useEmail";
+import useFetch from "../../utils/hooks/useFetch";
+
 const { BACKEND } = Constants.expoConfig.extra;
 
 export default function ExameneScreen() {
@@ -18,6 +19,7 @@ export default function ExameneScreen() {
         token,
         address:`${BACKEND}/api/exams/${mail}`
     });
+
     const loading = tokenLoading || mailLoading || dataLoading;
     const error = tokenError || mailError || dataError;
     const examene = data?.examsDTOList || [];

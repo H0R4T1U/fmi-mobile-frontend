@@ -1,4 +1,4 @@
-import {Dimensions, ScrollView, Text, View, TouchableOpacity} from "react-native";
+import {Dimensions, ScrollView, Text, TouchableOpacity, View} from "react-native";
 import {useState} from "react";
 import OrarPageMateriaContainer from "./OrarPageMaterieContainer";
 

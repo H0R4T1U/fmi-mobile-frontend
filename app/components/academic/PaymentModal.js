@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { View, Text, Modal, TouchableOpacity, Alert } from 'react-native';
-import { useConfirmPayment } from '@stripe/stripe-react-native';
-import { Ionicons } from '@expo/vector-icons';
-import { CardForm } from '@stripe/stripe-react-native';
+import React, {useState} from 'react';
+import {Alert, Modal, Text, TouchableOpacity, View} from 'react-native';
+import {CardForm, useConfirmPayment} from '@stripe/stripe-react-native';
+import {Ionicons} from '@expo/vector-icons';
 import Constants from "expo-constants";
+
 const { BACKEND } = Constants.expoConfig.extra;
 
 const AddCardModal = ({ visible, onClose, amount }) => {

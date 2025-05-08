@@ -1,6 +1,7 @@
-import {Platform, Dimensions, Text, View} from "react-native";
+import {Dimensions, Platform, Text, View} from "react-native";
 import React from "react";
 import {useFonts} from "expo-font";
+
 const {height, width} = Dimensions.get('window');
 
 export default function FMIHubHeaderTitle() {

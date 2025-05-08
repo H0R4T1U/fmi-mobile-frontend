@@ -1,8 +1,8 @@
-import {Dimensions, ScrollView, Text, TouchableOpacity, View} from "react-native";
+import {Dimensions, LayoutChangeEvent, ScrollView, Text, TouchableOpacity, View} from "react-native";
 import {useState} from "react";
+import {tabelExameneDataTextStyle, tabelExameneDataViewStyle, tabelExameneHeaderTextStyle} from '../../utils/styles';
+
 const {height, width} = Dimensions.get('window');
-import {tabelExameneHeaderTextStyle, tabelExameneDataTextStyle, tabelExameneDataViewStyle} from '../../utils/styles';
-import {LayoutChangeEvent} from "react-native";
 
 const examene = [
     {
