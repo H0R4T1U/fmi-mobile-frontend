@@ -1,16 +1,18 @@
 import FloatingHeader from "../../components/common/FloatingHeader";
 import SemestreDropDown from "../../components/academic/SemestreDropDown";
 import {useState} from "react";
-import {Dimensions, ScrollView, View} from "react-native";
+import {Dimensions} from "react-native";
 import TabelPrezente from "../../components/academic/TabelPrezente";
+import MateriiDropDown from "../../components/academic/MateriiDropDown";
+
 const {height, width} = Dimensions.get('window');
 
 export default function PrezenteScreen() {
-    const [selectedSemester, setSelectedSemester] = useState(null);
+    const [selectedMaterie, setSelectedMaterie] = useState(null);
     return (
         <>
         <FloatingHeader text="PREZENTE"/>
-        <SemestreDropDown onSelectSemester={setSelectedSemester}/>
+        <MateriiDropDown onSelectSemester={setSelectedMaterie}/>
         <TabelPrezente examene={[]}/>
         </>
     );

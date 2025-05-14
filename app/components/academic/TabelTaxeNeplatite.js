@@ -19,11 +19,12 @@ const tableHeaders = [
     { key: "paymentTerm", name: "DATA SCADENTA", style: { width: width * 0.26 } },
 ];
 
-export default function TabelTaxeNeplatite({ examene }) {
+export default function TabelTaxeNeplatite({ examene, onRefresh }) {
     const [rowHeights, setRowHeights] = useState({});
     const [selectedAmount, setSelectedAmount] = useState(null);
+    const[tuitioncrt,setTuitionCrt]=useState(null);
 
-    const handleOpenPayment = (amount) => setSelectedAmount(amount);
+    const handleOpenPayment = (amount,tuitioncrt) => {setSelectedAmount(amount); setTuitionCrt(tuitioncrt)}
 
     const handleTextLayout = (index: number, event: LayoutChangeEvent) => {
         const height = event.nativeEvent.layout.height;
@@ -90,7 +91,7 @@ export default function TabelTaxeNeplatite({ examene }) {
                                 <Pressable
                                     key={index}
                                     onLayout={(event) => handleTextLayout(index, event)}
-                                    onPress={() => handleOpenPayment(examen.price * 100)}
+                                    onPress={() => handleOpenPayment(examen.price,examen.number )}
                                     style={{
                                         marginTop: height * 0.011,
                                         flexDirection: "row",
@@ -137,12 +138,16 @@ export default function TabelTaxeNeplatite({ examene }) {
                     </View>
                 </ScrollView>
             </View>
-
             {selectedAmount !== null && (
                 <PaymentModal
                     visible={true}
                     amount={selectedAmount}
-                    onClose={() => setSelectedAmount(null)}
+                    tuitionCrt={tuitioncrt}
+                    onClose={(success) => {setSelectedAmount(null);
+                        if(success){
+                            onRefresh();
+                        }
+                    }}
                 />
             )}
         </View>

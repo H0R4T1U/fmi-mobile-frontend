@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { CacheManager } from './utils/CacheManager';
-import {Slot, Stack} from "expo-router";
+import React, {useEffect, useState} from "react";
+import {CacheManager} from './utils/CacheManager';
+import {Slot} from "expo-router";
 
 export default function Layout() {
     const [isLoading, setIsLoading] = useState(true);

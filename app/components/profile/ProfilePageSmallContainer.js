@@ -1,4 +1,5 @@
-import {View, Text, Dimensions} from "react-native";
+import {Dimensions, Text, View} from "react-native";
+
 const {height, width} = Dimensions.get('window');
 
 export default function ProfilePageSmallContainer({title, content}) {
@@ -24,7 +25,7 @@ export default function ProfilePageSmallContainer({title, content}) {
                 justifyContent:'center'
             }}>
                 <Text style={{
-                    fontSize: height*0.0149,
+                    fontSize: height*0.0147,
                     fontFamily: 'Montserrat',
                     fontWeight:"500",
                     color: '#fff',
@@ -44,7 +45,7 @@ export default function ProfilePageSmallContainer({title, content}) {
             }}>
                 <Text style={{
                     fontSize: height*0.016,
-                    fontFamily: 'Montserrat-Medium',
+                    fontFamily: 'Montserrat',
                     color: '#024073',
                     textAlign: 'center',
                     textAlignVertical: 'center'

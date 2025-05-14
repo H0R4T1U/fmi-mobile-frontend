@@ -1,9 +1,10 @@
 import tw from "twrnc";
-import {Text, Animated, Platform, Dimensions, Image, TouchableOpacity, View} from "react-native";
-import React, {useEffect} from "react";
+import {Animated, Dimensions, Image, Platform, Text, TouchableOpacity, View} from "react-native";
+import React from "react";
 import FMIHubHeader from "../components/common/FMIHubHeader";
 import {Tabs, useRouter, useSegments} from "expo-router";
 import {StatusBar} from "expo-status-bar";
+
 const {height, width} = Dimensions.get('window');
 const buttonWidth =width*0.25;
 const buttonHeight = width*0.25;
@@ -74,7 +75,7 @@ export default function Layout() {
                                 alignItems: 'center',
                                 }}>
                                 <View style={tabIconStyles.container}>
-                                    <Image source={require('../../assets/images/profile.png')} style={tabIconStyles.image} />
+                                    <Image source={require('../../assets/images/icon1_1.png')} style={tabIconStyles.image} />
                                 </View>
                                 <Text style={tabIconStyles.text}>Profil</Text>
                             </View>
@@ -86,7 +87,7 @@ export default function Layout() {
                         tabBarIcon: () => (
                             <View style={tw`items-center justify-center`}>
                                 <View style={tabIconStyles.container}>
-                                    <Image source={require('../../assets/images/building.png')} style={tabIconStyles.image} />
+                                    <Image source={require('../../assets/images/icon2_0.png')} style={tabIconStyles.image} />
                                 </View>
                                 <Text style={tabIconStyles.text}>Clădiri</Text>
                             </View>
@@ -100,7 +101,7 @@ export default function Layout() {
                         tabBarIcon: () => (
                             <View style={tw`items-center justify-center`}>
                                 <View style={tabIconStyles.container}>
-                                    <Image source={require('../../assets/images/academic.png')} style={tabIconStyles.image} />
+                                    <Image source={require('../../assets/images/icon3_3.png')} style={tabIconStyles.image} />
                                 </View>
                                 <Text style={tabIconStyles.text}>Academic</Text>
                             </View>
@@ -115,7 +116,7 @@ export default function Layout() {
                         tabBarIcon: () => (
                             <View style={tw`items-center justify-center`}>
                                 <View style={tabIconStyles.container}>
-                                    <Image source={require('../../assets/images/news.png')} style={tabIconStyles.image} />
+                                    <Image source={require('../../assets/images/icon4_0.png')} style={tabIconStyles.image} />
                                 </View>
                                 <Text style={tabIconStyles.text}>News</Text>
                             </View>

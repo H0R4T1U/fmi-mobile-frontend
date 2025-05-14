@@ -1,12 +1,10 @@
-import FloatingHeader from "../../components/common/FloatingHeader";
-import {View, Text, Button, Pressable} from "react-native";
+import {View} from "react-native";
 import TaxeDropDown from "../../components/academic/TaxeDropDown";
 
 
 export default function ExameneScreen() {
     return (
         <View>
-            <FloatingHeader text="TAXE"/>
             <TaxeDropDown/>
             {/*<TabelTaxeNeplatite examene={Examene}/>*/}
             {/*<View style={{*/}

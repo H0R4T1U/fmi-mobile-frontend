@@ -3,7 +3,7 @@ import { useRouter } from "expo-router";
 import { CacheManager } from "./utils/CacheManager";
 import { ActivityIndicator, View } from "react-native";
 import {StatusBar} from "expo-status-bar";
-import { StripeProvider } from '@stripe/stripe-react-native';
+import {StripeProvider} from '@stripe/stripe-react-native';
 import Constants from "expo-constants";
 import { useFonts } from 'expo-font';
 const { PUBLIC_KEY } = Constants.expoConfig.extra;

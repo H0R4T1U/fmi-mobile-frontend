@@ -1,61 +1,30 @@
 import FloatingHeader from "../components/common/FloatingHeader";
-import React, { useState, useEffect } from "react";
 import NewsContainer from "../components/news/NewsContainer";
-import {Text, FlatList, Dimensions, ActivityIndicator, View} from "react-native";
-import { CacheManager } from "../utils/CacheManager";
+import {Dimensions, FlatList} from "react-native";
 import Constants from "expo-constants";
+import useToken from "../utils/hooks/useToken";
+import LoadingView from "../components/common/LoadingView";
+import ErrorView from "../components/common/ErrorView";
+import useFetch from "../utils/hooks/useFetch";
+
 const { BACKEND } = Constants.expoConfig.extra;
 const {height} = Dimensions.get('window');
 
 export default function News() {
-    const [loading, setLoading] = useState(true);
-    const [token, setToken] = useState(null);
-    const [news, setNews] = useState([]);
-    const [error, setError] = useState(null);
+    const {token, tokenError, tokenLoading} = useToken();
+    const {data, dataError, dataLoading} = useFetch({
+        token,
+        address: `${BACKEND}/api/news/ro`
+    });
 
-    useEffect(() => {
-        const getToken = async () => {
-            try {
-                const storedToken = await CacheManager.get("token");
-                setToken(storedToken);
-            } catch (error) {
-                console.error("Token retrieval failed:", error);
-                setError("Authentication error");
-            }
-        };
-        getToken();
-    }, []);
+    const loading = tokenLoading || dataLoading;
+    const error = tokenError || dataError;
 
-    useEffect(() => {
-        const fetchNews = async () => {
-            try {
-                if (!token) return;
+    if (loading)
+        return <LoadingView headerText="NEWS"/>;
 
-                setLoading(true);
-                const response = await fetch(`${BACKEND}/api/news/ro`, {
-                    headers: {
-                        'Authorization': `Bearer ${token}`,
-                        'Content-Type': 'application/json'
-                    }
-                });
-
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-
-                const responseData = await response.json();
-                setNews(responseData._embedded.newsList);
-
-            } catch (error) {
-                console.error("News fetch failed:", error);
-                setError(error.message);
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        if (token) fetchNews();
-    }, [token]);
+    if (error)
+        return <ErrorView error={error} headerText="NEWS"/>
 
     if (loading)
         return (
@@ -80,7 +49,7 @@ export default function News() {
         <>
             <FloatingHeader text="NEWS" />
             <FlatList
-                data={news}
+                data={data?.newsList || []}
                 renderItem={({ item }) => (
                     <NewsContainer date={item.date} title={item.title} link={item.location}/>
                 )}

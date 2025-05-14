@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
-import {exchangeCodeAsync, makeRedirectUri, Prompt, ResponseType, useAuthRequest} from "expo-auth-session";
-import { CacheManager } from "./CacheManager";
+import {useEffect, useState} from "react";
+import {exchangeCodeAsync, Prompt, ResponseType, useAuthRequest} from "expo-auth-session";
+import {CacheManager} from "../CacheManager";
 import Constants from 'expo-constants';
-import { useRouter } from "expo-router";
-import { Alert } from "react-native";
+import {useRouter} from "expo-router";
+import {Alert} from "react-native";
+
 const { CLIENT_ID, TENANT_ID } = Constants.expoConfig.extra;
 
 const azureConfig = {
@@ -38,12 +39,9 @@ export function useLogin() {
     );
 
     useEffect(() => {
-        console.log("Redirect URI:", azureConfig.redirectUri);
-    }, [azureConfig]);
-
-    useEffect(() => {
         const checkExistingLogin = async () => {
             try {
+                await CacheManager.clear();
                 const cachedUser = await CacheManager.get("loggedUser");
                 if (cachedUser && cachedUser.displayName) {
                     router.replace('/Profil');
@@ -80,6 +78,7 @@ export function useLogin() {
                         discovery
                     );
                     await CacheManager.set("token", tokenResult.accessToken);
+                    console.log(tokenResult.accessToken);
 
                     const userInfoRes = await fetch("https://graph.microsoft.com/v1.0/me", {
                         headers: { Authorization: `Bearer ${tokenResult.accessToken}` },

@@ -1,4 +1,5 @@
-import {Alert, Dimensions, ImageBackground, Linking, Pressable, Text, TouchableOpacity, View} from "react-native";
+import {Alert, Dimensions, ImageBackground, Linking, Pressable, Text, View} from "react-native";
+
 const {height, width} = Dimensions.get('window');
 
 

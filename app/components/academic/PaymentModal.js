@@ -1,16 +1,18 @@
-import React, { useState } from 'react';
-import { View, Text, Modal, TouchableOpacity, Alert } from 'react-native';
-import { useConfirmPayment } from '@stripe/stripe-react-native';
-import { Ionicons } from '@expo/vector-icons';
-import { CardForm } from '@stripe/stripe-react-native';
+import React, {useState} from 'react';
+import {Alert, Modal, Text, TouchableOpacity, View} from 'react-native';
+import {CardForm, useConfirmPayment} from '@stripe/stripe-react-native';
+import {Ionicons} from '@expo/vector-icons';
 import Constants from "expo-constants";
+import useEmail from "../../utils/hooks/useEmail";
+
 const { BACKEND } = Constants.expoConfig.extra;
 
-const AddCardModal = ({ visible, onClose, amount }) => {
+const AddCardModal = ({ visible, onClose, amount,tuitionCrt }) => {
     const { confirmPayment } = useConfirmPayment();
     const [cardDetails, setCardDetails] = useState(null);
     const [billingCountry, setBillingCountry] = useState('Romania');
     const [zipCode, setZipCode] = useState('');
+    const {mail, mailError, mailLoading} = useEmail();
 
 
     const handlePayment = async () => {
@@ -36,21 +38,35 @@ const AddCardModal = ({ visible, onClose, amount }) => {
 
         if (error) {
             Alert.alert('Payment failed', error.message);
+            onClose(false);
         } else if (paymentIntent) {
-            Alert.alert('Success', 'Payment completed!');
-            onClose();
+
+                console.log(paymentIntent.id)
+                // Trimite confirmarea către backend
+                const resp=await fetch(`${BACKEND}/api/payment/success`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ paymentIntentId:paymentIntent.id, tuitionNumber:Number(tuitionCrt), payer:mail })
+                });
+                console.log(resp.status);
+
+                Alert.alert('Success', 'Payment completed!');
+
+
+            onClose(true);
         }
     };
 
     const fetchClientSecret = async () => {
-        //astept implementare backend
+
         const response = await fetch(`${BACKEND}/api/payment/create-checkout-session`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ amount: Number(amount) })
+            body: JSON.stringify({ amount: Number(amount),tuitionNumber:tuitionCrt,payer:mail })
         });
-        const { clientSecret } = await response.json();
-        return clientSecret;
+        const data = await response.json();
+        console.log("Stripe clientSecret:", data);
+        return data.clientSecret;
     };
 
     return (

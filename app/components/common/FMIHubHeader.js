@@ -1,6 +1,7 @@
-import { View, Dimensions} from "react-native";
+import {Dimensions, View} from "react-native";
 import FMIHubHeaderTitle from "./FMIHubHeaderTitle";
 import React from "react";
+
 const {height} = Dimensions.get('window');
 
 export default function FMIHubHeader() {

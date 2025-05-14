@@ -1,5 +1,6 @@
-import {Platform, View, Text, Dimensions} from "react-native";
+import {Dimensions, Platform, Text, View} from "react-native";
 import {useFonts} from "expo-font";
+
 const { height} = Dimensions.get('window');
 
 export default function LoginHeader() {

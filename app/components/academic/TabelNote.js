@@ -1,14 +1,14 @@
-import { Dimensions, ScrollView, Text, View } from "react-native";
-import { useState } from "react";
-import { tabelTaxePlatiteTextStyle } from "../../utils/styles";
-import {LayoutChangeEvent} from "react-native";
+import {Dimensions, LayoutChangeEvent, ScrollView, Text, View} from "react-native";
+import {useState} from "react";
+import {tabelTaxePlatiteTextStyle} from "../../utils/styles";
+
 const { height, width } = Dimensions.get("window");
 
 const tableHeaders = [
-    { key: "number", name: "NR. CRT", style: { width: width * 0.145, marginLeft: width * 0.02 } },
-    { key: "course", name: "DISCIPLINA", style: { width: width * 0.2 } },
+    { key: "number", name: "NR. CRT", style: { width: width * 0.145, marginLeft: width * 0.016 } },
+    { key: "course", name: "DISCIPLINA", style: { width: width * 0.21 } },
     { key: "grade", name: "NOTA", style: { width: width * 0.11 } },
-    { key: "credits", name: "NR. CREDITE", style: { width: width * 0.21 } },
+    { key: "credits", name: "NR. CREDITE", style: { width: width * 0.22 } },
     { key: "date", name: "DATA", style: { width: width * 0.19 } },
 ];
 
@@ -37,7 +37,7 @@ export default function TabelNote({ userGrades }) {
                     boxShadow: `0px ${height * 0.01} ${height * 0.02} #02407315`,
                     overflow: "hidden",
                 }}>
-                <ScrollView horizontal={true}>
+
                     <View>
                         <View
                             style={{
@@ -57,7 +57,7 @@ export default function TabelNote({ userGrades }) {
                                             alignSelf: "center",
                                             alignItems: "center",
                                             justifyContent: "center",
-                                            marginLeft: width * 0.015,
+                                            marginLeft: width * 0.01,
                                             backgroundColor: '#024073'
                                         },
                                         header.style,
@@ -103,7 +103,7 @@ export default function TabelNote({ userGrades }) {
                                                     borderRadius: 5,
                                                     justifyContent: "center",
                                                     alignItems: "center",
-                                                    marginLeft: width * 0.015,
+                                                    marginLeft: width * 0.01,
                                                 },
                                                 header.style,
                                                 { minHeight: rowHeights[index] || height * 0.035 },
@@ -117,7 +117,7 @@ export default function TabelNote({ userGrades }) {
                             ))}
                         </ScrollView>
                     </View>
-                </ScrollView>
+
             </View>
         </View>
     );
