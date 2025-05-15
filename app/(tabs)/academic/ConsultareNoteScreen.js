@@ -8,22 +8,20 @@ import LoadingView from "../../components/common/LoadingView";
 import ErrorView from "../../components/common/ErrorView";
 import useToken from "../../utils/hooks/useToken";
 import useFetch from "../../utils/hooks/useFetch";
-import useEmail from "../../utils/hooks/useEmail";
 
 const { BACKEND } = Constants.expoConfig.extra;
 
 export default function ConsultareNoteScreen() {
     const [selectedSemester, setSelectedSemester] = useState(null);
     const {token, tokenError, tokenLoading} = useToken();
-    const {mail, mailError, mailLoading} = useEmail();
     const {data, dataError, dataLoading} = useFetch({
         token,
-        address: `${BACKEND}/api/grades/${mail}`
+        address: `${BACKEND}/api/grades`
     });
 
-    const loading = tokenLoading || dataLoading || mailLoading;
-    const error = tokenError || dataError || mailError;
-    const userGrades = data?.gradesDTOList || [];
+    const loading = tokenLoading || dataLoading;
+    const error = tokenError || dataError;
+    const userGrades = data || [];
     const filteredGrades = selectedSemester
         ? userGrades.filter(grade => grade.semester === parseInt(selectedSemester))
         : userGrades;

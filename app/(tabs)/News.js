@@ -1,6 +1,6 @@
 import FloatingHeader from "../components/common/FloatingHeader";
 import NewsContainer from "../components/news/NewsContainer";
-import {Dimensions, FlatList} from "react-native";
+import {ActivityIndicator, Dimensions, FlatList, View} from "react-native";
 import Constants from "expo-constants";
 import useToken from "../utils/hooks/useToken";
 import LoadingView from "../components/common/LoadingView";
@@ -16,6 +16,8 @@ export default function News() {
         token,
         address: `${BACKEND}/api/news/ro`
     });
+
+    console.log(data);
 
     const loading = tokenLoading || dataLoading;
     const error = tokenError || dataError;
@@ -49,7 +51,7 @@ export default function News() {
         <>
             <FloatingHeader text="NEWS" />
             <FlatList
-                data={data?.newsList || []}
+                data={data || []}
                 renderItem={({ item }) => (
                     <NewsContainer date={item.date} title={item.title} link={item.location}/>
                 )}

@@ -6,7 +6,6 @@ import Constants from "expo-constants";
 import LoadingView from "../components/common/LoadingView";
 import ErrorView from "../components/common/ErrorView";
 import useFetch from "../utils/hooks/useFetch";
-import useEmail from "../utils/hooks/useEmail";
 import useToken from "../utils/hooks/useToken";
 import useLogout from "../utils/auth/Logout";
 
@@ -15,22 +14,16 @@ const { width, height } = Dimensions.get("window");
 
 export default function Profil() {
     const { token, tokenError, tokenLoading } = useToken();
-    const { mail, mailError, mailLoading } = useEmail();
     const { data, dataError, dataLoading } = useFetch({
         token,
-        address: `${BACKEND}/api/students/${mail}`
+        address: `${BACKEND}/api/students`
     });
     const {logout, loading : logoutLoading, error: logoutError} = useLogout();
 
-    const error = dataError || tokenError || mailError || logoutError;
-    const loading = dataLoading || tokenLoading || mailLoading || logoutLoading;
-    const user = data?.studentList[0] || [];
+    const error = dataError || tokenError || logoutError;
+    const loading = dataLoading || tokenLoading || logoutLoading;
 
-    // const {data : testData, dataError: testDataError, dataLoading: testDataLoading} = useFetch({
-    //     token,
-    //     address: `${BACKEND}/api/test`
-    //     });
-    // console.log("testData",testData);
+    const user = Array.isArray(data) && data.length > 0 ? data[0] : {};
 
     if (loading)
         return <LoadingView headerText="PROFIL"/>

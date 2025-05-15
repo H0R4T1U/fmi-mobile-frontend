@@ -11,7 +11,7 @@ const azureConfig = {
     clientId: CLIENT_ID,
     tenantId: TENANT_ID,
     redirectUri: 'exp://127.0.0.1:25242/--/Profil',
-    scopes: ["openid", "profile", "email", "User.Read"],
+    scopes: ["openid", "profile", "email", "api://fmihub-backend/.default"],
 };
 
 const discovery = {
@@ -78,23 +78,8 @@ export function useLogin() {
                     );
                     await CacheManager.set("token", tokenResult.accessToken);
                     console.log(tokenResult.accessToken);
+                    router.replace('/Profil');
 
-                    const userInfoRes = await fetch("https://graph.microsoft.com/v1.0/me", {
-                        headers: { Authorization: `Bearer ${tokenResult.accessToken}` },
-                    });
-
-                    const userData = await userInfoRes.json();
-
-                    if (userData && userData.displayName) {
-                        console.log("Login successful, user data:", JSON.stringify(userData));
-                        await CacheManager.remove("loggedUser");
-                        await CacheManager.set("loggedUser", userData);
-                        const verifyUser = await CacheManager.get("loggedUser");
-                        console.log("Verified stored user:", JSON.stringify(verifyUser));
-                        router.replace('/Profil');
-                    } else {
-                        throw new Error("Invalid user data received");
-                    }
                 } catch (err) {
                     console.error("Auth error:", err);
                     setError("Login failed. Please try again.");

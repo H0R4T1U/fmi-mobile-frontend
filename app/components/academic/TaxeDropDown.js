@@ -18,23 +18,22 @@ const {height, width} = Dimensions.get('window');
 export default function TaxeDropDown()
 {
     const {token, tokenError, tokenLoading} = useToken();
-    const {mail, mailError, mailLoading} = useEmail();
     const[taxePlatite,setTaxePlatite]=useState([]);
     const[taxeNeplatite,setTaxeNeplatite]=useState([]);
     let {data : taxeP, dataError: taxePlatiteError , dataLoading : taxePlatiteLoading} = useFetch(
         {token,
-            address: `${BACKEND}/api/paid-tuitions/${mail}`
+            address: `${BACKEND}/api/paid-tuitions`
         });
     let {data : taxeN, dataError: taxeNeplatiteError, dataLoading: taxeNeplatiteLoading} = useFetch(
         {token,
-            address: `${BACKEND}/api/tuitions/${mail}`
+            address: `${BACKEND}/api/tuitions`
         });
-    const loading = taxePlatiteLoading || taxeNeplatiteLoading || tokenLoading || mailLoading;
-    const error = taxePlatiteError || taxeNeplatiteError || tokenError || mailError;
+    const loading = taxePlatiteLoading || taxeNeplatiteLoading || tokenLoading;
+    const error = taxePlatiteError || taxeNeplatiteError || tokenError;
 
     useEffect(() => {
-        setTaxePlatite(taxeP?.paidTuitionDTOList || []);
-        setTaxeNeplatite(taxeN?.tuitionDTOList || []);
+        setTaxePlatite(taxeP || []);
+        setTaxeNeplatite(taxeN || []);
     }, [taxeP, taxeN]);
 
 
