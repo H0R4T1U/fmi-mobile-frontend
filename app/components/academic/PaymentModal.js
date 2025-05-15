@@ -7,7 +7,7 @@ import useEmail from "../../utils/hooks/useEmail";
 
 const { BACKEND } = Constants.expoConfig.extra;
 
-const AddCardModal = ({ visible, onClose, amount,tuitionCrt }) => {
+const AddCardModal = ({ visible, onClose, amount,tuitionCrt,setsuccess }) => {
     const { confirmPayment } = useConfirmPayment();
     const [cardDetails, setCardDetails] = useState(null);
     const [billingCountry, setBillingCountry] = useState('Romania');
@@ -38,22 +38,28 @@ const AddCardModal = ({ visible, onClose, amount,tuitionCrt }) => {
 
         if (error) {
             Alert.alert('Payment failed', error.message);
-            onClose(false);
+            onClose();
         } else if (paymentIntent) {
 
                 console.log(paymentIntent.id)
                 // Trimite confirmarea către backend
-                const resp=await fetch(`${BACKEND}/api/payment/success`, {
+                const resp=await fetch(`${BACKEND}/api/payment/success?paymentIntentId=${paymentIntent.id}`, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ paymentIntentId:paymentIntent.id, tuitionNumber:Number(tuitionCrt), payer:mail })
+                   // headers: { 'Content-Type': 'application/json' },
+                    //body: JSON.stringify({ paymentIntentId:paymentIntent.id, tuitionNumber:Number(tuitionCrt), payer:mail })
                 });
-                console.log(resp.status);
+            Alert.alert('Success', 'Payment completed!', [
+                {
+                    text: "OK",
+                    onPress: () => {
+                        setsuccess(true); // marchez plată
+                        onClose();     // închid modalul
+                    }
+                }
+            ]);
 
-                Alert.alert('Success', 'Payment completed!');
 
 
-            onClose(true);
         }
     };
 
@@ -62,9 +68,10 @@ const AddCardModal = ({ visible, onClose, amount,tuitionCrt }) => {
         const response = await fetch(`${BACKEND}/api/payment/create-checkout-session`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ amount: Number(amount),tuitionNumber:tuitionCrt,payer:mail })
+            body: JSON.stringify({ amount: Number(amount),tuitionNumber:Number(tuitionCrt),payer:mail })
         });
         const data = await response.json();
+        console.log(data)
         console.log("Stripe clientSecret:", data);
         return data.clientSecret;
     };

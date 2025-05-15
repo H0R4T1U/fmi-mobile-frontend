@@ -11,7 +11,7 @@ const azureConfig = {
     clientId: CLIENT_ID,
     tenantId: TENANT_ID,
     redirectUri: 'exp://127.0.0.1:25242/--/Profil',
-    scopes: ["openid", "profile", "email", "User.Read"],
+    scopes: ["openid", "profile", "email", "api://fmihub-backend/.default"],
 };
 
 const discovery = {
