@@ -3,14 +3,16 @@ import {Alert, Modal, Text, TouchableOpacity, View} from 'react-native';
 import {CardForm, useConfirmPayment} from '@stripe/stripe-react-native';
 import {Ionicons} from '@expo/vector-icons';
 import Constants from "expo-constants";
+import useEmail from "../../utils/hooks/useEmail";
 
 const { BACKEND } = Constants.expoConfig.extra;
 
-const AddCardModal = ({ visible, onClose, amount }) => {
+const AddCardModal = ({ visible, onClose, amount,tuitionCrt,setsuccess }) => {
     const { confirmPayment } = useConfirmPayment();
     const [cardDetails, setCardDetails] = useState(null);
     const [billingCountry, setBillingCountry] = useState('Romania');
     const [zipCode, setZipCode] = useState('');
+    const {mail, mailError, mailLoading} = useEmail();
 
 
     const handlePayment = async () => {
@@ -36,21 +38,42 @@ const AddCardModal = ({ visible, onClose, amount }) => {
 
         if (error) {
             Alert.alert('Payment failed', error.message);
-        } else if (paymentIntent) {
-            Alert.alert('Success', 'Payment completed!');
             onClose();
+        } else if (paymentIntent) {
+
+                console.log(paymentIntent.id)
+                // Trimite confirmarea către backend
+                const resp=await fetch(`${BACKEND}/api/payment/success?paymentIntentId=${paymentIntent.id}`, {
+                    method: 'POST',
+                   // headers: { 'Content-Type': 'application/json' },
+                    //body: JSON.stringify({ paymentIntentId:paymentIntent.id, tuitionNumber:Number(tuitionCrt), payer:mail })
+                });
+            Alert.alert('Success', 'Payment completed!', [
+                {
+                    text: "OK",
+                    onPress: () => {
+                        setsuccess(true); // marchez plată
+                        onClose();     // închid modalul
+                    }
+                }
+            ]);
+
+
+
         }
     };
 
     const fetchClientSecret = async () => {
-        //astept implementare backend
+
         const response = await fetch(`${BACKEND}/api/payment/create-checkout-session`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ amount: Number(amount) })
+            body: JSON.stringify({ amount: Number(amount),tuitionNumber:Number(tuitionCrt),payer:mail })
         });
-        const { clientSecret } = await response.json();
-        return clientSecret;
+        const data = await response.json();
+        console.log(data)
+        console.log("Stripe clientSecret:", data);
+        return data.clientSecret;
     };
 
     return (

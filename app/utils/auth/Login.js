@@ -77,6 +77,7 @@ export function useLogin() {
                         discovery
                     );
                     await CacheManager.set("token", tokenResult.accessToken);
+                    console.log(tokenResult.accessToken);
 
                     const userInfoRes = await fetch("https://graph.microsoft.com/v1.0/me", {
                         headers: { Authorization: `Bearer ${tokenResult.accessToken}` },

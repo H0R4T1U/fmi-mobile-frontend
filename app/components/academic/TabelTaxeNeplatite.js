@@ -1,5 +1,5 @@
 import {Alert, Dimensions, ImageBackground, Pressable, ScrollView, Text, View,} from "react-native";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import image from "../../../assets/images/pay.png";
 import PaymentModal from "./PaymentModal";
 import {LayoutChangeEvent} from "react-native";
@@ -8,7 +8,13 @@ import {
     tabelTaxeNeplatiteTextStyle,
     tabelTaxeNeplatiteViewStyle, tabelTaxePlatiteHeaderViewStyle
 } from "../../utils/styles";
+import useFetch from "../../utils/hooks/useFetch";
+import useToken from "../../utils/hooks/useToken";
+import Constants from "expo-constants";
+import useEmail from "../../utils/hooks/useEmail";
+import AddCardModal from "./PaymentModal";
 const {height, width} = Dimensions.get('window');
+const { BACKEND } = Constants.expoConfig.extra;
 
 const tableHeaders = [
     { key: "number", name: "NR. CRT", style: { width: width * 0.145, marginLeft: width * 0.022 } },
@@ -19,11 +25,16 @@ const tableHeaders = [
     { key: "paymentTerm", name: "DATA SCADENTA", style: { width: width * 0.26 } },
 ];
 
-export default function TabelTaxeNeplatite({ examene }) {
+export default function TabelTaxeNeplatite({ examene,setexamene }) {
     const [rowHeights, setRowHeights] = useState({});
     const [selectedAmount, setSelectedAmount] = useState(null);
+    const[tuitioncrt,setTuitionCrt]=useState(null);
+    const[paid,setpaid]=useState(false);
+    const {token, tokenError, tokenLoading} = useToken();
+    const {mail, mailError, mailLoading} = useEmail();
+    const [taxe, setTaxe] = useState(examene);
 
-    const handleOpenPayment = (amount) => setSelectedAmount(amount);
+    const handleOpenPayment = (amount,tuitioncrt) => {setSelectedAmount(amount); setTuitionCrt(tuitioncrt)}
 
     const handleTextLayout = (index: number, event: LayoutChangeEvent) => {
         const height = event.nativeEvent.layout.height;
@@ -32,6 +43,28 @@ export default function TabelTaxeNeplatite({ examene }) {
             [index]: Math.max(prevHeights[index] || 0, height),
         }));
     };
+
+    useEffect(() => {
+        const fetchUpdatedTaxe = async () => {
+            try {
+                const response = await fetch(`${BACKEND}/api/tuitions/${mail}`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                        'Content-Type': 'application/json',
+                    },
+                });
+                const data = await response.json();
+                setexamene(data._embedded.tuitionDTOList ?? []);
+                console.log(examene);
+            } catch (error) {
+                console.error("Eroare la fetch taxe neplatite:", error);
+            }
+        };
+        if (paid) {
+            fetchUpdatedTaxe()
+            setpaid(false);
+        }
+    }, [paid,  mail, token]);
 
     return (
         <View style={{ alignItems: "center", paddingTop: height * 0.01, paddingHorizontal: width * 0.01 }}>
@@ -90,7 +123,7 @@ export default function TabelTaxeNeplatite({ examene }) {
                                 <Pressable
                                     key={index}
                                     onLayout={(event) => handleTextLayout(index, event)}
-                                    onPress={() => handleOpenPayment(examen.price * 100)}
+                                    onPress={() => handleOpenPayment(examen.price,examen.number )}
                                     style={{
                                         marginTop: height * 0.011,
                                         flexDirection: "row",
@@ -138,10 +171,14 @@ export default function TabelTaxeNeplatite({ examene }) {
                 </ScrollView>
             </View>
             {selectedAmount !== null && (
-                <PaymentModal
+                <AddCardModal
                     visible={true}
                     amount={selectedAmount}
-                    onClose={() => setSelectedAmount(null)}
+                    tuitionCrt={tuitioncrt}
+                    setsuccess={setpaid}
+                    onClose={()=>
+                        setSelectedAmount(null)
+                    }
                 />
             )}
         </View>

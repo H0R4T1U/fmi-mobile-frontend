@@ -5,7 +5,6 @@ export default function useFetch({token, address}) {
     const [dataLoading, setDataLoading] = useState(false);
     const [dataError, setError] = useState(null);
 
-    useEffect(() => {
         const fetchData = async () => {
             try {
                 if (!token) return;
@@ -26,7 +25,8 @@ export default function useFetch({token, address}) {
                 setDataLoading(false);
             }
         };
+        useEffect(()=>{
         fetchData();
     }, [token]);
-    return {data, dataError, dataLoading};
+    return {data, dataError, dataLoading,refetch:fetchData};
 }

@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Dimensions, View} from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
 import TabelTaxeNeplatite from "./TabelTaxeNeplatite";
@@ -19,26 +19,30 @@ export default function TaxeDropDown()
 {
     const {token, tokenError, tokenLoading} = useToken();
     const {mail, mailError, mailLoading} = useEmail();
-    let {data : taxePlatite, dataError: taxePlatiteError , dataLoading : taxePlatiteLoading} = useFetch(
+    const[taxePlatite,setTaxePlatite]=useState([]);
+    const[taxeNeplatite,setTaxeNeplatite]=useState([]);
+    let {data : taxeP, dataError: taxePlatiteError , dataLoading : taxePlatiteLoading} = useFetch(
         {token,
             address: `${BACKEND}/api/paid-tuitions/${mail}`
         });
-    let {data : taxeNeplatite, dataError: taxeNeplatiteError, dataLoading: taxeNeplatiteLoading} = useFetch(
+    let {data : taxeN, dataError: taxeNeplatiteError, dataLoading: taxeNeplatiteLoading} = useFetch(
         {token,
             address: `${BACKEND}/api/tuitions/${mail}`
         });
     const loading = taxePlatiteLoading || taxeNeplatiteLoading || tokenLoading || mailLoading;
     const error = taxePlatiteError || taxeNeplatiteError || tokenError || mailError;
 
-    taxePlatite = taxePlatite?.paidTuitionDTOList || [];
-    taxeNeplatite = taxeNeplatite?.tuitionDTOList || [];
+    useEffect(() => {
+        setTaxePlatite(taxeP?.paidTuitionDTOList || []);
+        setTaxeNeplatite(taxeN?.tuitionDTOList || []);
+    }, [taxeP, taxeN]);
 
 
     const TabelTaxeN = () =>(
-        <TabelTaxeNeplatite examene={taxeNeplatite}/>
+        <TabelTaxeNeplatite examene={taxeNeplatite} setexamene={setTaxeNeplatite}/>
     )
     const TabelTaxeP=()=>(
-        <TabelTaxePlatite examene={taxePlatite}/>
+        <TabelTaxePlatite taxePlatite={taxePlatite} />
     )
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState("TabelTaxeN");
