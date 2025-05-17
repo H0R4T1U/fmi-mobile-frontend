@@ -37,7 +37,7 @@ export default function SemestreDropDown({onSelectSemester})
                     setOpen={setOpen}
                     setValue={handleChange}
                     setItems={setItems}
-                    placeholder="Selecteaza semestru"
+                    placeholder="SEMESTRUL 1"
                     dropDownContainerStyle={
                         {
                             borderColor:"#AEB9C4",

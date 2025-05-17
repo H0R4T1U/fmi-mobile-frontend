@@ -12,7 +12,7 @@ import useFetch from "../../utils/hooks/useFetch";
 const { BACKEND } = Constants.expoConfig.extra;
 
 export default function ConsultareNoteScreen() {
-    const [selectedSemester, setSelectedSemester] = useState(null);
+    const [selectedSemester, setSelectedSemester] = useState("1");
     const {token, tokenError, tokenLoading} = useToken();
     const {data, dataError, dataLoading} = useFetch({
         token,

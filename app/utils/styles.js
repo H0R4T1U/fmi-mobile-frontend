@@ -1,3 +1,37 @@
+
+export const orarRowStyle =(width,height)=>( {
+    width: width * 0.899,
+    minHeight: height * 0.045,
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
+    paddingLeft: width * 0.02,
+    borderRadius: 5,
+    borderColor: "#024073",
+    borderBottomWidth: 0.5,
+    borderTopWidth: 0,
+    flexDirection: "row",
+    gap: width * 0.03,
+    paddingHorizontal: width * 0.03,
+});
+
+export const orarTextTitleStyle = (width,height)=>({
+    fontSize: height * 0.017,
+    fontFamily: 'Montserrat',
+    color: '#024073',
+    fontWeight: "bold",
+    textAlign: "center",
+});
+
+export const orarTextValueStyle = (width,height)=>({
+    fontSize: height * 0.017,
+    fontFamily: 'Montserrat',
+    color: '#024073',
+    fontWeight: "500",
+    textAlign: "center",
+});
+
+
 export const tabelExameneHeaderTextStyle = (width, height) => ({
     textAlignVertical:"center",
     textAlign:"center",
@@ -11,6 +45,30 @@ export const tabelExameneHeaderTextStyle = (width, height) => ({
     paddingVertical: height*0.0065,
     marginLeft:width*0.012
 });
+export const tabelPrezenteHeaderTextStyle = (width, height) => ({
+    textAlignVertical:"center",
+    textAlign:"center",
+    backgroundColor: "#024073",
+    justifyContent:"center",
+    fontFamily: 'Montserrat',
+    color: '#FFF',
+    fontWeight: "500",
+    borderRadius: 5,
+    fontSize: height*0.0135,
+    paddingVertical: height*0.0065,
+    marginLeft:width*0.012
+});
+
+export const tabelPrezenteDataTextStyle = (width, height) => ({
+    fontFamily: 'Montserrat',
+    color: '#024073',
+    fontWeight: "600",
+    textAlign: "center",
+    textAlignVertical: 'center',
+    fontSize: height * 0.016,
+    paddingHorizontal:width*0.01,
+    paddingVertical:height*0.005
+});
 
 export const tabelExameneDataTextStyle = (width, height) => ({
     fontFamily: 'Montserrat',
@@ -18,7 +76,9 @@ export const tabelExameneDataTextStyle = (width, height) => ({
     fontWeight: "500",
     textAlign: "center",
     textAlignVertical: 'center',
-    fontSize: height * 0.016
+    fontSize: height * 0.016,
+    paddingHorizontal:width*0.01,
+    paddingVertical:height*0.005
 });
 
 export const tabelExameneDataViewStyle = (width, height) => ({
@@ -54,7 +114,9 @@ export const tabelTaxePlatiteTextStyle = (width, height) => ({
     fontFamily: 'Montserrat',
     color: '#024073',
     fontWeight: "500",
-    textAlign: "center"
+    textAlign: "center",
+    paddingHorizontal:width*0.012,
+    paddingVertical:height*0.005
 });
 
 export const tabelTaxePlatiteViewStyle = (width, height) => ({
@@ -62,7 +124,8 @@ export const tabelTaxePlatiteViewStyle = (width, height) => ({
     borderRadius: 5,
     justifyContent: "center",
     alignItems: "center",
-    marginLeft:width*0.015
+    marginLeft:width*0.015,
+
 });
 
 export const tabelTaxeNeplatiteTextStyle = (width, height) => ({
@@ -71,7 +134,7 @@ export const tabelTaxeNeplatiteTextStyle = (width, height) => ({
     color: '#024073',
     fontWeight: "500",
     textAlign: "center",
-    paddingHorizontal:width*0.01
+    paddingHorizontal:width*0.012
 });
 
 export const tabelTaxeNeplatiteViewStyle = (width, height) => ({

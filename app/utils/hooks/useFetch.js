@@ -30,7 +30,7 @@ export default function useFetch({token, address}) {
                 console.log("before set data", responseData);
                 responseData ? setData(responseData) : setData([]);
                 console.log(responseData);
-                if (responseData[0].email && await CacheManager.get("loggedUser") != null)
+                if (responseData[0] && responseData[0].email && await CacheManager.get("loggedUser") != null)
                     await CacheManager.set("loggedUser", responseData[0].email);
                 // console.log(responseData)
             } catch (dataError) {

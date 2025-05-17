@@ -64,7 +64,7 @@ export default function CantinaContainer({image,name,location,program, link}) {
                                 paddingHorizontal: width*0.01,
                                 fontSize: height*0.017,
                                 fontFamily: 'Montserrat',
-                                fontWeight: "500",
+                                fontWeight: "600",
                                 color: '#024073',
 
                             }}>

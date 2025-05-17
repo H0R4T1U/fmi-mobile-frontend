@@ -22,11 +22,16 @@ export default function HomeScreen() {
         address: `${BACKEND}/api/students`
     })
 
+    const [group,setGroup]=useState("");
     const loading = tokenLoading || timeTableLoading || dataLoading;
     const error = tokenError || timeTableError || dataError;
+    console.log(data);
 
-    const group = data[0]?.group || "";
 
+    useEffect(()=>{
+        if(!loading||!data)return;
+        setGroup(data[0]?.group||"");
+    },[data,loading]);
     useEffect(() => {
         const getTimeTable = async () => {
             if (!group) return;

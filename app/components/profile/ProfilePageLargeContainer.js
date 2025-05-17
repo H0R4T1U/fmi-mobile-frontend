@@ -1,11 +1,14 @@
 import {Dimensions, Pressable, Text, TextInput, View,} from "react-native";
 import {useState} from "react";
+import { useTranslation } from 'react-i18next';
+
 
 const {height, width} = Dimensions.get('window');
 
 
 export default function ProfilePageLargeContainer({username, password}) {
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+    const {t}=useTranslation();
     return (
         <View style={{
             backgroundColor: '#AEB9C4D7',
@@ -31,7 +34,12 @@ export default function ProfilePageLargeContainer({username, password}) {
             }}>
                 <Text style={{
                     color: '#fff',
-                }}>CREDENTIALE</Text>
+                    fontWeight:"600",
+                    alignSelf:"center",
+                    justifyContent:"center",
+                    paddingHorizontal:width*0.01,
+                    textAlign:"center"
+                }}>{t('credentials')}</Text>
             </View>
             <View style={{
                 flexDirection: 'row',
@@ -42,7 +50,7 @@ export default function ProfilePageLargeContainer({username, password}) {
                 <View style={{
                     backgroundColor: '#024073',
                     borderRadius: 5,
-                    width: width*0.25,
+                    width: width*0.27,
                     height: height*0.035,
                     alignItems: 'center',
                     justifyContent:'center'
@@ -50,11 +58,11 @@ export default function ProfilePageLargeContainer({username, password}) {
                     <Text style={{
                         fontSize: height*0.0147,
                         fontFamily: 'Montserrat',
-                        fontWeight:"500",
+                        fontWeight:"600",
                         color: '#fff',
                         textAlign: 'center'
                     }}>
-                        USERNAME
+                        {t('username')}
                     </Text>
                 </View>
                 <View style={{
@@ -69,7 +77,8 @@ export default function ProfilePageLargeContainer({username, password}) {
                     <Text style={{
                         fontSize: height*0.016,
                         fontFamily: 'Montserrat',
-                        color: '#024073'
+                        color: '#024073',
+                        fontWeight:"500",
                     }}>
                         {username}
                     </Text>
@@ -83,7 +92,7 @@ export default function ProfilePageLargeContainer({username, password}) {
                 <View style={{
                     backgroundColor: '#024073',
                     borderRadius: 5,
-                    width: width*0.25,
+                    width: width*0.27,
                     height: height*0.035,
                     alignItems: 'center',
                     justifyContent:'center'
@@ -93,9 +102,9 @@ export default function ProfilePageLargeContainer({username, password}) {
                         fontFamily: 'Montserrat',
                         color: '#fff',
                         textAlign: 'center',
-                        fontWeight:"500",
+                        fontWeight:"600",
                     }}>
-                        PAROLĂ
+                        {t('password')}
                     </Text>
                 </View>
                 <View style={{
@@ -119,6 +128,7 @@ export default function ProfilePageLargeContainer({username, password}) {
                             fontFamily: 'Montserrat',
                             color: '#024073',
                             textAlignVertical: 'center',
+                            fontWeight:"500",
                             textAlign: 'center',
                             flex: 1,
                             includeFontPadding: false

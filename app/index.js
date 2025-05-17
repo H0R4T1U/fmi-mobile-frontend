@@ -5,6 +5,7 @@ import { ActivityIndicator, View } from "react-native";
 import {StatusBar} from "expo-status-bar";
 import {StripeProvider} from '@stripe/stripe-react-native';
 import Constants from "expo-constants";
+import { TranslatorProvider } from 'react-native-translator';
 import { useFonts } from 'expo-font';
 const { PUBLIC_KEY } = Constants.expoConfig.extra;
 
@@ -53,7 +54,9 @@ export default function Index() {
 
     return (
         <StripeProvider publishableKey={PUBLIC_KEY}>
-        <StatusBar style="light" hidden={false}/>
+            <TranslatorProvider>
+                <StatusBar style="light" hidden={false}/>
+            </TranslatorProvider>
         </StripeProvider>
     );
 }

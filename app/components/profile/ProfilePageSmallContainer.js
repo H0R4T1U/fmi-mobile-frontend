@@ -1,4 +1,4 @@
-import {Dimensions, Text, View} from "react-native";
+import {Dimensions, ScrollView, Text, View} from "react-native";
 
 const {height, width} = Dimensions.get('window');
 
@@ -24,12 +24,14 @@ export default function ProfilePageSmallContainer({title, content}) {
                 alignItems: 'center',
                 justifyContent:'center'
             }}>
+
                 <Text style={{
                     fontSize: height*0.0147,
                     fontFamily: 'Montserrat',
-                    fontWeight:"500",
+                    fontWeight:"600",
                     color: '#fff',
-                    textAlign: 'center'
+                    textAlign: 'center',
+
                 }}>
                     {title}
                 </Text>
@@ -43,15 +45,19 @@ export default function ProfilePageSmallContainer({title, content}) {
                 justifyContent: 'center',
                 alignItems: 'center',
             }}>
-                <Text style={{
-                    fontSize: height*0.016,
-                    fontFamily: 'Montserrat',
-                    color: '#024073',
-                    textAlign: 'center',
-                    textAlignVertical: 'center'
-                }}>
-                    {content}
-                </Text>
+                <ScrollView horizontal={true} >
+                    <Text style={{
+                        fontSize: height*0.016,
+                        fontFamily: 'Montserrat',
+                        fontWeight:"500",
+                        color: '#024073',
+                        textAlign: 'center',
+                        textAlignVertical: 'center',
+                        alignSelf:"center"
+                    }}>
+                        {content}
+                    </Text>
+                </ScrollView>
             </View>
         </View>
     )
