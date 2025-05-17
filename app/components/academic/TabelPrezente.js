@@ -4,7 +4,7 @@ const { height, width } = Dimensions.get("window");
 import {
     tabelExameneHeaderTextStyle,
     tabelExameneDataTextStyle,
-    tabelExameneDataViewStyle,
+    tabelExameneDataViewStyle, tabelPrezenteHeaderTextStyle, tabelPrezenteDataTextStyle,
 } from "../../utils/styles";
 import { LayoutChangeEvent } from "react-native";
 
@@ -66,11 +66,11 @@ export default function TabelPrezente() {
     const getStatusColor = (status: string) => {
         switch (status.toUpperCase()) {
             case "PREZENT":
-                return "#024073"; // green
+                return "#024073";
             case "MOTIVAT":
-                return "#024073"; // yellow
+                return "#024073";
             case "ABSENT":
-                return "#e44c49"; // red
+                return "#e44c49";
             default:
                 return "#ffffff";
         }
@@ -106,7 +106,7 @@ export default function TabelPrezente() {
                             }}
                         >
                             {exameneHeader.map((item, index) => (
-                                <Text key={index} style={[tabelExameneHeaderTextStyle(width, height), item.style]}>
+                                <Text key={index} style={[tabelPrezenteHeaderTextStyle(width, height), item.style]}>
                                     {item.name}
                                 </Text>
                             ))}
@@ -125,7 +125,6 @@ export default function TabelPrezente() {
                                     onLayout={(event) => handleTextLayout(index, event)}
                                     style={{
                                         marginTop: height * 0.01,
-                                        //paddingHorizontal:width*0.005,
                                         flexDirection: "row",
                                         alignItems: "center",
                                         minHeight:height * 0.01,
@@ -151,7 +150,7 @@ export default function TabelPrezente() {
                                             >
                                                 <Text
                                                     style={[
-                                                        tabelExameneDataTextStyle(width, height),
+                                                        tabelPrezenteDataTextStyle(width, height),
                                                         isClickable && { color, fontWeight: "bold" },
                                                     ]}
                                                 >

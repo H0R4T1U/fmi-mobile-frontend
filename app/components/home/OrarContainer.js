@@ -55,11 +55,28 @@ export default function OrarContainer({orar,zi}) {
                     }}>
                         <ScrollView nestedScrollEnabled={true} showsVerticalScrollIndicator={false}>
                             <View>
-                                <ScrollView nestedScrollEnabled={true} style={{height:(height*0.05)+(height*0.045)*5}} showsVerticalScrollIndicator={false}>
-                                    {orar.sort((ora1, ora2) => ora1.startHour - ora2.startHour).map((orari,index) => (
-                                        <OrarPageMateriaContainer key={index} disciplina={orari.courseInstanceName} orastart={orari.startHour} orafinal={orari.endHour} frecventa={orari.frequency} sala={orari.room} formatia={orari.formation} tipul={orari.classType} prof={orari.teacher} />
-                                        ))}
-                                </ScrollView>
+                                {
+                                    orar.length ===0 ?(
+                                        <Text style={{
+                                            fontSize: height * 0.017,
+                                            fontFamily: 'Montserrat',
+                                            color: '#024073',
+                                            fontWeight: "bold",
+                                            textAlign: "center",
+                                            paddingBottom:height*0.01
+
+                                        }}>
+                                            Nu exista ore programate pentru aceasta zi.
+                                        </Text>
+                                    ):(
+                                        <ScrollView nestedScrollEnabled={true} style={{height:(height*0.05)+(height*0.045)*5}} showsVerticalScrollIndicator={false}>
+                                            {orar.sort((ora1, ora2) => ora1.startHour - ora2.startHour).map((orari,index) => (
+                                                <OrarPageMateriaContainer key={index} disciplina={orari.courseInstanceName} orastart={orari.startHour} orafinal={orari.endHour} frecventa={orari.frequency} sala={orari.room} formatia={orari.formation} tipul={orari.classType} prof={orari.teacher} />
+                                            ))}
+                                        </ScrollView>
+                                    )
+                                }
+
                             </View>
                         </ScrollView>
                     </View>

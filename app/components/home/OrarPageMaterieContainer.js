@@ -1,215 +1,49 @@
 import {Dimensions, Text, View} from "react-native";
+import {orarRowStyle, orarTextTitleStyle, orarTextValueStyle} from "../../utils/styles";
 const {height, width} = Dimensions.get('window');
 
 
 export default function OrarPageMateriaContainer({disciplina,orastart,orafinal,frecventa,sala,formatia,tipul,prof}){
-    const handleTextLayout = (index, event) => {
-        const height = event.nativeEvent.layout.height;
-        setRowHeights((prevHeights) => ({
-            ...prevHeights,
-            [index]: Math.max(prevHeights[index] || 0, height),
-        }));
-    };
-return(
-                <View>
-                    <View style={{
-                        width:width*0.899,
-                        minHeight:height*0.05,
-                        backgroundColor:"rgba(174,185,196,0.49)",
-                        alignItems:"center",
-                        justifyContent:"center",
-                        borderRadius:5,
-                        borderColor: "#024073",
-                        borderWidth: 0.5,
-                        paddingHorizontal:width*0.03
 
-                    }}
+    const renderRow = (title, value) => (
+        <View style={orarRowStyle(width,height)}>
+            <Text style={orarTextTitleStyle(width,height)}>{title}</Text>
+            <Text style={orarTextValueStyle(width,height)}>{value}</Text>
+        </View>
+    );
 
-                    >
-                        <Text style={{
-                            fontSize: height * 0.017,
-                            fontFamily: 'Montserrat',
-                            color: '#024073',
-                            fontWeight: "bold",
-                            textAlign: "center",
-                        }}>
-                            {disciplina} | {orastart} - {orafinal}
-                        </Text>
-                    </View>
-                    <View style={{
-                        width:width*0.899,
-                        minHeight:height*0.045,
-                        backgroundColor:"#fff",
-                        alignItems:"center",
-                        justifyContent:"center",
-                        paddingLeft:width*0.02,
-                        borderRadius:5,
-                        borderColor: "#024073",
-                        borderBottomWidth: 0.5,
-                        borderTopWidth:0,
-                        flexDirection:"row",
-                        gap: width * 0.03,
-                        paddingHorizontal:width*0.03
-                    }}>
-                        <Text style={{
-                            fontSize: height * 0.017,
-                            fontFamily: 'Montserrat',
-                            color: '#024073',
-                            fontWeight: "bold",
-                            textAlign:"center"
+    const frecventaText = frecventa === 0 ? 'Saptamanal' : (frecventa === 2 ? 'Saptamana para' : 'Saptamana impara');
 
-                        }}>
-                            Frecventa
-                        </Text>
-                        <Text style={{
-                            fontSize: height * 0.017,
-                            fontFamily: 'Montserrat',
-                            color: '#024073',
-                            fontWeight: "500",
-                            textAlign: "center",
-                        }}>
-                            {frecventa === 0 ? 'Saptamanal' : (frecventa === 2 ? 'Saptamana para' : 'Saptamana impara')}
-                        </Text>
-                    </View>
-                    <View style={{
-                        width:width*0.899,
-                        minHeight:height*0.045,
-                        backgroundColor:"#fff",
-                        alignItems:"center",
-                        justifyContent:"center",
-                        paddingLeft:width*0.02,
-                        borderRadius:5,
-                        borderColor: "#024073",
-                        borderBottomWidth: 0.5,
-                        borderTopWidth:0,
-                        flexDirection:"row",
-                        gap: width * 0.03,
-                        paddingHorizontal:width*0.03
-                    }}>
-                        <Text style={{
-                            fontSize: height * 0.017,
-                            fontFamily: 'Montserrat',
-                            color: '#024073',
-                            fontWeight: "bold",
-                            textAlign: "center",
 
-                        }}>
-                            Sala
-                        </Text>
-                        <Text style={{
-                            fontSize: height * 0.017,
-                            fontFamily: 'Montserrat',
-                            color: '#024073',
-                            fontWeight: "500",
-                            textAlign: "center",
-                        }}>
-                            {sala}
-                        </Text>
-                    </View>
-                    <View style={{
-                        width:width*0.899,
-                        minHeight:height*0.045,
-                        backgroundColor:"#fff",
-                        alignItems:"center",
-                        justifyContent:"center",
-                        paddingLeft:width*0.02,
-                        borderRadius:5,
-                        borderColor: "#024073",
-                        borderBottomWidth: 0.5,
-                        borderTopWidth:0,
-                        flexDirection:"row",
-                        gap: width * 0.03,
-                        paddingHorizontal:width*0.03
-                    }}>
-                        <Text style={{
-                            fontSize: height * 0.017,
-                            fontFamily: 'Montserrat',
-                            color: '#024073',
-                            fontWeight: "bold",
-                            textAlign: "center",
+    return (
+        <View>
+            <View style={{
+                width: width * 0.899,
+                minHeight: height * 0.05,
+                backgroundColor: "rgba(174,185,196,0.49)",
+                alignItems: "center",
+                justifyContent: "center",
+                borderRadius: 5,
+                borderColor: "#024073",
+                borderWidth: 0.5,
+                paddingHorizontal: width * 0.03,
+            }}>
+                <Text style={{
+                    fontSize: height * 0.017,
+                    fontFamily: 'Montserrat',
+                    color: '#024073',
+                    fontWeight: "bold",
+                    textAlign: "center",
+                }}>
+                    {disciplina} | {orastart} - {orafinal}
+                </Text>
+            </View>
 
-                        }}>
-                            Formatia
-                        </Text>
-                        <Text style={{
-                            fontSize: height * 0.017,
-                            fontFamily: 'Montserrat',
-                            color: '#024073',
-                            fontWeight: "500",
-                            textAlign: "center",
-                        }}>
-                            {formatia}
-                        </Text>
-                    </View>
-                    <View style={{
-                        width:width*0.899,
-                        minHeight:height*0.045,
-                        backgroundColor:"#fff",
-                        alignItems:"center",
-                        justifyContent:"center",
-                        paddingLeft:width*0.02,
-                        borderRadius:5,
-                        borderColor: "#024073",
-                        borderBottomWidth: 0.5,
-                        borderTopWidth:0,
-                        flexDirection:"row",
-                        gap: width * 0.03,
-                        paddingHorizontal:width*0.03
-                    }}>
-                        <Text style={{
-                            fontSize: height * 0.017,
-                            fontFamily: 'Montserrat',
-                            color: '#024073',
-                            fontWeight: "bold",
-                            textAlign: "center",
+            {renderRow('Frecventa', frecventaText)}
+            {renderRow('Sala', sala)}
+            {renderRow('Formatia', formatia)}
+            {renderRow('Tipul', tipul)}
+            {renderRow('Cadrul didactic', prof)}
+        </View>
 
-                        }}>
-                            Tipul
-                        </Text>
-                        <Text style={{
-                            fontSize: height * 0.017,
-                            fontFamily: 'Montserrat',
-                            color: '#024073',
-                            fontWeight: "500",
-                            textAlign: "center",
-                        }}>
-                            {tipul}
-                        </Text>
-                    </View>
-                    <View style={{
-                        width:width*0.899,
-                        minHeight:height*0.045,
-                        backgroundColor:"#fff",
-                        alignItems:"center",
-                        justifyContent:"center",
-                        paddingLeft:width*0.02,
-                        borderRadius:5,
-                        borderColor: "#024073",
-                        borderBottomWidth: 0.5,
-                        borderTopWidth:0,
-                        flexDirection:"row",
-                        gap: width * 0.03,
-                        paddingHorizontal:width*0.03
-                    }}>
-                        <Text style={{
-                            fontSize: height * 0.017,
-                            fontFamily: 'Montserrat',
-                            color: '#024073',
-                            fontWeight: "bold",
-                            textAlign: "center",
-
-                        }}>
-                            Cadrul didactic
-                        </Text>
-                        <Text style={{
-                            fontSize: height * 0.017,
-                            fontFamily: 'Montserrat',
-                            color: '#024073',
-                            fontWeight: "500",
-                            textAlign: "center",
-                        }}>
-                            {prof}
-                        </Text>
-                    </View>
-    </View>
 )}

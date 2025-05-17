@@ -7,7 +7,6 @@ import useToken from "../utils/hooks/useToken";
 import ErrorView from "../components/common/ErrorView";
 import LoadingView from "../components/common/LoadingView";
 import useFetch from "../utils/hooks/useFetch";
-import useEmail from "../utils/hooks/useEmail";
 
 const { height, width } = Dimensions.get('window');
 const { BACKEND } = Constants.expoConfig.extra;
@@ -18,17 +17,21 @@ export default function HomeScreen() {
     const [timeTableLoading, setTimeTableLoading] = useState(false);
     const [timeTableError, setTimeTableError] = useState(null);
     const {token, tokenLoading, tokenError} = useToken();
-    const {mail, mailError, mailLoading} = useEmail();
     const {data, dataError, dataLoading} = useFetch({
         token,
-        address: `${BACKEND}/api/students/${mail}`
+        address: `${BACKEND}/api/students`
     })
 
-    const loading = tokenLoading || timeTableLoading || mailLoading || dataLoading;
-    const error = tokenError || timeTableError || mailError || dataError;
+    const [group,setGroup]=useState("");
+    const loading = tokenLoading || timeTableLoading || dataLoading;
+    const error = tokenError || timeTableError || dataError;
+    console.log(data);
 
-    const group = data?.studentList[0].group || "";
 
+    useEffect(()=>{
+        if(!loading||!data)return;
+        setGroup(data[0]?.group||"");
+    },[data,loading]);
     useEffect(() => {
         const getTimeTable = async () => {
             if (!group) return;

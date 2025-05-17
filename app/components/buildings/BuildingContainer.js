@@ -50,7 +50,7 @@ export default function BuildingContainer({name, image, address, route}) {
                                 paddingHorizontal:width*0.01,
                                 fontSize:height*0.016,
                                 fontFamily: 'Montserrat',
-                                fontWeight: "500",
+                                fontWeight: "600",
                                 color: '#024073',
                                 paddingLeft:width*0.01,
                             }}>
@@ -71,6 +71,7 @@ export default function BuildingContainer({name, image, address, route}) {
                                 paddingHorizontal:width*0.01,
                                 fontSize:height*0.012,
                                 fontFamily: 'Montserrat',
+                                fontWeight:"500",
                                 color: '#024073',
                                 paddingVertical: height*0.003
 

@@ -41,7 +41,6 @@ export function useLogin() {
     useEffect(() => {
         const checkExistingLogin = async () => {
             try {
-                await CacheManager.clear();
                 const cachedUser = await CacheManager.get("loggedUser");
                 if (cachedUser && cachedUser.displayName) {
                     router.replace('/Profil');
@@ -79,23 +78,8 @@ export function useLogin() {
                     );
                     await CacheManager.set("token", tokenResult.accessToken);
                     console.log(tokenResult.accessToken);
+                    router.replace('/Profil');
 
-                    const userInfoRes = await fetch("https://graph.microsoft.com/v1.0/me", {
-                        headers: { Authorization: `Bearer ${tokenResult.accessToken}` },
-                    });
-
-                    const userData = await userInfoRes.json();
-
-                    if (userData && userData.displayName) {
-                        console.log("Login successful, user data:", JSON.stringify(userData));
-                        await CacheManager.remove("loggedUser");
-                        await CacheManager.set("loggedUser", userData);
-                        const verifyUser = await CacheManager.get("loggedUser");
-                        console.log("Verified stored user:", JSON.stringify(verifyUser));
-                        router.replace('/Profil');
-                    } else {
-                        throw new Error("Invalid user data received");
-                    }
                 } catch (err) {
                     console.error("Auth error:", err);
                     setError("Login failed. Please try again.");

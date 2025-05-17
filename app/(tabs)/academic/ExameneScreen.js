@@ -6,23 +6,21 @@ import Constants from "expo-constants";
 import LoadingView from "../../components/common/LoadingView";
 import ErrorView from "../../components/common/ErrorView";
 import useToken from "../../utils/hooks/useToken";
-import useEmail from "../../utils/hooks/useEmail";
 import useFetch from "../../utils/hooks/useFetch";
 
 const { BACKEND } = Constants.expoConfig.extra;
 
 export default function ExameneScreen() {
-    const [selectedSemester, setSelectedSemester] = useState(null);
+    const [selectedSemester, setSelectedSemester] = useState("1");
     const {token, tokenError, tokenLoading} = useToken();
-    const {mail, mailError, mailLoading} = useEmail();
     const {data, dataError, dataLoading} = useFetch({
         token,
-        address:`${BACKEND}/api/exams/${mail}`
+        address:`${BACKEND}/api/exams`
     });
 
-    const loading = tokenLoading || mailLoading || dataLoading;
-    const error = tokenError || mailError || dataError;
-    const examene = data?.examsDTOList || [];
+    const loading = tokenLoading || dataLoading;
+    const error = tokenError || dataError;
+    const examene = data || [];
     const filteredExams = selectedSemester
         ? examene.filter(examen => examen.semester === parseInt(selectedSemester))
         : examene;
