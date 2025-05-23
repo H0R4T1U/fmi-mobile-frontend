@@ -2,13 +2,15 @@ import {ScrollView, Text, TouchableOpacity, View} from "react-native";
 import {useState} from "react";
 import OrarPageMateriaContainer from "./OrarPageMaterieContainer";
 import styles from '../../utils/styles/orar.styles';
+import {useTranslation} from "react-i18next";
 
 export default function OrarContainer({orar,zi}) {
+    const {t} = useTranslation();
     const [open, setOpen] = useState(false);
     return (
         <View style={styles.mainView}>
             <TouchableOpacity onPress={() => setOpen(!open)} style={styles.button}>
-                <Text style={styles.dayText}>{zi}</Text>
+                <Text style={styles.dayText}>{t(zi)}</Text>
             </TouchableOpacity>
             {open && (
                 <View style={styles.timeTableMainView}>

@@ -11,6 +11,7 @@ import useLogout from "../utils/auth/Logout";
 import LanguageSwitcher from "../utils/LanguageSwitcher";
 import { useTranslation } from 'react-i18next';
 import styles from '../utils/styles/tabs.styles';
+import {useContext} from "react";
 const { BACKEND } = Constants.expoConfig.extra;
 
 export default function Profil() {
@@ -29,14 +30,14 @@ export default function Profil() {
     const user = Array.isArray(data) && data.length > 0 ? data[0] : {};
 
     if (loading)
-        return <LoadingView headerText={t("profile")}/>
+        return <LoadingView headerText={t("profile").toString().toUpperCase()}/>
 
     if (error)
-        return <ErrorView error={error} headerText={t("profile")}/>
+        return <ErrorView error={error} headerText={t("profile").toString().toUpperCase()}/>
 
     return (
         <View style={styles.mainView}>
-            <FloatingHeader text={t("profile")} />
+            <FloatingHeader text={t("profile").toString().toUpperCase()} />
             <View style={styles.profileMainView}>
                 <ProfilePageSmallContainer title={t("student")} content={user?.firstName + ' ' + user?.lastName} />
                 <ProfilePageLargeContainer title={t("credentials")} username={user?.username} password={user?.password} />

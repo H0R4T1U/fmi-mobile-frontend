@@ -8,10 +8,12 @@ import ErrorView from "../components/common/ErrorView";
 import LoadingView from "../components/common/LoadingView";
 import useFetch from "../utils/hooks/useFetch";
 import style from '../utils/styles/tabs.styles';
+import {useTranslation} from "react-i18next";
 
 const { BACKEND } = Constants.expoConfig.extra;
 
 export default function HomeScreen() {
+    const {t} = useTranslation();
     const zile = ["Luni", "Marti", "Miercuri", "Joi", "Vineri"];
     const [group, setGroup] = useState("");
     const {token, tokenLoading, tokenError} = useToken();
@@ -35,14 +37,14 @@ export default function HomeScreen() {
     const error = tokenError || timeTableError || dataError;
 
     if (loading)
-        return <LoadingView headerText="ORAR"/>;
+        return <LoadingView headerText={t("timetable")}/>;
 
     if (error)
-        return <ErrorView error={error} headerText="ORAR"/>;
+        return <ErrorView error={error} headerText={t("timetable")}/>;
 
     return (
         <View style={style.mainView}>
-            <FloatingHeader text="ORAR"/>
+            <FloatingHeader text={t("timetable")}/>
             <ScrollView contentContainerStyle={style.contentContainerView}>
                 {zile.map((zi, index) => (
                     <View key={index} style={style.orarContainerView}>

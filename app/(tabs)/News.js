@@ -7,10 +7,12 @@ import LoadingView from "../components/common/LoadingView";
 import ErrorView from "../components/common/ErrorView";
 import useFetch from "../utils/hooks/useFetch";
 import style from "../utils/styles/tabs.styles";
+import { useTranslation } from 'react-i18next';
 
 const { BACKEND } = Constants.expoConfig.extra;
 
 export default function News() {
+    const {t} = useTranslation();
     const {token, tokenError, tokenLoading} = useToken();
     const {data, dataError, dataLoading} = useFetch({
         token,
@@ -22,14 +24,14 @@ export default function News() {
     const error = tokenError || dataError;
 
     if (loading)
-        return <LoadingView headerText="NEWS"/>;
+        return <LoadingView headerText={t("news").toString().toUpperCase()}/>;
 
     if (error)
-        return <ErrorView error={error} headerText="NEWS"/>
+        return <ErrorView error={error} headerText={t("news").toString().toUpperCase()}/>
 
     return (
         <View style={style.mainView}>
-            <FloatingHeader text="NEWS"/>
+            <FloatingHeader text={t("news").toString().toUpperCase()}/>
             <FlatList
                 data={data || []}
                 renderItem={({ item }) => (

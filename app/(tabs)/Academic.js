@@ -6,15 +6,17 @@ import taxe from "../../assets/images/taxe.png";
 import examene from "../../assets/images/examene.png";
 import {View} from "react-native";
 import style from '../utils/styles/tabs.styles.js'
+import {useTranslation} from "react-i18next";
 
 export default function Academic() {
+    const {t} = useTranslation();
     return (
         <View style={style.mainView}>
-            <FloatingHeader text="ACADEMIC"/>
-            <AcademicContainer name="Taxe" image={taxe} route="/academic/TaxeScreen"/>
-            <AcademicContainer name="Examene" image={examene} route="/academic/ExameneScreen"/>
-            <AcademicContainer name="Consultare Note" image={note} route="/academic/ConsultareNoteScreen"/>
-            <AcademicContainer name="Prezente" image={note} route="/academic/PrezenteScreen"/>
+            <FloatingHeader text={t("academic").toString().toUpperCase()}/>
+            <AcademicContainer name={t("fees")} image={taxe} route="/academic/TaxeScreen"/>
+            <AcademicContainer name={t("exams")} image={examene} route="/academic/ExameneScreen"/>
+            <AcademicContainer name={t("grades")} image={note} route="/academic/ConsultareNoteScreen"/>
+            <AcademicContainer name={t("attendances")} image={note} route="/academic/PrezenteScreen"/>
         </View>
     );
 }

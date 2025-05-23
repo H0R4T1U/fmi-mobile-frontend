@@ -10,6 +10,7 @@ import LoadingView from "../common/LoadingView";
 import useToken from "../../utils/hooks/useToken";
 import useEmail from "../../utils/hooks/useEmail";
 import useFetch from "../../utils/hooks/useFetch";
+import {useTranslation} from "react-i18next";
 
 const { BACKEND } = Constants.expoConfig.extra;
 const {height, width} = Dimensions.get('window');
@@ -17,6 +18,7 @@ const {height, width} = Dimensions.get('window');
 
 export default function TaxeDropDown()
 {
+    const {t} = useTranslation();
     const {token, tokenError, tokenLoading} = useToken();
     const[taxePlatite,setTaxePlatite]=useState([]);
     const[taxeNeplatite,setTaxeNeplatite]=useState([]);
@@ -54,14 +56,14 @@ export default function TaxeDropDown()
     ]);
 
     if (loading)
-        return <LoadingView headerText="TAXE"/>
+        return <LoadingView headerText={t("fees").toString().toUpperCase()}/>
 
     if (error)
-        return <ErrorView error={error} headerText="TAXE"/>
+        return <ErrorView error={error} headerText={t("fees").toString().toUpperCase()}/>
 
     return (
         <>
-            <FloatingHeader text="TAXE"/>
+            <FloatingHeader text={t("fees").toString().toUpperCase()}/>
             <View style={{paddingHorizontal:width*0.025,paddingTop:height*0.01,borderColor:"#002E54"}}>
                 <DropDownPicker
                     open={open}

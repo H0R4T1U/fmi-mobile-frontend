@@ -4,6 +4,7 @@ import React from "react";
 import FMIHubHeader from "../components/common/FMIHubHeader";
 import {Tabs, useRouter, useSegments} from "expo-router";
 import {StatusBar} from "expo-status-bar";
+import {useTranslation} from "react-i18next";
 
 const {height, width} = Dimensions.get('window');
 const buttonWidth =width*0.25;
@@ -31,12 +32,13 @@ const tabIconStyles = {
         color: '#024073',
         fontSize: height * 0.015,
         fontFamily: 'Montserrat',
-        marginHorizontal: '-60%'
+        marginHorizontal: '-70%'
     }
 };
 
 
 export default function Layout() {
+    const {t} = useTranslation();
     const router = useRouter();
     const segments = useSegments();
     const currentScreen = segments[segments.length - 1];
@@ -76,7 +78,7 @@ export default function Layout() {
                                 <View style={tabIconStyles.container}>
                                     <Image source={require('../../assets/images/icon1_1.png')} style={tabIconStyles.image} />
                                 </View>
-                                <Text style={tabIconStyles.text}>Profil</Text>
+                                <Text style={tabIconStyles.text}>{t("profile")}</Text>
                             </View>
                         )
                     }} />
@@ -88,7 +90,7 @@ export default function Layout() {
                                 <View style={tabIconStyles.container}>
                                     <Image source={require('../../assets/images/icon2_0.png')} style={tabIconStyles.image} />
                                 </View>
-                                <Text style={tabIconStyles.text}>Clădiri</Text>
+                                <Text style={tabIconStyles.text}>{t("buildings")}</Text>
                             </View>
                         ),
                         tabBarItemStyle: {
@@ -102,7 +104,7 @@ export default function Layout() {
                                 <View style={tabIconStyles.container}>
                                     <Image source={require('../../assets/images/icon3_3.png')} style={tabIconStyles.image} />
                                 </View>
-                                <Text style={tabIconStyles.text}>Academic</Text>
+                                <Text style={tabIconStyles.text}>{t("academic")}</Text>
                             </View>
                         ),
                         tabBarItemStyle: {
@@ -117,7 +119,7 @@ export default function Layout() {
                                 <View style={tabIconStyles.container}>
                                     <Image source={require('../../assets/images/icon4_0.png')} style={tabIconStyles.image} />
                                 </View>
-                                <Text style={tabIconStyles.text}>News</Text>
+                                <Text style={tabIconStyles.text}>{t("news")}</Text>
                             </View>
                         )
                     }} />

@@ -8,10 +8,12 @@ import LoadingView from "../../components/common/LoadingView";
 import ErrorView from "../../components/common/ErrorView";
 import useToken from "../../utils/hooks/useToken";
 import useFetch from "../../utils/hooks/useFetch";
+import {useTranslation} from "react-i18next";
 
 const { BACKEND } = Constants.expoConfig.extra;
 
 export default function ConsultareNoteScreen() {
+    const {t} = useTranslation();
     const [selectedSemester, setSelectedSemester] = useState("1");
     const {token, tokenError, tokenLoading} = useToken();
     const {data, dataError, dataLoading} = useFetch({
@@ -28,14 +30,14 @@ export default function ConsultareNoteScreen() {
         : userGrades;
 
     if (loading)
-        return <LoadingView headerText="NOTE"/>;
+        return <LoadingView headerText={t("grades").toString().toUpperCase()}/>;
 
     if (error)
-        return <ErrorView error={error} headerText="NOTE"/>;
+        return <ErrorView error={error} headerText={t("grades").toString().toUpperCase()}/>;
 
     return (
         <View>
-            <FloatingHeader text="CONSULTARE NOTE"/>
+            <FloatingHeader text={t("grades").toString().toUpperCase()}/>
             <SemestreDropDown onSelectSemester={setSelectedSemester}/>
             <TabelNote userGrades={filteredGrades}/>
         </View>

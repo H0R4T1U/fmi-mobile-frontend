@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {TouchableOpacity, Text, Dimensions} from 'react-native';
 import i18n from "../../assets/translation/translationConfig.js";
 const { width, height } = Dimensions.get("window");
