@@ -1,8 +1,7 @@
 import {useState} from "react";
-import {Dimensions, View} from "react-native";
+import {View} from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
-const {height, width} = Dimensions.get('window');
-
+import styles from '../../utils/styles/dropdowns.styles';
 
 export default function MateriiDropDown({onSelectMaterie})
 {
@@ -25,8 +24,7 @@ export default function MateriiDropDown({onSelectMaterie})
     };
 
     return (
-
-        <View style={{paddingHorizontal:width*0.025,paddingTop:height*0.01,borderColor:"#002E54"}}>
+        <View style={styles.dropDownViewStyle}>
             <DropDownPicker
                 open={open}
                 value={value}
@@ -35,27 +33,10 @@ export default function MateriiDropDown({onSelectMaterie})
                 setValue={handleChange}
                 setItems={setItems}
                 placeholder="Selecteaza materie"
-                dropDownContainerStyle={
-                    {
-                        borderColor:"#AEB9C4",
-                        backgroundColor:"rgb(206,213,220)",
-                    }
-                }
-                textStyle={{
-                    fontSize: height*0.017,
-                    fontFamily: 'Montserrat',
-                    fontWeight: "600",
-                    color: '#002E54',
-                    paddingVertical:height*0.005
-                }}
-                style={{backgroundColor:"rgba(174,185,196,0.6)",
-                    borderColor:"#AEB9C4",
-                    borderRadius:10,
-                    boxShadow: `0px ${height*0.01} ${height*0.02} #02407315`,
-                    minHeight:height*0.01
-                }}
-
-                selectedItemContainerStyle={{ backgroundColor:"#AEB9C4"}}
+                dropDownContainerStyle={styles.dropDownContainerStyle}
+                textStyle={styles.dropDownTextStyle}
+                style={styles.dropDownStyle}
+                selectedItemContainerStyle={styles.dropDownSelectedItemContainerStyle}
             />
         </View>)
 

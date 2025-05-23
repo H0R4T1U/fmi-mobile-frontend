@@ -1,17 +1,12 @@
-import {Alert, Dimensions, ImageBackground, Pressable, ScrollView, Text, View,} from "react-native";
+import {Dimensions, ImageBackground, Pressable, ScrollView, Text, View,} from "react-native";
 import React, {useEffect, useState} from "react";
 import image from "../../../assets/images/pay.png";
 import {LayoutChangeEvent} from "react-native";
-import {
-    tabelTaxeNeplatiteHeaderTextStyle,
-    tabelTaxeNeplatiteTextStyle,
-    tabelTaxeNeplatiteViewStyle, tabelTaxePlatiteHeaderViewStyle
-} from "../../utils/styles";
 import useToken from "../../utils/hooks/useToken";
 import Constants from "expo-constants";
-import useEmail from "../../utils/hooks/useEmail";
 import AddCardModal from "./PaymentModal";
 const {height, width} = Dimensions.get('window');
+import styles from '../../utils/styles/academic/taxe_neplatite.styles';
 const { BACKEND } = Constants.expoConfig.extra;
 
 const tableHeaders = [
@@ -46,7 +41,7 @@ export default function TabelTaxeNeplatite({examene,setexamene}) {
             try {
                 const response = await fetch(`${BACKEND}/api/tuitions`, {
                     headers: {
-                        Authorization: `Bearer ${token}`,
+                        'Authorization': `Bearer ${token}`,
                         'Content-Type': 'application/json',
                     },
                 });
@@ -64,102 +59,38 @@ export default function TabelTaxeNeplatite({examene,setexamene}) {
     }, [paid, token]);
 
     return (
-        <View style={{ alignItems: "center", paddingTop: height * 0.01, paddingHorizontal: width * 0.01 }}>
-            <View
-                style={{
-                    backgroundColor: "rgba(174,185,196,0.49)",
-                    borderStyle: "solid",
-                    borderColor: "#AEB9C4",
-                    borderWidth: 0.5,
-                    height: height * 0.6,
-                    width: width * 0.95,
-                    borderRadius: 10,
-                    boxShadow: `0px ${height * 0.01} ${height * 0.02} #02407315`,
-                    marginTop: height * 0.01,
-                    overflow: "hidden",
-                }}>
+        <View style={styles.mainView}>
+            <View style={styles.view}>
                 <ScrollView horizontal={true}>
                     <View>
-
-                        <View
-                            style={{
-                                flexDirection: "row",
-                                backgroundColor: "#AEB9C4",
-                                borderRadius: 10,
-                                height: height * 0.045,
-                                paddingRight: width * 0.022,
-                            }}>
+                        <View style={styles.headerView}>
                             {tableHeaders.map((header, index) => (
-                                <View
-                                    key={index}
-                                    style={[
-                                        tabelTaxePlatiteHeaderViewStyle(width, height),
-                                        header.style,
-                                    ]}>
-                                    <Text style={tabelTaxeNeplatiteHeaderTextStyle(width, height)}>
-                                        {header.name}
-                                    </Text>
+                                <View key={index} style={[styles.headerItemView, header.style]}>
+                                    <Text style={styles.headerText}>{header.name}</Text>
                                 </View>
                             ))}
                             <View
-                                style={[
-                                    tabelTaxePlatiteHeaderViewStyle(width, height),
-                                    { width: width * 0.15 },
-                                ]}>
-                                <Text style={tabelTaxeNeplatiteHeaderTextStyle(width, height)}>PLATA</Text>
+                                style={[styles.headerItemView, { width: width * 0.15 }]}>
+                                <Text style={styles.headerText}>PLATA</Text>
                             </View>
                         </View>
-
                         <ScrollView
-                            contentContainerStyle={{
-                                paddingBottom: height * 0.02,
-                                alignItems: "flex-start",
-                                justifyContent: "flex-start",
-                            }}>
+                            contentContainerStyle={styles.contentContainerStyle}>
                             {examene.map((examen, index) => (
                                 <Pressable
                                     key={index}
                                     onLayout={(event) => handleTextLayout(index, event)}
                                     onPress={() => handleOpenPayment(examen.price,examen.number )}
-                                    style={{
-                                        marginTop: height * 0.011,
-                                        flexDirection: "row",
-                                        alignItems: "center",
-                                        minHeight: rowHeights[index] || height * 0.035,
-                                    }}>
+                                    style={[styles.pressable, {minHeight: rowHeights[index] || height * 0.035}]}>
                                     {tableHeaders.map((header, colIndex) => (
                                         <View
                                             key={colIndex}
-                                            style={[
-                                                tabelTaxeNeplatiteViewStyle(width, height),
-                                                header.style,
-                                                { minHeight: rowHeights[index] || height * 0.035 },
-                                            ]}>
-                                            <Text style={tabelTaxeNeplatiteTextStyle(width, height)}>
-                                                {examen[header.key]}
-                                            </Text>
+                                            style={[styles.textView, header.style, { minHeight: rowHeights[index] || height * 0.035 }]}>
+                                            <Text style={styles.text}>{examen[header.key]}</Text>
                                         </View>
                                     ))}
-
-
-                                    <View
-                                        style={{
-                                            width: width * 0.15,
-                                            minHeight: rowHeights[index] || height * 0.035,
-                                            backgroundColor: "#fff",
-                                            borderRadius: 5,
-                                            justifyContent: "center",
-                                            alignItems: "center",
-                                            marginLeft: width * 0.015,
-                                            overflow: "hidden",
-                                        }}>
-                                        <ImageBackground
-                                            source={image}
-                                            style={{
-                                                width: width * 0.15,
-                                                height: height * 0.075,
-                                            }}
-                                        />
+                                    <View style={[styles.imageView, {minHeight: rowHeights[index] || height * 0.035}]}>
+                                        <ImageBackground source={image} style={styles.image}/>
                                     </View>
                                 </Pressable>
                             ))}
