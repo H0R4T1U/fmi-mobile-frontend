@@ -10,6 +10,7 @@ export default function DreptScreen() {
     const currentDate = new Date();
     let link = 'https://www.ubbcluj.ro/ro/studenti/cantine/cafeteria_drept';
     link = link.concat(Days[currentDate.getDay() - 1]);
+
     return (
         <View>
             <FloatingHeader text="Clădirea Avram Iancu"/>

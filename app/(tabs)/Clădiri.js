@@ -12,10 +12,11 @@ import observator from "../../assets/images/observator1.jpeg"
 import litere from "../../assets/images/litere1.jpg"
 import dppd from "../../assets/images/dppd.png"
 const {height} = Dimensions.get('window');
+import styles from '../utils/styles/tabs.styles';
 
 export default function Clădiri() {
     return (
-        <View style={{backgroundColor:'#fff'}}>
+        <View style={styles.mainView}>
             <FloatingHeader text="CLĂDIRI ȘI CANTINE"/>
             <ScrollView contentContainerStyle={{paddingBottom:height*0.15}}>
                 <BuildingContainer name="Clădirea Centrală" image={centrala} address="Strada Mihail Kogălniceanu 1, Cluj-Napoca 400347" route='/buildings/CentralScreen'/>

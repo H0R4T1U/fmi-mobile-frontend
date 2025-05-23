@@ -16,7 +16,8 @@ export default function ConsultareNoteScreen() {
     const {token, tokenError, tokenLoading} = useToken();
     const {data, dataError, dataLoading} = useFetch({
         token,
-        address: `${BACKEND}/api/grades`
+        address: `${BACKEND}/api/grades`,
+        hasToken: true
     });
 
     const loading = tokenLoading || dataLoading;

@@ -1,37 +1,3 @@
-
-export const orarRowStyle =(width,height)=>( {
-    width: width * 0.899,
-    minHeight: height * 0.045,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-    paddingLeft: width * 0.02,
-    borderRadius: 5,
-    borderColor: "#024073",
-    borderBottomWidth: 0.5,
-    borderTopWidth: 0,
-    flexDirection: "row",
-    gap: width * 0.03,
-    paddingHorizontal: width * 0.03,
-});
-
-export const orarTextTitleStyle = (width,height)=>({
-    fontSize: height * 0.017,
-    fontFamily: 'Montserrat',
-    color: '#024073',
-    fontWeight: "bold",
-    textAlign: "center",
-});
-
-export const orarTextValueStyle = (width,height)=>({
-    fontSize: height * 0.017,
-    fontFamily: 'Montserrat',
-    color: '#024073',
-    fontWeight: "500",
-    textAlign: "center",
-});
-
-
 export const tabelExameneHeaderTextStyle = (width, height) => ({
     textAlignVertical:"center",
     textAlign:"center",

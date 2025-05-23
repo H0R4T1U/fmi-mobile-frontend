@@ -22,11 +22,13 @@ export default function TaxeDropDown()
     const[taxeNeplatite,setTaxeNeplatite]=useState([]);
     let {data : taxeP, dataError: taxePlatiteError , dataLoading : taxePlatiteLoading} = useFetch(
         {token,
-            address: `${BACKEND}/api/paid-tuitions`
+            address: `${BACKEND}/api/paid-tuitions`,
+            hasToken: true
         });
     let {data : taxeN, dataError: taxeNeplatiteError, dataLoading: taxeNeplatiteLoading} = useFetch(
         {token,
-            address: `${BACKEND}/api/tuitions`
+            address: `${BACKEND}/api/tuitions`,
+            hasToken: true
         });
     const loading = taxePlatiteLoading || taxeNeplatiteLoading || tokenLoading;
     const error = taxePlatiteError || taxeNeplatiteError || tokenError;

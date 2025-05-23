@@ -15,7 +15,8 @@ export default function ExameneScreen() {
     const {token, tokenError, tokenLoading} = useToken();
     const {data, dataError, dataLoading} = useFetch({
         token,
-        address:`${BACKEND}/api/exams`
+        address:`${BACKEND}/api/exams`,
+        hasToken: true
     });
 
     const loading = tokenLoading || dataLoading;

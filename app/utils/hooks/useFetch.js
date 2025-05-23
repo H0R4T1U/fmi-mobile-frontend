@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {CacheManager} from "../CacheManager";
 
-export default function useFetch({token, address}) {
+export default function useFetch({token, address, hasToken}) {
     const [data, setData] = useState(null);
     const [dataLoading, setDataLoading] = useState(false);
     const [dataError, setError] = useState(null);
@@ -10,16 +10,23 @@ export default function useFetch({token, address}) {
         const fetchData = async () => {
             try {
                 console.log("before ")
-                if (!token) return;
+                if (!token && hasToken) return;
+                if (!address) return;
                 console.log("after");
                 setDataLoading(true);
                 // console.log('before fetching from address', address)
+                const headers = {
+                    'Content-Type': 'application/json'
+                };
+
+                if (hasToken) {
+                    headers['Authorization'] = `Bearer ${token}`;
+                }
+
                 const response = await fetch(address, {
-                    headers: {
-                        'Authorization': `Bearer ${token}`,
-                        'Content-Type': 'application/json'
-                    }
+                    headers: headers
                 });
+
                 console.log('after fetch')
                 console.log(response)
                 // console.log(response.ok)
@@ -41,6 +48,6 @@ export default function useFetch({token, address}) {
             }
         };
         fetchData();
-    }, [token]);
+    }, [token, address]);
     return {data, dataError, dataLoading};
 }

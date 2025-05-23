@@ -16,7 +16,6 @@ export default function Layout() {
             setIsLoggedIn(!!user);
             setIsLoading(false);
         };
-
         checkUser();
     }, []);
 

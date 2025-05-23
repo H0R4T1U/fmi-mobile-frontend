@@ -29,7 +29,6 @@ export default function TabelTaxeNeplatite({examene,setexamene}) {
     const[tuitioncrt,setTuitionCrt]=useState(null);
     const[paid,setpaid]=useState(false);
     const {token, tokenError, tokenLoading} = useToken();
-    const {mail, mailError, mailLoading} = useEmail();
 
 
     const handleOpenPayment = (amount,tuitioncrt) => {setSelectedAmount(amount); setTuitionCrt(tuitioncrt)}
@@ -62,7 +61,7 @@ export default function TabelTaxeNeplatite({examene,setexamene}) {
             fetchUpdatedTaxe()
             setpaid(false);
         }
-    }, [paid,  mail, token]);
+    }, [paid, token]);
 
     return (
         <View style={{ alignItems: "center", paddingTop: height * 0.01, paddingHorizontal: width * 0.01 }}>

@@ -16,7 +16,6 @@ const tabIconStyles = {
         {
             width: width*0.15,
             height: width*0.15,
-            // marginTop: height * 0.04
         }
     ],
     image: [
