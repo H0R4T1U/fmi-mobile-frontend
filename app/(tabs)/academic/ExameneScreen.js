@@ -24,6 +24,7 @@ export default function ExameneScreen() {
     const loading = tokenLoading || dataLoading;
     const error = tokenError || dataError;
     const examene = data || [];
+
     const filteredExams = selectedSemester
         ? examene.filter(examen => examen.semester === parseInt(selectedSemester))
         : examene;

@@ -26,6 +26,7 @@ export default StyleSheet.create({
         width:width*0.95,
         alignItems: "center",
         justifyContent: "flex-start",
+        paddingRight:width*0.012
     },
     headerText: {
         textAlignVertical:"center",
@@ -44,6 +45,7 @@ export default StyleSheet.create({
         paddingBottom: height * 0.15,
         alignItems: "flex-start",
         justifyContent: "flex-start",
+        paddingRight:width*0.012
     },
     itemText: {
         fontFamily: 'Montserrat',

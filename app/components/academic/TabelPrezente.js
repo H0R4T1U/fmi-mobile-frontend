@@ -1,65 +1,48 @@
-import {Dimensions, ScrollView, Text, TouchableOpacity, View} from "react-native";
-import { useState } from "react";
+import { Dimensions, ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { useState, useMemo } from "react";
+import styles from "../../utils/styles/academic/prezente.styles";
+
 const { height, width } = Dimensions.get("window");
-import { LayoutChangeEvent } from "react-native";
-import styles from '../../utils/styles/academic/prezente.styles';
 
-const prezenteHeader = [
-    { key: "week", name: "SAPTAMANA", style: {  width: width * 0.3 } },
-    { key: "laborator", name: "LABORATOR", style: { width: width * 0.3 } },
-    { key: "seminar", name: "SEMINAR", style: {width: width * 0.3 } },
-
-];
-
-export default function TabelPrezente() {
-    const [rowHeights, setRowHeights] = useState({});
-
-    const handleTextLayout = (index: number, event: LayoutChangeEvent) => {
-        const height = event.nativeEvent.layout.height;
-        setRowHeights((prevHeights) => ({
-            ...prevHeights,
-            [index]: Math.max(prevHeights[index] || 0, height),
-        }));
-    };
-
-    const [prezente, setPrezente] = useState([
-        {
-            number: 1,
-            week: "1",
-            laborator: 'PREZENT',
-            seminar: 'MOTIVAT',
-        },
-        {
-            number: 2,
-            week: "2",
-            laborator: 'ABSENT',
-            seminar: 'PREZENT',
-        },
-        {
-            number: 3,
-            week: "3",
-            laborator: 'PREZENT',
-            seminar: 'PREZENT',
-        },
-    ]);
+export default function TabelPrezente({ examene, setPrezente, tipuri = {} }) {
 
     const STATUS_OPTIONS = ["PREZENT", "MOTIVAT", "ABSENT"];
 
-    const toggleStatus = (index: number, field: "laborator" | "seminar") => {
+    const prezenteHeader = useMemo(() => {
+        const headers = [{ key: "week", name: "SAPTAMANA" }];
+
+        if (tipuri?.showLaborator) {
+            headers.push({ key: "laborator", name: "LABORATOR" });
+        }
+
+        if (tipuri?.showSeminar) {
+            headers.push({ key: "seminar", name: "SEMINAR" });
+        }
+
+        return headers.map(header => ({
+            ...header,
+            style: { flex:1, minWidth:0 }
+        }));
+    }, [tipuri?.showLaborator, tipuri?.showSeminar]);
+
+
+    const toggleStatus = (index, field) => {
         setPrezente((prev) => {
-            const newValue = getNextStatus(prev[index][field]);
+            const currentValue = prev[index][field] || "";
+            const newValue = getNextStatus(currentValue);
             const updated = [...prev];
             updated[index] = { ...updated[index], [field]: newValue };
             return updated;
         });
     };
 
-    const getNextStatus = (current: string) => {
+    const getNextStatus = (current) => {
         const idx = STATUS_OPTIONS.indexOf(current.toUpperCase());
         return STATUS_OPTIONS[(idx + 1) % STATUS_OPTIONS.length];
     };
 
-    const getStatusColor = (status: string) => {
+    const getStatusColor = (status) => {
+        if (!status || typeof status !== "string") return "#000000";
         switch (status.toUpperCase()) {
             case "PREZENT":
                 return "#024073";
@@ -68,7 +51,7 @@ export default function TabelPrezente() {
             case "ABSENT":
                 return "#e44c49";
             default:
-                return "#ffffff";
+                return "#000000";
         }
     };
 
@@ -78,27 +61,29 @@ export default function TabelPrezente() {
                 <View>
                     <View style={styles.headerView}>
                         {prezenteHeader.map((item, index) => (
-                            <Text key={index} style={[styles.headerText, item.style]}>{item.name}</Text>
+                            <Text key={index} style={[styles.headerText, item.style]}>
+                                {item.name}
+                            </Text>
                         ))}
                     </View>
                     <ScrollView contentContainerStyle={styles.scrollView}>
-                        {prezente.map((examen, index) => (
-                            <View
-                                key={index}
-                                onLayout={(event) => handleTextLayout(index, event)}
-                                style={styles.header}
-                            >
-                                {prezenteHeader.map((col, colIndex) =>{
+                        {examene.map((examen, index) => (
+                            <View key={index} style={styles.header}>
+                                {prezenteHeader.map((col, colIndex) => {
                                     const isClickable = col.key === "laborator" || col.key === "seminar";
-                                    const value = examen[col.key];
+                                    const value = examen[col.key] || "";
                                     const color = getStatusColor(value);
+
                                     return (
                                         <TouchableOpacity
                                             key={colIndex}
                                             disabled={!isClickable}
                                             onPress={() => isClickable && toggleStatus(index, col.key)}
-                                            style={[styles.dataView, {...col.style, minHeight: height * 0.065}]}>
-                                            <Text style={[styles.itemText, isClickable && { color, fontWeight: "bold" }]}>{value}</Text>
+                                            style={[styles.dataView, {flex: 1, minWidth: 0, minHeight: height * 0.065 }]}
+                                        >
+                                            <Text style={[styles.itemText, isClickable && { color, fontWeight: "bold" }]}>
+                                                {value}
+                                            </Text>
                                         </TouchableOpacity>
                                     );
                                 })}

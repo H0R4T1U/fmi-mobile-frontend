@@ -1,25 +1,22 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {View} from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
 import styles from '../../utils/styles/dropdowns.styles';
 
-export default function MateriiDropDown({onSelectMaterie})
+export default function MateriiDropDown({items,onSelectMaterie,selectedValue})
 {
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState(null);
-    const [items, setItems] = useState([
-        { label: "MPP", value: "1" },
-        { label: "SGBD", value: "2" },
-        { label: "ISS", value: "3" },
-        { label: "AI", value: "4" },
 
 
-    ]);
+    useEffect(() => {
+        setValue(selectedValue);
+    }, [selectedValue]);
 
-    const handleChange = (callback) => {
-        setValue(callback);
-        if (onSelectMaterie) {
-            onSelectMaterie(callback);
+    const handleValueChange = (newValue) => {
+
+        if (onSelectMaterie && newValue) {
+            onSelectMaterie(newValue);
         }
     };
 
@@ -30,8 +27,8 @@ export default function MateriiDropDown({onSelectMaterie})
                 value={value}
                 items={items}
                 setOpen={setOpen}
-                setValue={handleChange}
-                setItems={setItems}
+                setValue={setValue}
+                onChangeValue={handleValueChange}
                 placeholder="Selecteaza materie"
                 dropDownContainerStyle={styles.dropDownContainerStyle}
                 textStyle={styles.dropDownTextStyle}
