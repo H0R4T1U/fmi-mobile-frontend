@@ -1,12 +1,9 @@
 import { Dimensions, ScrollView, Text, View } from "react-native";
 import { useState } from "react";
 const { height, width } = Dimensions.get("window");
-import {
-    tabelExameneHeaderTextStyle,
-    tabelExameneDataTextStyle,
-    tabelExameneDataViewStyle,
-} from "../../utils/styles";
+
 import { LayoutChangeEvent } from "react-native";
+import styles from '../../utils/styles/academic/examene.styles';
 
 const exameneHeader = [
     { key: "number", name: "NR. CRT", style: { marginLeft: width * 0.013, width: width * 0.145 } },
@@ -34,71 +31,24 @@ export default function TabelExamene({ examene }) {
     };
 
     return (
-        <View style={{ alignItems: "center", paddingTop: height * 0.015, paddingHorizontal: width * 0.02 }}>
-            <View
-                style={{
-                    backgroundColor: "rgba(174,185,196,0.49)",
-                    borderStyle: "solid",
-                    borderColor: "#AEB9C4",
-                    borderWidth: 0.5,
-                    height: height * 0.6,
-                    width: width * 0.95,
-                    borderRadius: 10,
-                    boxShadow: `0px ${height * 0.01} ${height * 0.02} #02407315`,
-                    overflow: "hidden",
-                }}
-            >
+        <View style={styles.mainView}>
+            <View style={styles.view}>
                 <ScrollView horizontal={true}>
                     <View>
-                        <View
-                            style={{
-                                flexDirection: "row",
-                                backgroundColor: "#AEB9C4",
-                                borderRadius: 10,
-                                height: height * 0.045,
-                                alignItems: "center",
-                                justifyContent: "center",
-                            }}
-                        >
+                        <View style={styles.headerView}>
                             {exameneHeader.map((item, index) => (
-                                <Text key={index} style={[tabelExameneHeaderTextStyle(width, height), item.style]}>
-                                    {item.name}
-                                </Text>
+                                <Text key={index} style={[styles.headerText, item.style]}>{item.name}</Text>
                             ))}
                         </View>
-
-                        <ScrollView
-                            contentContainerStyle={{
-                                paddingBottom: height * 0.15,
-                                alignItems: "flex-start",
-                                justifyContent: "flex-start",
-                            }}
-                        >
+                        <ScrollView contentContainerStyle={styles.scrollView}>
                             {examene.map((examen, index) => (
                                 <View
                                     key={index}
                                     onLayout={(event) => handleTextLayout(index, event)}
-                                    style={{
-                                        marginTop: height * 0.01,
-                                        flexDirection: "row",
-                                        alignItems: "center",
-                                        minHeight: rowHeights[index] || height * 0.1,
-                                    }}
-                                >
+                                    style={[styles.elementView, {minHeight: rowHeights[index] || height * 0.1}]}>
                                     {exameneHeader.map((col, colIndex) => (
-                                        <View
-                                            key={colIndex}
-                                            style={[
-                                                tabelExameneDataViewStyle(width, height),
-                                                {
-                                                    ...col.style,
-                                                    minHeight: rowHeights[index] || height * 0.1,
-                                                },
-                                            ]}
-                                        >
-                                            <Text style={tabelExameneDataTextStyle(width, height)}>
-                                                {examen[col.key]}
-                                            </Text>
+                                        <View key={colIndex} style={[styles.dataView, {...col.style, minHeight: rowHeights[index] || height * 0.1}]}>
+                                            <Text style={styles.dataText}>{examen[col.key]}</Text>
                                         </View>
                                     ))}
                                 </View>

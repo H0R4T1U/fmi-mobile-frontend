@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Dimensions, View} from "react-native";
+import {View} from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
 import TabelTaxeNeplatite from "./TabelTaxeNeplatite";
 import TabelTaxePlatite from "./TabelTaxePlatite";
@@ -8,25 +8,28 @@ import FloatingHeader from "../common/FloatingHeader";
 import ErrorView from "../common/ErrorView";
 import LoadingView from "../common/LoadingView";
 import useToken from "../../utils/hooks/useToken";
-import useEmail from "../../utils/hooks/useEmail";
 import useFetch from "../../utils/hooks/useFetch";
+import {useTranslation} from "react-i18next";
+import styles from '../../utils/styles/academic/taxe_dropdown.styles';
 
 const { BACKEND } = Constants.expoConfig.extra;
-const {height, width} = Dimensions.get('window');
 
 
 export default function TaxeDropDown()
 {
+    const {t} = useTranslation();
     const {token, tokenError, tokenLoading} = useToken();
     const[taxePlatite,setTaxePlatite]=useState([]);
     const[taxeNeplatite,setTaxeNeplatite]=useState([]);
     let {data : taxeP, dataError: taxePlatiteError , dataLoading : taxePlatiteLoading} = useFetch(
         {token,
-            address: `${BACKEND}/api/paid-tuitions`
+            address: `${BACKEND}/api/paid-tuitions`,
+            hasToken: true
         });
     let {data : taxeN, dataError: taxeNeplatiteError, dataLoading: taxeNeplatiteLoading} = useFetch(
         {token,
-            address: `${BACKEND}/api/tuitions`
+            address: `${BACKEND}/api/tuitions`,
+            hasToken: true
         });
     const loading = taxePlatiteLoading || taxeNeplatiteLoading || tokenLoading;
     const error = taxePlatiteError || taxeNeplatiteError || tokenError;
@@ -52,15 +55,15 @@ export default function TaxeDropDown()
     ]);
 
     if (loading)
-        return <LoadingView headerText="TAXE"/>
+        return <LoadingView headerText={t("fees").toString().toUpperCase()}/>
 
     if (error)
-        return <ErrorView error={error} headerText="TAXE"/>
+        return <ErrorView error={error} headerText={t("fees").toString().toUpperCase()}/>
 
     return (
         <>
-            <FloatingHeader text="TAXE"/>
-            <View style={{paddingHorizontal:width*0.025,paddingTop:height*0.01,borderColor:"#002E54"}}>
+            <FloatingHeader text={t("fees").toString().toUpperCase()}/>
+            <View style={styles.mainView}>
                 <DropDownPicker
                     open={open}
                     value={value}
@@ -68,32 +71,14 @@ export default function TaxeDropDown()
                     setOpen={setOpen}
                     setValue={setValue}
                     setItems={setItems}
-
-                    dropDownContainerStyle={
-                        {
-                            borderColor:"#AEB9C4",
-                            backgroundColor:"rgb(206,213,220)",
-                        }
-                    }
-                    textStyle={{
-                        fontSize: height*0.017,
-                        fontFamily: 'Montserrat',
-                        fontWeight: "600",
-                        color: '#002E54',
-                        paddingVertical:height*0.005
-                    }}
-                    style={{backgroundColor:"rgba(174,185,196,0.6)",
-                        borderColor:"#AEB9C4",
-                        borderRadius:10,
-                        boxShadow: `0px ${height*0.005} ${height*0.02} #02407320`,
-                        minHeight:height*0.01
-                    }}
-
-                    selectedItemContainerStyle={{ backgroundColor:"#AEB9C4"}}
+                    dropDownContainerStyle={styles.dropDownContainerStyle}
+                    textStyle={styles.textStyle}
+                    style={styles.dropDownStyle}
+                    selectedItemContainerStyle={styles.selectedItemContainerStyle}
                 />
                 {value === "TabelTaxeN"&&<TabelTaxeN/>}
                 {value === "TabelTaxeP"&&<TabelTaxeP/>}
             </View>
-        </>)
-
+        </>
+    );
 }

@@ -10,6 +10,7 @@ export default function FsegaScreen() {
     const currentDate = new Date();
     let link = 'https://www.ubbcluj.ro/ro/studenti/cantine/cafeteria_economica';
     link = link.concat(Days[currentDate.getDay() - 1]);
+
     return (
         <View>
             <FloatingHeader text="FSEGA"/>

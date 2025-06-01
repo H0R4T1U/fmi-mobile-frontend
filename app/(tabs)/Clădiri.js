@@ -12,11 +12,14 @@ import observator from "../../assets/images/observator1.jpeg"
 import litere from "../../assets/images/litere1.jpg"
 import dppd from "../../assets/images/dppd.png"
 const {height} = Dimensions.get('window');
+import styles from '../utils/styles/tabs.styles';
+import {useTranslation} from "react-i18next";
 
 export default function Clădiri() {
+    const {t} = useTranslation();
     return (
-        <View style={{backgroundColor:'#fff'}}>
-            <FloatingHeader text="CLĂDIRI ȘI CANTINE"/>
+        <View style={styles.mainView}>
+            <FloatingHeader text={t("buildings").toString().toUpperCase()}/>
             <ScrollView contentContainerStyle={{paddingBottom:height*0.15}}>
                 <BuildingContainer name="Clădirea Centrală" image={centrala} address="Strada Mihail Kogălniceanu 1, Cluj-Napoca 400347" route='/buildings/CentralScreen'/>
                 <BuildingContainer name="FSEGA" image={fsega} address="Strada Teodor Mihali 58-60, Cluj-Napoca 400591" route='/buildings/FsegaScreen'/>

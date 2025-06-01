@@ -1,4 +1,4 @@
-import {Dimensions, Text, TouchableOpacity, View} from "react-native";
+import {Text, TouchableOpacity, View} from "react-native";
 import FloatingHeader from "../components/common/FloatingHeader";
 import ProfilePageSmallContainer from "../components/profile/ProfilePageSmallContainer";
 import ProfilePageLargeContainer from "../components/profile/ProfilePageLargeContainer";
@@ -10,18 +10,17 @@ import useToken from "../utils/hooks/useToken";
 import useLogout from "../utils/auth/Logout";
 import LanguageSwitcher from "../utils/LanguageSwitcher";
 import { useTranslation } from 'react-i18next';
-
-
+import styles from '../utils/styles/tabs.styles';
+import {useContext} from "react";
 const { BACKEND } = Constants.expoConfig.extra;
-const { width, height } = Dimensions.get("window");
-
 
 export default function Profil() {
     const {t}=useTranslation();
     const { token, tokenError, tokenLoading } = useToken();
     const { data, dataError, dataLoading } = useFetch({
         token,
-        address: `${BACKEND}/api/students`
+        address: `${BACKEND}/api/students`,
+        hasToken: true
     });
     const {logout, loading : logoutLoading, error: logoutError} = useLogout();
 
@@ -31,41 +30,28 @@ export default function Profil() {
     const user = Array.isArray(data) && data.length > 0 ? data[0] : {};
 
     if (loading)
-        return <LoadingView headerText={t("profile")}/>
+        return <LoadingView headerText={t("profile").toString().toUpperCase()}/>
 
     if (error)
-        return <ErrorView error={error} headerText={t("profile")}/>
-
-
-
+        return <ErrorView error={error} headerText={t("profile").toString().toUpperCase()}/>
 
     return (
-        <View style={{ backgroundColor: "#fff", flex: 1 }}>
-
-            <FloatingHeader text={t("profile")} />
-            <View style={{ alignItems: "center", flex: 1 }}>
+        <View style={styles.mainView}>
+            <FloatingHeader text={t("profile").toString().toUpperCase()} />
+            <View style={styles.profileMainView}>
                 <ProfilePageSmallContainer title={t("student")} content={user?.firstName + ' ' + user?.lastName} />
                 <ProfilePageLargeContainer title={t("credentials")} username={user?.username} password={user?.password} />
                 <ProfilePageSmallContainer title={t("number")} content={user?.number} />
                 <ProfilePageSmallContainer title={t("code")} content={user?.code} />
-                <View style={{
-                    marginTop: height * 0.03,
-                    backgroundColor: '#024073',
-                    width: width * 0.5,
-                    height: height * 0.06,
-                    borderRadius: 10,
-                    justifyContent: 'center'
-                }}>
+                <View style={styles.profileLogoutButtonView}>
                     <TouchableOpacity onPress={logout}>
-                        <Text style={{ textAlign: 'center', color: '#fff',fontWeight:"600",}}>
+                        <Text style={styles.profileLogoutButtonText}>
                             {t('logout')}
                         </Text>
                     </TouchableOpacity>
                 </View>
-                <View style={{
-                    alignItems:"flex-start"
-                }}>
-                    <LanguageSwitcher></LanguageSwitcher>
+                <View style={styles.profileLanguageSwitcher}>
+                    <LanguageSwitcher/>
                 </View>
             </View>
         </View>
