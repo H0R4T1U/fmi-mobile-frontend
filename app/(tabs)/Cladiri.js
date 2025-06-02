@@ -15,7 +15,7 @@ const {height} = Dimensions.get('window');
 import styles from '../utils/styles/tabs.styles';
 import {useTranslation} from "react-i18next";
 
-export default function Clădiri() {
+export default function Cladiri() {
     const {t} = useTranslation();
     return (
         <View style={styles.mainView}>

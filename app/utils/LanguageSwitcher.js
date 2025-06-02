@@ -1,6 +1,7 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {TouchableOpacity, Text, Dimensions} from 'react-native';
 import i18n from "../../assets/translation/translationConfig.js";
+import {CacheManager} from "./CacheManager";
 const { width, height } = Dimensions.get("window");
 
 const languages = [
@@ -13,10 +14,11 @@ const languages = [
 export default function LanguageSwitcher() {
     const [index, setIndex] =  useState(languages.findIndex(l => l.code === i18n.language) || 0);
 
-    const changeLanguage = () => {
+    const changeLanguage = async () => {
         const nextIndex = (index + 1) % languages.length;
         setIndex(nextIndex);
         i18n.changeLanguage(languages[nextIndex].code);
+        await CacheManager.set("language", languages[nextIndex].code)
     };
 
     useEffect(() => {

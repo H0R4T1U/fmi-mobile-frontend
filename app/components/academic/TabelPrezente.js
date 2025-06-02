@@ -10,15 +10,10 @@ export default function TabelPrezente({ examene, setPrezente, tipuri = {} }) {
 
     const prezenteHeader = useMemo(() => {
         const headers = [{ key: "week", name: "SAPTAMANA" }];
-
-        if (tipuri?.showLaborator) {
+        if (tipuri?.showLaborator)
             headers.push({ key: "laborator", name: "LABORATOR" });
-        }
-
-        if (tipuri?.showSeminar) {
+        if (tipuri?.showSeminar)
             headers.push({ key: "seminar", name: "SEMINAR" });
-        }
-
         return headers.map(header => ({
             ...header,
             style: { flex:1, minWidth:0 }
@@ -70,10 +65,9 @@ export default function TabelPrezente({ examene, setPrezente, tipuri = {} }) {
                         {examene.map((examen, index) => (
                             <View key={index} style={styles.header}>
                                 {prezenteHeader.map((col, colIndex) => {
-                                    const isClickable = col.key === "laborator" || col.key === "seminar";
                                     const value = examen[col.key] || "";
+                                    const isClickable = (col.key === "laborator" || col.key === "seminar") && value !== "";
                                     const color = getStatusColor(value);
-
                                     return (
                                         <TouchableOpacity
                                             key={colIndex}

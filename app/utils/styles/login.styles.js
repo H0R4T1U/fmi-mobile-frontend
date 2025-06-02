@@ -76,5 +76,29 @@ export default StyleSheet.create({
         justifyContent: 'flex-end',
         flex: 1,
         paddingBottom: height * 0.03
+    },
+    buttonStyle: {
+        height: height * 0.065,
+        width: width * 0.65,
+        backgroundColor: '#024073',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 10,
+        marginTop: height * 0.025,
+    },
+    promptText: {
+        fontFamily: 'Montserrat-MediumItalic',
+        fontSize: height * 0.022,
+        textAlign: 'center',
+        fontStyle: 'italic',
+    },
+    promptView: {
+        width: width * 0.4,
+        alignItems: 'center'
+    },
+    loginScreenMainView: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: height * 0.7
     }
 });

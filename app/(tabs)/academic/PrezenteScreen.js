@@ -1,6 +1,5 @@
 import FloatingHeader from "../../components/common/FloatingHeader";
 import { useEffect, useState } from "react";
-import { Dimensions } from "react-native";
 import TabelPrezente from "../../components/academic/TabelPrezente";
 import MateriiDropDown from "../../components/academic/MateriiDropDown";
 import { useTranslation } from "react-i18next";

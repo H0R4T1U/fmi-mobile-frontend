@@ -41,10 +41,11 @@ export function useLogin() {
     useEffect(() => {
         const checkExistingLogin = async () => {
             try {
-                const cachedUser = await CacheManager.get("loggedUser");
-                if (cachedUser && cachedUser.displayName) {
+                const token = await CacheManager.get("token");
+                const cachedUser = token !== null;
+
+                if (cachedUser === true)
                     router.replace('/Profil');
-                }
             } catch (error) {
                 console.error("Error checking existing login:", error);
             } finally {
@@ -77,29 +78,24 @@ export function useLogin() {
                         discovery
                     );
                     await CacheManager.set("token", tokenResult.accessToken);
-                    console.log(tokenResult.accessToken);
                     router.replace('/Profil');
 
                 } catch (err) {
-                    console.error("Auth error:", err);
                     setError("Login failed. Please try again.");
                     Alert.alert("Login Failed", "There was a problem logging in. Please try again.");
                 } finally {
                     setLoading(false);
                 }
             } else if (response?.type === "error") {
-                console.error("Auth error:", response.error);
                 setError("Login error: " + (response.error?.message || "Unknown error"));
                 setLoading(false);
             } else if (response?.type === "cancel") {
-                console.log("Auth cancelled by user");
                 setError("Login was cancelled.");
                 setLoading(false);
             }
         };
-        if (response) {
+        if (response)
             handleAuth();
-        }
     }, [response, request?.codeVerifier, router]);
     return { loading, error, promptAsync };
 }
