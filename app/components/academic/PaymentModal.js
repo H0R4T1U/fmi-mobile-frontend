@@ -5,6 +5,7 @@ import {Ionicons} from '@expo/vector-icons';
 import Constants from "expo-constants";
 import useEmail from "../../utils/hooks/useEmail";
 import useToken from "../../utils/hooks/useToken";
+import styles from '../../utils/styles/paymentmodal.styles';
 
 const { BACKEND } = Constants.expoConfig.extra;
 
@@ -23,10 +24,10 @@ const AddCardModal = ({ visible, onClose, amount,tuitionCrt,setsuccess }) => {
             return;
         }
 
-
         const clientSecret = await fetchClientSecret();
         if(!clientSecret)
             return;
+
         const { paymentIntent, error } = await confirmPayment(clientSecret, {
             paymentMethodType: 'Card',
             paymentMethodData: {
@@ -58,9 +59,6 @@ const AddCardModal = ({ visible, onClose, amount,tuitionCrt,setsuccess }) => {
                     }
                 }
             ]);
-
-
-
         }
     };
 
@@ -89,80 +87,33 @@ const AddCardModal = ({ visible, onClose, amount,tuitionCrt,setsuccess }) => {
             onRequestClose={onClose}
 
         >
-            <View style={{flex: 1,
-                backgroundColor: 'rgba(0,0,0,0.5)',
-                justifyContent: 'center',
-                alignItems: 'center',}}>
-                <View style={{
-                    backgroundColor: 'white',
-                    padding: 20,
-                    borderRadius: 15,
-                    width: '90%',
-                    position: 'relative',
-                }}>
-                    {/* X Button */}
-                    <TouchableOpacity style={{position: 'absolute',
-                        top: 10,
-                        right: 10,
-                        zIndex: 10,
-                        marginBottom:20
+            <View style={styles.viewPayment}>
+                <View style={styles.viewModal}>
 
-                    }} onPress={onClose}>
+                    <TouchableOpacity style={styles.touchableModal} onPress={onClose}>
                         <Ionicons name="close" size={24} color="black" />
                     </TouchableOpacity>
 
-
-
-                    <View style={{flexDirection: 'row',
-                        alignItems: 'center',
-                        marginBottom: 20,
-                        marginTop:15
-                    }}>
-                        <View style={{
-                            flex: 1,
-                            height: 1,
-                            backgroundColor: '#ccc',
-                        }}/>
-                        <Text style={{marginHorizontal: 10,
-                            color: '#999',}}>Pay with a card</Text>
-                        <View style={{
-                            flex: 1,
-                            height: 1,
-                            backgroundColor: '#ccc',
-                        }} />
+                    <View style={styles.viewModal2}>
+                        <View style={styles.viewModalInside}/>
+                        <Text style={styles.modalText}>Pay with a card</Text>
+                        <View style={styles.viewModalInside} />
                     </View>
 
-                    {/* Card Form */}
+
                     <CardForm
                         onFormComplete={(cardDetails) => setCardDetails(cardDetails)}
-
-                        style={{  width: '100%',
-                            height: 200,
-                        }}
-                        cardStyle={{
-                            backgroundColor: "white",
-                            textAlign: "center",
-                        }}
-
+                        style={styles.cardForm}
+                        cardStyle={styles.cardStyle}
                     />
 
 
-                    {/* Pay Button */}
                     <TouchableOpacity
-                        style={[{padding: 15,
-                            borderRadius: 10,
-
-                            alignItems: 'center',
-
-                        }, { backgroundColor: cardDetails?.complete ? '#28e63f' : '#ccc' }]}
+                        style={[styles.buttonStylePay, { backgroundColor: cardDetails?.complete ? '#28e63f' : '#ccc' }]}
                         onPress={handlePayment}
                         disabled={!cardDetails?.complete}
                     >
-                        <Text style={{
-                            color: 'white',
-                            fontSize: 18,
-                            fontWeight: 'bold',
-                        }}>Pay {amount}lei</Text>
+                        <Text style={styles.buttonTextStylePay}>Pay {amount}lei</Text>
                     </TouchableOpacity>
                 </View>
             </View>

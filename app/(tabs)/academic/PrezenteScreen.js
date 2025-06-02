@@ -28,6 +28,7 @@ export default function PrezenteScreen() {
         ? Object.keys(courses).map((key) => ({ label: key, value: key }))
         : [];
 
+
     const getCacheKeyForCourse = (materie) => `prezente_${materie}`;
 
     const genereazaSaptamani = (tipValori) => {
