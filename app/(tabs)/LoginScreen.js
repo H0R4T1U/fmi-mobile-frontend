@@ -5,8 +5,6 @@ import {useLogin} from "../utils/auth/Login";
 import {useRouter} from "expo-router";
 import styles from '../utils/styles/login.styles'
 
-const {width, height} = Dimensions.get('window');
-
 export default function LoginScreen() {
     const { loading, error, promptAsync } = useLogin();
     const router = useRouter();

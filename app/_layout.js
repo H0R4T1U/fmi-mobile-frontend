@@ -7,7 +7,7 @@ import {ActivityIndicator, Alert, View} from "react-native";
 import {useFonts} from "expo-font";
 
 const { PUBLIC_KEY } = Constants.expoConfig.extra;
-const PUBLIC_ROUTES=['/LoginScreen', '/Loading', '/News', '/buildings', '/Cladiri', '/']
+const PUBLIC_ROUTES=['/LoginScreen', '/Loading', '/buildings', '/Cladiri', '/']
 
 export default function Layout() {
     const [isLoading, setIsLoading] = useState(true);

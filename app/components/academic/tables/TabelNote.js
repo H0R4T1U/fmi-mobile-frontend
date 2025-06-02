@@ -1,6 +1,6 @@
 import {Dimensions, LayoutChangeEvent, ScrollView, Text, View} from "react-native";
 import {useState} from "react";
-import styles from '../../utils/styles/academic/note.styles';
+import styles from '../../../utils/styles/academic/note.styles';
 
 const { height, width } = Dimensions.get("window");
 

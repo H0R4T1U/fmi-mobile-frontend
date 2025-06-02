@@ -1,7 +1,7 @@
 import FloatingHeader from "../../components/common/FloatingHeader";
 import {View} from "react-native";
-import SemestreDropDown from "../../components/academic/SemestreDropDown";
-import TabelNote from "../../components/academic/TabelNote";
+import SemestreDropDown from "../../components/academic/dropdowns/SemestreDropDown";
+import TabelNote from "../../components/academic/tables/TabelNote";
 import Constants from "expo-constants";
 import React, {useState} from "react";
 import LoadingView from "../../components/common/LoadingView";

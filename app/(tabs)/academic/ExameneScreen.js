@@ -1,6 +1,6 @@
 import FloatingHeader from "../../components/common/FloatingHeader";
-import SemestreDropDown from "../../components/academic/SemestreDropDown";
-import TabelExamene from "../../components/academic/TabelExamene";
+import SemestreDropDown from "../../components/academic/dropdowns/SemestreDropDown";
+import TabelExamene from "../../components/academic/tables/TabelExamene";
 import React, {useState} from "react";
 import Constants from "expo-constants";
 import LoadingView from "../../components/common/LoadingView";

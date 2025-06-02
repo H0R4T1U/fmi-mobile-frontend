@@ -1,16 +1,16 @@
 import React, {useEffect, useState} from "react";
 import {View} from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
-import TabelTaxeNeplatite from "./TabelTaxeNeplatite";
-import TabelTaxePlatite from "./TabelTaxePlatite";
+import TabelTaxeNeplatite from "../tables/TabelTaxeNeplatite";
+import TabelTaxePlatite from "../tables/TabelTaxePlatite";
 import Constants from "expo-constants";
-import FloatingHeader from "../common/FloatingHeader";
-import ErrorView from "../common/ErrorView";
-import LoadingView from "../common/LoadingView";
-import useToken from "../../utils/hooks/useToken";
-import useFetch from "../../utils/hooks/useFetch";
+import FloatingHeader from "../../common/FloatingHeader";
+import ErrorView from "../../common/ErrorView";
+import LoadingView from "../../common/LoadingView";
+import useToken from "../../../utils/hooks/useToken";
+import useFetch from "../../../utils/hooks/useFetch";
 import {useTranslation} from "react-i18next";
-import styles from '../../utils/styles/academic/taxe_dropdown.styles';
+import styles from '../../../utils/styles/academic/taxe_dropdown.styles';
 
 const { BACKEND } = Constants.expoConfig.extra;
 
@@ -21,17 +21,39 @@ export default function TaxeDropDown()
     const {token, tokenError, tokenLoading} = useToken();
     const[taxePlatite,setTaxePlatite]=useState([]);
     const[taxeNeplatite,setTaxeNeplatite]=useState([]);
-    let {data : taxeP, dataError: taxePlatiteError , dataLoading : taxePlatiteLoading} = useFetch(
-        {token,
-            address: `${BACKEND}/api/paid-tuitions`,
-            hasToken: true
-        });
-    let {data : taxeN, dataError: taxeNeplatiteError, dataLoading: taxeNeplatiteLoading} = useFetch(
-        {token,
-            address: `${BACKEND}/api/tuitions`,
-            hasToken: true
-        });
-    const loading = taxePlatiteLoading || taxeNeplatiteLoading || tokenLoading;
+    const [taxeP, setTaxeP] = useState([]);
+    const [taxeN, setTaxeN] = useState([]);
+    const [taxePlatiteError, setTaxePlatiteError] = useState(null);
+    const [taxeNeplatiteError, setTaxeNeplatiteError] = useState(null);
+    const refetchTaxe = async () => {
+        try {
+            const [resPlatite, resNeplatite] = await Promise.all([
+                    fetch(`${BACKEND}/api/paid-tuitions`, {
+                        headers: { 'Authorization': `Bearer ${token}`,'Content-Type': 'application/json' }
+                    }),
+                    fetch(`${BACKEND}/api/tuitions`, {
+                        headers: { 'Authorization': `Bearer ${token}` }
+                    }),
+                ]);
+
+            const dataP = await resPlatite.json();
+            const dataN = await resNeplatite.json();
+
+            setTaxeP(dataP ?? []);
+            setTaxeN(dataN ?? []);
+            setTaxePlatiteError(null);
+            setTaxeNeplatiteError(null);
+        } catch (e) {
+            setTaxePlatiteError("Eroare la taxe platite");
+            setTaxeNeplatiteError("Eroare la taxe neplatite");
+        }
+    };
+
+    useEffect(() => {
+        if (token) refetchTaxe();
+    }, [token]);
+
+
     const error = taxePlatiteError || taxeNeplatiteError || tokenError;
 
     useEffect(() => {
@@ -41,7 +63,7 @@ export default function TaxeDropDown()
 
 
     const TabelTaxeN = () =>(
-        <TabelTaxeNeplatite examene={taxeNeplatite} setexamene={setTaxeNeplatite}/>
+        <TabelTaxeNeplatite examene={taxeNeplatite} setexamene={setTaxeNeplatite} refetchAll={refetchTaxe}/>
     )
     const TabelTaxeP=()=>(
         <TabelTaxePlatite taxePlatite={taxePlatite} />
@@ -53,9 +75,6 @@ export default function TaxeDropDown()
         { label: "TAXE PLATITE", value: "TabelTaxeP" },
 
     ]);
-
-    if (loading)
-        return <LoadingView headerText={t("fees").toString().toUpperCase()}/>
 
     if (error)
         return <ErrorView error={error} headerText={t("fees").toString().toUpperCase()}/>

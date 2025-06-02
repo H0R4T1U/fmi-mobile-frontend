@@ -2,7 +2,7 @@ import {Dimensions, ScrollView, Text, View,} from "react-native";
 import React, {useState} from "react";
 const {height, width} = Dimensions.get('window');
 import {LayoutChangeEvent} from "react-native";
-import styles from '../../utils/styles/academic/taxe_platite.styles'
+import styles from '../../../utils/styles/academic/taxe_platite.styles'
 
 const tableHeaders = [
     { key: "number", name: "NR. CRT", style: { width: width * 0.145, marginLeft: width * 0.02 } },

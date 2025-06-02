@@ -1,7 +1,7 @@
 import FloatingHeader from "../../components/common/FloatingHeader";
 import { useEffect, useState } from "react";
-import TabelPrezente from "../../components/academic/TabelPrezente";
-import MateriiDropDown from "../../components/academic/MateriiDropDown";
+import TabelPrezente from "../../components/academic/tables/TabelPrezente";
+import MateriiDropDown from "../../components/academic/dropdowns/MateriiDropDown";
 import { useTranslation } from "react-i18next";
 import useToken from "../../utils/hooks/useToken";
 import useFetch from "../../utils/hooks/useFetch";

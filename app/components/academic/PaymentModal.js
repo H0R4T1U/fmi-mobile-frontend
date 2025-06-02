@@ -44,6 +44,9 @@ const AddCardModal = ({ visible, onClose, amount,tuitionCrt,setsuccess }) => {
 
                 const resp=await fetch(`${BACKEND}/api/payment/success?paymentIntentId=${paymentIntent.id}`, {
                     method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
                 });
             Alert.alert('Success', 'Payment completed!', [
                 {
@@ -61,7 +64,7 @@ const AddCardModal = ({ visible, onClose, amount,tuitionCrt,setsuccess }) => {
         const response = await fetch(`${BACKEND}/api/payment/create-checkout-session`, {
             method: "POST",
             headers: {'Authorization': `Bearer ${token}`, "Content-Type": "application/json" },
-            body: JSON.stringify({ amount: Number(amount),tuitionNumber:Number(tuitionCrt),payer:mail })
+            body: JSON.stringify({ amount: Number(amount),tuitionNumber:Number(tuitionCrt) })
         });
         const data = await response.json();
 

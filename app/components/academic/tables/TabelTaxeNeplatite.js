@@ -1,13 +1,10 @@
 import {Dimensions, ImageBackground, Pressable, ScrollView, Text, View,} from "react-native";
 import React, {useEffect, useState} from "react";
-import image from "../../../assets/images/pay.png";
+import image from "../../../../assets/images/pay.png";
 import {LayoutChangeEvent} from "react-native";
-import useToken from "../../utils/hooks/useToken";
-import Constants from "expo-constants";
-import AddCardModal from "./PaymentModal";
+import AddCardModal from "../PaymentModal";
 const {height, width} = Dimensions.get('window');
-import styles from '../../utils/styles/academic/taxe_neplatite.styles';
-const { BACKEND } = Constants.expoConfig.extra;
+import styles from '../../../utils/styles/academic/taxe_neplatite.styles';
 
 const tableHeaders = [
     { key: "number", name: "NR. CRT", style: { width: width * 0.145, marginLeft: width * 0.022 } },
@@ -18,12 +15,11 @@ const tableHeaders = [
     { key: "paymentTerm", name: "DATA SCADENTA", style: { width: width * 0.28 } },
 ];
 
-export default function TabelTaxeNeplatite({examene,setexamene}) {
+export default function TabelTaxeNeplatite({examene,refetchAll}) {
     const [rowHeights, setRowHeights] = useState({});
     const [selectedAmount, setSelectedAmount] = useState(null);
     const[tuitioncrt,setTuitionCrt]=useState(null);
     const[paid,setpaid]=useState(false);
-    const {token, tokenError, tokenLoading} = useToken();
 
 
     const handleOpenPayment = (amount,tuitioncrt) => {setSelectedAmount(amount); setTuitionCrt(tuitioncrt)}
@@ -36,27 +32,14 @@ export default function TabelTaxeNeplatite({examene,setexamene}) {
         }));
     };
 
+
     useEffect(() => {
-        const fetchUpdatedTaxe = async () => {
-            try {
-                const response = await fetch(`${BACKEND}/api/tuitions`, {
-                    headers: {
-                        'Authorization': `Bearer ${token}`,
-                        'Content-Type': 'application/json',
-                    },
-                });
-                const data = await response.json();
-                setexamene(data?? []);
-                console.log(examene);
-            } catch (error) {
-                console.error("Eroare la fetch taxe neplatite:", error);
-            }
-        };
         if (paid) {
-            fetchUpdatedTaxe()
+            refetchAll?.();
             setpaid(false);
         }
-    }, [paid, token]);
+    }, [paid]);
+
 
     return (
         <View style={styles.mainView}>

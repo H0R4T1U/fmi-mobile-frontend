@@ -1,5 +1,5 @@
 import {View} from "react-native";
-import TaxeDropDown from "../../components/academic/TaxeDropDown";
+import TaxeDropDown from "../../components/academic/dropdowns/TaxeDropDown";
 import React from "react";
 
 

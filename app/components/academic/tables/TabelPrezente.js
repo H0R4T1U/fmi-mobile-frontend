@@ -1,6 +1,6 @@
 import { Dimensions, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { useState, useMemo } from "react";
-import styles from "../../utils/styles/academic/prezente.styles";
+import styles from "../../../utils/styles/academic/prezente.styles";
 
 const { height, width } = Dimensions.get("window");
 

@@ -1,7 +1,7 @@
 import {useState} from "react";
 import {View} from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
-import styles from '../../utils/styles/dropdowns.styles';
+import styles from '../../../utils/styles/dropdowns.styles';
 
 
 export default function SemestreDropDown({onSelectSemester})

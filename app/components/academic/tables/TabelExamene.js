@@ -3,7 +3,7 @@ import { useState } from "react";
 const { height, width } = Dimensions.get("window");
 
 import { LayoutChangeEvent } from "react-native";
-import styles from '../../utils/styles/academic/examene.styles';
+import styles from '../../../utils/styles/academic/examene.styles';
 
 const exameneHeader = [
     { key: "number", name: "NR. CRT", style: { marginLeft: width * 0.013, width: width * 0.145 } },
