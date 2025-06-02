@@ -1,5 +1,5 @@
-import React from "react";
-import { Animated, View, Image, Text, TouchableOpacity, Platform } from "react-native";
+import React, {useEffect} from "react";
+import { Animated, View, Image, Text, TouchableOpacity } from "react-native";
 import { Tabs, useSegments, router } from "expo-router";
 import { useTranslation } from "react-i18next";
 import {StatusBar} from "expo-status-bar";

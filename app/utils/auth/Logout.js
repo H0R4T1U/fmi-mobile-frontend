@@ -1,6 +1,7 @@
 import {useRouter} from "expo-router";
 import {useCallback, useState} from "react";
 import {CacheManager} from "../CacheManager";
+import i18n from "i18next";
 
 export default function useLogout() {
     const [loading, setLoading] = useState(false);
@@ -11,6 +12,7 @@ export default function useLogout() {
         try {
             setLoading(true);
             await CacheManager.clear();
+            await i18n.changeLanguage("ro");
             router.replace("/LoginScreen");
         } catch (err) {
             setError(err.message || "Logout failed");

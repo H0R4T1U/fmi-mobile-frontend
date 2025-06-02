@@ -11,7 +11,6 @@ import useLogout from "../utils/auth/Logout";
 import LanguageSwitcher from "../utils/LanguageSwitcher";
 import { useTranslation } from 'react-i18next';
 import styles from '../utils/styles/tabs.styles';
-import {useContext} from "react";
 const { BACKEND } = Constants.expoConfig.extra;
 
 export default function Profil() {
